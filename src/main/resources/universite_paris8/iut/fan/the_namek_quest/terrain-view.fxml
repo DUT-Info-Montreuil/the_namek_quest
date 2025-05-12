@@ -10,7 +10,7 @@
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0">
             <center>
-                <TilePane fx:id="tilePane" prefHeight="208.0" prefWidth="261.0" BorderPane.alignment="CENTER" />
+                <TilePane fx:id="tilePane" prefHeight="208.0" prefWidth="160" BorderPane.alignment="CENTER" />
             </center>
             <top>
                 <Label text="The Namek Quest" BorderPane.alignment="CENTER" />
