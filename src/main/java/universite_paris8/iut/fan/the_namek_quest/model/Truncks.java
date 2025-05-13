@@ -1,5 +1,5 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
-public interface Personnage {
+public class Truncks implements Personnage{
 
 }
