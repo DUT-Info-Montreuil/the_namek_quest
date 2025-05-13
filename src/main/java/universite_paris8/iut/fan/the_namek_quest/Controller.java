@@ -22,6 +22,8 @@ public class Controller implements Initializable {
     @FXML
     private TilePane tilePane;
 
+    @FXML
+    private ImageView persoImage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -33,6 +35,9 @@ public class Controller implements Initializable {
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));
         Image imageperso = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/trunks.png"));
+        persoImage.setImage(imageperso);
+        persoImage.setTranslateX(5*16);
+        persoImage.setTranslateY(4*16);
         //boucle
         for(int i = 0; i< terrain.hauteurTerrain(); i++) {
             for(int j = 0; j< terrain.largeurTerrain(); j++) {
@@ -48,10 +53,10 @@ public class Controller implements Initializable {
                     System.out.println("3");
                     tilePane.getChildren().add(new ImageView(imageHerbe));
                 }
-                else if(this.terrain.getTerrain()[i][j]==4){
+                /*else if(this.terrain.getTerrain()[i][j]==4){
                     System.out.println("4");
                     tilePane.getChildren().add(new ImageView(imageperso));
-                }
+                }*/
             }
         }
     }
