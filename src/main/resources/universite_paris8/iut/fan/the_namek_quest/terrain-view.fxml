@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.TilePane?>
-
-
 <?import javafx.scene.text.Font?>
-<BorderPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.Controller">
+
+<BorderPane prefHeight="140.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.Controller">
     <top>
-        <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER" >
+        <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER">
         <font>
             <Font size="25.0" />
         </font></Label>
     </top>
     <center>
-        <TilePane fx:id="tilePane" prefHeight="160" prefWidth="160" BorderPane.alignment="CENTER" />
+        <TilePane fx:id="tilePane" prefHeight="320.0" prefWidth="140.0" BorderPane.alignment="CENTER" />
     </center>
 </BorderPane>
