@@ -6,12 +6,15 @@
 <?import javafx.scene.layout.TilePane?>
 
 
-
-<BorderPane prefHeight="100.0" prefWidth="160.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.Controller">
+<?import javafx.scene.text.Font?>
+<BorderPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.Controller">
+    <top>
+        <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER" >
+        <font>
+            <Font size="25.0" />
+        </font></Label>
+    </top>
     <center>
         <TilePane fx:id="tilePane" prefHeight="160" prefWidth="160" BorderPane.alignment="CENTER" />
     </center>
-    <top>
-        <Label text="The Namek Quest" BorderPane.alignment="CENTER" />
-    </top>
 </BorderPane>
