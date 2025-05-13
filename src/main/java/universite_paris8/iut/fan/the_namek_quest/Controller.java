@@ -1,5 +1,6 @@
 package universite_paris8.iut.fan.the_namek_quest;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,10 @@ public class Controller implements Initializable {
 
     @FXML
     private ImageView persoImage;
+
+    @FXML
+    private double persoImageX = 0;
+    private double persoImageY = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,11 +58,22 @@ public class Controller implements Initializable {
                     System.out.println("3");
                     tilePane.getChildren().add(new ImageView(imageHerbe));
                 }
-                /*else if(this.terrain.getTerrain()[i][j]==4){
-                    System.out.println("4");
-                    tilePane.getChildren().add(new ImageView(imageperso));
-                }*/
             }
         }
+        Platform.runLater(() -> {
+            tilePane.getScene().setOnKeyPressed(event -> {
+                switch (event.getCode()) {
+                    case D:
+                        persoImageX += 16;
+                        break;
+                    case Q:
+                        persoImageX -= 16;
+                        break;
+                }
+                persoImage.setTranslateX(persoImageX);
+                persoImage.setTranslateX(persoImageX);
+            });
+        });
     }
 }
+
