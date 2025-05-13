@@ -12,7 +12,7 @@ public class Launcher extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("terrain-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("the namek quest!");
+        stage.setTitle("The Namek Quest!");
         stage.setScene(scene);
         stage.show();
     }
