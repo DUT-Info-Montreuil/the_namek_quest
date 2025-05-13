@@ -28,6 +28,7 @@ public class Controller implements Initializable {
         this.terrain = new Terrain();
         tilePane.setPrefColumns(terrain.largeurTerrain());
         tilePane.setPrefSize(terrain.largeurTerrain()*16,terrain.hauteurTerrain()*16);
+        tilePane.setFocusTraversable(true) ;
         Image imageCiel = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png") );
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));

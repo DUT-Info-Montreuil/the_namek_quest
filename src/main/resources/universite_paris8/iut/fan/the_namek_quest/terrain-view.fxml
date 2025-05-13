@@ -14,7 +14,7 @@
     <top>
         <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER">
         <font>
-            <Font size="25.0" />
+            <Font size="35.0" />
         </font></Label>
     </top>
     <center>
