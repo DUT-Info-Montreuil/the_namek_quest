@@ -29,8 +29,10 @@ public class Controller implements Initializable {
     private ImageView persoImage;
     private double persoImageX = 0;
     private final int tailleTuile = 16;
-@FXML
-private Pane pane;
+
+    @FXML
+    private Pane pane;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.terrain = new Terrain();

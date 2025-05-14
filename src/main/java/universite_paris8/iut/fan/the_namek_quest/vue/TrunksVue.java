@@ -10,6 +10,7 @@ import javafx.scene.layout.TilePane;
 import universite_paris8.iut.fan.the_namek_quest.Controller;
 import universite_paris8.iut.fan.the_namek_quest.Launcher;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
+import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 
 public class TrunksVue {
     @FXML
@@ -17,9 +18,11 @@ public class TrunksVue {
     private double persoImageX = 0;
     private final int tailleTuile = 16;
     private Pane pane;
+    private Trunks trunks;
 
 
     public TrunksVue(Pane pane) {
+        this.trunks = new Trunks();
         this.pane = pane;
         this.persoImage = new ImageView();
 
@@ -31,10 +34,10 @@ public class TrunksVue {
         Image imagePerso = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks.png").toExternalForm());
         System.out.println(imagePerso);
         ImageView imageViewPerso = new ImageView(imagePerso);
-        //persoImage.setImage(imagePerso);
-        persoImage.setTranslateX(25 * tailleTuile);
-        persoImage.setTranslateY(30 * tailleTuile);
-        pane.getChildren().add(imageViewPerso);
+        persoImage.setImage(imagePerso);
+        persoImage.translateXProperty().bind(trunks.getXProp());
+        persoImage.translateYProperty().bind(trunks.getYProp());
+        pane.getChildren().add(persoImage);
 
         //tilePane.setFocusTraversable(true);
 

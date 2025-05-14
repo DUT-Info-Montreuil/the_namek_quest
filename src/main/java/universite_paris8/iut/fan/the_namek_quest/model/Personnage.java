@@ -1,17 +1,20 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public abstract class Personnage {
 
     private int pv;
-    private int x;
-    private int y;
+    private IntegerProperty xProp;
+    private IntegerProperty yProp;
     private int vitesse;
     private Terrain terrain;
 
     public Personnage(int pv, int x, int y) {
         this.pv = pv;
-        this.x = x;
-        this.y = y;
+        this.xProp = new SimpleIntegerProperty(x);
+        this.yProp = new SimpleIntegerProperty(y);
     }
 
 
@@ -20,10 +23,16 @@ public abstract class Personnage {
         return this.pv;
     }
     public int getX() {
-        return this.x;
+        return this.xProp.getValue();
     }
     public int getY() {
-        return this.y;
+        return this.yProp.getValue();
+    }
+    public IntegerProperty getXProp() {
+        return this.xProp;
+    }
+    public IntegerProperty getYProp() {
+        return this.yProp;
     }
     public int getVitesse() {
         return this.vitesse;
@@ -38,10 +47,10 @@ public abstract class Personnage {
         this.pv = pv;
     }
     public void setX(int x) {
-        this.x = x;
+        this.xProp.setValue(x);
     }
     public void setY(int y) {
-        this.y = y;
+        this.yProp.setValue(y);
     }
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
