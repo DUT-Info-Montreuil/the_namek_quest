@@ -41,21 +41,21 @@ public class TrunksVue {
 
         //tilePane.setFocusTraversable(true);
 
-    /*
+
            Platform.runLater(() -> {
                 pane.getScene().setOnKeyPressed(event -> {
                     switch (event.getCode()) {
                         case D:
-                            persoImageX += 16;
+                            this.trunks.setX(this.trunks.getX()+16);
                             break;
                         case Q:
-                            persoImageX -= 16;
+                            this.trunks.setX(this.trunks.getX()-16);
                             break;
                     }
-                    persoImage.setTranslateX(persoImageX);
-                    persoImage.setTranslateX(persoImageX);
+                    //persoImage.setTranslateX(persoImageX);
+                    //persoImage.setTranslateX(persoImageX);
                 });
             });
-*/
+
     }
 }

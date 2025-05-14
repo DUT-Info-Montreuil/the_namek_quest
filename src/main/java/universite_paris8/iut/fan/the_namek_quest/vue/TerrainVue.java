@@ -40,8 +40,12 @@ public class TerrainVue {
                 else if(this.terrain.codeTuile(y,x)==3){
 
                     tilePane.getChildren().add(new ImageView(imageHerbe));
+
                 }
+                System.out.println("x="+x+"y=" +y );
+
             }
         }
+
     }
 }

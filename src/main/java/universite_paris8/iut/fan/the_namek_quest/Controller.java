@@ -40,6 +40,8 @@ public class Controller implements Initializable {
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         TrunksVue trunksVue = new TrunksVue(pane);
 
+
+
     }
 }
 

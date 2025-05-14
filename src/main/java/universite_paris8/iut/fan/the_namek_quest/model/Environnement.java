@@ -10,8 +10,8 @@ public class Environnement {
     private int width;
     private int height;
 
-    public Environnement(Terrain terrain) {
-        this.terrain = terrain;
+    public Environnement() {
+        this.terrain = new Terrain();
         this.personnages= new ArrayList<Personnage>();
         this.trunks= new Trunks();
         this.height = 720;
