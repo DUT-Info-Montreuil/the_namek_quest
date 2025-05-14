@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -9,8 +10,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.scene.image.ImageView?>
+
 <BorderPane prefHeight="140.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.Controller">
     <top>
         <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER">
@@ -19,9 +20,12 @@
         </font></Label>
     </top>
     <center>
-        <StackPane fx:id="stackPane" BorderPane.alignment="CENTER" >
+
+        <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+
             <TilePane fx:id="tilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="1.0" tileAlignment="CENTER" BorderPane.alignment="CENTER" />
-            <ImageView fx:id="persoImage"/>
-        </StackPane>
+            <!--<ImageView fx:id="persoImage" />-->
+        </Pane>
+
     </center>
 </BorderPane>
