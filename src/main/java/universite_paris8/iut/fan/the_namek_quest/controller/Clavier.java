@@ -12,6 +12,7 @@ public class Clavier implements EventHandler<KeyEvent> {
         this.trunks = trunks;
     }
 
+
     @Override
     public void handle(KeyEvent keyEvent) {
         switch (keyEvent.getCode()){
