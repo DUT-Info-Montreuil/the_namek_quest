@@ -61,4 +61,7 @@ public class Terrain {
         return this.terrain[x][y];
     }
 
+    public int [][] getTerrain() {
+        return this.terrain;
+    }
 }

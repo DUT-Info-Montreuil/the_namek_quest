@@ -13,7 +13,7 @@ public class Environnement {
     public Environnement() {
         this.terrain = new Terrain();
         this.personnages= new ArrayList<Personnage>();
-        this.trunks= new Trunks();
+        this.trunks= new Trunks(this);
         this.height = 720;
         this.width = 1280;
     }
