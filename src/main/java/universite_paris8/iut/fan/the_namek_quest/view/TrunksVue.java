@@ -19,10 +19,20 @@ public class TrunksVue {
     }
 
     public void afficherTrunks() {
-        Image imagePerso = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks(3).png").toExternalForm());
-        persoImage.setImage(imagePerso);
+        Image imagePersoDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks-droite.png").toExternalForm());
+        persoImage.setImage(imagePersoDroite);
         persoImage.translateXProperty().bind(trunks.getXProp());
         persoImage.translateYProperty().bind(trunks.getYProp());
         pane.getChildren().add(persoImage);
+    }
+
+    public void changerImageDroite() {
+        Image imagePersoDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks-droite.png").toExternalForm());
+        persoImage.setImage(imagePersoDroite);
+    }
+
+    public void changerImageGauche() {
+        Image imagePersoGauche = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks-gauche.png").toExternalForm());
+        persoImage.setImage(imagePersoGauche);
     }
 }
