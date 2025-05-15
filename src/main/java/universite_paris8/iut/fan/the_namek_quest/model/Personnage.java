@@ -18,7 +18,6 @@ public abstract class Personnage {
         this.vitesseProp = new SimpleIntegerProperty(0);
     }
 
-
     //getter
     public int getPv() {
         return this.pv;
@@ -65,7 +64,5 @@ public abstract class Personnage {
         this.vitesseProp.setValue(vitesse);
     }
 
-    public void seDeplacer(int d) {
-    }
-
+    public void seDeplacer(int d) {}
 }

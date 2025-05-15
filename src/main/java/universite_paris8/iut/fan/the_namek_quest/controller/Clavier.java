@@ -23,6 +23,9 @@ public class Clavier implements EventHandler<KeyEvent> {
             case Q:
                 trunks.seDeplacer(1);
                 break;
+            case SPACE:
+                trunks.sauter(0);
+                break;
         }
     }
 }

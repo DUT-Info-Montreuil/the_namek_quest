@@ -5,6 +5,7 @@ public class Trunks extends Personnage {
 
     public Trunks(Environnement env) {
         super(200, 250, 300);
+        //super(200, 8, 6);
         this.env = env;
     }
 
@@ -23,4 +24,19 @@ public class Trunks extends Personnage {
             }
         }
     }
+
+    public void sauter(int d) {
+        int newY;
+        if (d == 0) {
+            newY = this.getY() - 20;
+            if (env.dansTerrain(newY, this.getY())) {
+                setY(newY);
+            }
+        }
+    }
+
+    /*public void finSauter(int d) {
+        int newY;
+        if (d == 0) {}
+    }*/
 }
