@@ -1,11 +1,13 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
@@ -18,28 +20,26 @@ import static javafx.application.Application.launch;
 
 public class Controller implements Initializable {
     private Terrain terrain;
-
-
     @FXML
     private TilePane tilePane;
-    @FXML
-    private ImageView persoImage;
-    private double persoImageX = 0;
-    private final int tailleTuile = 16;
 
     @FXML
     private Pane pane;
 
     private Trunks trunks;
+    private Environnement environnement;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.terrain = new Terrain();
-        this.trunks = new Trunks();
+        this.environnement = new Environnement();
+        this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         TrunksVue trunksVue = new TrunksVue(pane,trunks);
-        Clavier clavier= new Clavier(trunks);
-        this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
+        Clavier clavier = new Clavier(trunks);
+        pane.setFocusTraversable(true); // autorise le focus
+        Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
+        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier); // écoute les touches
     }
 }
 

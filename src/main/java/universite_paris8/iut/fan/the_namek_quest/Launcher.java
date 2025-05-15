@@ -13,8 +13,8 @@ public class Launcher extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("terrain-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 900);
         stage.setTitle("The Namek Quest!");
-        scene.getRoot().requestFocus();
         stage.setScene(scene);
+        scene.getRoot().requestFocus();
         stage.show();
     }
 

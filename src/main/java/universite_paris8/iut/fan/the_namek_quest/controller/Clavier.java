@@ -1,13 +1,8 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
 import javafx.event.EventHandler;
-import javafx.event.Event;
 import javafx.scene.input.*;
-
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
-
-//import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class Clavier implements EventHandler<KeyEvent> {
 
@@ -20,14 +15,14 @@ public class Clavier implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         switch (keyEvent.getCode()){
+            case RIGHT:
             case D:
                 trunks.seDeplacer(0);
-
+                break;
+            case LEFT:
             case Q:
                 trunks.seDeplacer(1);
-
+                break;
         }
     }
-
-
 }

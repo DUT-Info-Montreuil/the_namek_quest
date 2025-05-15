@@ -9,8 +9,7 @@ public abstract class Personnage {
     private IntegerProperty xProp;
     private IntegerProperty yProp;
     private IntegerProperty vitesseProp;
-    private Terrain terrain;
-    private Environnement environnement;
+
 
     public Personnage(int pv, int x, int y) {
         this.pv = pv;
