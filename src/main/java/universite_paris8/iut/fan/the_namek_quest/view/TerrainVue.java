@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.vue;
+package universite_paris8.iut.fan.the_namek_quest.view;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,7 +42,7 @@ public class TerrainVue {
                     tilePane.getChildren().add(new ImageView(imageHerbe));
 
                 }
-                System.out.println("x="+x+"y=" +y );
+
 
             }
         }

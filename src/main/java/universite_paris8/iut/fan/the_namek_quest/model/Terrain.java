@@ -43,8 +43,8 @@ public class Terrain {
         return this.terrain[0].length;
     }
 
-    public int codeTuile(int i, int j) {
-        return this.terrain[i][j];
+    public int codeTuile(int x, int y) {
+        return this.terrain[x][y];
     }
 
 }
