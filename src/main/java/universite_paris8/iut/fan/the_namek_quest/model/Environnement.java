@@ -19,13 +19,26 @@ public class Environnement {
     }
 
 
+    public boolean dansTerrain(int x, int y){
+        return (0 <= x && x<this.width && 0<=y && y< this.height);
+    }
 
     public Terrain getTerrain() {
         return terrain;
     }
+
     public ArrayList<Personnage> getPersonnages() {
         return personnages;
     }
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+
     public Trunks getTrunks() {
         return trunks;
     }

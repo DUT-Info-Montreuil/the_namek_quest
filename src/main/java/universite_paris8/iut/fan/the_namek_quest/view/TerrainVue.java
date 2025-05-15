@@ -18,14 +18,13 @@ public class TerrainVue {
     }
 
     public void afficherTerrain () {
-        tilePane.setPrefColumns(terrain.largeurTerrain());
-        tilePane.setPrefSize(terrain.largeurTerrain()*tailleTuile,terrain.hauteurTerrain()*tailleTuile);
-        tilePane.setFocusTraversable(true);
+
         Image imageCiel = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png") );
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));
 
-
+        tilePane.setPrefColumns(terrain.largeurTerrain());
+        tilePane.setPrefSize(terrain.largeurTerrain()*tailleTuile,terrain.hauteurTerrain()*tailleTuile);
 
         for(int y = 0; y< terrain.hauteurTerrain(); y++) {
             for(int x = 0; x< terrain.largeurTerrain(); x++) {
