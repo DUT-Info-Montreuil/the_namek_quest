@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest;
+package universite_paris8.iut.fan.the_namek_quest.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
-import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
-import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
+import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
+import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 
 import java.net.URL;
 import java.util.ResourceBundle;
