@@ -10,16 +10,20 @@ public class Environnement {
     private int width;
     private int height;
 
+
     public Environnement() {
         this.terrain = new Terrain();
         this.personnages= new ArrayList<Personnage>();
         this.trunks= new Trunks();
         this.height = 720;
         this.width = 1280;
+
     }
 
 
-
+    public boolean dansTerrain(int x, int y){
+        return (0 <= x && x<this.width && 0<=y && y< this.height);
+    }
     public Terrain getTerrain() {
         return terrain;
     }
