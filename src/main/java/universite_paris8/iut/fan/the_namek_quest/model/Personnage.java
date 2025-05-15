@@ -24,44 +24,49 @@ public abstract class Personnage {
     public int getPv() {
         return this.pv;
     }
+
     public int getX() {
         return this.xProp.getValue();
     }
+
     public int getY() {
         return this.yProp.getValue();
     }
+
     public IntegerProperty getXProp() {
         return this.xProp;
     }
+
     public IntegerProperty getYProp() {
         return this.yProp;
     }
+
     public IntegerProperty getVitesseProp() {
         return this.vitesseProp;
     }
+
     public int getVitesse() {
         return this.vitesseProp.getValue();
     }
-
-    public Terrain getTerrain() {
-        return this.terrain;
-    }
-
 
     //setter
     public void setPv(int pv) {
         this.pv = pv;
     }
+
     public void setX(int x) {
         this.xProp.setValue(x);
     }
+
     public void setY(int y) {
         this.yProp.setValue(y);
     }
+
     public void setVitesse(int vitesse) {
         this.vitesseProp.setValue(vitesse);
     }
 
-    public void seDeplacer(int d){}
-
+    public void seDeplacer(int d) {
     }
+
+}

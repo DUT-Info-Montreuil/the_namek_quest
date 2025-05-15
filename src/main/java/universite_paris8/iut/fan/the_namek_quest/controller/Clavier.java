@@ -1,44 +1,33 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
-import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.event.Event;
+import javafx.scene.input.*;
+
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.security.Key;
+//import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
-public class Clavier implements KeyListener {
+public class Clavier implements EventHandler<KeyEvent> {
 
-    public Clavier() {
-    }
+    private Trunks trunks;
 
-    public void deplacement(Trunks trunks){
-        /*Platform.runLater(() -> {
-            trunks.getScene().setOnKeyPressed(event -> {
-                switch (event.getCode()) {
-                    case D:
-                        this.trunks.setX(this.trunks.getX()+16);
-                        break;
-                    case Q:
-                        this.trunks.setX(this.trunks.getX()-16);
-                        break;
-                }
-                //persoImage.setTranslateX(persoImageX);
-                //persoImage.setTranslateX(persoImageX);
-            });
-        });*/
+    public Clavier(Trunks trunks ) {
+        this.trunks = trunks;
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void handle(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()){
+            case D:
+                trunks.seDeplacer(0);
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_D){
-            this.trunks.setX(this.trunks.getX()+16);
+            case Q:
+                trunks.seDeplacer(1);
+
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {}
+
 }
