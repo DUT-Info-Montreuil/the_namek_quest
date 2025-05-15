@@ -1,7 +1,5 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
-import javafx.scene.image.ImageView;
-
 import java.util.Scanner;
 
 public class VueConsole {
@@ -44,6 +42,7 @@ public class VueConsole {
         System.out.println("\n=== Menu ===");
         System.out.println("q : Reculer (gauche)");
         System.out.println("d : Avancer (droite)");
+        System.out.println("e : sauté");
         System.out.println("x : Quitter");
         System.out.print("Entrez votre choix : ");
         String input = scanner.nextLine();
@@ -62,6 +61,9 @@ public class VueConsole {
                 case 'q':
                     env.getTrunks().seDeplacer(1);
                     break;
+                case 'e':
+                    env.getTrunks().sauter();
+                break;
                 case 'x':
                     System.out.println("Au revoir !");
                     encore = false;

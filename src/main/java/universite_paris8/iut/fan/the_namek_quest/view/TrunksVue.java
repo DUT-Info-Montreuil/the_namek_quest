@@ -20,7 +20,6 @@ public class TrunksVue {
 
     public void afficherTrunks() {
         Image imagePerso = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks(3).png").toExternalForm());
-        System.out.println(imagePerso);
         persoImage.setImage(imagePerso);
         persoImage.translateXProperty().bind(trunks.getXProp());
         persoImage.translateYProperty().bind(trunks.getYProp());

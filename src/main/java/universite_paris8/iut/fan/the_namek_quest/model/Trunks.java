@@ -25,13 +25,11 @@ public class Trunks extends Personnage {
         }
     }
 
-    public void sauter(int d) {
+    public void sauter() {
         int newY;
-        if (d == 0) {
-            newY = this.getY() - 20;
-            if (env.dansTerrain(newY, this.getY())) {
-                setY(newY);
-            }
+        newY = this.getY() - 20;
+        if (env.dansTerrain(newY, this.getY())) {
+            setY(newY);
         }
     }
 
