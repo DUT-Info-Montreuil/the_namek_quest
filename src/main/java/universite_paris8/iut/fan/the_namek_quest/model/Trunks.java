@@ -4,23 +4,26 @@ public class Trunks extends Personnage {
 
     public Trunks(Environnement env) {
         //super(200, 250, 352, env);
-        super(200, 400, 348, env);
+        super(200, 400, 352, env);
         this.setVitesse(16);
     }
 
     public void seDeplacer(int d) {
         int newX;
         if (d == 0) {
+            System.out.println("Deplacer des trunks a droite");
             newX = this.getX()+1;
-            System.out.println(" 1 X = " + getX() + " / NewX = " + newX + " / Width = " + getEnv().getWidth());
-            if (this.getEnv().dansTerrain(newX, this.getY()) && this.collisionHorizontale(newX)) {
-                System.out.println("2 X = " + getX() + " / NewX = " + newX + " / Width = " + getEnv().getWidth());
+            if (this.getEnv().dansTerrain(newX, this.getY()) /* && this.collisionHorizontale(newX)*/) {
+                System.out.println("Deplacer des trunks a droite");
                 setX((newX -1) + getVitesse());
             }
         }
+
         else if (d == 1) {
+            System.out.println("Deplacer des trunks a gauche");
             newX = this.getX() - 1;
-            if (this.getEnv().dansTerrain(newX, this.getY())/* && this.collisionHorizontale(newX)*/) {
+            if (this.getEnv().dansTerrain(newX, this.getY()) /* && this.collisionHorizontale(newX)*/) {
+                System.out.println("Deplacer des trunks a gauche");
                 setX((newX -1) - getVitesse());
             }
         }
@@ -56,6 +59,6 @@ public class Trunks extends Personnage {
 
         timeline.play();
     }
-*/
+    */
 
 }

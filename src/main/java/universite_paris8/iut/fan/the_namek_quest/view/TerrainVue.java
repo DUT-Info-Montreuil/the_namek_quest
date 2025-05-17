@@ -45,10 +45,7 @@ public class TerrainVue {
                 } else if (this.terrain.codeTuile(x,y)==4) {
                     tilePane.getChildren().add(new ImageView(imageBlanche));
                 }
-
-
             }
         }
-
     }
 }

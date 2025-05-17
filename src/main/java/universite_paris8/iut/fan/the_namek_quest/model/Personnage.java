@@ -70,18 +70,17 @@ public abstract class Personnage {
     public void seDeplacer(int d) {}
 
     //Collision
-    public boolean collisionHorizontale(int newX) {
-        if(this.getEnv().getTerrain().getTerrain()[newX][this.getY()] == 1 /*|| this.getEnv().getTerrain().codeTuile(this.getX(), newY) == 3*/){
-            System.out.println("Pas de collision avec " + this.getX() + " and " + this.getY());
+    /*public boolean collisionHorizontale(int newX) {
+        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()) == 1 || this.getEnv().getTerrain().codeTuile(newX,this.getY()) == 4){
             return true;
         }
         return false;
     }
 
     public boolean collisionVerticale(int newY) {
-        if(this.getEnv().getTerrain().getTerrain()[this.getX()][newY] == 2 /*|| this.getEnv().getTerrain().codeTuile(this.getX(), newY) == 3*/){
+        if(this.getEnv().getTerrain().codeTuile(this.getX(), newY) == 2 || this.getEnv().getTerrain().codeTuile(this.getX(), newY) == 3){
             return true;
         }
         return false;
-    }
+    }*/
 }
