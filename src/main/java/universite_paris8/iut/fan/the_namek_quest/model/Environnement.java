@@ -15,7 +15,7 @@ public class Environnement {
         this.personnages= new ArrayList<Personnage>();
         this.trunks= new Trunks(this);
         this.height = 720;
-        this.width = 1280;
+        this.width = 855;
     }
 
 
