@@ -24,24 +24,25 @@ public class TerrainVue {
         Image imageCiel = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png") );
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));
+        Image imageBlanche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/blanc.png"));
 
 
 
         for(int y = 0; y< terrain.hauteurTerrain(); y++) {
             for(int x = 0; x< terrain.largeurTerrain(); x++) {
-                if(this.terrain.codeTuile(y,x)==1){
+                if(this.terrain.codeTuile(x,y)==1){
                     tilePane.getChildren().add(new ImageView(imageCiel));
 
                 }
-                else if(this.terrain.codeTuile(y,x)==2){
+                else if(this.terrain.codeTuile(x,y)==2){
 
                     tilePane.getChildren().add(new ImageView(imageSol));
                 }
-                else if(this.terrain.codeTuile(y,x)==3){
+                else if(this.terrain.codeTuile(x,y)==3){
 
                     tilePane.getChildren().add(new ImageView(imageHerbe));
 
-                } else if (this.terrain.codeTuile(y,x)==4) {
+                } else if (this.terrain.codeTuile(x,y)==4) {
                     tilePane.getChildren().add(new ImageView(imageBlanche));
                 }
 

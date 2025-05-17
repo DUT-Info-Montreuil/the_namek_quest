@@ -3,7 +3,6 @@ module universite_paris8.iut.fan.the_namek_quest {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
-    requires java.desktop;
 
     opens universite_paris8.iut.fan.the_namek_quest to javafx.fxml;
     exports universite_paris8.iut.fan.the_namek_quest;

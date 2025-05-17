@@ -8,14 +8,16 @@ public abstract class Personnage {
     private int pv;
     private IntegerProperty xProp;
     private IntegerProperty yProp;
-    private IntegerProperty vitesseProp;
+    private int vitesse;
+    private Environnement env;
 
 
-    public Personnage(int pv, int x, int y) {
+    public Personnage(int pv, int x, int y, Environnement env) {
         this.pv = pv;
         this.xProp = new SimpleIntegerProperty(x);
         this.yProp = new SimpleIntegerProperty(y);
-        this.vitesseProp = new SimpleIntegerProperty(0);
+        this.vitesse = 1;
+        this.env=env;
     }
 
     //getter
@@ -39,12 +41,12 @@ public abstract class Personnage {
         return this.yProp;
     }
 
-    public IntegerProperty getVitesseProp() {
-        return this.vitesseProp;
+    public int getVitesse() {
+        return this.vitesse;
     }
 
-    public int getVitesse() {
-        return this.vitesseProp.getValue();
+    public Environnement getEnv(){
+        return  this.env;
     }
 
     //setter
@@ -61,8 +63,25 @@ public abstract class Personnage {
     }
 
     public void setVitesse(int vitesse) {
-        this.vitesseProp.setValue(vitesse);
+        this.vitesse = vitesse;
     }
 
+    // Deplacement
     public void seDeplacer(int d) {}
+
+    //Collision
+    public boolean collisionHorizontale(int newX) {
+        if(this.getEnv().getTerrain().getTerrain()[newX][this.getY()] == 1 /*|| this.getEnv().getTerrain().codeTuile(this.getX(), newY) == 3*/){
+            System.out.println("Pas de collision avec " + this.getX() + " and " + this.getY());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean collisionVerticale(int newY) {
+        if(this.getEnv().getTerrain().getTerrain()[this.getX()][newY] == 2 /*|| this.getEnv().getTerrain().codeTuile(this.getX(), newY) == 3*/){
+            return true;
+        }
+        return false;
+    }
 }

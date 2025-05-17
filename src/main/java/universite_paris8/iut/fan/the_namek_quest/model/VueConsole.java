@@ -28,9 +28,19 @@ public class VueConsole {
                 for(int x = 0; x< env.getTerrain().largeurTerrain(); x++) {
                      if(env.getTrunks().getX() == x && env.getTrunks().getY() ==y){
                         tab[y][x]="T";
-                    }else{
-                        tab[y][x] = " ";
+                    }else if(env.getTerrain().codeTuile(x,y)==1){
+                        tab[y][x] = "C";
                        }
+                     else if(env.getTerrain().codeTuile(x,y)==3){
+                         tab[y][x] = "H";
+                     }
+                     else if(env.getTerrain().codeTuile(x,y)==2){
+                         tab[y][x] = "S";
+                     }
+                     else if(env.getTerrain().codeTuile(x,y)==4){
+                         tab[y][x] = "N";
+                     }
+
                 }
                 System.out.println();
 
@@ -39,6 +49,9 @@ public class VueConsole {
     }
 
     public char menuEtSaisie() {
+        System.out.println(this.env.getTerrain().hauteurTerrain());
+        System.out.println(this.env.getTerrain().largeurTerrain());
+        System.out.println(env.getTrunks().getX());
         System.out.println("\n=== Menu ===");
         System.out.println("q : Reculer (gauche)");
         System.out.println("d : Avancer (droite)");
@@ -50,6 +63,7 @@ public class VueConsole {
     }
 
     public void go() {
+        env.getTrunks().setVitesse(1);
         boolean encore = true;
         while (encore) {
             afficherMap(tableauEnv());

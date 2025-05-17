@@ -12,7 +12,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/terrain-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         stage.setTitle("The Namek Quest!");
         stage.setScene(scene);
         scene.getRoot().requestFocus();

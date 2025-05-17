@@ -14,13 +14,14 @@ public class Environnement {
         this.terrain = new Terrain();
         this.personnages= new ArrayList<Personnage>();
         this.trunks= new Trunks(this);
-        this.height = 720;
-        this.width = 855;
+        this.height = terrain.hauteurTerrain()*16;
+        this.width = terrain.largeurTerrain()*16 ;
     }
 
 
     public boolean dansTerrain(int x, int y){
-        return (0 <= x && x<this.width && 0<=y && y< this.height);
+        System.out.println("dansTerrain(" + x + ", " + y + ") = " + (0 <= x && x < this.width && 0 <= y && y < this.height));
+        return (0 <= x && x<this.width -1 && 0<=y && y< this.height -1 );
     }
 
     public Terrain getTerrain() {
@@ -41,5 +42,4 @@ public class Environnement {
     public Trunks getTrunks() {
         return trunks;
     }
-
 }
