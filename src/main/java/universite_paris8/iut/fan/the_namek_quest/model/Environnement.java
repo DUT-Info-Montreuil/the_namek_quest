@@ -16,7 +16,7 @@ public class Environnement {
         this.personnages= new ArrayList<Personnage>();
         this.trunks= new Trunks(this);
         this.height = 720;
-        this.width = 800;
+        this.width = 855;
     }
 
     public boolean dansTerrain(int x, int y){
