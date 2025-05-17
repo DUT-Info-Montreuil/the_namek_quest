@@ -1,10 +1,14 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 public class Trunks extends Personnage {
     private Environnement env;
 
     public Trunks(Environnement env) {
-        super(200, 250, 300);
+        super(200, 250, 352);
         //super(200, 8, 6);
         this.env = env;
     }
@@ -25,16 +29,36 @@ public class Trunks extends Personnage {
         }
     }
 
-    public void sauter() {
-        int newY;
-        newY = this.getY() - 20;
-        if (env.dansTerrain(newY, this.getY())) {
-            setY(newY);
-        }
-    }
+    /*public void sauter() {
+        Timeline timeline = new Timeline();
+        int sautHauteur = 20;
 
-    /*public void finSauter(int d) {
-        int newY;
-        if (d == 0) {}
-    }*/
+        // Monter
+        for (int i = 0; i < sautHauteur; i++) {
+            int delta = -1;
+            timeline.getKeyFrames().add(
+                    new KeyFrame(Duration.millis(i * 10), e -> {
+                        if (env.dansTerrain(getX(), getY() + delta)) {
+                            setY(getY() + delta);
+                        }
+                    })
+            );
+        }
+
+        // Redescendre
+        for (int i = 0; i < sautHauteur; i++) {
+            int delta = 1;
+            timeline.getKeyFrames().add(
+                    new KeyFrame(Duration.millis((sautHauteur + i) * 10), e -> {
+                        if (env.dansTerrain(getX(), getY() + delta)) {
+                            setY(getY() + delta);
+                        }
+                    })
+            );
+        }
+
+        timeline.play();
+    }
+*/
+
 }

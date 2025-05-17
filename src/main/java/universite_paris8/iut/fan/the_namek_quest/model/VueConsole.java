@@ -61,9 +61,9 @@ public class VueConsole {
                 case 'q':
                     env.getTrunks().seDeplacer(1);
                     break;
-                case 'e':
+                /*case 'e':
                     env.getTrunks().sauter();
-                break;
+                break;*/
                 case 'x':
                     System.out.println("Au revoir !");
                     encore = false;
