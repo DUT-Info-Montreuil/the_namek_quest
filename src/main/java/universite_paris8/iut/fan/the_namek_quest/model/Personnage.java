@@ -70,11 +70,19 @@ public abstract class Personnage {
     public void seDeplacer(int d) {}
 
     //Collision
-    /*public boolean collisionHorizontale(int newX) {
-        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()) == 1 || this.getEnv().getTerrain().codeTuile(newX,this.getY()) == 4){
+    public boolean collisionHorizontale(int newX) {
+        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()) == 1){
+            System.out.println("PAS DE Collision horizontal environnement 1");
+            return false;
+        }
+        if( this.getEnv().getTerrain().codeTuile(newX,this.getY()) == 4){
+            System.out.println("PAS DE Collision horizontal environnement 4");
+            return false;
+        }
+        else {
+            System.out.println("COLLISION HORIZONTALE");
             return true;
         }
-        return false;
     }
 
     public boolean collisionVerticale(int newY) {
@@ -82,5 +90,5 @@ public abstract class Personnage {
             return true;
         }
         return false;
-    }*/
+    }
 }
