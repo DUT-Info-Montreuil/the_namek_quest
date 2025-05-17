@@ -36,7 +36,7 @@ public class Controller implements Initializable {
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         TrunksVue trunksVue = new TrunksVue(pane,trunks);
-        Clavier clavier = new Clavier(trunks);
+        Clavier clavier = new Clavier(trunks, trunksVue);
         pane.setFocusTraversable(true); // autorise le focus
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
         pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier); // écoute les touches

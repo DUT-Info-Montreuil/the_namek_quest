@@ -41,6 +41,8 @@ public class TerrainVue {
 
                     tilePane.getChildren().add(new ImageView(imageHerbe));
 
+                } else if (this.terrain.codeTuile(y,x)==4) {
+                    tilePane.getChildren().add(new ImageView(imageBlanche));
                 }
 
 
