@@ -13,8 +13,8 @@ public class Environnement {
         this.terrain = new Terrain();
         this.personnages= new ArrayList<Personnage>();
         this.trunks= new Trunks(this);
-        this.height = terrain.hauteurTerrain()*15;
-        this.width = terrain.largeurTerrain()*15 ;
+        this.height = terrain.hauteurTerrain()*31;
+        this.width = terrain.largeurTerrain()*31 ;
     }
 
 

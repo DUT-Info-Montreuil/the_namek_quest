@@ -9,7 +9,7 @@ public class TerrainVue {
 
     private TilePane tilePane;
     private Terrain terrain;
-    private final int tailleTuile = 16;
+    private final int tailleTuile = 32;
 
     public TerrainVue(TilePane tilePane, Terrain terrain) {
         this.tilePane = tilePane;

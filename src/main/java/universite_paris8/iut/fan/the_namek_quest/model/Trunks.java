@@ -2,65 +2,34 @@ package universite_paris8.iut.fan.the_namek_quest.model;
 
 public class Trunks extends Personnage {
 
+    private boolean enAir;
     public Trunks(Environnement env) {
-        //super(200, 250, 352, env);
-        super(200, 400, 348, env);
-        this.setVitesse(16);
+        super(200, 250, 0, env);
+        this.setVitesse(3);
     }
 
     public void seDeplacer(int d) {
-        int newX;
+        int vitesse = getVitesse();
+        int largeur = this.getEnv().getTerrain().largeurTerrain();
+
         if (d == 0) {
-            newX = (this.getX() + 1) / getVitesse();
-            System.out.println("touche D pressé");
+            int newX = this.getX() + vitesse;
+            int caseSuiv = (newX + largeur - 1) / 32;
+
+            if (this.getEnv().dansTerrain(newX + largeur - 1, this.getY())) {
+                if (!this.collisionHorizontale(caseSuiv)) {
+                    setX(newX);
+                }
+            }
+        } else if (d == 1) {
+            int newX = this.getX() - vitesse;
+            int caseSuiv = newX / 32;
+
             if (this.getEnv().dansTerrain(newX, this.getY())) {
-                System.out.println("Peut se deplacer");
-                if (!this.collisionHorizontale(newX)) {
-                    System.out.println("pas de collision");
-                    setX((newX+1) * getVitesse());
+                if (caseSuiv >= 0 && !this.collisionHorizontale(caseSuiv)) {
+                    setX(newX);
                 }
             }
         }
-        else if (d == 1) {
-            newX = this.getX() - 1;
-                System.out.println("touche q presser");
-            if (this.getEnv().dansTerrain(newX, this.getY())/* && this.collisionHorizontale(newX)*/) {
-                System.out.println("Peut se deplacer");
-                setX((newX -1) - getVitesse());
-            }
-        }
     }
-
-    /*public void sauter() {
-        Timeline timeline = new Timeline();
-        int sautHauteur = 20;
-
-        // Monter
-        for (int i = 0; i < sautHauteur; i++) {
-            int delta = -1;
-            timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.millis(i * 10), e -> {
-                        if (env.dansTerrain(getX(), getY() + delta)) {
-                            setY(getY() + delta);
-                        }
-                    })
-            );
-        }
-
-        // Redescendre
-        for (int i = 0; i < sautHauteur; i++) {
-            int delta = 1;
-            timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.millis((sautHauteur + i) * 10), e -> {
-                        if (env.dansTerrain(getX(), getY() + delta)) {
-                            setY(getY() + delta);
-                        }
-                    })
-            );
-        }
-
-        timeline.play();
-    }
-*/
-
 }

@@ -30,6 +30,7 @@ public class Clavier implements EventHandler<KeyEvent> {
                 trunksVue.changerImageGauche();
                 break;
             /*case SPACE:
+            case UP:
                 trunks.sauter();
                 break;*/
         }
