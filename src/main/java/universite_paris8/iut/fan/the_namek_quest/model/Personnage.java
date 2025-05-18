@@ -71,11 +71,10 @@ public abstract class Personnage {
 
     //Collision
     public boolean collisionHorizontale(int newX) {
-        if(this.getEnv().getTerrain().getTerrain()[newX][this.getY()] == 1 /*|| this.getEnv().getTerrain().codeTuile(this.getX(), newY) == 3*/){
-            System.out.println("Pas de collision avec " + this.getX() + " and " + this.getY());
-            return true;
+        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()/getVitesse()) == 1){
+            return false;
         }
-        return false;
+        return true;
     }
 
     public boolean collisionVerticale(int newY) {

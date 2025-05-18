@@ -1,6 +1,5 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Environnement {
@@ -14,14 +13,13 @@ public class Environnement {
         this.terrain = new Terrain();
         this.personnages= new ArrayList<Personnage>();
         this.trunks= new Trunks(this);
-        this.height = terrain.hauteurTerrain()*16;
-        this.width = terrain.largeurTerrain()*16 ;
+        this.height = terrain.hauteurTerrain()*15;
+        this.width = terrain.largeurTerrain()*15 ;
     }
 
 
     public boolean dansTerrain(int x, int y){
-        System.out.println("dansTerrain(" + x + ", " + y + ") = " + (0 <= x && x < this.width && 0 <= y && y < this.height));
-        return (0 <= x && x<this.width -1 && 0<=y && y< this.height -1 );
+        return (0 <= x && x<this.width  && 0<=y && y< this.height );
     }
 
     public Terrain getTerrain() {

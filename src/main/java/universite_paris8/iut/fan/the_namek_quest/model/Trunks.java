@@ -11,16 +11,21 @@ public class Trunks extends Personnage {
     public void seDeplacer(int d) {
         int newX;
         if (d == 0) {
-            newX = this.getX()+1;
-            System.out.println(" 1 X = " + getX() + " / NewX = " + newX + " / Width = " + getEnv().getWidth());
-            if (this.getEnv().dansTerrain(newX, this.getY()) && this.collisionHorizontale(newX)) {
-                System.out.println("2 X = " + getX() + " / NewX = " + newX + " / Width = " + getEnv().getWidth());
-                setX((newX -1) + getVitesse());
+            newX = (this.getX() + 1) / getVitesse();
+            System.out.println("touche D pressé");
+            if (this.getEnv().dansTerrain(newX, this.getY())) {
+                System.out.println("Peut se deplacer");
+                if (!this.collisionHorizontale(newX)) {
+                    System.out.println("pas de collision");
+                    setX((newX+1) * getVitesse());
+                }
             }
         }
         else if (d == 1) {
             newX = this.getX() - 1;
+                System.out.println("touche q presser");
             if (this.getEnv().dansTerrain(newX, this.getY())/* && this.collisionHorizontale(newX)*/) {
+                System.out.println("Peut se deplacer");
                 setX((newX -1) - getVitesse());
             }
         }
