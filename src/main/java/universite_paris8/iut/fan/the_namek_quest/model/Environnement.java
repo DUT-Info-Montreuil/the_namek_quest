@@ -6,7 +6,7 @@ public class Environnement {
     private Terrain terrain;
     private ArrayList<Personnage> personnages;
     private Trunks trunks;
-    private int width;
+    private int width;//TODO dans Terrain
     private int height;
 
     public Environnement() {
@@ -19,7 +19,7 @@ public class Environnement {
 
 
     public boolean dansTerrain(int x, int y){
-        return (0 <= x && x<this.width  && 0<=y && y< this.height );
+        return (0 <= x && x<this.width  && 0<=y && y< this.height ); // TODO déplacer dans Terrain
     }
 
     public Terrain getTerrain() {

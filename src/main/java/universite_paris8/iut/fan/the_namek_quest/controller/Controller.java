@@ -26,6 +26,7 @@ public class Controller implements Initializable {
     private Environnement environnement;
     private Terrain terrain;
     private Trunks trunks;
+
     private Timeline gameLoop;
     private int temps;
 
@@ -44,31 +45,17 @@ public class Controller implements Initializable {
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
         pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);// écoute les touches
         initAnimation();
-        gameLoop.play();
+
     }
 
     private void initAnimation() {
-        gameLoop = new Timeline();
-        temps=0;
+        gameLoop = new Timeline(new KeyFrame(Duration.seconds(0.017), (ev -> {
+            trunks.gravite();
+            trunks.seDeplacer();
+        })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
+        gameLoop.play();
 
-        KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.017),
-                (ev ->{
-                    trunks.gravite();
-                    if(temps==100){
-                        System.out.println("fini");
-                        gameLoop.stop();
-                    }
-                    else if (temps%5==0){
-                        System.out.println("un tour");
-                        pane.setLayoutX(pane.getLayoutX()+5);
-                        pane.setLayoutY(pane.getLayoutY()+5);
-                    }
-                    temps++;
-                })
-        );
-        gameLoop.getKeyFrames().add(kf);
     }
 }
 

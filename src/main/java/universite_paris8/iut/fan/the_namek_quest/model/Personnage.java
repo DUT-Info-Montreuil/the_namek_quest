@@ -58,9 +58,9 @@ public abstract class Personnage {
     // Deplacement
     public void seDeplacer(int d) {}
 
-    //Collision
+    //Collision  //TODO déolacer dans terrain
     public boolean collisionHorizontale(int newX) {
-        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()/31) == 1){
+        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()/31) == 1){  //TODO c'est le terrain qui gère les coordonnées ligne/colonne (partout ailleurs on parle pixels), c'est le terrain qui peut dire si on peut marcher sur une tuile
             return false;
         }
         return true;
@@ -74,8 +74,8 @@ public abstract class Personnage {
     }
 
    public void gravite() {
-       while (this.getY() + 32 < this.getEnv().getTerrain().hauteurTerrain() * 31 && !this.collisionVerticale(this.getY() + 32)) {
-           setY(getY() + 32);
+       if (this.getY() + 32 < this.getEnv().getTerrain().hauteurTerrain() * 31 && !this.collisionVerticale(this.getY() + 32)) {
+           setY(getY() + 2);
        }
    }
 }

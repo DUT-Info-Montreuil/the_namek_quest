@@ -3,17 +3,22 @@ package universite_paris8.iut.fan.the_namek_quest.model;
 public class Trunks extends Personnage {
 
     private boolean enAir;
+    private char direction;
     public Trunks(Environnement env) {
         super(200, 250, 0, env);
         this.setVitesse(3);
+        this.direction = 'h'; //h => ne bouge pas
     }
 
-    public void seDeplacer(int d) {
+    public void changerDirection(char direction) {
+        this.direction = direction;
+    }
+    public void seDeplacer() {
         int vitesse = getVitesse();
         int largeur = this.getEnv().getTerrain().largeurTerrain();
 
-        if (d == 0) {
-            int newX = this.getX() + vitesse;
+        if (this.direction== 'd') {
+            int newX = this.getX() + vitesse; //TODO gérer le déplacement de la façon suivante : losqu'on appuie sur une touche le personnage stocke sa direction. La gamloop dit au personnage de se déplacer
             int caseSuiv = (newX + largeur - 1) / 32;
 
             if (this.getEnv().dansTerrain(newX + largeur - 1, this.getY())) {
@@ -21,7 +26,7 @@ public class Trunks extends Personnage {
                     setX(newX);
                 }
             }
-        } else if (d == 1) {
+        } else if (this.direction== 'g') {
             int newX = this.getX() - vitesse;
             int caseSuiv = newX / 32;
 
@@ -32,4 +37,5 @@ public class Trunks extends Personnage {
             }
         }
     }
+
 }

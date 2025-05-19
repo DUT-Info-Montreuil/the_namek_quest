@@ -18,15 +18,18 @@ public class Clavier implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent keyEvent) {
+
         switch (keyEvent.getCode()){
             case RIGHT:
             case D:
-                trunks.seDeplacer(0);
+
+                trunks.changerDirection('d');
                 trunksVue.changerImageDroite();
                 break;
             case LEFT:
             case Q:
-                trunks.seDeplacer(1);
+
+                trunks.changerDirection('g');
                 trunksVue.changerImageGauche();
                 break;
             /*case SPACE:
@@ -34,5 +37,8 @@ public class Clavier implements EventHandler<KeyEvent> {
                 trunks.sauter();
                 break;*/
         }
+
     }
+
+
 }
