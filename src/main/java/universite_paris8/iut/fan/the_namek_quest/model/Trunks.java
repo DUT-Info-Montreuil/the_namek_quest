@@ -2,74 +2,40 @@ package universite_paris8.iut.fan.the_namek_quest.model;
 
 public class Trunks extends Personnage {
 
+    private boolean enAir;
+    private char direction;
     public Trunks(Environnement env) {
-        //super(200, 250, 352, env);
-        super(200, 400, 352, env);
-        this.setVitesse(16);
+
+        super(200, 250, 100, env);
+        this.setVitesse(3);
+        this.direction = 'h'; //h => ne bouge pas
     }
 
-    public void seDeplacer(int d) {
-        int newX;
-        if (d == 0) {
-            System.out.println("tente de Deplacer des trunks a droite");
-            newX = this.getX()+1;
-            if (this.getEnv().dansTerrain(newX, this.getY()) /*&& this.collisionHorizontale(newX)*/) {
-                System.out.println("C1");
-                /*if(this.collisionHorizontale(newX)) {
-                    System.out.println("Deplacer des trunks a droite vraiment");
-                    setX((newX - 1) + getVitesse());
-                }
-                else if (!this.collisionVerticale(newX)) {
-                    System.out.println("C3");
-                }*/
-                if (this.getEnv().getTerrain().codeTuile(this.getX()*16, this.getY())*16 != 2) {
-                    System.out.println("C2");
-                    setX((newX - 1));
+    public void changerDirection(char direction) {
+        this.direction = direction;
+    }
+    public void seDeplacer() {
+        int vitesse = getVitesse();
+        int largeur = this.getEnv().getTerrain().largeurTerrain();
+
+        if (this.direction== 'd') {
+            int newX = this.getX() + vitesse; //TODO gérer le déplacement de la façon suivante : losqu'on appuie sur une touche le personnage stocke sa direction. La gamloop dit au personnage de se déplacer
+            int caseSuiv = (newX + largeur - 1) / 32;
+
+            if (this.getEnv().dansTerrain(newX + largeur - 1, this.getY())) {
+                if (!this.collisionHorizontale(caseSuiv)) {
+                    setX(newX);
                 }
             }
+        } else if (this.direction== 'g') {
+            int newX = this.getX() - vitesse;
+            int caseSuiv = ((newX) / 32);
 
-        }
-
-        else if (d == 1) {
-            System.out.println("Deplacer des trunks a gauche");
-            newX = this.getX() - 1;
-            if (this.getEnv().dansTerrain(newX, this.getY()) /*&& this.collisionHorizontale(newX)*/) {
-                System.out.println("Deplacer des trunks a gauche");
-                setX((newX -1) - getVitesse());
+            if (this.getEnv().dansTerrain(newX, this.getY())) {
+                if (caseSuiv >= 0 && !this.collisionHorizontale(caseSuiv)) {
+                    setX(newX);
+                }
             }
         }
     }
-
-    /*public void sauter() {
-        Timeline timeline = new Timeline();
-        int sautHauteur = 20;
-
-        // Monter
-        for (int i = 0; i < sautHauteur; i++) {
-            int delta = -1;
-            timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.millis(i * 10), e -> {
-                        if (env.dansTerrain(getX(), getY() + delta)) {
-                            setY(getY() + delta);
-                        }
-                    })
-            );
-        }
-
-        // Redescendre
-        for (int i = 0; i < sautHauteur; i++) {
-            int delta = 1;
-            timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.millis((sautHauteur + i) * 10), e -> {
-                        if (env.dansTerrain(getX(), getY() + delta)) {
-                            setY(getY() + delta);
-                        }
-                    })
-            );
-        }
-
-        timeline.play();
-    }
-    */
-
 }
