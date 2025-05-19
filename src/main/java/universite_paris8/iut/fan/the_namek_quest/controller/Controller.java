@@ -53,10 +53,11 @@ public class Controller implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
+
                 Duration.seconds(0.017),
                 (ev ->{
                     trunks.gravite();
-                    if(temps==100){
+                    if(temps==10000000){
                         System.out.println("fini");
                         gameLoop.stop();
                     }

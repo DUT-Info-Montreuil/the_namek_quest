@@ -59,12 +59,15 @@ public abstract class Personnage {
     public void seDeplacer(int d) {}
 
     //Collision
-    public boolean collisionHorizontale(int newX) {
-        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()/31) == 1){
-            return false;
+
+    public boolean PasDeCollisionHorizontale(int newX) {
+        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()/31) != 1){
+            return true;
         }
-        return true;
+        return false;
     }
+
+
 
     public boolean collisionVerticale(int newY) {
         if (getX() / 31 < 0 || getX() / 31 >= this.getEnv().getTerrain().largeurTerrain() || newY / 31 < 0 || newY / 31 >= this.getEnv().getTerrain().hauteurTerrain()) {
