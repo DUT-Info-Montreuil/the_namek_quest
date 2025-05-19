@@ -50,7 +50,7 @@ public class Controller implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.seconds(0.017), (ev -> {
-            trunks.gravite();
+            trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
             trunks.seDeplacer();
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
