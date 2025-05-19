@@ -22,7 +22,7 @@ public class Trunks extends Personnage {
             int caseSuiv = (newX + largeur - 1) / 32;
 
             if (this.getEnv().dansTerrain(newX + largeur - 1, this.getY())) {
-                if (!this.PasDeCollisionHorizontale(caseSuiv)) {
+                if (!this.collisionHorizontale(caseSuiv)) {
                     setX(newX);
                 }
             }
@@ -31,7 +31,7 @@ public class Trunks extends Personnage {
             int caseSuiv = ((newX) / 32);
 
             if (this.getEnv().dansTerrain(newX, this.getY())) {
-                if (caseSuiv >= 0 && !this.PasDeCollisionHorizontale(caseSuiv)) {
+                if (caseSuiv >= 0 && !this.collisionHorizontale(caseSuiv)) {
                     setX(newX);
                 }
             }
