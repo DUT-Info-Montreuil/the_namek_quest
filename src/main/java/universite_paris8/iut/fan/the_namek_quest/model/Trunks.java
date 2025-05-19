@@ -5,7 +5,7 @@ public class Trunks extends Personnage {
     private boolean enAir;
     private char direction;
     public Trunks(Environnement env) {
-        super(200, 250, 0, env);
+        super(200, 250, 100, env);
         this.setVitesse(3);
         this.direction = 'h'; //h => ne bouge pas
     }
@@ -22,16 +22,16 @@ public class Trunks extends Personnage {
             int caseSuiv = (newX + largeur - 1) / 32;
 
             if (this.getEnv().dansTerrain(newX + largeur - 1, this.getY())) {
-                if (!this.collisionHorizontale(caseSuiv)) {
+                if (!this.PasDeCollisionHorizontale(caseSuiv)) {
                     setX(newX);
                 }
             }
         } else if (this.direction== 'g') {
             int newX = this.getX() - vitesse;
-            int caseSuiv = newX / 32;
+            int caseSuiv = ((newX) / 32);
 
             if (this.getEnv().dansTerrain(newX, this.getY())) {
-                if (caseSuiv >= 0 && !this.collisionHorizontale(caseSuiv)) {
+                if (caseSuiv >= 0 && !this.PasDeCollisionHorizontale(caseSuiv)) {
                     setX(newX);
                 }
             }

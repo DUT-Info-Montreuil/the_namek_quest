@@ -58,13 +58,16 @@ public abstract class Personnage {
     // Deplacement
     public void seDeplacer(int d) {}
 
+
     //Collision  //TODO déolacer dans terrain
     public boolean collisionHorizontale(int newX) {
-        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()/31) == 1){  //TODO c'est le terrain qui gère les coordonnées ligne/colonne (partout ailleurs on parle pixels), c'est le terrain qui peut dire si on peut marcher sur une tuile
+        if(this.getEnv().getTerrain().codeTuile(newX,this.getY()/31) == 1) {  //TODO c'est le terrain qui gère les coordonnées ligne/colonne (partout ailleurs on parle pixels), c'est le terrain qui peut dire si on peut marcher sur une tuile
             return false;
         }
         return true;
     }
+
+
 
     public boolean collisionVerticale(int newY) {
         if (getX() / 31 < 0 || getX() / 31 >= this.getEnv().getTerrain().largeurTerrain() || newY / 31 < 0 || newY / 31 >= this.getEnv().getTerrain().hauteurTerrain()) {
