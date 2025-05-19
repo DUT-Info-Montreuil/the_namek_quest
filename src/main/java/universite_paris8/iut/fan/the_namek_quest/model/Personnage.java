@@ -50,5 +50,5 @@ public abstract class Personnage {
     }
 
     // Deplacement
-    public void seDeplacer(int d){}
+    public void seDeplacer(){}
 }

@@ -2,8 +2,6 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventHandler;
-import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
@@ -26,7 +24,7 @@ public class Clavier {
         pane.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case SPACE -> spacePressed.set(true);
-                case Q -> qPressed.set(true);
+                case Q  -> qPressed.set(true);
                 case S -> sPressed.set(true);
                 case D -> dPressed.set(true);
             }
@@ -42,27 +40,6 @@ public class Clavier {
         });
     }
 
-    /*@Override
-    public void handle(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()){
-            case RIGHT:
-            case D:
-                trunks.setDirection('d');
-                trunksVue.changerImageDroite();
-                break;
-
-            case LEFT:
-            case Q:
-                trunks.setDirection('g');
-                trunksVue.changerImageGauche();
-                break;
-            case SPACE:
-            case UP:
-                trunks.sauter();
-                break;
-        }
-
-    }*/
 
     public boolean isQPressed() {
         return qPressed.get();
@@ -74,12 +51,11 @@ public class Clavier {
 
     public void handleLeft() {
         trunks.setDirection('g');
+        trunksVue.changerImageGauche();
     }
 
     public void handleRight() {
         trunks.setDirection('d');
+        trunksVue.changerImageDroite();
     }
-
-
-
 }

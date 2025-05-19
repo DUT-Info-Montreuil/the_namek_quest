@@ -70,10 +70,10 @@ public class VueConsole {
             char choix = menuEtSaisie();
             switch (choix) {
                 case 'd':
-                    env.getTrunks().seDeplacer(0);
+                    env.getTrunks().seDeplacer();
                     break;
                 case 'q':
-                    env.getTrunks().seDeplacer(1);
+                    env.getTrunks().seDeplacer();
                     break;
                 /*case 'e':
                     env.getTrunks().sauter();

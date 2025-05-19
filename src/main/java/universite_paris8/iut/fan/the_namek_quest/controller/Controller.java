@@ -40,14 +40,11 @@ public class Controller implements Initializable {
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         TrunksVue trunksVue = new TrunksVue(pane,trunks);
-
-        Clavier clavier = new Clavier(trunks, trunksVue);
+        clavier = new Clavier(trunks, trunksVue);
         clavier.setupKeyHandlers(pane);
-        /*pane.setFocusTraversable(true); // autorise le focus
+        pane.setFocusTraversable(true); // autorise le focus
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
-        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);// écoute les touches*/
         initAnimation();
-
     }
 
     private void initAnimation() {
@@ -57,11 +54,9 @@ public class Controller implements Initializable {
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
-                System.out.println("gauche");
             }
             if(clavier.isDPressed()) {
                 clavier.handleRight();
-                System.out.println("droite");
             }
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);

@@ -10,6 +10,13 @@ public class Terrain {
     private int width;
     private int height;
 
+    private final int TAILLE_TUILE = 32;
+    private final int LARGEUR_PERSO = 24;
+    private final int HAUTEUR_PERSO = 32;
+    private final int MARGE_COLLISION_X = 4;
+    private final int MARGE_COLLISION_Y = 4;
+
+
     public Terrain(){
         this.height = this.hauteurTerrain()*31;
         this.width = this.largeurTerrain()*31 ;
@@ -36,13 +43,13 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1},
+            {1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
     };
 
     public int hauteurTerrain(){
-       return this.terrain.length;
+        return this.terrain.length;
     }
 
     public int largeurTerrain(){
@@ -54,7 +61,19 @@ public class Terrain {
     }
 
     public int codeTuilePixel(int x, int y){
-        return this.terrain[x/32][y/32];
+        return this.terrain[y / TAILLE_TUILE][x / TAILLE_TUILE];
+    }
+
+    public int getCaseX(int xPixel) {
+        return xPixel / TAILLE_TUILE;
+    }
+
+    public int getCaseY(int yPixel) {
+        if (yPixel >= 0) {
+            return yPixel / TAILLE_TUILE;
+        } else {
+            return -1;
+        }
     }
 
     public boolean dansTerrain(int x, int y){
@@ -65,25 +84,64 @@ public class Terrain {
         return codeTuilePixel(x, y) == 1;
     }
 
-    //Collision  //TODO déplacer dans terrain
-    public boolean collisionHorizontale(int newX,int y) {
-        if(this.codeTuile(newX,y/31) == 1) {  //TODO c'est le terrain qui gère les coordonnées ligne/colonne (partout ailleurs on parle pixels), c'est le terrain qui peut dire si on peut marcher sur une tuile
+    public boolean estMarchable(int xPixel, int yPixel) {
+        int caseX = getCaseX(xPixel);
+        int caseY = getCaseY(yPixel);
+
+        if (caseY < 0 || caseY >= terrain.length || caseX < 0 || caseX >= terrain[0].length) {
             return false;
         }
-        return true;
+
+        return terrain[caseY][caseX] == 1;
     }
 
-    public boolean collisionVerticale(int x,int newY) {
-        if (x / 31 < 0 || x / 31 >= this.largeurTerrain() || newY / 31 < 0 || newY / 31 >= this.hauteurTerrain()) {
+
+    //Collision  //TODO déplacer dans terrain
+    public boolean collisionDroite(int x, int y) {
+        return !estMarchable(x + LARGEUR_PERSO, y + MARGE_COLLISION_Y) ||
+                !estMarchable(x + LARGEUR_PERSO, y + HAUTEUR_PERSO - MARGE_COLLISION_Y);
+    }
+
+    public boolean collisionGauche(int x, int y) {
+        return !estMarchable(x, y + MARGE_COLLISION_Y) ||
+                !estMarchable(x, y + HAUTEUR_PERSO - MARGE_COLLISION_Y);
+    }
+
+    public boolean collisionVerticale(int x, int yBas) {
+        int colonne = x / 32; // 32 pixels par tuile (cohérent avec la taille perso)
+        int ligne = yBas/ 32; // on ajoute 1 pixel pour détecter juste sous les pieds
+
+        if (colonne < 0 || colonne >= this.largeurTerrain() || ligne < 0 || ligne >= this.hauteurTerrain()) {
             return true;
         }
-        return (this.codeTuile(x / 31, newY / 31) == 2 || this.codeTuile(x / 31, newY / 31) == 3);
+
+        int code = this.codeTuile(colonne, ligne);
+        return (code == 2 || code == 3);
     }
 
-    public int gravite(int x,int newY) {
-        if (newY + 32 < this.hauteurTerrain() * 31 && !this.collisionVerticale(x, newY + 32)) {
-            newY = (newY + 2);
+
+    public int gravite(int x, int y) {
+        int hauteurPerso = 32;
+
+        if (y + hauteurPerso + 1 < this.hauteurTerrain() * 32 &&
+                !this.collisionVerticale(x, y + hauteurPerso + 1)) {
+            y += 2; // vitesse de chute (ajuste si trop rapide)
         }
-        return newY;
+
+        return y;
     }
+
+    /*
+    public boolean collisionBas(int x, int y) {
+        int piedY = y + HAUTEUR_PERSO;
+        return !estMarchable(x + MARGE_COLLISION_X, piedY) ||
+                !estMarchable(x + LARGEUR_PERSO - MARGE_COLLISION_X, piedY);
+    }
+
+
+    public boolean collisionHaut(int x, int y) {
+        int teteY = y - 1;
+        return !estMarchable(x + MARGE_COLLISION_X, teteY) ||
+                !estMarchable(x + LARGEUR_PERSO - MARGE_COLLISION_X, teteY);
+    }*/
 }

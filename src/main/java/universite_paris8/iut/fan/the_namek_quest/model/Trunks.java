@@ -2,11 +2,11 @@ package universite_paris8.iut.fan.the_namek_quest.model;
 
 public class Trunks extends Personnage {
 
-    private boolean enAir;
     private char direction;
 
+
     public Trunks(Environnement env) {
-        super(200, 100, env);
+        super(200, 132, env);
         this.setVitesse(3);
         this.direction = 'h'; //h => ne bouge pas
     }
@@ -17,26 +17,29 @@ public class Trunks extends Personnage {
 
     public void seDeplacer() {
         int vitesse = getVitesse();
-        int largeur = this.getEnv().getTerrain().largeurTerrain();
+        Terrain terrain = this.getEnv().getTerrain();
+        int x = this.getX();
+        int y = this.getY();
 
-        if (this.direction== 'd') {
-            int newX = this.getX() + vitesse; //TODO gérer le déplacement de la façon suivante : losqu'on appuie sur une touche le personnage stocke sa direction. La gamloop dit au personnage de se déplacer
-            int caseSuiv = (newX + largeur - 1) / 32;
-
-            if (this.getEnv().getTerrain().dansTerrain(newX + largeur - 1, this.getY())) {
-                if (!this.getEnv().getTerrain().collisionHorizontale(caseSuiv,this.getY())) {
+        if (this.direction == 'd') {
+            int newX = x + vitesse;
+            if(terrain.dansTerrain(newX, y)) {
+                // On vérifie la collision à droite à partir de la position actuelle
+                if (!terrain.collisionDroite(x, y)) {
                     setX(newX);
+                    setDirection('h');
                 }
             }
-        } else if (this.direction== 'g') {
-            int newX = this.getX() - vitesse;
-            int caseSuiv = ((newX) / 32);
-
-            if (this.getEnv().getTerrain().dansTerrain(newX, this.getY())) {
-                if (caseSuiv >= 0 && !this.getEnv().getTerrain().collisionHorizontale(caseSuiv,this.getY())) {
+        } else if (this.direction == 'g') {
+            int newX = x - vitesse;
+            if (terrain.dansTerrain(newX, y)) {
+                // Vérifie la collision à gauche à partir de la position actuelle
+                if (!terrain.collisionGauche(x, y)) {
                     setX(newX);
+                    setDirection('h');
                 }
             }
         }
     }
+
 }
