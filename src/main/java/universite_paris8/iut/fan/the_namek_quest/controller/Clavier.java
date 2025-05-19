@@ -15,6 +15,9 @@ public class Clavier implements EventHandler<KeyEvent> {
         this.trunksVue = trunksVue;
     }
 
+    public boolean qPressed(){
+            return false;
+    }
 
     @Override
     public void handle(KeyEvent keyEvent) {
@@ -22,14 +25,13 @@ public class Clavier implements EventHandler<KeyEvent> {
         switch (keyEvent.getCode()){
             case RIGHT:
             case D:
-
-                trunks.changerDirection('d');
+                trunks.setDirection('d');
                 trunksVue.changerImageDroite();
                 break;
+
             case LEFT:
             case Q:
-
-                trunks.changerDirection('g');
+                trunks.setDirection('g');
                 trunksVue.changerImageGauche();
                 break;
             /*case SPACE:
