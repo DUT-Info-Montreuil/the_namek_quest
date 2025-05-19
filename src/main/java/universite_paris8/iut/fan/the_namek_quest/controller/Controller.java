@@ -28,10 +28,10 @@ public class Controller implements Initializable {
     private Trunks trunks;
 
     private Timeline gameLoop;
-    private int temps;
 
     @FXML private TilePane tilePane;
     @FXML private Pane pane;
+    private Clavier clavier;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,18 +40,29 @@ public class Controller implements Initializable {
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         TrunksVue trunksVue = new TrunksVue(pane,trunks);
+
         Clavier clavier = new Clavier(trunks, trunksVue);
-        pane.setFocusTraversable(true); // autorise le focus
+        clavier.setupKeyHandlers(pane);
+        /*pane.setFocusTraversable(true); // autorise le focus
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
-        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);// écoute les touches
+        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);// écoute les touches*/
         initAnimation();
 
     }
 
     private void initAnimation() {
-        gameLoop = new Timeline(new KeyFrame(Duration.seconds(0.017), (ev -> {
+        gameLoop = new Timeline(new KeyFrame(Duration.millis(10), (ev -> {
             trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
             trunks.seDeplacer();
+            clavier.setupKeyHandlers(pane);
+            if(clavier.isQPressed()) {
+                clavier.handleLeft();
+                System.out.println("gauche");
+            }
+            if(clavier.isDPressed()) {
+                clavier.handleRight();
+                System.out.println("droite");
+            }
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();

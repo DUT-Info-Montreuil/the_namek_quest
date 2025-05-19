@@ -1,13 +1,13 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
 /*
-    Cette classe définit le terrain. C'est-à-dire quelle type de tuile est à quel endroit.
+    Cette classe définit le terrain. C'est-à-dire quel type de tuile est à quel endroit.
 
 
  */
 public class Terrain {
 
-    private int width;//TODO dans Terrain
+    private int width;
     private int height;
 
     public Terrain(){
@@ -58,19 +58,7 @@ public class Terrain {
     }
 
     public boolean dansTerrain(int x, int y){
-        return (0 <= x && x<this.width  && 0<=y && y< this.height ); // TODO déplacer dans Terrain
-    }
-
-    public int [][] getTerrain() {
-        return this.terrain;
-    }
-
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
+        return (0 <= x && x<this.width  && 0<=y && y< this.height );
     }
 
     public boolean peutMarcherDessus (int x, int y){
