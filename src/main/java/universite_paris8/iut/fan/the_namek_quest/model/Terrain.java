@@ -1,34 +1,27 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
-/*
-    Cette classe définit le terrain. C'est-à-dire quel type de tuile est à quel endroit.
-
-
+/**
+ * Classe Terrain
+ * ---------------
+ * Représente le terrain du jeu sous forme de grille de tuiles (tableau 2D).
+ * - Gère les types de tuiles (sol, herbe, ciel, nuage).
+ * - Gère les détections de collisions entre le personnage et le terrain.
+ * - Gère la gravité pour les personnages/joueurs.
+ * - Vérifie si une case est traversable ou non.
+ * - Contrôle que les coordonnées sont dans le terrain.
  */
+
 public class Terrain {
 
     private int width;
     private int height;
 
-    private final int TAILLE_TUILE = 32;
-    private final int LARGEUR_PERSO = 31;
-    private final int HAUTEUR_PERSO = 31;
-    private final int MARGE_COLLISION_X = 4;
-    private final int MARGE_COLLISION_Y = 4;
+    private static final int TAILLE_TUILE = 32;
+    private static final int LARGEUR_PERSO = 32;
+    private static final int HAUTEUR_PERSO = 32;
 
-
-    public Terrain(){
-        this.height = this.hauteurTerrain()*31;
-        this.width = this.largeurTerrain()*31 ;
-
-    }
-
-    //1 => Ciel
-    //3 => Herbe
-    //2 => Sol
-    //4 => blanc (nuage)
-
-    private int [][] terrain= {
+    // 1 => Ciel; 2 => Sol; 3 => Herbe; 4 => blanc (nuage)
+    private int[][] terrain = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -39,29 +32,39 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
+            {1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
+            {1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
+            {1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
+            {3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
     };
 
-    public int hauteurTerrain(){
-        return this.terrain.length;
+    public Terrain() {
+        this.height = this.hauteurTerrain() * TAILLE_TUILE;
+        this.width = this.largeurTerrain() * TAILLE_TUILE;
     }
 
-    public int largeurTerrain(){
-        return this.terrain[0].length;
+    public int hauteurTerrain() {
+        return terrain.length;
+    }
+
+    public int largeurTerrain() {
+        return terrain[0].length;
     }
 
     public int codeTuile(int c, int l) {
-        return this.terrain[l][c];
+        return terrain[l][c];
     }
 
-    public int codeTuilePixel(int x, int y){
-        return this.terrain[y / TAILLE_TUILE][x / TAILLE_TUILE];
+    public int codeTuilePixel(int x, int y) {
+        int l = y / TAILLE_TUILE;
+        int c = x / TAILLE_TUILE;
+        if (l < 0 || l >= terrain.length || c < 0 || c >= terrain[0].length) {
+            return -1; // Hors du terrain
+        }
+        return terrain[l][c];
     }
 
     public int getCaseX(int xPixel) {
@@ -69,22 +72,14 @@ public class Terrain {
     }
 
     public int getCaseY(int yPixel) {
-        if (yPixel >= 0) {
-            return yPixel / TAILLE_TUILE;
-        } else {
-            return -1;
-        }
+        return yPixel / TAILLE_TUILE;
     }
 
-    public boolean dansTerrain(int x, int y){
-        return (0 <= x && x<this.width  && 0<=y && y< this.height );
+    public boolean dansTerrain(int x, int y) {
+        return (x >= 0 && x < width && y >= 0 && y < height);
     }
 
-
-    /*public boolean peutMarcherDessus (int x, int y){
-        return codeTuilePixel(x, y) == 1;
-    }*/
-
+    // Détermine si la case (en pixels) est "marchable" (ciel, nuage)
     public boolean estMarchable(int xPixel, int yPixel) {
         int caseX = getCaseX(xPixel);
         int caseY = getCaseY(yPixel);
@@ -92,65 +87,70 @@ public class Terrain {
         if (caseY < 0 || caseY >= terrain.length || caseX < 0 || caseX >= terrain[0].length) {
             return false;
         }
+        int code = terrain[caseY][caseX];
 
-        return terrain[caseY][caseX] == 1;
+        return (code == 1 || code == 4);
     }
 
 
-    //Collision  //TODO déplacer dans terrain
-    public boolean collisionDroite(int x, int y) {
-        return !estMarchable(x + LARGEUR_PERSO, y) &&
-                !estMarchable(x + LARGEUR_PERSO, y + HAUTEUR_PERSO );
-    }
-
-    public boolean collisionGauche(int x, int y) {
-        return !estMarchable(x, y) && !estMarchable(x, y + HAUTEUR_PERSO);
+    public boolean collisionBas(int x, int y) {
+        int yTest = y + HAUTEUR_PERSO;
+        for (int testX = x; testX < x + LARGEUR_PERSO; testX++) {
+            if (!estMarchable(testX, yTest)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean collisionHaut(int x, int y) {
-        return !estMarchable(x , y) &&
-                !estMarchable(x , y + HAUTEUR_PERSO );
+        int yTest = y;
+        for (int testX = x; testX < x + LARGEUR_PERSO; testX++) {
+            if (!estMarchable(testX, yTest)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
-    public boolean collisionBas(int x, int y){
-        return !estMarchable(x , y+32 ) &&
-                !estMarchable(x+32 , y +32 );
+    public boolean collisionDroite(int x, int y) {
+        int xTest = x + LARGEUR_PERSO;
+        for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
+            if (!estMarchable(xTest, testY)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean collisionGauche(int x, int y) {
+        int xTest = x;
+        for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
+            if (!estMarchable(xTest, testY)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
     public boolean collisionVerticale(int x, int yBas) {
-        int colonne = x / 32; // 32 pixels par tuile (cohérent avec la taille perso)
-        int ligne = yBas/ 32; // on ajoute 1 pixel pour détecter juste sous les pieds
-
-        if (colonne < 0 || colonne >= this.largeurTerrain() || ligne < 0 || ligne >= this.hauteurTerrain()) {
+        int colonne = x / TAILLE_TUILE;
+        int ligne = yBas / TAILLE_TUILE;
+        if (colonne < 0 || colonne >= largeurTerrain() || ligne < 0 || ligne >= hauteurTerrain()) {
             return true;
         }
-
-        int code = this.codeTuile(colonne, ligne);
+        int code = codeTuile(colonne, ligne);
         return (code == 2 || code == 3);
     }
 
 
     public int gravite(int x, int y) {
-        if (y + HAUTEUR_PERSO + 1 < this.hauteurTerrain() * HAUTEUR_PERSO && !this.collisionBas(x, y /*+ HAUTEUR_PERSO */) && estMarchable(x, y + HAUTEUR_PERSO)) {
-            y += 2; // vitesse de chute (ajuste si trop rapide)
-
+        if (!collisionBas(x, y)) {
+            y += 2;
         }
         return y;
     }
-
-    /*
-    public boolean collisionBas(int x, int y) {
-        int piedY = y + HAUTEUR_PERSO;
-        return !estMarchable(x + MARGE_COLLISION_X, piedY) ||
-                !estMarchable(x + LARGEUR_PERSO - MARGE_COLLISION_X, piedY);
-    }
-
-
-    public boolean collisionHaut(int x, int y) {
-        int teteY = y - 1;
-        return !estMarchable(x + MARGE_COLLISION_X, teteY) ||
-                !estMarchable(x + LARGEUR_PERSO - MARGE_COLLISION_X, teteY);
-    }*/
 }

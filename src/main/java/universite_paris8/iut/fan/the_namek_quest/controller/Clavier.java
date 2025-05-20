@@ -49,6 +49,10 @@ public class Clavier {
         return dPressed.get();
     }
 
+    public boolean isSpacePressed() {
+        return spacePressed.get();
+    }
+
     public void handleLeft() {
         trunks.setDirection('g');
         trunksVue.changerImageGauche();
@@ -57,5 +61,9 @@ public class Clavier {
     public void handleRight() {
         trunks.setDirection('d');
         trunksVue.changerImageDroite();
+    }
+
+    public void handleUp() {
+        trunks.sauter();
     }
 }

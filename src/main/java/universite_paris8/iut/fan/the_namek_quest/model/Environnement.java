@@ -1,5 +1,11 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
+/**
+ * Classe Environnement
+ * --------------------
+ *
+ *
+ */
 
 public class Environnement {
     private Terrain terrain;

@@ -1,12 +1,19 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
+/**
+ * Classe Controller
+ * -----------------
+ * Contrôleur principal de l'application JavaFX. Gère l'initialisation, la boucle de jeu et la communication entre modèle et vue.
+ * - Initialise l'environnement, le terrain, le personnage et les vues.
+ * - Lance et maintenir la boucle principale du jeu (animation, gravité, déplacements).
+ * - Gère les entrées clavier et les actions correspondantes.
+ */
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -49,14 +56,19 @@ public class Controller implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), (ev -> {
-            trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
+            //trunks.collision(trunks.getX(),  trunks.getY());
             trunks.seDeplacer();
+            trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
+
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
             }
             if(clavier.isDPressed()) {
                 clavier.handleRight();
+            }
+            if(clavier.isSpacePressed()){
+                clavier.handleUp();
             }
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
