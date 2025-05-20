@@ -11,8 +11,8 @@ public class Terrain {
     private int height;
 
     private final int TAILLE_TUILE = 32;
-    private final int LARGEUR_PERSO = 24;
-    private final int HAUTEUR_PERSO = 32;
+    private final int LARGEUR_PERSO = 31;
+    private final int HAUTEUR_PERSO = 31;
     private final int MARGE_COLLISION_X = 4;
     private final int MARGE_COLLISION_Y = 4;
 
@@ -43,8 +43,8 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1},
-            {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3},
+            {3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
     };
 
@@ -80,9 +80,10 @@ public class Terrain {
         return (0 <= x && x<this.width  && 0<=y && y< this.height );
     }
 
-    public boolean peutMarcherDessus (int x, int y){
+
+    /*public boolean peutMarcherDessus (int x, int y){
         return codeTuilePixel(x, y) == 1;
-    }
+    }*/
 
     public boolean estMarchable(int xPixel, int yPixel) {
         int caseX = getCaseX(xPixel);
@@ -98,14 +99,25 @@ public class Terrain {
 
     //Collision  //TODO déplacer dans terrain
     public boolean collisionDroite(int x, int y) {
-        return !estMarchable(x + LARGEUR_PERSO, y + MARGE_COLLISION_Y) ||
-                !estMarchable(x + LARGEUR_PERSO, y + HAUTEUR_PERSO - MARGE_COLLISION_Y);
+        return !estMarchable(x + LARGEUR_PERSO, y) &&
+                !estMarchable(x + LARGEUR_PERSO, y + HAUTEUR_PERSO );
     }
 
     public boolean collisionGauche(int x, int y) {
-        return !estMarchable(x, y + MARGE_COLLISION_Y) ||
-                !estMarchable(x, y + HAUTEUR_PERSO - MARGE_COLLISION_Y);
+        return !estMarchable(x, y) && !estMarchable(x, y + HAUTEUR_PERSO);
     }
+
+    public boolean collisionHaut(int x, int y) {
+        return !estMarchable(x , y) &&
+                !estMarchable(x , y + HAUTEUR_PERSO );
+    }
+
+
+    public boolean collisionBas(int x, int y){
+        return !estMarchable(x , y+32 ) &&
+                !estMarchable(x+32 , y +32 );
+    }
+
 
     public boolean collisionVerticale(int x, int yBas) {
         int colonne = x / 32; // 32 pixels par tuile (cohérent avec la taille perso)
@@ -121,13 +133,10 @@ public class Terrain {
 
 
     public int gravite(int x, int y) {
-        int hauteurPerso = 32;
-
-        if (y + hauteurPerso + 1 < this.hauteurTerrain() * 32 &&
-                !this.collisionVerticale(x, y + hauteurPerso + 1)) {
+        if (y + HAUTEUR_PERSO + 1 < this.hauteurTerrain() * HAUTEUR_PERSO && !this.collisionBas(x, y /*+ HAUTEUR_PERSO */) && estMarchable(x, y + HAUTEUR_PERSO)) {
             y += 2; // vitesse de chute (ajuste si trop rapide)
-        }
 
+        }
         return y;
     }
 

@@ -4,9 +4,8 @@ public class Trunks extends Personnage {
 
     private char direction;
 
-
     public Trunks(Environnement env) {
-        super(200, 132, env);
+        super(0, 0, env);
         this.setVitesse(3);
         this.direction = 'h'; //h => ne bouge pas
     }
