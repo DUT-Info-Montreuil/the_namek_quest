@@ -92,7 +92,6 @@ public class Terrain {
         return (code == 1 || code == 4);
     }
 
-
     public boolean collisionBas(int x, int y) {
         int yTest = y + HAUTEUR_PERSO;
         for (int testX = x; testX < x + LARGEUR_PERSO; testX++) {
@@ -113,7 +112,6 @@ public class Terrain {
         return false;
     }
 
-
     public boolean collisionDroite(int x, int y) {
         int xTest = x + LARGEUR_PERSO;
         for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
@@ -123,7 +121,6 @@ public class Terrain {
         }
         return false;
     }
-
 
     public boolean collisionGauche(int x, int y) {
         int xTest = x;
@@ -135,7 +132,6 @@ public class Terrain {
         return false;
     }
 
-
     public boolean collisionVerticale(int x, int yBas) {
         int colonne = x / TAILLE_TUILE;
         int ligne = yBas / TAILLE_TUILE;
@@ -145,7 +141,6 @@ public class Terrain {
         int code = codeTuile(colonne, ligne);
         return (code == 2 || code == 3);
     }
-
 
     public int gravite(int x, int y) {
         if (!collisionBas(x, y)) {
