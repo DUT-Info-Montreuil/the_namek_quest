@@ -14,6 +14,7 @@ public class Clavier {
     private BooleanProperty qPressed = new SimpleBooleanProperty();
     private final BooleanProperty sPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
+    private final BooleanProperty vPressed = new SimpleBooleanProperty();
 
     public Clavier(Trunks trunks, TrunksVue trunksVue ) {
         this.trunks = trunks;
@@ -30,6 +31,7 @@ public class Clavier {
                 case S -> sPressed.set(true);
                 case D -> dPressed.set(true);
                 case RIGHT -> dPressed.set(true);
+                case V ->  vPressed.set(true);
             }
         });
 
@@ -40,6 +42,7 @@ public class Clavier {
                 case S -> sPressed.set(false);
                 case D -> dPressed.set(false);
                 case RIGHT -> dPressed.set(false);
+                case V ->  vPressed.set(false);
             }
         });
     }
@@ -56,6 +59,7 @@ public class Clavier {
     public boolean isSpacePressed() {
         return spacePressed.get();
     }
+    public boolean isVPressed() { return vPressed.get(); }
 
     public void handleLeft() {
         trunks.setDirection('g');
@@ -70,5 +74,10 @@ public class Clavier {
     public void handleUp() {
         trunks.sauter();
         spacePressed.set(false);
+    }
+
+    public void handleV() {
+        trunks.decrementerPv();
+        vPressed.set(false);
     }
 }

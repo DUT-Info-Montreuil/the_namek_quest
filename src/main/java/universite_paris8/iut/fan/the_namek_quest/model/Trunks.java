@@ -59,4 +59,8 @@ public class Trunks extends Personnage {
             System.out.println("tu saute pas");
         }
     }
+
+    public void decrementerPv(){
+        this.setPv(this.getPv() - 10);
+    }
 }

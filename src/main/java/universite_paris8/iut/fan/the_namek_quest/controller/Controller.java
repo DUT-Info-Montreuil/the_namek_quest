@@ -60,7 +60,7 @@ public class Controller implements Initializable {
             //trunks.collision(trunks.getX(),  trunks.getY());
             trunks.seDeplacer();
             trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
-            trunks.setPv(trunks.getPv()-1);
+            //trunks.setPv(trunks.getPv()-1);
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
@@ -70,6 +70,8 @@ public class Controller implements Initializable {
             }
             if(clavier.isSpacePressed()){
                 clavier.handleUp();
+            }if(clavier.isVPressed()){
+                clavier.handleV();
             }
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
