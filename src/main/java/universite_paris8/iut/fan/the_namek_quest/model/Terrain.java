@@ -34,9 +34,10 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
-            {1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1},
-            {3, 1, 1, 3, 3, 3, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1, 1, 6, 3, 3, 3, 3, 3, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1},
+            {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 7, 3, 3, 3, 9, 6, 9, 9},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 2, 2, 2, 2, 2, 2, 2},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2},
@@ -82,7 +83,7 @@ public class Terrain {
     }
 
     // Détermine si la case (en pixels) est "marchable" (ciel, nuage)
-    public boolean estMarchable(int xPixel, int yPixel) {
+    public boolean estTraversable(int xPixel, int yPixel) {
         int caseX = getCaseX(xPixel);
         int caseY = getCaseY(yPixel);
 
@@ -91,13 +92,13 @@ public class Terrain {
         }
         int code = terrain[caseY][caseX];
 
-        return (code == 1 || code == 4 || code == 5 || code == 6 || code == 7 || code == 8);
+        return (code == 1 || code == 4 || code == 5 || code == 6 || code == 7 || code == 8|| code == 9);
     }
 
     public boolean collisionBas(int x, int y) {
         int yTest = y + HAUTEUR_PERSO;
         for (int testX = x; testX < x + LARGEUR_PERSO; testX++) {
-            if (!estMarchable(testX, yTest)) {
+            if (!estTraversable(testX, yTest)) {
                 return true;
             }
         }
@@ -107,7 +108,7 @@ public class Terrain {
     public boolean collisionHaut(int x, int y) {
         int yTest = y;
         for (int testX = x; testX < x + LARGEUR_PERSO; testX++) {
-            if (!estMarchable(testX, yTest)) {
+            if (!estTraversable(testX, yTest)) {
                 return true;
             }
         }
@@ -117,7 +118,7 @@ public class Terrain {
     public boolean collisionDroite(int x, int y) {
         int xTest = x + LARGEUR_PERSO;
         for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
-            if (!estMarchable(xTest, testY)) {
+            if (!estTraversable(xTest, testY)) {
                 return true;
             }
         }
@@ -127,7 +128,7 @@ public class Terrain {
     public boolean collisionGauche(int x, int y) {
         int xTest = x;
         for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
-            if (!estMarchable(xTest, testY)) {
+            if (!estTraversable(xTest, testY)) {
                 return true;
             }
         }

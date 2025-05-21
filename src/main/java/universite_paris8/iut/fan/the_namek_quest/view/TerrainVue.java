@@ -29,6 +29,7 @@ public class TerrainVue {
         Image imageChampignon = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/champgnon.png"));
         Image imageRocher = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/rocher.png"));
         Image imageRoche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/roche.png"));
+        Image imageCoucherSoleil = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/coucher-soleil.png"));
 
 
 
@@ -61,6 +62,9 @@ public class TerrainVue {
                 }
                 else if (this.terrain.codeTuile(x,y)==8) {
                     tilePane.getChildren().add(new ImageView(imageRoche));
+                }
+                else if (this.terrain.codeTuile(x,y)==9) {
+                    tilePane.getChildren().add(new ImageView(imageCoucherSoleil));
                 }
             }
         }
