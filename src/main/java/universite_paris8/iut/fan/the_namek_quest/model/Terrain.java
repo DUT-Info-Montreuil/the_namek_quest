@@ -1,5 +1,7 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
+import universite_paris8.iut.fan.the_namek_quest.model.bloc.Bloc;
+
 /**
  * Classe Terrain
  * ---------------

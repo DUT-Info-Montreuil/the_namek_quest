@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.model;
+package universite_paris8.iut.fan.the_namek_quest.model.Inventaire;
 
 import java.util.ArrayList;
 
