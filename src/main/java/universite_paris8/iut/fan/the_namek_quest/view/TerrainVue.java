@@ -25,6 +25,12 @@ public class TerrainVue {
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));
         Image imageBlanche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/blanc.png"));
+        Image imageArbre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/arbre.png"));
+        Image imageChampignon = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/champgnon.png"));
+        Image imageRocher = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/rocher.png"));
+        Image imageRoche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/roche.png"));
+
+
 
 
 
@@ -44,6 +50,17 @@ public class TerrainVue {
 
                 } else if (this.terrain.codeTuile(x,y)==4) {
                     tilePane.getChildren().add(new ImageView(imageBlanche));
+                } else if (this.terrain.codeTuile(x,y)==5) {
+                    tilePane.getChildren().add(new ImageView(imageArbre));
+                }
+                else if (this.terrain.codeTuile(x,y)==6) {
+                    tilePane.getChildren().add(new ImageView(imageChampignon));
+                }
+                else if (this.terrain.codeTuile(x,y)==7) {
+                    tilePane.getChildren().add(new ImageView(imageRocher));
+                }
+                else if (this.terrain.codeTuile(x,y)==8) {
+                    tilePane.getChildren().add(new ImageView(imageRoche));
                 }
             }
         }

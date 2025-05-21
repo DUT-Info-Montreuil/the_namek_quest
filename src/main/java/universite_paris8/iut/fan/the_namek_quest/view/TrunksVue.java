@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 
 public class TrunksVue {
-    @FXML private ImageView persoImage;
+     private ImageView persoImage;
     @FXML private Pane pane;
     private Trunks trunks;
     private ProgressBar barreDeVie;

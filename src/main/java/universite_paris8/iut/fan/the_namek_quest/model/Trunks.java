@@ -45,8 +45,8 @@ public class Trunks extends Personnage {
     }
 
     public void sauter(){
-        int newY = getY() - 48;
-        int yMax = this.getY() - 64;
+        int newY = getY() - 64;
+        int yMax = this.getY() - 128;
         if (this.getEnv().getTerrain().collisionBas(getX(), getY())) {
             if (newY < 0) {
                 newY = 0;
