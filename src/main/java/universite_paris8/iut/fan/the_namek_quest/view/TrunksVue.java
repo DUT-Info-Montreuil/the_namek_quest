@@ -1,6 +1,7 @@
 package universite_paris8.iut.fan.the_namek_quest.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,12 +11,14 @@ public class TrunksVue {
     @FXML private ImageView persoImage;
     @FXML private Pane pane;
     private Trunks trunks;
+    private ProgressBar barreDeVie;
 
     public TrunksVue(Pane pane,Trunks trunks) {
         this.trunks = trunks;
         this.pane = pane;
         this.persoImage = new ImageView();
         this.afficherTrunks();
+        this.afficherPv();
     }
 
     public void afficherTrunks() {
@@ -35,4 +38,16 @@ public class TrunksVue {
         Image imagePersoGauche = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks-gauche.png").toExternalForm());
         persoImage.setImage(imagePersoGauche);
     }
+
+    public void afficherPv(){
+        barreDeVie = new ProgressBar(1);
+        barreDeVie.setStyle("-fx-accent: red;");
+        barreDeVie.setPrefWidth(150);
+        barreDeVie.setProgress(0.50);
+        barreDeVie.progressProperty().bind(trunks.getPvProp().divide(100.0));
+
+        pane.getChildren().add(barreDeVie);
+
+    }
+
 }

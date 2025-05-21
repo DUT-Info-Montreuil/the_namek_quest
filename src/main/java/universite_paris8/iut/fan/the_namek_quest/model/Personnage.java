@@ -9,6 +9,7 @@ public abstract class Personnage {
     private IntegerProperty yProp;
     private int vitesse;
     private Environnement env;
+    private IntegerProperty pv;
 
     public Personnage( int x, int y, Environnement env) {
 
@@ -16,6 +17,7 @@ public abstract class Personnage {
         this.yProp = new SimpleIntegerProperty(y);
         this.vitesse = 1;
         this.env=env;
+        this.pv = new SimpleIntegerProperty(10000000);
     }
 
     //getter
@@ -37,6 +39,12 @@ public abstract class Personnage {
     public Environnement getEnv(){
         return  this.env;
     }
+    public IntegerProperty getPvProp() {
+        return this.pv;
+    }
+    public int getPv(){
+        return this.pv.getValue();
+    }
 
     //setter
     public void setX(int x) {
@@ -47,6 +55,9 @@ public abstract class Personnage {
     }
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
+    }
+    public void setPv(int pv) {
+        this.pv.setValue(pv);
     }
 
     // Deplacement
