@@ -1,6 +1,6 @@
 package universite_paris8.iut.fan.the_namek_quest.object;
 
-public class Arme extends Object {
+public class Arme extends ObjectMain {
     private int PointDattaqueMax;
 
     public Arme(int id, String name , int PointDattaqueMax) {

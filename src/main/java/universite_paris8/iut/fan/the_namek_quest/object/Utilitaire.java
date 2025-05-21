@@ -1,6 +1,6 @@
 package universite_paris8.iut.fan.the_namek_quest.object;
 
-public abstract class Utilitaire extends Object {
+public abstract class Utilitaire extends ObjectMain {
     private int PointDeCreusage ;
 
     public Utilitaire(int id, String name , int PointDeCreusage ) {

@@ -8,7 +8,5 @@ public abstract class Object {
         this.id = id;
         this.name = name;
     }
-
-    public abstract int Taper();
-    public abstract int Creuser();
 }
+
