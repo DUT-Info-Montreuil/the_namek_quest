@@ -24,18 +24,22 @@ public class Clavier {
         pane.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case SPACE -> spacePressed.set(true);
+                case UP -> spacePressed.set(true);
                 case Q  -> qPressed.set(true);
+                case LEFT -> qPressed.set(true);
                 case S -> sPressed.set(true);
                 case D -> dPressed.set(true);
+                case RIGHT -> dPressed.set(true);
             }
         });
 
         pane.setOnKeyReleased(event -> {
             switch (event.getCode()) {
-                case SPACE -> spacePressed.set(false);
                 case Q -> qPressed.set(false);
+                case LEFT -> qPressed.set(false);
                 case S -> sPressed.set(false);
                 case D -> dPressed.set(false);
+                case RIGHT -> dPressed.set(false);
             }
         });
     }
@@ -65,5 +69,6 @@ public class Clavier {
 
     public void handleUp() {
         trunks.sauter();
+        spacePressed.set(false);
     }
 }
