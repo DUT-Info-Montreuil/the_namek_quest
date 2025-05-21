@@ -33,6 +33,7 @@ public class Controller implements Initializable {
     private Environnement environnement;
     private Terrain terrain;
     private Trunks trunks;
+    private TrunksVue trunksVue;
 
     private Timeline gameLoop;
 
@@ -46,7 +47,7 @@ public class Controller implements Initializable {
         this.terrain = new Terrain();
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
-        TrunksVue trunksVue = new TrunksVue(pane,trunks);
+        this.trunksVue = new TrunksVue(pane,trunks);
         clavier = new Clavier(trunks, trunksVue);
         clavier.setupKeyHandlers(pane);
         pane.setFocusTraversable(true); // autorise le focus
@@ -59,7 +60,7 @@ public class Controller implements Initializable {
             //trunks.collision(trunks.getX(),  trunks.getY());
             trunks.seDeplacer();
             trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
-
+            trunks.setPv(trunks.getPv()-1);
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
