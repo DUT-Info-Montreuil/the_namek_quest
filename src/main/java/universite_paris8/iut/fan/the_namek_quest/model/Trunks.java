@@ -57,4 +57,8 @@ public class Trunks extends Personnage {
         }
 
     }
+
+    public void decrementerPv(){
+        this.setPv(this.getPv() - 10);
+    }
 }
