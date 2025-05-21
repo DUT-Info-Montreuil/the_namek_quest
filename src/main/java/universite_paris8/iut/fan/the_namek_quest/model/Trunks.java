@@ -44,19 +44,17 @@ public class Trunks extends Personnage {
         }
     }
 
-    public void sauter() {
+    public void sauter(){
         int newY = getY() - 48;
         int yMax = this.getY() - 64;
-        // Empêche de sortir par le haut
-        if (newY < 0) {
-            newY = 0;
+        if (this.getEnv().getTerrain().collisionBas(getX(), getY())) {
+            if (newY < 0) {
+                newY = 0;
+            }
+            if (newY > yMax) {
+                setY(newY);
+            }
         }
-        if(newY > yMax) {
-            setY(newY);
-        }
-        else{
-            setY(getY());
-            System.out.println("tu saute pas");
-        }
+
     }
 }

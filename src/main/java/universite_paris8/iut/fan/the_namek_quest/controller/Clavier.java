@@ -25,6 +25,7 @@ public class Clavier {
             switch (event.getCode()) {
                 case SPACE -> spacePressed.set(true);
                 case UP -> spacePressed.set(true);
+                case Z -> spacePressed.set(true);
                 case Q  -> qPressed.set(true);
                 case LEFT -> qPressed.set(true);
                 case S -> sPressed.set(true);
