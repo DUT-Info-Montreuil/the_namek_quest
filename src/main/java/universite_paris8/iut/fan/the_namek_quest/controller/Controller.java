@@ -1,12 +1,19 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
+/**
+ * Classe Controller
+ * -----------------
+ * Contrôleur principal de l'application JavaFX. Gère l'initialisation, la boucle de jeu et la communication entre modèle et vue.
+ * - Initialise l'environnement, le terrain, le personnage et les vues.
+ * - Lance et maintenir la boucle principale du jeu (animation, gravité, déplacements).
+ * - Gère les entrées clavier et les actions correspondantes.
+ */
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -26,11 +33,12 @@ public class Controller implements Initializable {
     private Environnement environnement;
     private Terrain terrain;
     private Trunks trunks;
+
     private Timeline gameLoop;
-    private int temps;
 
     @FXML private TilePane tilePane;
     @FXML private Pane pane;
+    private Clavier clavier;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,36 +47,33 @@ public class Controller implements Initializable {
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         TrunksVue trunksVue = new TrunksVue(pane,trunks);
-        Clavier clavier = new Clavier(trunks, trunksVue);
+        clavier = new Clavier(trunks, trunksVue);
+        clavier.setupKeyHandlers(pane);
         pane.setFocusTraversable(true); // autorise le focus
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
-        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);// écoute les touches
         initAnimation();
-        gameLoop.play();
     }
 
     private void initAnimation() {
-        gameLoop = new Timeline();
-        temps=0;
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        gameLoop = new Timeline(new KeyFrame(Duration.millis(10), (ev -> {
+            //trunks.collision(trunks.getX(),  trunks.getY());
+            trunks.seDeplacer();
+            trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
 
-        KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.017),
-                (ev ->{
-                    trunks.gravite();
-                    if(temps==100){
-                        System.out.println("fini");
-                        gameLoop.stop();
-                    }
-                    else if (temps%5==0){
-                        System.out.println("un tour");
-                        pane.setLayoutX(pane.getLayoutX()+5);
-                        pane.setLayoutY(pane.getLayoutY()+5);
-                    }
-                    temps++;
-                })
-        );
-        gameLoop.getKeyFrames().add(kf);
+            clavier.setupKeyHandlers(pane);
+            if(clavier.isQPressed()) {
+                clavier.handleLeft();
+            }
+            if(clavier.isDPressed()) {
+                clavier.handleRight();
+            }
+            if(clavier.isSpacePressed()){
+                clavier.handleUp();
+            }
+        })));
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        gameLoop.play();
+
     }
 }
 
