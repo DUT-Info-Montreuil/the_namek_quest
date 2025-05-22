@@ -1,5 +1,10 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+import java.net.HttpCookie;
+
 /**
  * Classe Trunks
  * -------------
@@ -11,12 +16,14 @@ package universite_paris8.iut.fan.the_namek_quest.model;
 
 public class Trunks extends Personnage {
 
+    private IntegerProperty KI;
     private char direction;
 
     public Trunks(Environnement env) {
         super(0, 0, env);
         this.setVitesse(3);
         this.direction = 'h'; // h => ne bouge pas
+        this.KI = new SimpleIntegerProperty(50);
     }
 
     public void setDirection(char direction) {
@@ -56,5 +63,17 @@ public class Trunks extends Personnage {
             }
         }
 
+    }
+
+    public void setKI(int KI) {
+        this.KI.setValue(KI);
+    }
+
+    public IntegerProperty getKI() {
+        return this.KI;
+    }
+
+    public void increaseKI() {
+        this.KI.set(this.KI.get() + 10);
     }
 }
