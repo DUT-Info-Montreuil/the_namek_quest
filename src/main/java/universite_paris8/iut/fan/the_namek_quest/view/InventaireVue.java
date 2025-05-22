@@ -17,9 +17,6 @@ public class InventaireVue {
     private Inventaire inventaire;
     private Pane paneInventaire;
     private ImageView capsuleVue ;
-
-
-
     private boolean ouvert;
 
     public InventaireVue(Inventaire inventaire,Pane pane,Pane paneInventaire) {
@@ -30,36 +27,27 @@ public class InventaireVue {
         this.ouvert = false;
         this.capsuleVue = new ImageView(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") ));
 
-
-
         inventaire.addObject(new Pioche());
         inventaire.addObject(new Hache());
 
-        //Image capsule = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") );
-
-        //ImageView capsuleVue = new ImageView(capsule);
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
-        capsuleVue.setTranslateX(736);
+        capsuleVue.setTranslateX(752);
         capsuleVue.setTranslateY(0);
 
         afficherLogoInventaire();
     }
 
 
-    /*le bug vient d'ici*/
-    public void afficherLogoInventaire(){
-
-        if(!this.estOuvert()){
-            this.paneInventaire.getChildren().add(capsuleVue);
-            System.out.println("logo affiché");
-        }else {
-            this.pane.getChildren().remove(capsuleVue);
-            System.out.println("logo pas affiché");
+    public void afficherLogoInventaire() {
+        if (!this.estOuvert()) {
+            if (!pane.getChildren().contains(capsuleVue)) {
+                pane.getChildren().add(capsuleVue);
+            }
+        } else {
+            pane.getChildren().remove(capsuleVue);
         }
     }
-
-
 
     public void afficherContenuInventaire(){
 
@@ -70,14 +58,14 @@ public class InventaireVue {
 
         ImageView caseInventaireVue;
 
-        int x = 736;
-        int y = 46;
+        int x = 753;
+        int y = 0;
 
         if(!inventaire.getObjects().isEmpty()){
             this.ouvert = true;
             for (Object object : inventaire.getObjects()) {
                 if(x<100){
-                    x=736;
+                    x=753;
                     y = y + 46;
                 }
 
@@ -116,18 +104,18 @@ public class InventaireVue {
     }
 
     public void ouvrirInventaire(){
+        this.ouvert = true;
         paneInventaire.setVisible(true);
         afficherContenuInventaire();
-        //afficherLogoInventaire();
+        pane.getChildren().remove(capsuleVue);
     }
 
     public void fermeInventaire() {
         this.ouvert = false;
-        paneInventaire.getChildren().removeAll();
+        paneInventaire.getChildren().clear();
         paneInventaire.setVisible(false);
-        //afficherLogoInventaire();
+        pane.getChildren().add(capsuleVue);
     }
-
 }
 
 
