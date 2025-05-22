@@ -4,6 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Object;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.arme.Arme;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.arme.Epee;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Hache;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Pioche;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Materieau;
 
 public class InventaireVue {
 
@@ -19,12 +25,18 @@ public class InventaireVue {
         this.paneInventaire= paneInventaire;
         this.ouvert = false;
 
-        afficherInventaire();
 
+        inventaire.addObject(new Pioche());
+        inventaire.addObject(new Hache());
+
+
+
+        afficherLogoInventaire();
     }
 
-    public void afficherInventaire(){
+    public void afficherLogoInventaire(){
         Image capsule = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") );
+
         ImageView capsuleVue = new ImageView(capsule);
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
@@ -34,6 +46,13 @@ public class InventaireVue {
     }
 
     public void ouvrirInventaire(){
+        afficherContenuInventaire();
+    }
+
+    public void afficherContenuInventaire(){
+        Image pioche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/pioche.png") );
+        Image hache = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/hache.png") );
+
 
     }
 }

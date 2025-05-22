@@ -1,19 +1,21 @@
 package universite_paris8.iut.fan.the_namek_quest.model.Inventaire;
 
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Inventaire {
-    private ArrayList<Object> objects;
+    private ObservableList<Object> objects;
 
     public Inventaire() {
-        this.objects = new ArrayList<>();
+
+        this.objects = FXCollections.observableArrayList();
     }
 
-    public ArrayList<Object> getObjects() {
+    public ObservableList<Object> getObjects() {
         return objects;
     }
 
-    public void setObjects(ArrayList<Object> objects) {
+    public void setObjects(ObservableList<Object> objects) {
         this.objects = objects;
     }
     public void addObject(Object object) {

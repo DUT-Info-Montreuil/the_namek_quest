@@ -1,7 +1,9 @@
 package universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils;
 
 public class Hache extends Outils{
-    public Hache(int id, String name) {
-        super(id, name);
+    public Hache() {
+        super(3, "Hache");
     }
+
+
 }
