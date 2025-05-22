@@ -61,9 +61,9 @@ public class InventaireVue {
         int x = 753;
         int y = 0;
 
-        if(!inventaire.getObjects().isEmpty()){
+        if(!inventaire.getListObjects().isEmpty()){
             this.ouvert = true;
-            for (Object object : inventaire.getObjects()) {
+            for (Object object : inventaire.getListObjects()) {
                 if(x<100){
                     x=753;
                     y = y + 46;
@@ -108,6 +108,7 @@ public class InventaireVue {
         paneInventaire.setVisible(true);
         afficherContenuInventaire();
         pane.getChildren().remove(capsuleVue);
+        //inventaire.addObject(new Hache());
     }
 
     public void fermeInventaire() {
@@ -115,6 +116,7 @@ public class InventaireVue {
         paneInventaire.getChildren().clear();
         paneInventaire.setVisible(false);
         pane.getChildren().add(capsuleVue);
+        //inventaire.removeObjectsIndex();
     }
 }
 
