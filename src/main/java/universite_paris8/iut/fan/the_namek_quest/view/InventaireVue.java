@@ -28,8 +28,12 @@ public class InventaireVue {
         ImageView capsuleVue = new ImageView(capsule);
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
-        capsuleVue.setTranslateX(50);
-        capsuleVue.setTranslateY(50);
+        capsuleVue.setTranslateX(736);
+        capsuleVue.setTranslateY(0);
         this.pane.getChildren().add(capsuleVue);
+    }
+
+    public void ouvrirInventaire(){
+
     }
 }

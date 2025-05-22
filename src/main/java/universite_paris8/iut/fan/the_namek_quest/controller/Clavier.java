@@ -70,7 +70,7 @@ public class Clavier {
     }
 
     public void handleInventaire(){
-        inventaireVue.afficherInventaire();
+        inventaireVue.ouvrirInventaire();
     }
 
     public void handleLeft() {
