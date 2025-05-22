@@ -16,6 +16,9 @@ public class InventaireVue {
     private Pane pane;
     private Inventaire inventaire;
     private Pane paneInventaire;
+    private ImageView capsuleVue ;
+
+
 
     private boolean ouvert;
 
@@ -24,44 +27,53 @@ public class InventaireVue {
         this.inventaire = inventaire;
         this.paneInventaire= paneInventaire;
         this.ouvert = false;
+        this.capsuleVue = new ImageView(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") ));
 
 
         inventaire.addObject(new Pioche());
         inventaire.addObject(new Hache());
 
+        //Image capsule = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") );
 
+        //ImageView capsuleVue = new ImageView(capsule);
+        capsuleVue.setFitHeight(46);
+        capsuleVue.setFitWidth(46);
+        capsuleVue.setTranslateX(736);
+        capsuleVue.setTranslateY(0);
 
         afficherLogoInventaire();
     }
 
     public void afficherLogoInventaire(){
-        Image capsule = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") );
 
-        ImageView capsuleVue = new ImageView(capsule);
-        capsuleVue.setFitHeight(46);
-        capsuleVue.setFitWidth(46);
-        capsuleVue.setTranslateX(736);
-        capsuleVue.setTranslateY(0);
-        this.pane.getChildren().add(capsuleVue);
+        if(!this.estOuvert()){
+            this.paneInventaire.getChildren().add(capsuleVue);
+        }else {
+            this.paneInventaire.getChildren().remove(capsuleVue);
+
+        }
+
     }
 
 
 
     public void afficherContenuInventaire(){
+
+
         Image pioche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/pioche.png") );
         Image hache = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/hache.png") );
         Image caseInventaire = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/caseInventaire.png") );
 
         ImageView caseInventaireVue;
 
-        int x = 100;
-        int y = 40;
+        int x = 736;
+        int y = 46;
 
         if(!inventaire.getObjects().isEmpty()){
-            ouvert = true;
+            this.ouvert = true;
             for (Object object : inventaire.getObjects()) {
-                if(x>600){
-                    x=100;
+                if(x<100){
+                    x=600;
                     y = y + 46;
                 }
 
@@ -89,21 +101,27 @@ public class InventaireVue {
                 img.setFitWidth(32);
                 paneInventaire.getChildren().add(img);
 
-                x=x+46;
+                x=x-46;
 
             }
         }
     }
 
+    public boolean estOuvert(){
+        return this.ouvert;
+    }
+
     public void ouvrirInventaire(){
         paneInventaire.setVisible(true);
         afficherContenuInventaire();
+        //afficherLogoInventaire();
     }
 
     public void fermeInventaire() {
         this.ouvert = false;
         paneInventaire.getChildren().removeAll();
         paneInventaire.setVisible(false);
+        //afficherLogoInventaire();
     }
 
 }

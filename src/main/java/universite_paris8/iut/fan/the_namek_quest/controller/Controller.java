@@ -14,6 +14,7 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -57,8 +58,11 @@ public class Controller implements Initializable {
         this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
         clavier = new Clavier(trunks, trunksVue, inventaireVue);
         clavier.setupKeyHandlers(pane);
+        this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         pane.setFocusTraversable(true); // autorise le focus
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
+
+
         initAnimation();
     }
 
@@ -78,9 +82,9 @@ public class Controller implements Initializable {
             if(clavier.isSpacePressed()){
                 clavier.handleUp();
             }
-            if(clavier.isIPressed()){
+            /*if(clavier.isIPressed()) {
                 clavier.handleInventaire();
-            }
+            }*/
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();

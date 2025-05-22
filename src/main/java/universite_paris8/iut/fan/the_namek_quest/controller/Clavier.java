@@ -2,13 +2,15 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 
-public class Clavier {
+public class Clavier implements EventHandler<KeyEvent> {
 
     private Trunks trunks;
     private TrunksVue trunksVue;
@@ -36,7 +38,7 @@ public class Clavier {
                 case S -> sPressed.set(true);
                 case D -> dPressed.set(true);
                 case RIGHT -> dPressed.set(true);
-                case I -> iPressed.set(true);
+                //case I -> iPressed.set(true);
             }
         });
 
@@ -47,7 +49,7 @@ public class Clavier {
                 case S -> sPressed.set(false);
                 case D -> dPressed.set(false);
                 case RIGHT -> dPressed.set(false);
-                case I -> iPressed.set(false);
+               // case I -> iPressed.set(false);
             }
         });
     }
@@ -70,7 +72,17 @@ public class Clavier {
     }
 
     public void handleInventaire(){
-        inventaireVue.ouvrirInventaire();
+
+        if(inventaireVue.estOuvert()){
+            System.out.println("fermé");
+            inventaireVue.fermeInventaire();
+
+            //iPressed.set(false);
+        }else{
+            System.out.println("ouvert");
+            inventaireVue.ouvrirInventaire();
+
+        }
     }
 
     public void handleLeft() {
@@ -86,5 +98,16 @@ public class Clavier {
     public void handleUp() {
         trunks.sauter();
         spacePressed.set(false);
+    }
+
+    @Override
+    public void handle(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case I:
+
+                handleInventaire();
+
+                break;
+        }
     }
 }
