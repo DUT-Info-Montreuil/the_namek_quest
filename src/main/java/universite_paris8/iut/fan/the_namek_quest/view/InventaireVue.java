@@ -73,7 +73,7 @@ public class InventaireVue {
             this.ouvert = true;
             for (Object object : inventaire.getObjects()) {
                 if(x<100){
-                    x=600;
+                    x=736;
                     y = y + 46;
                 }
 
