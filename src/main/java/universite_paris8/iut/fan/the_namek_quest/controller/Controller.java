@@ -18,8 +18,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 
@@ -36,10 +38,13 @@ public class Controller implements Initializable {
     private TrunksVue trunksVue;
 
     private Timeline gameLoop;
+    private InventaireVue inventaireVue;
+    private Inventaire inventaire;
+    private Clavier clavier;
 
     @FXML private TilePane tilePane;
     @FXML private Pane pane;
-    private Clavier clavier;
+    @FXML private Pane paneInventaire;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,7 +53,9 @@ public class Controller implements Initializable {
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         this.trunksVue = new TrunksVue(pane,trunks);
-        clavier = new Clavier(trunks, trunksVue);
+        this.inventaire = new Inventaire();
+        this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
+        clavier = new Clavier(trunks, trunksVue, inventaireVue);
         clavier.setupKeyHandlers(pane);
         pane.setFocusTraversable(true); // autorise le focus
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
@@ -70,6 +77,9 @@ public class Controller implements Initializable {
             }
             if(clavier.isSpacePressed()){
                 clavier.handleUp();
+            }
+            if(clavier.isIPressed()){
+                clavier.handleInventaire();
             }
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);

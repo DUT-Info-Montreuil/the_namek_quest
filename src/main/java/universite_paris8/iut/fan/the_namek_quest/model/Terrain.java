@@ -1,5 +1,7 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
+import universite_paris8.iut.fan.the_namek_quest.model.bloc.Bloc;
+
 /**
  * Classe Terrain
  * ---------------
@@ -13,8 +15,10 @@ package universite_paris8.iut.fan.the_namek_quest.model;
 
 public class Terrain {
 
+    private Bloc bloc;
     private int width;
     private int height;
+    private Bloc typeBloc;
 
     private static final int TAILLE_TUILE = 32;
     private static final int LARGEUR_PERSO = 32;
