@@ -23,11 +23,13 @@ public class InventaireVue {
     private boolean ouvert;
 
     public InventaireVue(Inventaire inventaire,Pane pane,Pane paneInventaire) {
+
         this.pane = pane;
         this.inventaire = inventaire;
         this.paneInventaire= paneInventaire;
         this.ouvert = false;
         this.capsuleVue = new ImageView(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") ));
+
 
 
         inventaire.addObject(new Pioche());
@@ -44,15 +46,17 @@ public class InventaireVue {
         afficherLogoInventaire();
     }
 
+
+    /*le bug vient d'ici*/
     public void afficherLogoInventaire(){
 
         if(!this.estOuvert()){
             this.paneInventaire.getChildren().add(capsuleVue);
+            System.out.println("logo affiché");
         }else {
-            this.paneInventaire.getChildren().remove(capsuleVue);
-
+            this.pane.getChildren().remove(capsuleVue);
+            System.out.println("logo pas affiché");
         }
-
     }
 
 
