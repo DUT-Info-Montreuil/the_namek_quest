@@ -17,7 +17,7 @@ public abstract class Personnage {
         this.yProp = new SimpleIntegerProperty(y);
         this.vitesse = 1;
         this.env=env;
-        this.pv = new SimpleIntegerProperty(10000000);
+        this.pv = new SimpleIntegerProperty(99);
     }
 
     //getter

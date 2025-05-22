@@ -12,6 +12,9 @@ package universite_paris8.iut.fan.the_namek_quest.model;
 public class Trunks extends Personnage {
 
     private char direction;
+    private boolean enSaut = false;
+    private int hauteurMax = 0; // Nombre de pixels à encore monter
+
 
     public Trunks(Environnement env) {
         super(0, 0, env);
@@ -44,17 +47,35 @@ public class Trunks extends Personnage {
         }
     }
 
-    public void sauter(){
-        int newY = getY() - 64;
-        int yMax = this.getY() - 128;
-        if (this.getEnv().getTerrain().collisionBas(getX(), getY())) {
-            if (newY < 0) {
-                newY = 0;
-            }
-            if (newY > yMax) {
+
+   public void sauter() {
+       if (!enSaut && this.getEnv().getTerrain().collisionBas(getX(), getY())) {
+           enSaut = true;
+           hauteurMax = 33;
+       }
+   }
+
+    public void gererSaut() {
+        if (enSaut) {
+            int newY = getY() - 7;
+
+            if (newY < 0 || !this.getEnv().getTerrain().collisionBas(getX(), newY)) {
                 setY(newY);
+                hauteurMax -= 4;
+                if (hauteurMax <= 0) {
+                    enSaut = false;
+                }
+            } else {
+                enSaut = false;
             }
         }
+    }
 
+    public boolean estEnSaut() {
+        return enSaut;
+    }
+
+    public void decrementerPv(){
+        this.setPv(this.getPv() - 10);
     }
 }
