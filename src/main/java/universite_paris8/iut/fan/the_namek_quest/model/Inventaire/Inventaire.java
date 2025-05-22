@@ -11,7 +11,7 @@ public class Inventaire {
         this.objects = FXCollections.observableArrayList();
     }
 
-    public ObservableList<Object> getObjects() {
+    public ObservableList<Object> getListObjects() {
         return objects;
     }
 
@@ -23,6 +23,9 @@ public class Inventaire {
     }
     public void removeObject(Object object) {
         this.objects.remove(object);
+    }
+    public void removeObjectsIndex() {
+        this.objects.remove(0);
     }
 }
 
