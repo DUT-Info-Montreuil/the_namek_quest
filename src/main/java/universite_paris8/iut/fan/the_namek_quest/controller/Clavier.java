@@ -48,7 +48,6 @@ public class Clavier {
         });
     }
 
-
     public boolean isQPressed() {
         return qPressed.get();
     }

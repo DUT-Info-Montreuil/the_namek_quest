@@ -57,10 +57,12 @@ public class Controller implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), (ev -> {
-            //trunks.collision(trunks.getX(),  trunks.getY());
             trunks.seDeplacer();
-            trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
-            //trunks.setPv(trunks.getPv()-1);
+            if (!trunks.estEnSaut()) {
+                trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
+            } else {
+                trunks.gererSaut();
+            }
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
@@ -76,7 +78,6 @@ public class Controller implements Initializable {
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
-
     }
 }
 
