@@ -82,9 +82,6 @@ public class Controller implements Initializable {
             }if(clavier.isVPressed()){
                 clavier.handleV();
             }
-            if(clavier.isIPressed()){
-                clavier.handleInventaire();
-            }
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();

@@ -17,11 +17,8 @@ public class Clavier {
     private BooleanProperty qPressed = new SimpleBooleanProperty();
     private final BooleanProperty sPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
-<<<<<<< HEAD
-    private final BooleanProperty iPressed = new SimpleBooleanProperty();
-=======
     private final BooleanProperty vPressed = new SimpleBooleanProperty();
->>>>>>> collision
+
 
     public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue) {
         this.trunks = trunks;
@@ -70,9 +67,6 @@ public class Clavier {
     }
     public boolean isVPressed() { return vPressed.get(); }
 
-    public boolean isIPressed() {
-        return iPressed.get();
-    }
 
     public void handleInventaire(){
         inventaireVue.ouvrirInventaire();
