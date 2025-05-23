@@ -20,6 +20,10 @@ public abstract class Personnage {
         this.pv = new SimpleIntegerProperty(99);
     }
 
+    public boolean estMort(){
+        return this.getPv() <= 0;
+    }
+
     //getter
     public int getX() {
         return this.xProp.getValue();

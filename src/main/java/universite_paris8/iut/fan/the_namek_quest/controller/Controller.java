@@ -10,12 +10,15 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
  */
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
@@ -28,7 +31,9 @@ import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import static javafx.application.Application.launch;
+import static javafx.application.Application.setUserAgentStylesheet;
 
 public class Controller implements Initializable {
 
@@ -36,6 +41,7 @@ public class Controller implements Initializable {
     private Terrain terrain;
     private Trunks trunks;
     private TrunksVue trunksVue;
+    private TerrainVue terrainVue;
 
     private Timeline gameLoop;
     private InventaireVue inventaireVue;
@@ -45,13 +51,17 @@ public class Controller implements Initializable {
     @FXML private TilePane tilePane;
     @FXML private Pane pane;
     @FXML private Pane paneInventaire;
+    @FXML private Pane borderpane;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         this.environnement = new Environnement();
         this.terrain = new Terrain();
         this.trunks = new Trunks(environnement);
-        TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
+        this.terrainVue = new TerrainVue(tilePane, terrain);
         this.trunksVue = new TrunksVue(pane,trunks);
         this.inventaire = new Inventaire();
         this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
@@ -81,8 +91,23 @@ public class Controller implements Initializable {
                 clavier.handleUp();
             }if(clavier.isVPressed()){
                 clavier.handleV();
+            }if(trunks.estMort()){
+                terrainVue.GameOver();
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(5));
+                pause.setOnFinished(event -> {
+
+                    System.out.println("fait la pose");
+                    Stage stage = (Stage) pane.getScene().getWindow();
+                    stage.close();
+                });
+                pause.play();
+
+
             }
+
         })));
+
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
     }
