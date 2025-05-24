@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -25,6 +26,9 @@ import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
+
+
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +46,7 @@ public class Controller implements Initializable {
     private InventaireVue inventaireVue;
     private Inventaire inventaire;
     private Clavier clavier;
+    private MoletteController moletteController;
 
     @FXML private TilePane tilePane;
     @FXML private Pane pane;
@@ -55,11 +60,15 @@ public class Controller implements Initializable {
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         this.trunksVue = new TrunksVue(pane,trunks);
         this.inventaire = new Inventaire();
-        this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
-        clavier = new Clavier(trunks, trunksVue, inventaireVue);
-        clavier.setupKeyHandlers(pane);
+        this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire,this.trunks);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue);
+        this.clavier.setupKeyHandlers(pane);
+        this.moletteController = new MoletteController(trunks);
+        this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         pane.setFocusTraversable(true); // autorise le focus
+
+
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
 
 

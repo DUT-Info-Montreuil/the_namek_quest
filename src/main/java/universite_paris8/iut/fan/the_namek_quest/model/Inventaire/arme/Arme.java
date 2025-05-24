@@ -1,23 +1,19 @@
 package universite_paris8.iut.fan.the_namek_quest.model.Inventaire.arme;
 
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Object;
+
 public class Arme extends Object {
-    private int degats;
 
-    public Arme(int id, String name , int degats) {
-        super();
-        this.degats = degats;
+    private int degat;
+    public Arme(int id, String name,int degat) {
+        super(id, name);
+        this.degat = degat;
     }
-     public int getDegats() {
-        return degats;
-     }
 
-     public int Taper(){
-        return degats;
-     }
+    public int getDegat(){
+        return this.degat;
+    }
 
-     public void setDegats(int degats) {
-        this.degats = degats;
-     }
 
 
 }

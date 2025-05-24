@@ -8,7 +8,7 @@ public abstract class Outils extends Object {
     }
 
 
-    public Outils() {
+    /*public Outils() {
         super();
-    }
+    }*/
 }

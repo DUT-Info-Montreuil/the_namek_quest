@@ -4,28 +4,31 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventaire {
-    private ObservableList<Object> objects;
+    private ObservableList<Object> inventaire;
 
     public Inventaire() {
 
-        this.objects = FXCollections.observableArrayList();
+        this.inventaire = FXCollections.observableArrayList();
     }
 
     public ObservableList<Object> getListObjects() {
-        return objects;
+        return inventaire;
     }
 
-    public void setObjects(ObservableList<Object> objects) {
-        this.objects = objects;
+    public void setInventaire(ObservableList<Object> inventaire) {
+
+        this.inventaire = inventaire;
     }
-    public void addObject(Object object) {
-        this.objects.add(object);
+    public void addObject(Object o) {
+        this.inventaire.add(o);
     }
+
+
     public void removeObject(Object object) {
-        this.objects.remove(object);
+        this.inventaire.remove(object);
     }
-    public void removeObjectsIndex() {
-        this.objects.remove(0);
+    public void removeObjectsIndex(int index) {
+        this.inventaire.remove(index);
     }
 }
 

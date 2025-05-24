@@ -13,17 +13,18 @@ public class Object {
         this.name = name;
     }
 
-    public Object() {}
-
-    public Object(Hache hache) {
-    }
-
+   // public Object() {}
 
     public int getId() {
         return this.id;
     }
     public String getName() {
         return this.name;
+    }
+
+
+    public String toString(){
+        return "id :"+this.id+"arme"+this.name;
     }
 }
 
