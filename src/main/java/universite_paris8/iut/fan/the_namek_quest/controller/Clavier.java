@@ -2,17 +2,21 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
+import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 
-public class Clavier {
+public class Clavier implements EventHandler<KeyEvent> {
 
     private Trunks trunks;
     private TrunksVue trunksVue;
     private InventaireVue inventaireVue;
+    private TerrainVue  terrainVue;
     private final BooleanProperty spacePressed = new SimpleBooleanProperty();
     private BooleanProperty qPressed = new SimpleBooleanProperty();
     private final BooleanProperty sPressed = new SimpleBooleanProperty();
@@ -20,10 +24,11 @@ public class Clavier {
     private final BooleanProperty vPressed = new SimpleBooleanProperty();
 
 
-    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue) {
+    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, TerrainVue terrainVue) {
         this.trunks = trunks;
         this.trunksVue = trunksVue;
         this.inventaireVue = inventaireVue;
+        this.terrainVue = terrainVue;
     }
 
     public void setupKeyHandlers(Pane pane) {
@@ -90,5 +95,14 @@ public class Clavier {
     public void handleV() {
         trunks.decrementerPv();
         vPressed.set(false);
+    }
+
+    @Override
+    public void handle(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case M:
+                terrainVue.GameOver();
+                break;
+        }
     }
 }

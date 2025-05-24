@@ -65,7 +65,7 @@ public class Controller implements Initializable {
         this.trunksVue = new TrunksVue(pane,trunks);
         this.inventaire = new Inventaire();
         this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
-        clavier = new Clavier(trunks, trunksVue, inventaireVue);
+        clavier = new Clavier(trunks, trunksVue, inventaireVue, terrainVue);
         clavier.setupKeyHandlers(pane);
         pane.setFocusTraversable(true); // autorise le focus
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
