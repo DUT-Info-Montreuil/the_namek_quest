@@ -23,6 +23,8 @@ public class Terrain {
     private static final int TAILLE_TUILE = 32;
     private static final int LARGEUR_PERSO = 32;
     private static final int HAUTEUR_PERSO = 32;
+    private static final int MARGE_DROITE = 7;
+    private static final int MARGE_GAUCHE = 11;
 
     // 1 => Ciel; 2 => Sol; 3 => Herbe; 4 => blanc (nuage) 5 => arbre 6 => Champignon 7 => rocher 8 => roche
     private int[][] terrain = {
@@ -83,7 +85,7 @@ public class Terrain {
     }
 
     public boolean dansTerrain(int x, int y) {
-        return (x >= 0 && x < width && y >= 0 && y < height);
+        return (x + MARGE_DROITE >= 0 && x < width - MARGE_GAUCHE && y >= 0 && y < height);
     }
 
     // Détermine si la case (en pixels) est "marchable" (ciel, nuage)
@@ -101,7 +103,7 @@ public class Terrain {
 
     public boolean collisionBas(int x, int y) {
         int yTest = y + HAUTEUR_PERSO;
-        for (int testX = x; testX < x + LARGEUR_PERSO; testX++) {
+        for (int testX = x+MARGE_GAUCHE; testX < x + LARGEUR_PERSO-MARGE_DROITE; testX++) {
             if (!estTraversable(testX, yTest)) {
                 return true;
             }
@@ -111,7 +113,7 @@ public class Terrain {
 
     public boolean collisionHaut(int x, int y) {
         int yTest = y;
-        for (int testX = x; testX < x + LARGEUR_PERSO; testX++) {
+        for (int testX = x + MARGE_GAUCHE; testX < x + LARGEUR_PERSO-MARGE_DROITE; testX++) {
             if (!estTraversable(testX, yTest)) {
                 return true;
             }
@@ -120,7 +122,7 @@ public class Terrain {
     }
 
     public boolean collisionDroite(int x, int y) {
-        int xTest = x + LARGEUR_PERSO;
+        int xTest = x + LARGEUR_PERSO-MARGE_DROITE;
         for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
             if (!estTraversable(xTest, testY)) {
                 return true;
@@ -130,7 +132,7 @@ public class Terrain {
     }
 
     public boolean collisionGauche(int x, int y) {
-        int xTest = x;
+        int xTest = x + MARGE_DROITE;
         for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
             if (!estTraversable(xTest, testY)) {
                 return true;
