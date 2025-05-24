@@ -1,8 +1,11 @@
 package universite_paris8.iut.fan.the_namek_quest.view;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 
 public class TerrainVue {
@@ -21,6 +24,7 @@ public class TerrainVue {
         tilePane.setPrefColumns(terrain.largeurTerrain());
         tilePane.setPrefSize(terrain.largeurTerrain()*tailleTuile,terrain.hauteurTerrain()*tailleTuile);
         tilePane.setFocusTraversable(true);
+
         Image imageCiel = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png") );
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));
@@ -69,4 +73,6 @@ public class TerrainVue {
             }
         }
     }
+
+
 }

@@ -1,19 +1,21 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.view.GameOver;
 import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.MenuDemarrage;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
@@ -33,10 +35,13 @@ public class Controller implements Initializable {
     private InventaireVue inventaireVue;
     private Inventaire inventaire;
     private Clavier clavier;
-
     @FXML private TilePane tilePane;
     @FXML private Pane pane;
     @FXML private Pane paneInventaire;
+    @FXML private Pane borderpane;
+    private GameOver gameOver;
+
+
 
     private MenuDemarrage menuDemarrage;
 
@@ -51,7 +56,6 @@ public class Controller implements Initializable {
 
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
-
         this.environnement = new Environnement();
         this.terrain = new Terrain();
         this.trunks = new Trunks(environnement);
@@ -59,12 +63,10 @@ public class Controller implements Initializable {
         this.trunksVue = new TrunksVue(pane, trunks);
         this.inventaire = new Inventaire();
         this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue);
-
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, terrainVue);
         clavier.setupKeyHandlers(pane);
         pane.setFocusTraversable(true);
         Platform.runLater(() -> pane.requestFocus());
-
         initAnimation();
     }
 
@@ -76,13 +78,38 @@ public class Controller implements Initializable {
             } else {
                 trunks.gererSaut();
             }
+            clavier.setupKeyHandlers(pane);
+            if(clavier.isQPressed()) {
+                clavier.handleLeft();
+            }
+            if(clavier.isDPressed()) {
+                clavier.handleRight();
+            }
+            if(clavier.isSpacePressed()){
+                clavier.handleUp();
+            }if(clavier.isVPressed()){
+                clavier.handleV();
+            }if(trunks.estMort()) {
+                afficherGameOver();
 
-            if (clavier.isQPressed()) clavier.handleLeft();
-            if (clavier.isDPressed()) clavier.handleRight();
-            if (clavier.isSpacePressed()) clavier.handleUp();
-            if (clavier.isVPressed()) clavier.handleV();
+                PauseTransition pause = new PauseTransition(Duration.seconds(5));
+                pause.setOnFinished(event -> {
+                    Stage stage = (Stage) pane.getScene().getWindow();
+                    stage.close();
+                });
+                pause.play();
+            }
+
         }));
+
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
     }
+
+    public void afficherGameOver() {
+        gameLoop.stop();
+        gameOver = new GameOver();
+        gameOver.afficherGameOver(pane);
+    }
+
 }
