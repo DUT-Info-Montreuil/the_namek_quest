@@ -1,19 +1,13 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
-/**
- * Classe Controller
- * -----------------
- * Contrôleur principal de l'application JavaFX. Gère l'initialisation, la boucle de jeu et la communication entre modèle et vue.
- * - Initialise l'environnement, le terrain, le personnage et les vues.
- * - Lance et maintenir la boucle principale du jeu (animation, gravité, déplacements).
- * - Gère les entrées clavier et les actions correspondantes.
- */
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -27,8 +21,6 @@ import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static javafx.application.Application.launch;
 
 public class Controller implements Initializable {
 
@@ -46,19 +38,56 @@ public class Controller implements Initializable {
     @FXML private Pane pane;
     @FXML private Pane paneInventaire;
 
+    private Pane menuPane;  // Menu temporaire
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        afficherMenuDemarrage();
+    }
+
+    private void afficherMenuDemarrage() {
+        menuPane = new Pane();
+        menuPane.setPrefSize(800, 600);
+
+        // Image de fond du menu
+        Image menuImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/menu.png"));
+        ImageView imageView = new ImageView(menuImage);
+        imageView.setFitWidth(800);
+        imageView.setFitHeight(600);
+
+        // Bouton "Démarrer"
+        Button startButton = new Button(" ");
+        startButton.setStyle("""
+        -fx-font-size: 60px;
+        -fx-background-color: transparent;
+        -fx-border-color: transparent;
+        -fx-text-fill: white;
+    """);
+        startButton.setLayoutX(330);
+        startButton.setLayoutY(420);
+        startButton.setOnAction(e -> {
+            pane.getChildren().remove(menuPane);
+            demarrerJeu();
+        });
+
+        menuPane.getChildren().addAll(imageView, startButton);
+        pane.getChildren().add(menuPane);
+    }
+
+    private void demarrerJeu() {
         this.environnement = new Environnement();
         this.terrain = new Terrain();
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
-        this.trunksVue = new TrunksVue(pane,trunks);
+        this.trunksVue = new TrunksVue(pane, trunks);
         this.inventaire = new Inventaire();
         this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
+
         clavier = new Clavier(trunks, trunksVue, inventaireVue);
         clavier.setupKeyHandlers(pane);
-        pane.setFocusTraversable(true); // autorise le focus
-        Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
+
+        pane.setFocusTraversable(true);
+        Platform.runLater(pane::requestFocus);
         initAnimation();
     }
 
@@ -70,21 +99,14 @@ public class Controller implements Initializable {
             } else {
                 trunks.gererSaut();
             }
-            clavier.setupKeyHandlers(pane);
-            if(clavier.isQPressed()) {
-                clavier.handleLeft();
-            }
-            if(clavier.isDPressed()) {
-                clavier.handleRight();
-            }
-            if(clavier.isSpacePressed()){
-                clavier.handleUp();
-            }if(clavier.isVPressed()){
-                clavier.handleV();
-            }
+
+            if (clavier.isQPressed()) clavier.handleLeft();
+            if (clavier.isDPressed()) clavier.handleRight();
+            if (clavier.isSpacePressed()) clavier.handleUp();
+            if (clavier.isVPressed()) clavier.handleV();
+
         })));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
     }
 }
-
