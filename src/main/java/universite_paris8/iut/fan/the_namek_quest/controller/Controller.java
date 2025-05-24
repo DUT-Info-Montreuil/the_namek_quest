@@ -20,7 +20,6 @@ import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.MenuDemarrage;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -92,14 +91,13 @@ public class Controller implements Initializable {
             }if(trunks.estMort()) {
                 afficherGameOver();
 
-                PauseTransition pause = new PauseTransition(Duration.seconds(5));
+                PauseTransition pause = new PauseTransition(Duration.seconds(3));
                 pause.setOnFinished(event -> {
                     Stage stage = (Stage) pane.getScene().getWindow();
                     stage.close();
                 });
                 pause.play();
             }
-
         }));
 
         gameLoop.setCycleCount(Timeline.INDEFINITE);
