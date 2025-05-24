@@ -1,16 +1,27 @@
 package universite_paris8.iut.fan.the_namek_quest.view;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class MenuDemarrage {
 
     private Pane menuPane;
 
+    public void afficherMenuDemarrage(Pane pane) {
+        menuPane = new Pane();
+        menuPane.setPrefSize(800, 600);
 
+        Image menuImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/menu.png"));
+        ImageView imageView = new ImageView(menuImage);
+        imageView.setFitWidth(800);
+        imageView.setFitHeight(600);
 
-    public Pane getView() {
-        return menuPane;
+        menuPane.getChildren().add(imageView);
+        pane.getChildren().add(menuPane);
+    }
+
+    public void retirerMenuDemarrage(Pane pane) {
+        pane.getChildren().remove(menuPane);
     }
 }
