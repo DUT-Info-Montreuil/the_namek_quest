@@ -1,8 +1,11 @@
 package universite_paris8.iut.fan.the_namek_quest.view;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 
 public class TerrainVue {
@@ -72,11 +75,23 @@ public class TerrainVue {
     }
 
      public void GameOver(){
+
+         tilePane.getChildren().clear();
+
         Image imageGameOver = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/gameOver.png") );
-        tilePane.getChildren().removeAll();
-        tilePane.getChildren().add(new ImageView(imageGameOver));
+        ImageView GameOverView = new ImageView(imageGameOver);
+        //GameOverView.setOpacity(0.3);
+        tilePane.getChildren().add(GameOverView);
          System.out.println("affiche game over");
 
+         PauseTransition pause = new PauseTransition(Duration.seconds(3));
+         pause.setOnFinished(event -> {
+
+             System.out.println("fait la pose");
+             Stage stage = (Stage) tilePane.getScene().getWindow();
+             stage.close();
+         });
+         pause.play();
 
      }
 }
