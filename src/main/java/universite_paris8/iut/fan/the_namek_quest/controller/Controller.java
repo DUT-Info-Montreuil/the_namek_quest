@@ -15,7 +15,8 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -24,6 +25,7 @@ import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.view.GameOver;
 import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
@@ -31,9 +33,6 @@ import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-import static javafx.application.Application.launch;
-import static javafx.application.Application.setUserAgentStylesheet;
 
 public class Controller implements Initializable {
 
@@ -52,6 +51,7 @@ public class Controller implements Initializable {
     @FXML private Pane pane;
     @FXML private Pane paneInventaire;
     @FXML private Pane borderpane;
+    private GameOver gameOver;
 
 
 
@@ -91,19 +91,15 @@ public class Controller implements Initializable {
                 clavier.handleUp();
             }if(clavier.isVPressed()){
                 clavier.handleV();
-            }if(trunks.estMort()){
-                terrainVue.GameOver();
+            }if(trunks.estMort()) {
+                afficherGameOver();
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(5));
                 pause.setOnFinished(event -> {
-
-                    System.out.println("fait la pose");
                     Stage stage = (Stage) pane.getScene().getWindow();
                     stage.close();
                 });
                 pause.play();
-
-
             }
 
         })));
@@ -111,5 +107,12 @@ public class Controller implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
     }
+
+    public void afficherGameOver() {
+        gameLoop.stop();
+        gameOver = new GameOver();
+        gameOver.afficherGameOver(pane);
+    }
+
 }
 

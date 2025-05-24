@@ -70,13 +70,4 @@ public class TerrainVue {
             }
         }
     }
-
-     public void GameOver(){
-        Image imageGameOver = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/gameOver.png") );
-        tilePane.getChildren().removeAll();
-        tilePane.getChildren().add(new ImageView(imageGameOver));
-         System.out.println("affiche game over");
-
-
-     }
 }
