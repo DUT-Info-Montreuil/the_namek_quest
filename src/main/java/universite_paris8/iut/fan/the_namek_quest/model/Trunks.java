@@ -93,11 +93,11 @@ public class Trunks extends Personnage {
     public void changerEquipement(int sens){
         if(sens<0){
             if(this.objectEquipe.getId()>0){
-                setObjectEquipe(this.getInventaire().getListObjects().get(1));
+                setObjectEquipe(this.getInventaire().getListObjects().get(this.objectEquipe.getId()-1));
             }
         }else if(sens>0){
-            if(this.objectEquipe.getId()<3){
-                setObjectEquipe(this.getInventaire().getListObjects().get(2));
+            if(this.objectEquipe.getId()<2){
+                setObjectEquipe(this.getInventaire().getListObjects().get(this.objectEquipe.getId()+1));
             }
         }
 

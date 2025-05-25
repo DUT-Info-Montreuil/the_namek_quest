@@ -45,6 +45,7 @@ public class Controller implements Initializable {
     private Timeline gameLoop;
     private InventaireVue inventaireVue;
     private Inventaire inventaire;
+    private InventaireListener inventaireListener;
     private Clavier clavier;
     private MoletteController moletteController;
 
@@ -59,11 +60,13 @@ public class Controller implements Initializable {
         this.trunks = new Trunks(environnement);
         TerrainVue terrainVue = new TerrainVue(tilePane, terrain);
         this.trunksVue = new TrunksVue(pane,trunks);
-        this.inventaire = new Inventaire();
-        this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire,this.trunks);
+        //this.inventaire = new Inventaire();
+        this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
+        this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
+        trunks.getInventaire().getListObjects().addListener(inventaireListener);
         this.clavier = new Clavier(trunks, trunksVue, inventaireVue);
         this.clavier.setupKeyHandlers(pane);
-        this.moletteController = new MoletteController(trunks);
+        this.moletteController = new MoletteController(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         pane.setFocusTraversable(true); // autorise le focus
@@ -81,7 +84,7 @@ public class Controller implements Initializable {
             trunks.seDeplacer();
             trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
             trunks.setPv(trunks.getPv()-1);
-            clavier.setupKeyHandlers(pane);
+            //clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
             }

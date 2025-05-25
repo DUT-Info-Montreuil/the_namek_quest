@@ -6,14 +6,17 @@ import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Hache;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Pioche;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
-
+import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 
 
 public class MoletteController implements EventHandler<ScrollEvent> {
     private Trunks trunks;
+    private InventaireVue inventaireVue;
 
-    public MoletteController(Trunks trunks){
+
+    public MoletteController(Trunks trunks,InventaireVue inventaireVue){
         this.trunks = trunks;
+        this.inventaireVue = inventaireVue;
     }
 
 
@@ -23,14 +26,17 @@ public class MoletteController implements EventHandler<ScrollEvent> {
         if(event.getDeltaY()>0){
             System.out.println("⬆️ Molette vers le haut");
             trunks.changerEquipement(1);
-            //trunks.setObjectEquipe(new Pioche());
-            //trunks.setObjectEquipe(trunks.getInventaire().getListObjects().get(2));
-            //trunks.getObjectEquipe().toString();
+            inventaireVue.fermeInventaire();
+            inventaireVue.ouvrirInventaire();
+            System.out.println(trunks.getObjectEquipe().toString());
         } else if (event.getDeltaY()<0) {
             System.out.println(" Molette vers le bas");
             trunks.changerEquipement(-1);
+            trunks.getInventaire().addObject(new Hache());
+            inventaireVue.fermeInventaire();
+            inventaireVue.ouvrirInventaire();
            // trunks.setObjectEquipe(trunks.getInventaire().getListObjects().get(1));
-            //trunks.getObjectEquipe().toString();
+            System.out.println(trunks.getObjectEquipe().toString());
 
         }
 

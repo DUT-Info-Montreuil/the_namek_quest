@@ -30,10 +30,6 @@ public class InventaireVue {
         this.trunks=trunks;
         this.capsuleVue = new ImageView(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") ));
 
-        inventaire.addObject(new Pioche());
-        inventaire.addObject(new Hache());
-
-
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
         capsuleVue.setTranslateX(752);
