@@ -3,19 +3,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.Group?>
 
-<BorderPane fx:id="bordenpane" prefHeight="140.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.controller.Controller">
-    <top>
-        <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER">
-        <font>
-            <Font size="35.0" />
-        </font></Label>
-    </top>
+<BorderPane fx:id="bordenpane" prefHeight="720.0" prefWidth="1280.0"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="universite_paris8.iut.fan.the_namek_quest.controller.Controller">
+
     <center>
+        <StackPane fx:id="stackPane" BorderPane.alignment="CENTER" prefWidth="5000" prefHeight="900">
 
-        <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
-            <TilePane fx:id="tilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="1.0" tileAlignment="CENTER" BorderPane.alignment="CENTER" />
-        </Pane>
+            <!-- Le monde du jeu -->
+            <Group fx:id="group">
+                <Pane fx:id="pane" prefWidth="5000" prefHeight="900">
+                    <TilePane fx:id="tilePane"/>
+                </Pane>
+            </Group>
+
+            <!-- HUD FIXE : inventaire, barre de vie -->
+            <AnchorPane fx:id="hudPane" pickOnBounds="false" mouseTransparent="false">
+                <Pane fx:id="paneInventaire" layoutX="500" layoutY="20"/>
+            </AnchorPane>
+
+        </StackPane>
 
     </center>
+
 </BorderPane>

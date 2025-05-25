@@ -2,26 +2,34 @@ package universite_paris8.iut.fan.the_namek_quest.view;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+
+import java.io.InputStream;
 
 public class MenuDemarrage {
 
-    private Pane menuPane;
+    private ImageView imageView;
 
-    public void afficherMenuDemarrage(Pane pane) {
-        menuPane = new Pane();
-        menuPane.setPrefSize(800, 600);
+    public void afficherMenuDemarrage(StackPane stackPane) {
+        InputStream input = getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/menu.png");
 
-        Image menuImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/menu.png"));
-        ImageView imageView = new ImageView(menuImage);
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
+        Image menuImage = new Image(input);
+        imageView = new ImageView(menuImage);
 
-        menuPane.getChildren().add(imageView);
-        pane.getChildren().add(menuPane);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+
+        imageView.setFitWidth(900);
+        imageView.setFitHeight(900);
+
+        // ✅ Aligné à gauche, centré verticalement
+        StackPane.setAlignment(imageView, javafx.geometry.Pos.CENTER_LEFT);
+
+        stackPane.getChildren().add(0, imageView);
     }
 
-    public void retirerMenuDemarrage(Pane pane) {
-        pane.getChildren().remove(menuPane);
+
+    public void retirerMenuDemarrage(StackPane stackPane) {
+        stackPane.getChildren().remove(imageView);
     }
 }

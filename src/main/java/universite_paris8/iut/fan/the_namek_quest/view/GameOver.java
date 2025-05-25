@@ -3,6 +3,7 @@ package universite_paris8.iut.fan.the_namek_quest.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 public class GameOver {
 
@@ -14,9 +15,10 @@ public class GameOver {
 
         Image gameOverImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/gameover.png"));
         ImageView imageView = new ImageView(gameOverImage);
-        imageView.setFitWidth(800);
+        imageView.setFitWidth(900);
         imageView.setFitHeight(600);
 
+        StackPane.setAlignment(imageView, javafx.geometry.Pos.CENTER_LEFT);
         gameOverPane.getChildren().add(imageView);
         pane.getChildren().clear();  // Supprimer tous les éléments
         pane.getChildren().add(gameOverPane);

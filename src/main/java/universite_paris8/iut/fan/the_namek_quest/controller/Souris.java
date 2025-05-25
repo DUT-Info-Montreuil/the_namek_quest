@@ -15,8 +15,8 @@ public class Souris implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
             System.out.println("clic");
-            if (mouseEvent.getX() > 330 && mouseEvent.getX() < 530
-                    && mouseEvent.getY() > 420 && mouseEvent.getY() < 480) {
+            if (mouseEvent.getX() > 350 && mouseEvent.getX() < 550
+                    && mouseEvent.getY() > 450 && mouseEvent.getY() < 500) {
                 System.out.println("clic start");
                 controller.demarrerJeu();
             }

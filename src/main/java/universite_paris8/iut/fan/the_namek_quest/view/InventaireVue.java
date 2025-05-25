@@ -1,7 +1,9 @@
 package universite_paris8.iut.fan.the_namek_quest.view;
 
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 
@@ -12,12 +14,14 @@ public class InventaireVue {
     private Pane paneInventaire;
 
     private boolean ouvert;
+    private AnchorPane anchorPaneInventaire;
 
-    public InventaireVue(Inventaire inventaire,Pane pane,Pane paneInventaire) {
+    public InventaireVue(Inventaire inventaire, Pane pane, Pane paneInventaire, AnchorPane anchorPaneInventaire) {
         this.pane = pane;
         this.inventaire = inventaire;
         this.paneInventaire= paneInventaire;
         this.ouvert = false;
+        this.anchorPaneInventaire = anchorPaneInventaire;
 
         afficherInventaire();
 
@@ -28,9 +32,9 @@ public class InventaireVue {
         ImageView capsuleVue = new ImageView(capsule);
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
-        capsuleVue.setTranslateX(736);
+        capsuleVue.setTranslateX(850);
         capsuleVue.setTranslateY(0);
-        this.pane.getChildren().add(capsuleVue);
+        this.anchorPaneInventaire.getChildren().add(capsuleVue);
     }
 
     public void ouvrirInventaire(){

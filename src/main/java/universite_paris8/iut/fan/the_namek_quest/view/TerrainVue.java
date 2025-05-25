@@ -3,6 +3,7 @@ package universite_paris8.iut.fan.the_namek_quest.view;
 import javafx.animation.PauseTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
