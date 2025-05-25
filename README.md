@@ -1,58 +1,61 @@
 # 🌌 Trunks – The Namek Quest
-
-> Terraria-like 2D game set in the Dragon Ball universe – built with Java & JavaFX.
-
-<hr>
-## 👥 Team
-Nour Chouari
-
-Fousseyni Cisse
-
-Anis Bourmatte
 <hr>
 
+> Jeu 2D type Terraria dans l’univers de Dragon Ball – développé en Java & JavaFX.
 
-## 🚀 Features
+<hr>
 
-- 2D platformer movement (jump, run, fall)
-- Dynamic tile-based map rendering
-- Inventory and crafting system
-- Combat with enemies and boss mechanics
-- NPC interactions and item upgrades
-- Special powers using a Ki energy bar
-- Clean MVC architecture
+## 👥 Équipe
+
+- Nour Chouari  
+- Fousseyni Cisse  
+- Anis Bourmatte
 
 <hr>
 
 
-## 🛠️ Tech Stack
+## 🚀 Fonctionnalités
 
-- Java 21
-- JavaFX with FXML & Scene Builder
-- Git (main/dev workflow)
-- Trello (Agile project management)
+- Déplacement type plateforme en 2D (saut, course, chute)
+- Rendu dynamique de la carte en tuiles
+- Système d'inventaire et d'artisanat
+- Combats contre des ennemis et mécaniques de boss
+- Interactions avec des PNJ et amélioration d'objets
+- Pouvoirs spéciaux via une barre de Ki
+- Architecture MVC propre et modulaire
 
 <hr>
 
-## 📅 Project Info
-This project was developed as part of the following SAEs:
 
-S2.01 – Object-Oriented Programming
+## 🛠️ Technologies utilisées
 
-S2.02 – Implementation of Data Structures
+- Java 21  
+- JavaFX avec FXML & Scene Builder  
+- Git (workflow avec branches main/dev)  
+- Trello (gestion de projet agile)
 
-S2.05 – User Documentation and UX
+<hr>
 
-S2.06 – Project Management and Agile Methods
 
-Duration: 7 weeks
-Methodology: 3 sprints, GitHub + Trello
-Final delivery: June 19, 2025
+## 📅 Informations sur le projet
+
+Ce projet a été réalisé dans le cadre des SAEs suivantes :
+
+- **S2.01** – Programmation Orientée Objet  
+- **S2.02** – Structures de Données  
+- **S2.05** – Documentation Utilisateur et Expérience  
+- **S2.06** – Gestion de Projet et Méthodes Agiles  
+
+> Durée : 7 semaines  
+> Méthodologie : 3 sprints, gestion avec GitHub + Trello  
+> Livraison finale : 19 juin 2025
+
+<hr>
 
 
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/<your-username>/namek-quest.git
+git clone https://github.com/<votre-nom-utilisateur>/namek-quest.git
 cd namek-quest
-# Open with your favorite Java IDE and run the Main class
+# Ouvrez dans votre IDE Java préféré et exécutez la classe Main
