@@ -7,9 +7,9 @@
 
 ## 👥 Équipe
 
-- Nour Chouari  
-- Fousseyni Cisse  
-- Anis Bourmatte
+- Nour CHOUARI  
+- Fousseyni CISSE  
+- Anis BOURMATTE
 
 <hr>
 
