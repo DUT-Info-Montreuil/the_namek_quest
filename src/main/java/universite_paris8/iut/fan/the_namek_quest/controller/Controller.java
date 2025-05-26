@@ -68,7 +68,7 @@ public class Controller implements Initializable {
         this.trunks = environnement.getTrunks();
 
         this.terrainVue = new TerrainVue(tilePane, terrain);
-        souris = new Souris(this,this.environnement );
+        souris = new Souris(this,this.environnement,this.terrainVue );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
     }
 

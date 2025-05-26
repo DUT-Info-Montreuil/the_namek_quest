@@ -54,7 +54,7 @@ public class Terrain {
     }
 
     public void setTuileCiel(int x,int y) {
-        this.terrain[x][y] = 1;
+        this.terrain[y][x] = 1;
     }
 
     public int hauteurTerrain() {
@@ -177,7 +177,7 @@ public class Terrain {
         /*droite*/
         if(XtuileDroite*TAILLE_TUILE <= xSouris && xSouris <= (XtuileDroite * TAILLE_TUILE)+TAILLE_TUILE
                 && YtuileDroite*TAILLE_TUILE <= ySouris /*&& ySouris <= (YtuileDroite * TAILLE_TUILE)-TAILLE_TUILE */){
-            setTuileCiel((xTrunks+TAILLE_TUILE) / TAILLE_TUILE, yTrunks/TAILLE_TUILE);
+            setTuileCiel((int)(xSouris / TAILLE_TUILE)-1, (int)(ySouris/TAILLE_TUILE)-1);
             System.out.println("destruction");
             return codeTuile((int)xSouris/TAILLE_TUILE,(int)ySouris/TAILLE_TUILE) ;
         }
