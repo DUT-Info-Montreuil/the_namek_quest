@@ -30,5 +30,17 @@ public class Inventaire {
     public void removeObjectsIndex(int index) {
         this.inventaire.remove(index);
     }
+
+    public int getIndexObject(Object object) {
+        for (int i = 0; i < this.inventaire.size(); i++) {
+            if (this.inventaire.get(i).equals(object)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+
 }
 
