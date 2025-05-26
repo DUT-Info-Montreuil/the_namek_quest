@@ -54,6 +54,7 @@ public class InventaireVue {
 
         Image pioche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/pioche.png") );
         Image hache = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/hache.png") );
+        Image epee = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/Epee.png") );
         Image caseInventaire = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/caseInventaire.png") );
         Image Equipé = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/CaseObjetEquipe.png") );
         ImageView caseInventaireVue;
@@ -92,6 +93,8 @@ public class InventaireVue {
                         case "Hache":
                             img = new ImageView(hache);
                             break;
+                        case "épée":
+                            img = new ImageView(epee);
                     }
 
                     img.setTranslateX(x + (46 - 32) / 2);

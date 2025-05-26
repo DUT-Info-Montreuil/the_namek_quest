@@ -24,7 +24,7 @@ public class Object {
 
 
     public String toString(){
-        return "id :"+this.id+"arme"+this.name;
+        return "id :"+this.id+" arme :"+this.name;
     }
 }
 

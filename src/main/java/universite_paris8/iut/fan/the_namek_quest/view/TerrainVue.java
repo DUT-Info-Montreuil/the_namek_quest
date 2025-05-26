@@ -33,8 +33,6 @@ public class TerrainVue {
 
 
 
-
-
         for(int y = 0; y< terrain.hauteurTerrain(); y++) {
             for(int x = 0; x< terrain.largeurTerrain(); x++) {
                 if(this.terrain.codeTuile(x,y)==1){
