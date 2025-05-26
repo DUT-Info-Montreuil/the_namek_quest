@@ -75,9 +75,6 @@ public class Controller implements Initializable {
 
 
 
-
-
-
         this.trunksVue = new TrunksVue(pane,trunks);
         //this.inventaire = new Inventaire();
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
