@@ -15,6 +15,13 @@ public class Environnement {
         this.terrain = new Terrain();
         this.trunks= new Trunks(this);
     }
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+
+    public void setTrunks(Trunks trunks) {
+        this.trunks = trunks;
+    }
 
     public Terrain getTerrain() {
         return terrain;

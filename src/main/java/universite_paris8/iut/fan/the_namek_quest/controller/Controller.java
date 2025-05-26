@@ -41,6 +41,8 @@ public class Controller implements Initializable {
     private Inventaire inventaire;
     private InventaireListener inventaireListener;
     private Clavier clavier;
+    private Souris souris;
+
 
     private MoletteController moletteController;
 
@@ -60,21 +62,18 @@ public class Controller implements Initializable {
         menuDemarrage = new MenuDemarrage();
         menuDemarrage.afficherMenuDemarrage(pane); // Affiche le menu image
 
-        Souris souris = new Souris(this);
+
+        this.environnement = new Environnement();
+        this.terrain = environnement.getTerrain();
+        this.trunks = environnement.getTrunks();
+
+        this.terrainVue = new TerrainVue(tilePane, terrain);
+        souris = new Souris(this,this.environnement );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
     }
 
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
-        this.environnement = new Environnement();
-        this.terrain = new Terrain();
-        this.trunks = new Trunks(environnement);
-
-        this.terrainVue = new TerrainVue(tilePane, terrain);
-
-
-
-
         this.trunksVue = new TrunksVue(pane,trunks);
         //this.inventaire = new Inventaire();
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
@@ -88,7 +87,7 @@ public class Controller implements Initializable {
         pane.setFocusTraversable(true); // autorise le focus
         clavier.setupKeyHandlers(pane);
         pane.setFocusTraversable(true);
-
+        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
 

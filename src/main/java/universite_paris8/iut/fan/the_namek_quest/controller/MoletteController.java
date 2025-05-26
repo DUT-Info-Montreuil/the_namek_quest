@@ -42,6 +42,8 @@ public class MoletteController implements EventHandler<ScrollEvent> {
                 inventaireVue.ouvrirInventaire();
             }
 
+            trunks.getInventaire().addObject(new Hache());
+
             System.out.println(trunks.getObjectEquipe().toString());
 
         }

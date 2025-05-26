@@ -25,7 +25,4 @@ public abstract class Bloc {
         return id ;
     }
 
-
-
-
 }

@@ -42,7 +42,7 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 2, 2, 2, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
@@ -51,6 +51,10 @@ public class Terrain {
     public Terrain() {
         this.height = this.hauteurTerrain() * TAILLE_TUILE;
         this.width = this.largeurTerrain() * TAILLE_TUILE;
+    }
+
+    public void setTuileCiel(int x,int y) {
+        this.terrain[x][y] = 1;
     }
 
     public int hauteurTerrain() {
@@ -154,5 +158,34 @@ public class Terrain {
             y += 2;
         }
         return y;
+    }
+
+    public int creuserBlocPioche(int xTrunks , int yTrunks,double xSouris, double ySouris){
+
+        int XtuileDroite = getCaseX(xTrunks+TAILLE_TUILE);
+        int YtuileDroite = getCaseY(yTrunks);
+
+        int XtuileGauche  = getCaseX(xTrunks-TAILLE_TUILE);
+        int YtuileGauche  = getCaseY(yTrunks);
+
+        int XtuileHaut  = getCaseX(xTrunks);
+        int YtuileHaut  = getCaseY(yTrunks+TAILLE_TUILE);
+
+        int XtuileBas  = getCaseX(xTrunks);
+        int YtuileBas  = getCaseY(yTrunks-TAILLE_TUILE);
+
+        /*droite*/
+        if(XtuileDroite*TAILLE_TUILE <= xSouris && xSouris <= (XtuileDroite * TAILLE_TUILE)+TAILLE_TUILE
+                && YtuileDroite*TAILLE_TUILE <= ySouris /*&& ySouris <= (YtuileDroite * TAILLE_TUILE)-TAILLE_TUILE */){
+            setTuileCiel((xTrunks+TAILLE_TUILE) / TAILLE_TUILE, yTrunks/TAILLE_TUILE);
+            System.out.println("destruction");
+            return codeTuile((int)xSouris/TAILLE_TUILE,(int)ySouris/TAILLE_TUILE) ;
+        }
+        System.out.println("Xtuile droite : " + XtuileDroite*TAILLE_TUILE);
+        System.out.println("Ytuile droite : " + YtuileDroite*TAILLE_TUILE);
+        System.out.println("Ytuileaufond droite :" + (YtuileDroite * TAILLE_TUILE-TAILLE_TUILE));
+        System.out.println("XSouris : "+ xSouris);
+        System.out.println("ySouris : "+ySouris);
+    return -1;
     }
 }
