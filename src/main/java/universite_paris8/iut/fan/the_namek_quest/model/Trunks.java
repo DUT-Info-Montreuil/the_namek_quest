@@ -1,5 +1,11 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Object;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.arme.Epee;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Hache;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Pioche;
+
 /**
  * Classe Trunks
  * -------------
@@ -14,19 +20,35 @@ public class Trunks extends Personnage {
     private char direction;
     private boolean enSaut = false;
     private int hauteurMax = 0; // Nombre de pixels à encore monter
-
+    private Object objectEquipe;
+    private Inventaire inventaire;
 
     public Trunks(Environnement env) {
         super(0, 0, env);
         this.setVitesse(3);
-        this.direction = 'h'; // h => ne bouge pas
+        this.direction = 'h';// h => ne bouge pas
+
+        this.inventaire = new Inventaire();
+        this.objectEquipe = new Epee();
+        this.inventaire.addObject(this.objectEquipe);
+        this.inventaire.addObject(new Hache());
+        this.inventaire.addObject(new Pioche());
     }
 
+
+    public Object getObjectEquipe(){
+        return this.objectEquipe;
+    }
+
+    public void setObjectEquipe(Object object){
+        this.objectEquipe = object;
+    }
     public void setDirection(char direction) {
         this.direction = direction;
     }
 
     public void seDeplacer() {
+
         int vitesse = getVitesse();
         Terrain terrain = this.getEnv().getTerrain();
         int x = this.getX();
@@ -77,5 +99,26 @@ public class Trunks extends Personnage {
 
     public void decrementerPv(){
         this.setPv(this.getPv() - 10);
+    }
+
+    public Inventaire getInventaire(){
+        return this.inventaire;
+    }
+
+    public void changerEquipement(int sens){
+        int indexEquipement=this.inventaire.getIndexObject(this.objectEquipe);
+
+        if(sens<0){
+            if(indexEquipement>0){
+                setObjectEquipe(this.inventaire.getListObjects().get(indexEquipement-1));
+            }
+        } else if (sens>0) {
+            if(indexEquipement<this.inventaire.getListObjects().size()-1){
+                setObjectEquipe(this.inventaire.getListObjects().get(indexEquipement+1));
+            }
+
+        }
+
+        this.objectEquipe.toString();
     }
 }

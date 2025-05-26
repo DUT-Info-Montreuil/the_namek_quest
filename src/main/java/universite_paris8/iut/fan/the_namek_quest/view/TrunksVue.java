@@ -47,6 +47,10 @@ public class TrunksVue {
         barreDeVie.progressProperty().bind(trunks.getPvProp().divide(100.0));
 
         pane.getChildren().add(barreDeVie);
+    }
+
+
+    public void changerImageEpee(){
 
     }
 

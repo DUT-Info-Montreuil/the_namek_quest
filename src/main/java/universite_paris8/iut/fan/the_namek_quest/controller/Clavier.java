@@ -11,7 +11,7 @@ import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
 
-public class Clavier {
+public class Clavier implements EventHandler<KeyEvent> {
 
     private Trunks trunks;
     private TrunksVue trunksVue;
@@ -42,8 +42,12 @@ public class Clavier {
                 case S -> sPressed.set(true);
                 case D -> dPressed.set(true);
                 case RIGHT -> dPressed.set(true);
+<<<<<<< HEAD
                 case V ->  vPressed.set(true);
 
+=======
+                //case I -> iPressed.set(true);
+>>>>>>> inventaire
             }
         });
 
@@ -54,7 +58,11 @@ public class Clavier {
                 case S -> sPressed.set(false);
                 case D -> dPressed.set(false);
                 case RIGHT -> dPressed.set(false);
+<<<<<<< HEAD
                 case V ->  vPressed.set(false);
+=======
+               // case I -> iPressed.set(false);
+>>>>>>> inventaire
             }
         });
     }
@@ -74,7 +82,17 @@ public class Clavier {
 
 
     public void handleInventaire(){
-        inventaireVue.ouvrirInventaire();
+
+        if(inventaireVue.estOuvert()){
+            System.out.println("fermé");
+            inventaireVue.fermeInventaire();
+
+            //iPressed.set(false);
+        }else{
+            System.out.println("ouvert");
+            inventaireVue.ouvrirInventaire();
+
+        }
     }
 
     public void handleLeft() {
@@ -92,9 +110,22 @@ public class Clavier {
         spacePressed.set(false);
     }
 
+<<<<<<< HEAD
     public void handleV() {
         trunks.decrementerPv();
         vPressed.set(false);
     }
 
+=======
+    @Override
+    public void handle(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case I:
+
+                handleInventaire();
+
+                break;
+        }
+    }
+>>>>>>> inventaire
 }

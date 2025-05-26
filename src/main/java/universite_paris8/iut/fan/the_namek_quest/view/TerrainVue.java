@@ -28,6 +28,16 @@ public class TerrainVue {
         Image imageCiel = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png") );
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));
+<<<<<<< HEAD
+=======
+        Image imageBlanche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/blanc.png"));
+        Image imageArbre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/arbre.png"));
+        Image imageChampignon = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/champgnon.png"));
+        Image imageRocher = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/rocher.png"));
+        Image imageRoche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/roche.png"));
+        Image imageCoucherSoleil = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/coucher-soleil.png"));
+
+>>>>>>> inventaire
 
 
         for(int y = 0; y< terrain.hauteurTerrain(); y++) {

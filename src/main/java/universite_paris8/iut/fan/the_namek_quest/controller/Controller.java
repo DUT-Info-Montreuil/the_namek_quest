@@ -6,7 +6,12 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.input.MouseEvent;
+
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.ScrollEvent;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -20,6 +25,7 @@ import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.view.MenuDemarrage;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +39,12 @@ public class Controller implements Initializable {
     private Timeline gameLoop;
     private InventaireVue inventaireVue;
     private Inventaire inventaire;
+    private InventaireListener inventaireListener;
     private Clavier clavier;
+
+    private MoletteController moletteController;
+
+
     @FXML private TilePane tilePane;
     @FXML private Pane pane;
     @FXML private Pane paneInventaire;
@@ -58,20 +69,41 @@ public class Controller implements Initializable {
         this.environnement = new Environnement();
         this.terrain = new Terrain();
         this.trunks = new Trunks(environnement);
+
         this.terrainVue = new TerrainVue(tilePane, terrain);
-        this.trunksVue = new TrunksVue(pane, trunks);
-        this.inventaire = new Inventaire();
-        this.inventaireVue = new InventaireVue(inventaire, pane, paneInventaire);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, terrainVue);
+
+
+
+
+
+
+
+        this.trunksVue = new TrunksVue(pane,trunks);
+        //this.inventaire = new Inventaire();
+        this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
+        this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
+        trunks.getInventaire().getListObjects().addListener(inventaireListener);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue);
+        this.clavier.setupKeyHandlers(pane);
+        this.moletteController = new MoletteController(trunks,inventaireVue);
+        this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
+        this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
+        pane.setFocusTraversable(true); // autorise le focus
         clavier.setupKeyHandlers(pane);
         pane.setFocusTraversable(true);
-        Platform.runLater(() -> pane.requestFocus());
+
+
+        Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
+
+
+
         initAnimation();
     }
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             trunks.seDeplacer();
+
             if (!trunks.estEnSaut()) {
                 trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
             } else {

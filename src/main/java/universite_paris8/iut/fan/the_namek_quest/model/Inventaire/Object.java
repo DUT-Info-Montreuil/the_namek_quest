@@ -1,6 +1,10 @@
 package universite_paris8.iut.fan.the_namek_quest.model.Inventaire;
 
-public abstract class Object {
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.arme.Epee;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Hache;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Pioche;
+
+public class Object {
     private int id;
     private String name;
 
@@ -9,8 +13,18 @@ public abstract class Object {
         this.name = name;
     }
 
+   // public Object() {}
+
     public int getId() {
         return this.id;
+    }
+    public String getName() {
+        return this.name;
+    }
+
+
+    public String toString(){
+        return "id :"+this.id+" arme :"+this.name;
     }
 }
 
