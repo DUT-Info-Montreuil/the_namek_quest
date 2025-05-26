@@ -42,12 +42,7 @@ public class Clavier implements EventHandler<KeyEvent> {
                 case S -> sPressed.set(true);
                 case D -> dPressed.set(true);
                 case RIGHT -> dPressed.set(true);
-<<<<<<< HEAD
                 case V ->  vPressed.set(true);
-
-=======
-                //case I -> iPressed.set(true);
->>>>>>> inventaire
             }
         });
 
@@ -58,11 +53,7 @@ public class Clavier implements EventHandler<KeyEvent> {
                 case S -> sPressed.set(false);
                 case D -> dPressed.set(false);
                 case RIGHT -> dPressed.set(false);
-<<<<<<< HEAD
                 case V ->  vPressed.set(false);
-=======
-               // case I -> iPressed.set(false);
->>>>>>> inventaire
             }
         });
     }
@@ -110,13 +101,13 @@ public class Clavier implements EventHandler<KeyEvent> {
         spacePressed.set(false);
     }
 
-<<<<<<< HEAD
+
     public void handleV() {
         trunks.decrementerPv();
         vPressed.set(false);
     }
 
-=======
+
     @Override
     public void handle(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -127,5 +118,5 @@ public class Clavier implements EventHandler<KeyEvent> {
                 break;
         }
     }
->>>>>>> inventaire
+
 }

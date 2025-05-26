@@ -80,7 +80,7 @@ public class Controller implements Initializable {
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue);
         this.clavier.setupKeyHandlers(pane);
         this.moletteController = new MoletteController(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
