@@ -26,8 +26,11 @@ public class InventaireListener implements ListChangeListener<Object>{
                 for (Object o : c.getAddedSubList()) {
                     inventaireVue.afficherContenuInventaire();
                 }
-                inventaireVue.fermeInventaire();
-                inventaireVue.ouvrirInventaire();
+
+                if(inventaireVue.estOuvert()) {
+                    inventaireVue.fermeInventaire();
+                    inventaireVue.ouvrirInventaire();
+                }
             }
         }
     }

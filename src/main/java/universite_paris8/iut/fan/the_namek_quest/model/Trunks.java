@@ -29,8 +29,9 @@ public class Trunks extends Personnage {
         this.inventaire = new Inventaire();
         this.objectEquipe = new Epee();
         this.inventaire.addObject(this.objectEquipe);
-        this.inventaire.addObject(new Pioche());
         this.inventaire.addObject(new Hache());
+        this.inventaire.addObject(new Pioche());
+
 
 
 
