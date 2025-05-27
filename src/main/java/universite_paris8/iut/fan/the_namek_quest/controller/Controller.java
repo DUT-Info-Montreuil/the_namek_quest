@@ -64,10 +64,10 @@ public class Controller implements Initializable {
 
 
         this.environnement = new Environnement();
-        this.terrain = environnement.getTerrain();
+        //this.terrain = environnement.getTerrain();
         this.trunks = environnement.getTrunks();
 
-        this.terrainVue = new TerrainVue(tilePane, terrain);
+        this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
     }
@@ -86,7 +86,6 @@ public class Controller implements Initializable {
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         pane.setFocusTraversable(true); // autorise le focus
         clavier.setupKeyHandlers(pane);
-        pane.setFocusTraversable(true);
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
@@ -98,13 +97,7 @@ public class Controller implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
-            trunks.seDeplacer();
-
-            if (!trunks.estEnSaut()) {
-                trunks.setY(terrain.gravite(trunks.getX(), trunks.getY()));
-            } else {
-                trunks.gererSaut();
-            }
+            environnement.update();
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();

@@ -1,11 +1,8 @@
 package universite_paris8.iut.fan.the_namek_quest.view;
 
-import javafx.animation.PauseTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 
 public class TerrainVue {
@@ -61,14 +58,11 @@ public class TerrainVue {
     }
 
     
-    public void changerTuile(int x, int y) {
+    public void changerTuileCiel(int x, int y) {
+        System.out.println("changerTuile");
 
         this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png")));
 
-        /*else if(codeTuile==2){
-            tilePane.getChildren().remove(x,y);
-            tilePane.getChildren().add(x,y,new ImageView(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"))));
-        }*/
     }
 
 

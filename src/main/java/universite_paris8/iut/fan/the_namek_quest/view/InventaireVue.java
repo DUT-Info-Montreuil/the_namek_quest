@@ -127,6 +127,7 @@ public class InventaireVue {
         paneInventaire.setVisible(false);
         pane.getChildren().add(capsuleVue);
         //inventaire.removeObjectsIndex();
+
     }
 }
 

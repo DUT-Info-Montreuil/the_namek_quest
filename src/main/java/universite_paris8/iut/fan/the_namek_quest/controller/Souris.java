@@ -3,7 +3,6 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
-import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 
 public class Souris implements EventHandler<MouseEvent> {
@@ -27,8 +26,9 @@ public class Souris implements EventHandler<MouseEvent> {
                 System.out.println("clic start");
                 controller.demarrerJeu();
             }
-            if(environnement.getTerrain().creuserBlocPioche(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())==3){
-                this.terrainVue.changerTuile((int) mouseEvent.getX(), (int) mouseEvent.getY());
+            if(environnement.getTerrain().creuserBlocPioche(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())==1){
+                System.out.println("entre dans la fonction");
+                this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
             }
 
         }

@@ -30,4 +30,18 @@ public class Environnement {
     public Trunks getTrunks() {
         return trunks;
     }
+
+
+    public void update() {
+        trunks.seDeplacer();
+
+        if (!trunks.estEnSaut()) {
+            int nouvelleY = terrain.gravite(trunks.getX(), trunks.getY());
+            trunks.setY(nouvelleY);
+        } else {
+            trunks.gererSaut();
+        }
+
+    }
+
 }

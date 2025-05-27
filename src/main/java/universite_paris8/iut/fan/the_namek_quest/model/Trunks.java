@@ -71,7 +71,7 @@ public class Trunks extends Personnage {
 
 
    public void sauter() {
-       if (!enSaut && this.getEnv().getTerrain().collisionBas(getX(), getY())) {
+       if (!enSaut && this.getEnv().getTerrain().collisionBas(getX(), getY()) && !this.getEnv().getTerrain().collisionHaut(getX(), getY())) {
            enSaut = true;
            hauteurMax = 33;
        }

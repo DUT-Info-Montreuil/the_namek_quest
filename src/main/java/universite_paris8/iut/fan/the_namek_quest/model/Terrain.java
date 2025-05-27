@@ -41,7 +41,7 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 2, 2, 2, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -53,8 +53,10 @@ public class Terrain {
         this.width = this.largeurTerrain() * TAILLE_TUILE;
     }
 
-    public void setTuileCiel(int x,int y) {
-        this.terrain[y][x] = 1;
+    public void setTuileCiel(int c,int l) {
+        System.out.println("modif de la tuile en ciel modele");
+        this.terrain[l][c] = 1;
+        System.out.println(l + "-" + c);
     }
 
     public int hauteurTerrain() {
@@ -114,9 +116,8 @@ public class Terrain {
     }
 
     public boolean collisionHaut(int x, int y) {
-        int yTest = y;
-        for (int testX = x + MARGE_GAUCHE; testX < x + LARGEUR_PERSO-MARGE_DROITE; testX++) {
-            if (!estTraversable(testX, yTest)) {
+        for (int testX = x + MARGE_GAUCHE; testX < x + (LARGEUR_PERSO - MARGE_DROITE); testX++) {
+            if (!estTraversable(testX, y - 1)) { // y - 1 pour tester le pixel juste au-dessus
                 return true;
             }
         }
@@ -169,23 +170,40 @@ public class Terrain {
         int YtuileGauche  = getCaseY(yTrunks);
 
         int XtuileHaut  = getCaseX(xTrunks);
-        int YtuileHaut  = getCaseY(yTrunks+TAILLE_TUILE);
+        int YtuileHaut  = getCaseY(yTrunks-TAILLE_TUILE);
 
         int XtuileBas  = getCaseX(xTrunks);
-        int YtuileBas  = getCaseY(yTrunks-TAILLE_TUILE);
+        int YtuileBas  = getCaseY(yTrunks+TAILLE_TUILE);
 
-        /*droite*/
+        //droite
         if(XtuileDroite*TAILLE_TUILE <= xSouris && xSouris <= (XtuileDroite * TAILLE_TUILE)+TAILLE_TUILE
-                && YtuileDroite*TAILLE_TUILE <= ySouris /*&& ySouris <= (YtuileDroite * TAILLE_TUILE)-TAILLE_TUILE */){
-            setTuileCiel((int)(xSouris / TAILLE_TUILE)-1, (int)(ySouris/TAILLE_TUILE)-1);
-            System.out.println("destruction");
+                && YtuileDroite*TAILLE_TUILE <= ySouris && ySouris <= YtuileDroite*TAILLE_TUILE + TAILLE_TUILE){
+            setTuileCiel((int)(xSouris / TAILLE_TUILE), (int)(ySouris/TAILLE_TUILE));
             return codeTuile((int)xSouris/TAILLE_TUILE,(int)ySouris/TAILLE_TUILE) ;
         }
-        System.out.println("Xtuile droite : " + XtuileDroite*TAILLE_TUILE);
-        System.out.println("Ytuile droite : " + YtuileDroite*TAILLE_TUILE);
-        System.out.println("Ytuileaufond droite :" + (YtuileDroite * TAILLE_TUILE-TAILLE_TUILE));
-        System.out.println("XSouris : "+ xSouris);
-        System.out.println("ySouris : "+ySouris);
-    return -1;
+
+        //gauche
+        if((XtuileGauche*TAILLE_TUILE)+TAILLE_TUILE <= xSouris && xSouris <= xTrunks
+                && YtuileGauche*TAILLE_TUILE <= ySouris && ySouris <= YtuileDroite*TAILLE_TUILE + TAILLE_TUILE){
+            System.out.println("tuile gauche");
+            setTuileCiel((int)(xSouris / TAILLE_TUILE), (int)(ySouris/TAILLE_TUILE));
+            return codeTuile((int)xSouris/TAILLE_TUILE,(int)ySouris/TAILLE_TUILE) ;
+        }
+        //bas
+        if(xTrunks <= xSouris && xSouris <= xTrunks + TAILLE_TUILE
+                && YtuileBas * TAILLE_TUILE <= ySouris && ySouris <= YtuileBas * TAILLE_TUILE + TAILLE_TUILE) {
+
+            System.out.println("tuile bas");
+            setTuileCiel((int)(xSouris / TAILLE_TUILE), (int)(ySouris / TAILLE_TUILE));
+            return codeTuile((int)xSouris / TAILLE_TUILE, (int)ySouris / TAILLE_TUILE);
+        }
+        //haut
+        if(xTrunks <= xSouris && xSouris <= xTrunks + TAILLE_TUILE
+                && YtuileHaut * TAILLE_TUILE <= ySouris && ySouris <=( YtuileHaut * TAILLE_TUILE) + TAILLE_TUILE ){
+            System.out.println("tuile haut");
+            setTuileCiel((int)(xSouris / TAILLE_TUILE), (int)(ySouris / TAILLE_TUILE));
+            return codeTuile((int)xSouris / TAILLE_TUILE, (int)ySouris / TAILLE_TUILE);
+        }
+        return -1;
     }
 }
