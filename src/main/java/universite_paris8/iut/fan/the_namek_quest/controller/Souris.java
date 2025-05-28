@@ -26,12 +26,14 @@ public class Souris implements EventHandler<MouseEvent> {
                 System.out.println("clic start");
                 controller.demarrerJeu();
             }
-            if(environnement.getTerrain().creuserBlocPioche(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())==1){
-                System.out.println("entre dans la fonction");
-                this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-            }
-
+             if(environnement.getTrunks().getObjectEquipe().getId() == 1) {
+                 if (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 2 || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 3) {
+                     if (environnement.getTerrain().creuserBlocPioche(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY()) == 1) {
+                         System.out.println("entre dans la fonction");
+                         this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
+                     }
+                 }
+             }
         }
-
     }
 }

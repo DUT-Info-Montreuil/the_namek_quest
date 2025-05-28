@@ -27,6 +27,7 @@ public class MoletteController implements EventHandler<ScrollEvent> {
             System.out.println("⬆️ Molette vers le haut");
             trunks.changerEquipement(1);
 
+
             if(inventaireVue.estOuvert()) {
                 inventaireVue.fermeInventaire();
                 inventaireVue.ouvrirInventaire();

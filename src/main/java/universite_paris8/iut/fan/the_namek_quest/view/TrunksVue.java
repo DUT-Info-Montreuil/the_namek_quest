@@ -50,8 +50,24 @@ public class TrunksVue {
     }
 
 
+    public void changerImagePioche(){
+        if(this.trunks.getObjectEquipe().getId() == 1){
+            Image imagePersoPiocheDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks-pioche-droite.png").toExternalForm());
+            persoImage.setImage(imagePersoPiocheDroite);
+        }
+    }
     public void changerImageEpee(){
+        if(this.trunks.getObjectEquipe().getId() == 0){
+            Image imagePersoEpeeDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks-epee-droite.png").toExternalForm());
+            persoImage.setImage(imagePersoEpeeDroite);
+        }
+    }
 
+    public void changerImageHache(){
+        if(this.trunks.getObjectEquipe().getId() == 2){
+            Image imagePersoHacheDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks-hache-droite.png").toExternalForm());
+            persoImage.setImage(imagePersoHacheDroite);
+        }
     }
 
 }

@@ -98,6 +98,8 @@ public class Controller implements Initializable {
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
+            trunksVue.changerImagePioche();
+            trunksVue.changerImageHache();
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
