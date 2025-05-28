@@ -1,6 +1,7 @@
 package universite_paris8.iut.fan.the_namek_quest.model;
 
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.MainVide;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Object;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.arme.Epee;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Hache;
@@ -29,8 +30,9 @@ public class Trunks extends Personnage {
         this.direction = 'h';// h => ne bouge pas
 
         this.inventaire = new Inventaire();
-        this.objectEquipe = new Epee();
+        this.objectEquipe = new MainVide();
         this.inventaire.addObject(this.objectEquipe);
+        this.inventaire.addObject(new Epee());
         this.inventaire.addObject(new Hache());
         this.inventaire.addObject(new Pioche());
     }
@@ -39,7 +41,9 @@ public class Trunks extends Personnage {
     public Object getObjectEquipe(){
         return this.objectEquipe;
     }
-
+    public char getDirection() {
+        return direction;
+    }
     public void setObjectEquipe(Object object){
         this.objectEquipe = object;
     }

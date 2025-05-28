@@ -90,16 +90,13 @@ public class Controller implements Initializable {
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
 
-
-
         initAnimation();
     }
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
-            trunksVue.changerImagePioche();
-            trunksVue.changerImageHache();
+            //trunksVue.changerImage();
             clavier.setupKeyHandlers(pane);
             if(clavier.isQPressed()) {
                 clavier.handleLeft();

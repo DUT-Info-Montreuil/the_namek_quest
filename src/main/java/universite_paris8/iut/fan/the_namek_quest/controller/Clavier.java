@@ -94,6 +94,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     public void handleRight() {
         trunks.setDirection('d');
         trunksVue.changerImageDroite();
+
     }
 
     public void handleUp() {

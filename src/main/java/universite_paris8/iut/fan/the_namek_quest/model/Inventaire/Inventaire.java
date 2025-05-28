@@ -2,6 +2,7 @@ package universite_paris8.iut.fan.the_namek_quest.model.Inventaire;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Materieau;
 
 public class Inventaire {
     private ObservableList<Object> inventaire;
@@ -40,6 +41,47 @@ public class Inventaire {
         return -1;
     }
 
+
+    public void verifierRessource(int typeRessource){
+        switch (typeRessource) {
+            case 2 :
+
+                case 3 :
+
+
+
+        }
+
+    }
+
+    public boolean ressourceDetenue(int typeRessource){
+        for (int i = 0; i < this.inventaire.size(); i++) {
+            if (this.inventaire.get(i).getId()==typeRessource) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void ajoutRessource(int typeRessource){
+        if (this.ressourceDetenue(typeRessource)) {
+            if(this.inventaire.get(ressourceDansInventaire(typeRessource)) instanceof Materieau){
+                Materieau materieau = (Materieau) this.inventaire.get(ressourceDansInventaire(typeRessource));
+                materieau.incrementerRessource();
+            }
+        }else {
+            //this.inventaire.
+        }
+    }
+
+    public int ressourceDansInventaire(int typeRessource){
+        for (int i = 0; i < this.inventaire.size(); i++) {
+            if (this.inventaire.get(i).getId()==typeRessource) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 }
