@@ -92,7 +92,7 @@ public class Terrain {
         return (x + MARGE_DROITE >= 0 && x < width - MARGE_GAUCHE && y >= 0 && y < height);
     }
 
-    // Détermine si la case (en pixels) est "marchable" (ciel, nuage)
+    // Détermine si la case (en pixels) est "traversable" (ciel, nuage)
     public boolean estTraversable(int xPixel, int yPixel) {
         int caseX = getCaseX(xPixel);
         int caseY = getCaseY(yPixel);
@@ -179,7 +179,6 @@ public class Terrain {
             setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
             return codeTuile((int) xSouris / TAILLE_TUILE, (int) ySouris / TAILLE_TUILE);
         }
-
         //gauche
         if ((XtuileGauche * TAILLE_TUILE) + TAILLE_TUILE <= xSouris && xSouris <= xTrunks
                 && YtuileGauche * TAILLE_TUILE <= ySouris && ySouris <= YtuileDroite * TAILLE_TUILE + TAILLE_TUILE) {
@@ -202,7 +201,6 @@ public class Terrain {
             setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
             return codeTuile((int) xSouris / TAILLE_TUILE, (int) ySouris / TAILLE_TUILE);
         }
-
         return-1;
-}
+    }
 }
