@@ -12,6 +12,10 @@ import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Pioche;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
 
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+
+
 public class InventaireVue {
 
     private Pane pane;
@@ -57,6 +61,7 @@ public class InventaireVue {
         Image epee = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/Epee.png") );
         Image caseInventaire = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/caseInventaire.png") );
         Image Equipé = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/CaseObjetEquipe.png") );
+        Image terre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png") );
         ImageView caseInventaireVue;
         ImageView EquipéVue;
 
@@ -77,7 +82,7 @@ public class InventaireVue {
                     caseInventaireVue.setTranslateX(x);
                     caseInventaireVue.setTranslateY(y);
                     paneInventaire.getChildren().add(caseInventaireVue);
-                }else {
+                }  else {
                     caseInventaireVue = new ImageView(caseInventaire);
                     caseInventaireVue.setFitHeight(46);
                     caseInventaireVue.setFitWidth(46);
@@ -95,6 +100,10 @@ public class InventaireVue {
                             break;
                         case "épée":
                             img = new ImageView(epee);
+                            break;
+                        case  "terre":
+                                img = new ImageView(terre);
+                            break;
                     }
 
                     img.setTranslateX(x + (46 - 32) / 2);
@@ -102,6 +111,17 @@ public class InventaireVue {
                     img.setFitHeight(32);
                     img.setFitWidth(32);
                     paneInventaire.getChildren().add(img);
+
+                    if (object instanceof Materieau){
+                        Materieau mat = (Materieau) object;
+                        Label labelQuantite = new Label();
+                        labelQuantite.textProperty().bind(mat.getQuantiteProp().asString());
+                        labelQuantite.setFont(new Font("Arial", 12));
+                        labelQuantite.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        labelQuantite.setTranslateX(x + 30);// Ajuste la position X
+                        labelQuantite.setTranslateY(y + 28); // Ajuste la position Y
+                        paneInventaire.getChildren().add(labelQuantite);
+                    }
 
                     x = x - 46;
 

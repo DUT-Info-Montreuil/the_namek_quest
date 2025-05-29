@@ -41,8 +41,8 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
+            {1, 1, 1, 1, 1, 3, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 2, 2, 2, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
@@ -161,46 +161,21 @@ public class Terrain {
         return y;
     }
 
-    public int creuserBlocPioche(int xTrunks, int yTrunks, double xSouris, double ySouris) {
-
-        int XtuileDroite = getCaseX(xTrunks + TAILLE_TUILE);
-        int YtuileDroite = getCaseY(yTrunks);
-
-        int XtuileGauche = getCaseX(xTrunks - TAILLE_TUILE);
-        int YtuileGauche = getCaseY(yTrunks);
-
-        int YtuileHaut = getCaseY(yTrunks - TAILLE_TUILE);
-
-        int YtuileBas = getCaseY(yTrunks + TAILLE_TUILE);
-
-        //droite
-        if (XtuileDroite * TAILLE_TUILE <= xSouris && xSouris <= (XtuileDroite * TAILLE_TUILE) + TAILLE_TUILE
-                && YtuileDroite * TAILLE_TUILE <= ySouris && ySouris <= YtuileDroite * TAILLE_TUILE + TAILLE_TUILE) {
-            setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
-            return codeTuile((int) xSouris / TAILLE_TUILE, (int) ySouris / TAILLE_TUILE);
+    /// TODO a modifier , changer le nom de la foction (range perso) faire une range autour du perso
+    public boolean rangeCreuser(int xTrunks, int yTrunks, double xSouris, double ySouris) {
+        boolean peutCreuser = false;
+        if(xTrunks-TAILLE_TUILE<= xSouris && xSouris<=xTrunks+2*TAILLE_TUILE
+        && yTrunks-TAILLE_TUILE<= ySouris && ySouris<=yTrunks+2*TAILLE_TUILE ) {
+            peutCreuser = true;
         }
-        //gauche
-        if ((XtuileGauche * TAILLE_TUILE) + TAILLE_TUILE <= xSouris && xSouris <= xTrunks
-                && YtuileGauche * TAILLE_TUILE <= ySouris && ySouris <= YtuileDroite * TAILLE_TUILE + TAILLE_TUILE) {
-            System.out.println("tuile gauche");
-            setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
-            return codeTuile((int) xSouris / TAILLE_TUILE, (int) ySouris / TAILLE_TUILE);
-        }
-        //bas
-        if (xTrunks <= xSouris && xSouris <= xTrunks + TAILLE_TUILE
-                && YtuileBas * TAILLE_TUILE <= ySouris && ySouris <= YtuileBas * TAILLE_TUILE + TAILLE_TUILE) {
 
-            System.out.println("tuile bas");
-            setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
-            return codeTuile((int) xSouris / TAILLE_TUILE, (int) ySouris / TAILLE_TUILE);
-        }
-        //haut
-        if (xTrunks <= xSouris && xSouris <= xTrunks + TAILLE_TUILE
-                && YtuileHaut * TAILLE_TUILE <= ySouris && ySouris <= (YtuileHaut * TAILLE_TUILE) + TAILLE_TUILE) {
-            System.out.println("tuile haut");
-            setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
-            return codeTuile((int) xSouris / TAILLE_TUILE, (int) ySouris / TAILLE_TUILE);
-        }
-        return-1;
+        return peutCreuser;
     }
+
+
+    public void casserBloc(double xSouris, double ySouris) {
+        setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
+        System.out.println("tuile casser");
+    }
+
 }

@@ -2,6 +2,8 @@ package universite_paris8.iut.fan.the_namek_quest.model.Inventaire;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Materieau;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Terre;
 
 public class Inventaire {
     private ObservableList<Object> inventaire;
@@ -41,6 +43,56 @@ public class Inventaire {
     }
 
 
+    public void ajoutRessource(int typeRessource){
+        System.out.println("entre dans ajoutRessource : \n type ressource"+typeRessource);
+        switch (typeRessource) {
+            case 2 :
+                verifierRessource(2,new Terre());
+                break;
+            case 3 :
+                verifierRessource(2,new Terre());
+                break;
+
+        }
+
+    }
+
+    public int positionRessource(int typeRessource){
+        for (int i = 3; i < this.inventaire.size(); i++) {
+            if (this.inventaire.get(i).getId()==typeRessource) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void verifierRessource(int typeRessource,Object ressource){
+
+        if(this.ressourceDansInventaire(typeRessource)){
+            System.out.println("entre dans verif");
+            Materieau materieau = (Materieau)this.inventaire.get(positionRessource(typeRessource));
+            materieau.incrementerRessource();
+            System.out.println("materieau quantité :"+materieau.getQuantite());
+
+            if(this.inventaire.get(positionRessource(typeRessource)) instanceof Materieau){
+                System.out.println("entre dans verif materieau");
+
+            }
+        }else {
+
+            this.inventaire.add(ressource);
+        }
+
+    }
+
+    public boolean ressourceDansInventaire(int typeRessource){
+        for (int i = 3; i < this.inventaire.size(); i++) {
+            if (this.inventaire.get(i).getId()==typeRessource) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
-
