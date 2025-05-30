@@ -64,6 +64,4 @@ public class TerrainVue {
         this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png")));
 
     }
-
-
 }
