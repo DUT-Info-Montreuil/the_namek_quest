@@ -130,4 +130,5 @@ public class Controller implements Initializable {
         gameOver.afficherGameOver(pane);
     }
 
+
 }

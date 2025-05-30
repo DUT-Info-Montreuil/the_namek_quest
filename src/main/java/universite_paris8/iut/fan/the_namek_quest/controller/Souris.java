@@ -33,28 +33,18 @@ public class Souris implements EventHandler<MouseEvent> {
 
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())) {
                 System.out.println("entre dans la range");
+                //si trunks a une pioche
                 if (environnement.getTrunks().getObjectEquipe().getId() == 1) {
 
                     environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                }
+                }/* else if (environnement.getTrunks().getObjectEquipe() ) {
+
+                }*/
             }
         }
 
     }
 }
-            /*if(environnement.getTrunks().getObjectEquipe().getId() == 1) {
-                if (/*environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 2 || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 3) {
-                    System.out.println("entre dans la fonction");
-                    if(environnement.getTerrain().creuserBlocPioche(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY()) != -1) {
-                        //teste deux fois car il y a un || (une fois pour 2 et une fois pour 3)
-                        this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                    }
 
-
-                    //this.environnement.getTrunks().getInventaire().addObject();
-                }
-            }
-            */
-            /*if(environnement.getTrunks().getObjectEquipe().getId() == 1)*/

@@ -75,7 +75,7 @@ public class InventaireVue {
                     x=753;
                     y = y + 46;
                 }
-                if(this.trunks.getObjectEquipe().getId()==object.getId()){
+                if(this.trunks.getObjectEquipe().equals(object)){
                     caseInventaireVue = new ImageView(Equipé);
                     caseInventaireVue.setFitHeight(46);
                     caseInventaireVue.setFitWidth(46);
