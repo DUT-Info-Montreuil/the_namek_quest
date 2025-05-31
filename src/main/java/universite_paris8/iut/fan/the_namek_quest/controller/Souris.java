@@ -3,6 +3,7 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
 
 public class Souris implements EventHandler<MouseEvent> {
@@ -39,12 +40,18 @@ public class Souris implements EventHandler<MouseEvent> {
                     environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                }/* else if (environnement.getTrunks().getObjectEquipe() ) {
-
-                }*/
+                }else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
+                    if(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==1){
+                        Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
+                        if(materieau.getQuantite()>0) {
+                            materieau.decrementerRessource();
+                            environnement.getTerrain().poserBloc(mouseEvent.getX(), mouseEvent.getY(), materieau.getId());
+                            this.terrainVue.changerTuileSol((int) mouseEvent.getX(), (int) mouseEvent.getY());
+                        }
+                    }
+                }
             }
         }
-
     }
 }
 

@@ -59,6 +59,13 @@ public class Terrain {
         System.out.println(l + "-" + c);
     }
 
+    public void setTuile(int c, int l,int typeTuile) {
+        System.out.println("modif de la tuile en sol modele");
+        this.terrain[l][c] = 2;
+        System.out.println(l + "-" + c);
+    }
+
+
     public int hauteurTerrain() {
         return terrain.length;
     }
@@ -165,7 +172,7 @@ public class Terrain {
     public boolean rangeCreuser(int xTrunks, int yTrunks, double xSouris, double ySouris) {
         boolean peutCreuser = false;
         if(xTrunks-TAILLE_TUILE<= xSouris && xSouris<=xTrunks+2*TAILLE_TUILE
-        && yTrunks-TAILLE_TUILE<= ySouris && ySouris<=yTrunks+2*TAILLE_TUILE ) {
+        && yTrunks-TAILLE_TUILE<= ySouris && ySouris<=yTrunks+2*TAILLE_TUILE && !(xTrunks<=xSouris && xSouris<=xTrunks+TAILLE_TUILE && yTrunks<=ySouris && ySouris<=yTrunks+TAILLE_TUILE)) {
             peutCreuser = true;
         }
 
@@ -177,5 +184,11 @@ public class Terrain {
         setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
         System.out.println("tuile casser");
     }
+
+    public void poserBloc(double xSouris, double ySouris,int typeTuile) {
+        setTuile((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE),typeTuile);
+        System.out.println("tuile creuser");
+    }
+
 
 }

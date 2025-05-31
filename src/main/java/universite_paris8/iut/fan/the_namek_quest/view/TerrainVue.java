@@ -64,4 +64,9 @@ public class TerrainVue {
         this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/ciel.png")));
 
     }
+    /// TODO changer cette fonction avec un switch pour changer en fonction fu typ de bloc posé
+    public void changerTuileSol(int x, int y) {
+        System.out.println("changerTuile");
+        this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png")));
+    }
 }
