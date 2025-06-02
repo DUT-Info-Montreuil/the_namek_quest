@@ -110,6 +110,7 @@ public class Terrain {
         return (code == 1 || code == 4 || code == 5 || code == 6 || code == 7 || code == 8 || code == 9);
     }
 
+    //TODO mettre dans Personnage (ou Trunks) tout ce quiconcerne Trunks = sa position, sa largeur, sa hauteur
     public boolean collisionBas(int x, int y) {
         int yTest = y + HAUTEUR_PERSO;
         for (int testX = x + MARGE_GAUCHE; testX < x + LARGEUR_PERSO - MARGE_DROITE; testX++) {
@@ -149,16 +150,6 @@ public class Terrain {
         return false;
     }
 
-    public boolean collisionVerticale(int x, int yBas) {
-        int colonne = x / TAILLE_TUILE;
-        int ligne = yBas / TAILLE_TUILE;
-        if (colonne < 0 || colonne >= largeurTerrain() || ligne < 0 || ligne >= hauteurTerrain()) {
-            return true;
-        }
-        int code = codeTuile(colonne, ligne);
-        return (code == 2 || code == 3);
-    }
-
     public int gravite(int x, int y) {
         if (!collisionBas(x, y)) {
             y += 2;
@@ -166,7 +157,7 @@ public class Terrain {
         return y;
     }
 
-    /// TODO a modifier , changer le nom de la foction (range perso) faire une range autour du perso
+    /// TODO a modifier , changer le nom de la fonction (range perso) faire une range autour du perso
     public boolean rangeCreuser(int xTrunks, int yTrunks, double xSouris, double ySouris) {
         boolean peutCreuser = false;
         if(xTrunks-TAILLE_TUILE<= xSouris && xSouris<=xTrunks+2*TAILLE_TUILE
@@ -177,7 +168,6 @@ public class Terrain {
         return peutCreuser;
     }
 
-
     public void casserBloc(double xSouris, double ySouris) {
         setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
         System.out.println("tuile casser");
@@ -187,6 +177,5 @@ public class Terrain {
         setTuile((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE),typeTuile);
         System.out.println("tuile creuser");
     }
-
 
 }

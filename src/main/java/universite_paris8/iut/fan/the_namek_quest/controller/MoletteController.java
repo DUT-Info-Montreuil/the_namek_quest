@@ -30,7 +30,7 @@ public class MoletteController implements EventHandler<ScrollEvent> {
     public void handle(ScrollEvent event) {
 
         if(event.getDeltaY()>0){
-            System.out.println("⬆️ Molette vers le haut");
+            System.out.println("Molette vers le haut");
             trunks.changerEquipement(1);
 
 
@@ -41,18 +41,14 @@ public class MoletteController implements EventHandler<ScrollEvent> {
 
             System.out.println(trunks.getObjectEquipe().toString());
         } else if (event.getDeltaY()<0) {
-            System.out.println(" Molette vers le bas");
+            System.out.println("Molette vers le bas");
             trunks.changerEquipement(-1);
 
             if(inventaireVue.estOuvert()) {
                 inventaireVue.fermeInventaire();
                 inventaireVue.ouvrirInventaire();
             }
-
-            //trunks.getInventaire().addObject(new Hache());
-
             System.out.println(trunks.getObjectEquipe().toString());
-
         }
 
     }

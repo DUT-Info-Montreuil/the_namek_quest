@@ -39,15 +39,10 @@ public class Souris implements EventHandler<MouseEvent> {
                 controller.demarrerJeu();
             }
 
-
-            /// TODO verifier en premier la range du click puis quel type de block a ete cliqué et agir en fonction du bloque
-
-
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())) {
                 System.out.println("entre dans la range");
                 //si trunks a une pioche
                 if (environnement.getTrunks().getObjectEquipe().getId() == 1) {
-
                     environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());

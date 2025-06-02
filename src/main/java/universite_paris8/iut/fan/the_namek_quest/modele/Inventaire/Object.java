@@ -7,6 +7,8 @@ package universite_paris8.iut.fan.the_namek_quest.modele.Inventaire;
  * Cette classe peut être utilisée pour modéliser des armes, objets de quête ou équipements.
  **/
 
+
+// TODO attention : Object est un mot réservé de Java
 public class Object {
     private int id;
     private String name;
@@ -16,15 +18,12 @@ public class Object {
         this.name = name;
     }
 
-   // public Object() {}
-
     public int getId() {
         return this.id;
     }
     public String getName() {
         return this.name;
     }
-
 
     public String toString(){
         return "id :"+this.id+" arme :"+this.name;

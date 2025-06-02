@@ -52,6 +52,7 @@ public class Clavier implements EventHandler<KeyEvent> {
                 case RIGHT -> dPressed.set(true);
                 case V ->  vPressed.set(true);
             }
+
         });
 
         pane.setOnKeyReleased(event -> {
@@ -86,7 +87,6 @@ public class Clavier implements EventHandler<KeyEvent> {
             System.out.println("fermé");
             inventaireVue.fermeInventaire();
 
-            //iPressed.set(false);
         }else{
             System.out.println("ouvert");
             inventaireVue.ouvrirInventaire();
@@ -109,12 +109,10 @@ public class Clavier implements EventHandler<KeyEvent> {
         spacePressed.set(false);
     }
 
-
     public void handleV() {
         trunks.decrementerPv();
         vPressed.set(false);
     }
-
 
     @Override
     public void handle(KeyEvent keyEvent) {
@@ -126,5 +124,4 @@ public class Clavier implements EventHandler<KeyEvent> {
                 break;
         }
     }
-
 }

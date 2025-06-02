@@ -66,22 +66,22 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuDemarrage = new MenuDemarrage();
-        menuDemarrage.afficherMenuDemarrage(pane); // Affiche le menu image
+        menuDemarrage.afficherMenuDemarrage(pane);
 
 
         this.environnement = new Environnement();
-        //this.terrain = environnement.getTerrain();
         this.trunks = environnement.getTrunks();
 
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
+
+
     }
 
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
         this.trunksVue = new TrunksVue(pane,trunks);
-        //this.inventaire = new Inventaire();
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
@@ -102,8 +102,8 @@ public class Controller implements Initializable {
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
-            //trunksVue.changerImage();
-            clavier.setupKeyHandlers(pane);
+
+            //TODO : à déplacer dans l'écouteur de clavier
             if(clavier.isQPressed()) {
                 clavier.handleLeft();
             }
@@ -112,9 +112,13 @@ public class Controller implements Initializable {
             }
             if(clavier.isSpacePressed()){
                 clavier.handleUp();
-            }if(clavier.isVPressed()){
+            }
+            if(clavier.isVPressed()){
                 clavier.handleV();
-            }if(trunks.estMort()) {
+            }
+
+
+            if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -135,6 +139,4 @@ public class Controller implements Initializable {
         gameOver = new GameOver();
         gameOver.afficherGameOver(pane);
     }
-
-
 }

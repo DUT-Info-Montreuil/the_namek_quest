@@ -26,7 +26,7 @@ public class GameOver {
         imageView.setFitHeight(600);
 
         gameOverPane.getChildren().add(imageView);
-        pane.getChildren().clear();  // Supprimer tous les éléments
+        pane.getChildren().clear();
         pane.getChildren().add(gameOverPane);
     }
 }

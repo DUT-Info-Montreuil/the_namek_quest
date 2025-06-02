@@ -18,9 +18,12 @@ import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.outils.Pioche
 
 public class Trunks extends Personnage {
 
+    // TODO remplacer par un IntegerProperty et un listener qui change l('image.
     private char direction;
+
+
     private boolean enSaut = false;
-    private int hauteurMax = 0; // Nombre de pixels à encore monter
+    private int hauteurMax = 0;
     private Object objectEquipe;
     private Inventaire inventaire;
 
@@ -70,7 +73,6 @@ public class Trunks extends Personnage {
             setDirection('h');
         }
     }
-
 
    public void sauter() {
        if (!enSaut && this.getEnv().getTerrain().collisionBas(getX(), getY()) && !this.getEnv().getTerrain().collisionHaut(getX(), getY())) {
@@ -122,9 +124,7 @@ public class Trunks extends Personnage {
             if(indexEquipement<this.inventaire.getListObjects().size()-1){
                 setObjectEquipe(this.inventaire.getListObjects().get(indexEquipement+1));
             }
-
         }
-
         this.objectEquipe.toString();
     }
 }

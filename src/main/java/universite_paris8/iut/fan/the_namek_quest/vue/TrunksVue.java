@@ -50,6 +50,8 @@ public class TrunksVue {
     }
 
     public void changerImageDroite() {
+
+        //TODO charger les images une seule fois au démarrage de TrunksVue
         Image imagePersoDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-droite.png").toExternalForm());
         switch (trunks.getObjectEquipe().getId()) {
             case 0:
