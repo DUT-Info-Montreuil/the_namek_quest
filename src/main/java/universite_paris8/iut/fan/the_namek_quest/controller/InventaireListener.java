@@ -1,10 +1,18 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+/**
+ * Classe InventaireListener
+ * --------------------------
+ * Écoute les changements dans la liste d'objets de l'inventaire.
+ * Lorsqu'un ajout, une suppression ou un remplacement survient,
+ * elle met à jour la vue de l'inventaire en rafraîchissant l'affichage.
+ **/
+
+
+ import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
+import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 
 public class InventaireListener implements ListChangeListener<Object>{
 

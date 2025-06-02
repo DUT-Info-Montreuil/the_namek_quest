@@ -1,15 +1,23 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
+/**
+ * Classe Clavier
+ * --------------
+ * Gère les entrées clavier du jeu.
+ * Permet de détecter les touches pressées et relâchées
+ * et d’agir en conséquence sur le personnage (Trunks), l’inventaire et la vue.
+ */
+
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
-import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
-import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
+import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
+import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
+import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
 
 public class Clavier implements EventHandler<KeyEvent> {
 

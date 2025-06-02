@@ -1,10 +1,21 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
+
+/**
+ * Classe Souris
+ * --------------
+ * Gère les événements de souris (clics) dans le jeu.
+ * Cette classe détecte les clics de souris, vérifie la zone cliquée
+ * et agit en conséquence, notamment pour commencer le jeu,
+ * creuser des blocs ou poser des blocs dans l'environnement.
+ **/
+
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Materieau;
-import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.ressource.Materieau;
+import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
 
 public class Souris implements EventHandler<MouseEvent> {
 

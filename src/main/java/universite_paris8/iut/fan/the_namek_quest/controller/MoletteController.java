@@ -2,12 +2,18 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.ScrollEvent;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Hache;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.outils.Pioche;
-import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
+import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 
+/**
+ * Classe MoletteController
+ * -------------------------
+ * Gère les événements de la molette de la souris (scroll) pour changer
+ * l'équipement de Trunks et mettre à jour la vue de l'inventaire.
+ * Lors d'un scroll vers le haut, l'équipement est changé dans un sens,
+ * lors d'un scroll vers le bas, il est changé dans l'autre sens.
+ * Si l'inventaire est ouvert, il est rafraîchi pour refléter le changement.
+ */
 
 public class MoletteController implements EventHandler<ScrollEvent> {
     private Trunks trunks;

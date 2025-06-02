@@ -1,31 +1,37 @@
 package universite_paris8.iut.fan.the_namek_quest.controller;
 
+/**
+ * Classe Controller
+ * ----------------
+ * Contrôleur principal du jeu. Gère l'initialisation,
+ * la liaison entre modèle (Environnement, Trunks, Inventaire, Terrain),
+ * et vue (TerrainVue, TrunksVue, InventaireVue, MenuDemarrage).
+ * Assure la gestion des événements clavier, souris et molette,
+ * ainsi que la boucle de jeu (animation et mise à jour).
+ */
+
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.input.MouseEvent;
-
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
-import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.view.GameOver;
-import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
-import universite_paris8.iut.fan.the_namek_quest.view.MenuDemarrage;
-import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
-import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
-
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
+import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.vue.GameOver;
+import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
+import universite_paris8.iut.fan.the_namek_quest.vue.MenuDemarrage;
+import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
+import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
 import java.net.URL;
 import java.util.ResourceBundle;
 
