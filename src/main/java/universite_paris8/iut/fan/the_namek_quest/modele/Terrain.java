@@ -1,5 +1,7 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
+import universite_paris8.iut.fan.the_namek_quest.Constante;
+
 /**
  * Classe Terrain
  * ---------------
@@ -16,11 +18,6 @@ public class Terrain {
     private int width;
     private int height;
 
-    private static final int TAILLE_TUILE = 32;
-    private static final int LARGEUR_PERSO = 32;
-    private static final int HAUTEUR_PERSO = 32;
-    private static final int MARGE_DROITE = 7;
-    private static final int MARGE_GAUCHE = 11;
 
     // 1 => Ciel; 2 => Sol; 3 => Herbe; 4 => blanc (nuage) 5 => arbre 6 => Champignon 7 => rocher 8 => roche
     private int[][] terrain = {
@@ -47,8 +44,8 @@ public class Terrain {
     };
 
     public Terrain() {
-        this.height = this.hauteurTerrain() * TAILLE_TUILE;
-        this.width = this.largeurTerrain() * TAILLE_TUILE;
+        this.height = this.hauteurTerrain() * Constante.TAILLE_TUILE;
+        this.width = this.largeurTerrain() * Constante.TAILLE_TUILE;
     }
 
     public void setTuileCiel(int c, int l) {
@@ -77,8 +74,8 @@ public class Terrain {
     }
 
     public int codeTuilePixel(int x, int y) {
-        int l = y / TAILLE_TUILE;
-        int c = x / TAILLE_TUILE;
+        int l = y / Constante.TAILLE_TUILE;
+        int c = x / Constante.TAILLE_TUILE;
         if (l < 0 || l >= terrain.length || c < 0 || c >= terrain[0].length) {
             return -1; // Hors du terrain
         }
@@ -86,15 +83,15 @@ public class Terrain {
     }
 
     public int getCaseX(int xPixel) {
-        return xPixel / TAILLE_TUILE;
+        return xPixel / Constante.TAILLE_TUILE;
     }
 
     public int getCaseY(int yPixel) {
-        return yPixel / TAILLE_TUILE;
+        return yPixel / Constante.TAILLE_TUILE;
     }
 
     public boolean dansTerrain(int x, int y) {
-        return (x + MARGE_DROITE >= 0 && x < width - MARGE_GAUCHE && y >= 0 && y < height);
+        return (x >= 0 && x < width && y >= 0 && y < height);
     }
 
     // Détermine si la case (en pixels) est "traversable" (ciel, nuage)
@@ -111,57 +108,16 @@ public class Terrain {
     }
 
     //TODO mettre dans Personnage (ou Trunks) tout ce quiconcerne Trunks = sa position, sa largeur, sa hauteur
-    public boolean collisionBas(int x, int y) {
-        int yTest = y + HAUTEUR_PERSO;
-        for (int testX = x + MARGE_GAUCHE; testX < x + LARGEUR_PERSO - MARGE_DROITE; testX++) {
-            if (!estTraversable(testX, yTest)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public boolean collisionHaut(int x, int y) {
-        for (int testX = x + MARGE_GAUCHE; testX < x + (LARGEUR_PERSO - MARGE_DROITE); testX++) {
-            if (!estTraversable(testX, y - 1)) { // y - 1 pour tester le pixel juste au-dessus
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public boolean collisionDroite(int x, int y) {
-        int xTest = x + LARGEUR_PERSO - MARGE_DROITE;
-        for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
-            if (!estTraversable(xTest, testY)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public boolean collisionGauche(int x, int y) {
-        int xTest = x + MARGE_DROITE;
-        for (int testY = y; testY < y + HAUTEUR_PERSO; testY++) {
-            if (!estTraversable(xTest, testY)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public int gravite(int x, int y) {
-        if (!collisionBas(x, y)) {
-            y += 2;
-        }
-        return y;
-    }
 
     /// TODO a modifier , changer le nom de la fonction (range perso) faire une range autour du perso
     public boolean rangeCreuser(int xTrunks, int yTrunks, double xSouris, double ySouris) {
         boolean peutCreuser = false;
-        if(xTrunks-TAILLE_TUILE<= xSouris && xSouris<=xTrunks+2*TAILLE_TUILE
-        && yTrunks-TAILLE_TUILE<= ySouris && ySouris<=yTrunks+2*TAILLE_TUILE && !(xTrunks<=xSouris && xSouris<=xTrunks+TAILLE_TUILE && yTrunks<=ySouris && ySouris<=yTrunks+TAILLE_TUILE)) {
+        if(xTrunks- Constante.TAILLE_TUILE<= xSouris && xSouris<=xTrunks+2* Constante.TAILLE_TUILE
+        && yTrunks- Constante.TAILLE_TUILE<= ySouris && ySouris<=yTrunks+2* Constante.TAILLE_TUILE && !(xTrunks<=xSouris && xSouris<=xTrunks+ Constante.TAILLE_TUILE && yTrunks<=ySouris && ySouris<=yTrunks+ Constante.TAILLE_TUILE)) {
             peutCreuser = true;
         }
 
@@ -169,12 +125,12 @@ public class Terrain {
     }
 
     public void casserBloc(double xSouris, double ySouris) {
-        setTuileCiel((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE));
+        setTuileCiel((int) (xSouris / Constante.TAILLE_TUILE), (int) (ySouris / Constante.TAILLE_TUILE));
         System.out.println("tuile casser");
     }
 
     public void poserBloc(double xSouris, double ySouris,int typeTuile) {
-        setTuile((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE),typeTuile);
+        setTuile((int) (xSouris / Constante.TAILLE_TUILE), (int) (ySouris / Constante.TAILLE_TUILE),typeTuile);
         System.out.println("tuile creuser");
     }
 

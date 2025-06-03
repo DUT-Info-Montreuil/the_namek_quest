@@ -1,11 +1,14 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.MainVide;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Object;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.arme.Epee;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.outils.Hache;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.outils.Pioche;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import universite_paris8.iut.fan.the_namek_quest.Constante;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.MainVide;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Epee;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Hache;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Pioche;
 
 /**
  * Classe Trunks
@@ -19,7 +22,7 @@ import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.outils.Pioche
 public class Trunks extends Personnage {
 
     // TODO remplacer par un IntegerProperty et un listener qui change l('image.
-    private char direction;
+    private IntegerProperty direction;
 
 
     private boolean enSaut = false;
@@ -29,9 +32,8 @@ public class Trunks extends Personnage {
 
     public Trunks(Environnement env) {
         super(0, 0, env);
-        this.setVitesse(3);
-        this.direction = 'h';// h => ne bouge pas
-
+        this.setVitesse(5);
+        this.direction = new SimpleIntegerProperty(0); // 0 => ne bouge pas
         this.inventaire = new Inventaire();
         this.objectEquipe = new MainVide();
         this.inventaire.addObject(this.objectEquipe);
@@ -48,8 +50,8 @@ public class Trunks extends Personnage {
     public void setObjectEquipe(Object object){
         this.objectEquipe = object;
     }
-    public void setDirection(char direction) {
-        this.direction = direction;
+    public void setDirection(int direction) {
+        this.direction.setValue(direction);
     }
 
     public void seDeplacer() {
@@ -58,24 +60,26 @@ public class Trunks extends Personnage {
         Terrain terrain = this.getEnv().getTerrain();
         int x = this.getX();
         int y = this.getY();
-
-        if (this.direction == 'd') {
+ 
+        if (this.direction.getValue() == 1) {
             int newX = x + vitesse;
-            if (terrain.dansTerrain(newX, y) && !terrain.collisionDroite(newX, y)) {
+            if (terrain.dansTerrain(newX+Constante.MARGE_DROITE, y) && !getEnv().collisionDroite(newX, y)) {
                 setX(newX);
             }
-            setDirection('h');
-        } else if (this.direction == 'g') {
+
+//            setDirection(0);
+        } else if (this.direction.getValue() == -1) {
             int newX = x - vitesse;
-            if (terrain.dansTerrain(newX, y) && !terrain.collisionGauche(newX, y)) {
+            if (terrain.dansTerrain(newX, y) && !this.getEnv().collisionGauche(newX , y)) {
                 setX(newX);
             }
-            setDirection('h');
+//            setDirection(0);
         }
+
     }
 
    public void sauter() {
-       if (!enSaut && this.getEnv().getTerrain().collisionBas(getX(), getY()) && !this.getEnv().getTerrain().collisionHaut(getX(), getY())) {
+       if (!enSaut && this.getEnv().collisionBas(getX(), getY()) && !this.getEnv().collisionHaut(getX(), getY())) {
            enSaut = true;
            hauteurMax = 33;
        }
@@ -83,9 +87,9 @@ public class Trunks extends Personnage {
 
     public void gererSaut() {
         if (enSaut) {
-            int newY = getY() - 7;
+            int newY = getY() - 8;
 
-            if (newY < 0 || !this.getEnv().getTerrain().collisionBas(getX(), newY)) {
+            if (newY < 0 || !this.getEnv().collisionBas(getX(), newY)) {
                 setY(newY);
                 hauteurMax -= 4;
                 if (hauteurMax <= 0) {
@@ -97,10 +101,13 @@ public class Trunks extends Personnage {
         }
     }
 
-    public char getDirection() {
-        return direction;
+    public int getDirection() {
+        return this.direction.getValue();
     }
 
+    public IntegerProperty getDirectionProperty() {
+        return this.direction;
+    }
     public boolean estEnSaut() {
         return enSaut;
     }
@@ -126,5 +133,12 @@ public class Trunks extends Personnage {
             }
         }
         this.objectEquipe.toString();
+    }
+
+    public int gravite(int x, int y) {
+        if (!getEnv().collisionBas(x, y)) {
+            y += 2;
+        }
+        return y;
     }
 }

@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.modele.Inventaire;
+package universite_paris8.iut.fan.the_namek_quest.modele.inventaire;
 
 /**
  * Classe Inventaire
@@ -9,8 +9,8 @@ package universite_paris8.iut.fan.the_namek_quest.modele.Inventaire;
 
  import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.ressource.Materieau;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.ressource.Terre;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Terre;
 
 public class Inventaire {
     private ObservableList<Object> inventaire;

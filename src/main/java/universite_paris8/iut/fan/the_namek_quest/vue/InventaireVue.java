@@ -13,9 +13,9 @@ package universite_paris8.iut.fan.the_namek_quest.vue;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Object;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.ressource.Materieau;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
 
 import javafx.scene.control.Label;

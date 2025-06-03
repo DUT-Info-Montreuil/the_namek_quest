@@ -1,8 +1,8 @@
-package universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.ressource;
+package universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Object;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
 
 public abstract class Materieau extends Object {
     private IntegerProperty Quantite ;

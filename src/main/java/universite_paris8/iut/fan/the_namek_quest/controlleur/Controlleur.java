@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.controller;
+package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
 /**
  * Classe Controller
@@ -24,18 +24,15 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.vue.GameOver;
-import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
-import universite_paris8.iut.fan.the_namek_quest.vue.MenuDemarrage;
-import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
-import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
+import universite_paris8.iut.fan.the_namek_quest.vue.*;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controlleur implements Initializable {
 
     private Environnement environnement;
     private Terrain terrain;
@@ -50,7 +47,7 @@ public class Controller implements Initializable {
     private Souris souris;
 
 
-    private MoletteController moletteController;
+    private MoletteControlleur moletteController;
 
 
     @FXML private TilePane tilePane;
@@ -62,6 +59,7 @@ public class Controller implements Initializable {
 
 
     private MenuDemarrage menuDemarrage;
+    private PointVieVue pointVieVue;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,17 +80,17 @@ public class Controller implements Initializable {
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
         this.trunksVue = new TrunksVue(pane,trunks);
+        this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
         this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue);
-        this.clavier.setupKeyHandlers(pane);
-        this.moletteController = new MoletteController(trunks,inventaireVue);
+        this.moletteController = new MoletteControlleur(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
+        this.pane.addEventHandler(KeyEvent.KEY_RELEASED,clavier);
+
         pane.setFocusTraversable(true); // autorise le focus
-        clavier.setupKeyHandlers(pane);
-        pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
 
@@ -102,21 +100,6 @@ public class Controller implements Initializable {
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
-
-            //TODO : à déplacer dans l'écouteur de clavier
-            if(clavier.isQPressed()) {
-                clavier.handleLeft();
-            }
-            if(clavier.isDPressed()) {
-                clavier.handleRight();
-            }
-            if(clavier.isSpacePressed()){
-                clavier.handleUp();
-            }
-            if(clavier.isVPressed()){
-                clavier.handleV();
-            }
-
 
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
@@ -135,7 +118,7 @@ public class Controller implements Initializable {
     }
 
     public void afficherGameOver() {
-        gameLoop.stop();
+       gameLoop.stop();
         gameOver = new GameOver();
         gameOver.afficherGameOver(pane);
     }

@@ -1,5 +1,7 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
+import universite_paris8.iut.fan.the_namek_quest.Constante;
+
 /**
  * Classe Environnement
  * --------------------
@@ -9,6 +11,7 @@ package universite_paris8.iut.fan.the_namek_quest.modele;
  */
 
 public class Environnement {
+
     private Terrain terrain;
     private Trunks trunks;
 
@@ -34,14 +37,55 @@ public class Environnement {
 
 
     public void update() {
-        trunks.seDeplacer();
 
+        trunks.seDeplacer();
         if (!trunks.estEnSaut()) {
-            int nouvelleY = terrain.gravite(trunks.getX(), trunks.getY());
+            int nouvelleY = trunks.gravite(trunks.getX(), trunks.getY());
             trunks.setY(nouvelleY);
         } else {
             trunks.gererSaut();
         }
 
     }
+
+    public boolean collisionBas(int x, int y) {
+        int yTest = y + Constante.HAUTEUR_PERSO;
+        for (int testX = x + Constante.MARGE_GAUCHE; testX < x + Constante.LARGEUR_PERSO - Constante.MARGE_DROITE; testX++) {
+            if (!getTerrain().estTraversable(testX, yTest)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean collisionHaut(int x, int y) {
+        for (int testX = x + Constante.MARGE_GAUCHE; testX < x + (Constante.LARGEUR_PERSO - Constante.MARGE_DROITE); testX++) {
+            if (!getTerrain().estTraversable(testX, y - 1)) { // y - 1 pour tester le pixel juste au-dessus
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean collisionDroite(int x, int y) {
+        int xTest = x + Constante.LARGEUR_PERSO - Constante.MARGE_DROITE;
+        for (int testY = y; testY < y + Constante.HAUTEUR_PERSO; testY++) {
+            if (!getTerrain().estTraversable(xTest, testY)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean collisionGauche(int x, int y) {
+        int xTest = x + Constante.MARGE_DROITE;
+        for (int testY = y; testY < y + Constante.HAUTEUR_PERSO; testY++) {
+            if (!getTerrain().estTraversable(xTest, testY)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

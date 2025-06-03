@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.controller;
+package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
 /**
  * Classe InventaireListener
@@ -9,9 +9,9 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
  **/
 
 
- import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 
 public class InventaireListener implements ListChangeListener<Object>{

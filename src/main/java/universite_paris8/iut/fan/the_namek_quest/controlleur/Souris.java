@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.controller;
+package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
 
 /**
@@ -14,17 +14,17 @@ package universite_paris8.iut.fan.the_namek_quest.controller;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
-import universite_paris8.iut.fan.the_namek_quest.modele.Inventaire.ressource.Materieau;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
 
 public class Souris implements EventHandler<MouseEvent> {
 
-    private final Controller controller;
+    private final Controlleur controlleur;
     private Environnement environnement;
     private TerrainVue terrainVue;
 
-    public Souris(Controller controller, Environnement environnement, TerrainVue terrainVue) {
-        this.controller = controller;
+    public Souris(Controlleur controlleur, Environnement environnement, TerrainVue terrainVue) {
+        this.controlleur = controlleur;
         this.environnement = environnement;
         this.terrainVue = terrainVue;
     }
@@ -36,7 +36,7 @@ public class Souris implements EventHandler<MouseEvent> {
             if (mouseEvent.getX() > 330 && mouseEvent.getX() < 530
                     && mouseEvent.getY() > 420 && mouseEvent.getY() < 480) {
                 System.out.println("clic start");
-                controller.demarrerJeu();
+                controlleur.demarrerJeu();
             }
 
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())) {

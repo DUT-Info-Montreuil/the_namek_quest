@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.controller;
+package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.ScrollEvent;
@@ -15,12 +15,12 @@ import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
  * Si l'inventaire est ouvert, il est rafraîchi pour refléter le changement.
  */
 
-public class MoletteController implements EventHandler<ScrollEvent> {
+public class MoletteControlleur implements EventHandler<ScrollEvent> {
     private Trunks trunks;
     private InventaireVue inventaireVue;
 
 
-    public MoletteController(Trunks trunks,InventaireVue inventaireVue){
+    public MoletteControlleur(Trunks trunks, InventaireVue inventaireVue){
         this.trunks = trunks;
         this.inventaireVue = inventaireVue;
     }

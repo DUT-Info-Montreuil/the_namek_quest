@@ -18,16 +18,16 @@ import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
 
 public class TrunksVue {
     private ImageView persoImage;
-    @FXML private Pane pane;
+    private Pane pane;
     private Trunks trunks;
-    private ProgressBar barreDeVie;
+
 
     public TrunksVue(Pane pane,Trunks trunks) {
         this.trunks = trunks;
         this.pane = pane;
         this.persoImage = new ImageView();
         this.afficherTrunks();
-        this.afficherPv();
+
     }
 
     public void afficherTrunks() {
@@ -87,17 +87,6 @@ public class TrunksVue {
                 break;
         }
     }
-
-    public void afficherPv(){
-        barreDeVie = new ProgressBar(1);
-        barreDeVie.setStyle("-fx-accent: red;");
-        barreDeVie.setPrefWidth(150);
-        barreDeVie.setProgress(0.50);
-        barreDeVie.progressProperty().bind(trunks.getPvProp().divide(100.0));
-
-        pane.getChildren().add(barreDeVie);
-    }
-
 
     public void changerImagePiocheDroite(){
         if(this.trunks.getObjectEquipe().getId() == 1){
