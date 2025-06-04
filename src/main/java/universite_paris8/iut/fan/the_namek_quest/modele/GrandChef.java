@@ -45,6 +45,6 @@ public class GrandChef  extends Personnage {
     }
 
     public boolean trunksAProximite(){
-        return trunks.getX() >= this.getX()-96;
+        return trunks.getX() >= this.getX()-96 && trunks.getX() <= this.getX()+32;
     }
 }

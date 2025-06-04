@@ -16,6 +16,8 @@ public class GrandChefVue {
     @FXML
     private Pane pane;
     private GrandChef grandChef;
+    private Label labelMessage = null;
+
 
     public GrandChefVue(Pane pane, GrandChef grandChef) {
         this.grandChef = grandChef;
@@ -32,38 +34,33 @@ public class GrandChefVue {
         pane.getChildren().add(persoImage);
     }
 
-    /*public void afficherMessageAcceuil() {
-        if(grandChef.trunksAProximite()){
-            Label labelMessage = new Label();
-            labelMessage.setFont(new Font("Arial",12));
-            labelMessage.setText("Bonjour Trunks, \n avec moi tu peux amélioré ton épée il te suffit de cliquer sur 'e' et d'avoir de la roche (x3) et des boules d'énergie (x2)!");
-            labelMessage.setBackground();
-
-        }
-
-    }*/
-
     public void afficherMessageAcceuil() {
-
         if(grandChef.trunksAProximite()) {
-            Label labelMessage = new Label("Bonjour Trunks,\navec moi tu peux améliorer ton épée.\nAppuie sur 'e' avec 3 roches et 2 boules d'énergie !");
-            labelMessage.setFont(new Font("Arial", 12));
-            labelMessage.setPrefSize(160, 96);
-            labelMessage.setWrapText(true); // retour à la ligne automatique
-            labelMessage.setStyle(
-                    "-fx-background-color: white;" +
-                            "-fx-border-color: black;" +
-                            "-fx-background-radius: 10;" +
-                            "-fx-border-radius: 10;"
-            );
+            if (labelMessage == null) {
+                labelMessage = new Label("Bonjour Trunks,\navec moi tu peux améliorer ton épée.\nAppuie sur 'e' avec ton épée en main et d'avoir 3 roches et 2 boules d'énergie !");
+                labelMessage.setFont(new Font("Arial", 12));
+                labelMessage.setPrefSize(180, 105);
+                labelMessage.setWrapText(true);
+                labelMessage.setStyle(
+                        "-fx-background-color: white;" +
+                                "-fx-border-color: black;" +
+                                "-fx-background-radius: 10;" +
+                                "-fx-border-radius: 10;"
+                );
 
-            // Position de la bulle (à adapter selon ta scène)
-            labelMessage.setLayoutX(140);
-            labelMessage.setLayoutY(416);
-
-            pane.getChildren().add(labelMessage);
+                labelMessage.setLayoutX(grandChef.getXProp().doubleValue() - 155);
+                labelMessage.setLayoutY(grandChef.getYProp().doubleValue() - 106);
+                pane.getChildren().add(labelMessage);
+            }
+        } else {
+            if (labelMessage != null) {
+                System.out.println("pas de grand chef");
+                pane.getChildren().remove(labelMessage);
+                labelMessage = null;
+            }
         }
     }
+
 
 
 }

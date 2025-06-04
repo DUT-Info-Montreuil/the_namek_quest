@@ -20,7 +20,7 @@ public class Environnement {
     public Environnement() {
         this.terrain = new Terrain();
         this.trunks= new Trunks(this);
-        this.grandChef = new GrandChef(300,513,this, this.trunks);
+        this.grandChef = new GrandChef(450,513,this, this.trunks);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -92,6 +92,5 @@ public class Environnement {
         }
         return false;
     }
-
 
 }
