@@ -8,9 +8,6 @@ import javafx.scene.text.Font;
 import universite_paris8.iut.fan.the_namek_quest.modele.GrandChef;
 import javafx.scene.image.Image;
 
-
-import java.awt.*;
-
 public class GrandChefVue {
     private ImageView persoImage;
     @FXML
@@ -27,7 +24,7 @@ public class GrandChefVue {
     }
 
     public void afficherGrandChef() {
-        Image imageGrandChef = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/grandchef.png").toExternalForm());
+        Image imageGrandChef = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/PNJ/grandchef.png").toExternalForm());
         persoImage.setImage(imageGrandChef);
         persoImage.translateXProperty().bind(grandChef.getXProp());
         persoImage.translateYProperty().bind(grandChef.getYProp());

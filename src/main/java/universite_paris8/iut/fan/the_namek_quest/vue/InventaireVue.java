@@ -38,7 +38,7 @@ public class InventaireVue {
         this.paneInventaire= paneInventaire;
         this.ouvert = false;
         this.trunks=trunks;
-        this.capsuleVue = new ImageView(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/inventaire.png") ));
+        this.capsuleVue = new ImageView(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/inventaire.png") ));
 
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
@@ -62,12 +62,12 @@ public class InventaireVue {
     public void afficherContenuInventaire(){
 
 
-        Image pioche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/pioche.png") );
-        Image hache = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/hache.png") );
-        Image epee = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/Epee.png") );
-        Image caseInventaire = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/caseInventaire.png") );
-        Image Equipé = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/CaseObjetEquipe.png") );
-        Image terre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png") );
+        Image pioche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/pioche.png") );
+        Image hache = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/hache.png") );
+        Image epee = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/epee.png") );
+        Image caseInventaire = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/caseInventaire.png") );
+        Image Equipé = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/CaseObjetEquipe.png") );
+        Image terre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/herbe.png") );
         ImageView caseInventaireVue;
         ImageView EquipéVue;
 
