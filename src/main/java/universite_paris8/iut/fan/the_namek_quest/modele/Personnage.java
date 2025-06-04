@@ -9,9 +9,11 @@ package universite_paris8.iut.fan.the_namek_quest.modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
 
 public abstract class Personnage {
 
+    private IntegerProperty direction;
     private IntegerProperty xProp;
     private IntegerProperty yProp;
     private int vitesse;
@@ -19,7 +21,7 @@ public abstract class Personnage {
     private IntegerProperty pv;
 
     public Personnage( int x, int y, Environnement env) {
-
+        this.direction = new SimpleIntegerProperty(0);
         this.xProp = new SimpleIntegerProperty(x);
         this.yProp = new SimpleIntegerProperty(y);
         this.vitesse = 1;
@@ -56,6 +58,13 @@ public abstract class Personnage {
     public int getPv(){
         return this.pv.getValue();
     }
+    public IntegerProperty getDirectionProp(){
+        return this.direction;
+    }
+    public int getDirection(){
+        return this.direction.getValue();
+    }
+
 
     //setter
     public void setX(int x) {
@@ -69,6 +78,9 @@ public abstract class Personnage {
     }
     public void setPv(int pv) {
         this.pv.setValue(pv);
+    }
+    public void setDirection(int direction) {
+        this.direction.setValue(direction);
     }
 
     // Deplacement

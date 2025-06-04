@@ -14,10 +14,12 @@ public class Environnement {
 
     private Terrain terrain;
     private Trunks trunks;
+    private PersonnageEnnemis personnageEnnemis;
 
     public Environnement() {
         this.terrain = new Terrain();
         this.trunks= new Trunks(this);
+        this.personnageEnnemis = new PersonnageEnnemis(this);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -34,18 +36,22 @@ public class Environnement {
     public Trunks getTrunks() {
         return trunks;
     }
-
+    public PersonnageEnnemis getPersonnageEnnemis() {
+        return this.personnageEnnemis;
+    }
 
     public void update() {
 
         trunks.seDeplacer();
+        personnageEnnemis.deplacement();
         if (!trunks.estEnSaut()) {
-            int nouvelleY = trunks.gravite(trunks.getX(), trunks.getY());
+            int nouvelleY = this.gravite(trunks.getX(), trunks.getY());
             trunks.setY(nouvelleY);
         } else {
             trunks.gererSaut();
         }
-
+        int nouvelleYEnnemis = this.gravite(personnageEnnemis.getX(), personnageEnnemis.getY());
+        personnageEnnemis.setY(nouvelleYEnnemis);
     }
 
     public boolean collisionBas(int x, int y) {
@@ -85,6 +91,13 @@ public class Environnement {
             }
         }
         return false;
+    }
+
+    public int gravite(int x, int y) {
+        if (!this.collisionBas(x, y)) {
+            y += 2;
+        }
+        return y;
     }
 
 

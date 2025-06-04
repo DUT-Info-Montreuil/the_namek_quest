@@ -24,6 +24,7 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.PersonnageEnnemis;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
@@ -35,10 +36,13 @@ import java.util.ResourceBundle;
 public class Controlleur implements Initializable {
 
     private Environnement environnement;
-    private Terrain terrain;
+
     private Trunks trunks;
     private TrunksVue trunksVue;
+    private Terrain terrain;
     private TerrainVue terrainVue;
+    private PersonnageEnnemis personnageEnnemis;
+    private PersonnageEnnemisVue personnageEnnemisVue;
     private Timeline gameLoop;
     private InventaireVue inventaireVue;
     private Inventaire inventaire;
@@ -69,6 +73,7 @@ public class Controlleur implements Initializable {
 
         this.environnement = new Environnement();
         this.trunks = environnement.getTrunks();
+        this.personnageEnnemis = environnement.getPersonnageEnnemis();
 
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
@@ -80,6 +85,7 @@ public class Controlleur implements Initializable {
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
         this.trunksVue = new TrunksVue(pane,trunks);
+        this.personnageEnnemisVue = new PersonnageEnnemisVue(pane,this.personnageEnnemis);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
