@@ -88,12 +88,12 @@ public class Controlleur implements Initializable {
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue, grandChef);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         this.pane.addEventHandler(KeyEvent.KEY_RELEASED,clavier);
-
+        this.grandChefVue.afficherMessageAcceuil();
         pane.setFocusTraversable(true); // autorise le focus
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
@@ -104,7 +104,7 @@ public class Controlleur implements Initializable {
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
-
+            this.grandChefVue.afficherMessageAcceuil();
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 

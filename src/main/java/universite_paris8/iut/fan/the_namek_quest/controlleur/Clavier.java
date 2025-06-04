@@ -34,11 +34,12 @@ public class Clavier implements EventHandler<KeyEvent> {
     private final BooleanProperty vPressed = new SimpleBooleanProperty();
     private final BooleanProperty ePressed = new SimpleBooleanProperty();
 
-    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, TerrainVue terrainVue) {
+    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, TerrainVue terrainVue, GrandChef grandChef) {
         this.trunks = trunks;
         this.trunksVue = trunksVue;
         this.inventaireVue = inventaireVue;
         this.terrainVue = terrainVue;
+        this.grandChef = grandChef;
     }
 
     public void setupKeyHandlers(Pane pane) {

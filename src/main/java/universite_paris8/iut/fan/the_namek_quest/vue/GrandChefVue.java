@@ -22,7 +22,6 @@ public class GrandChefVue {
         this.pane = pane;
         this.persoImage = new ImageView();
         this.afficherGrandChef();
-        afficherMessageAcceuil();
     }
 
     public void afficherGrandChef() {
@@ -45,6 +44,7 @@ public class GrandChefVue {
     }*/
 
     public void afficherMessageAcceuil() {
+
         if(grandChef.trunksAProximite()) {
             Label labelMessage = new Label("Bonjour Trunks,\navec moi tu peux améliorer ton épée.\nAppuie sur 'e' avec 3 roches et 2 boules d'énergie !");
             labelMessage.setFont(new Font("Arial", 12));
@@ -58,8 +58,8 @@ public class GrandChefVue {
             );
 
             // Position de la bulle (à adapter selon ta scène)
-            labelMessage.setLayoutX(100);
-            labelMessage.setLayoutY(100);
+            labelMessage.setLayoutX(140);
+            labelMessage.setLayoutY(416);
 
             pane.getChildren().add(labelMessage);
         }

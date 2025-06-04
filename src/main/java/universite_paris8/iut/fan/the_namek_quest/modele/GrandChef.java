@@ -28,7 +28,9 @@ public class GrandChef  extends Personnage {
     public void seDeplacer(){}
 
     public void ameliorerEpee(){
+        System.out.println("demande d'amelioration de l'epee du grand chef");
         if(trunks.getX() == this.getX()-1 && trunks.getY() == this.getY()){
+
             Materieau rocheNamek = (Materieau) inventaire.getListObjects().get(inventaire.getIndexObject(new RocheDeNamek()));
             Materieau energie = (Materieau) inventaire.getListObjects().get(inventaire.getIndexObject(new Energie()));
             if(inventaire.ressourceDansInventaire(7) && inventaire.ressourceDansInventaire(4) ){
@@ -43,6 +45,6 @@ public class GrandChef  extends Personnage {
     }
 
     public boolean trunksAProximite(){
-        return trunks.getX() == this.getX()-64 && trunks.getY() == this.getY();
+        return trunks.getX() >= this.getX()-96;
     }
 }
