@@ -32,7 +32,7 @@ public class Trunks extends Personnage {
 
     public Trunks(Environnement env) {
         super(0, 0, env);
-        this.setVitesse(5);
+        this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0); // 0 => ne bouge pas
         this.inventaire = new Inventaire();
         this.objectEquipe = new MainVide();
@@ -67,13 +67,11 @@ public class Trunks extends Personnage {
                 setX(newX);
             }
 
-//            setDirection(0);
         } else if (this.direction.getValue() == -1) {
             int newX = x - vitesse;
             if (terrain.dansTerrain(newX, y) && !this.getEnv().collisionGauche(newX , y)) {
                 setX(newX);
             }
-//            setDirection(0);
         }
 
     }

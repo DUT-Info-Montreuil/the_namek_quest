@@ -14,10 +14,13 @@ public class Environnement {
 
     private Terrain terrain;
     private Trunks trunks;
+    private GrandChef grandChef;
+
 
     public Environnement() {
         this.terrain = new Terrain();
         this.trunks= new Trunks(this);
+        this.grandChef = new GrandChef(300,513,this, this.trunks);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -35,6 +38,9 @@ public class Environnement {
         return trunks;
     }
 
+    public GrandChef getGrandChef() {
+        return grandChef;
+    }
 
     public void update() {
 

@@ -14,6 +14,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import universite_paris8.iut.fan.the_namek_quest.modele.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
@@ -26,11 +27,12 @@ public class Clavier implements EventHandler<KeyEvent> {
     private TrunksVue trunksVue;
     private InventaireVue inventaireVue;
     private TerrainVue  terrainVue;
+    private GrandChef grandChef;
     private final BooleanProperty spacePressed = new SimpleBooleanProperty();
     private BooleanProperty qPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
     private final BooleanProperty vPressed = new SimpleBooleanProperty();
-
+    private final BooleanProperty ePressed = new SimpleBooleanProperty();
 
     public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, TerrainVue terrainVue) {
         this.trunks = trunks;
@@ -54,7 +56,11 @@ public class Clavier implements EventHandler<KeyEvent> {
                     break;
                 case V :
                     vPressed.set(true);
-                    break;            }
+                    break;
+                case E:
+                    ePressed.set(true);
+                    break;
+            }
         });
 
         pane.setOnKeyReleased(event -> {
@@ -64,6 +70,7 @@ public class Clavier implements EventHandler<KeyEvent> {
                 case D -> dPressed.set(false);
                 case RIGHT -> dPressed.set(false);
                 case V ->  vPressed.set(false);
+                case E ->  ePressed.set(false);
             }
         });
 
@@ -96,6 +103,9 @@ public class Clavier implements EventHandler<KeyEvent> {
         trunks.sauter();
 
     }
+    public void handleE() {
+        grandChef.ameliorerEpee();
+    }
 
     public void handleV() {
         trunks.decrementerPv();
@@ -119,6 +129,9 @@ public class Clavier implements EventHandler<KeyEvent> {
                     break;
                 case V:
                     handleV();
+                    break;
+                case E:
+                    handleE();
                     break;
             }
 

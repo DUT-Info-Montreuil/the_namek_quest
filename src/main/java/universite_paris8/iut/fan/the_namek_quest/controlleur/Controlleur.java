@@ -24,6 +24,7 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
@@ -45,7 +46,8 @@ public class Controlleur implements Initializable {
     private InventaireListener inventaireListener;
     private Clavier clavier;
     private Souris souris;
-
+    private GrandChefVue grandChefVue;
+    private GrandChef grandChef;
 
     private MoletteControlleur moletteController;
 
@@ -69,6 +71,7 @@ public class Controlleur implements Initializable {
 
         this.environnement = new Environnement();
         this.trunks = environnement.getTrunks();
+        this.grandChef = environnement.getGrandChef();
 
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
@@ -80,6 +83,7 @@ public class Controlleur implements Initializable {
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
         this.trunksVue = new TrunksVue(pane,trunks);
+        this.grandChefVue = new GrandChefVue(pane,grandChef);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);

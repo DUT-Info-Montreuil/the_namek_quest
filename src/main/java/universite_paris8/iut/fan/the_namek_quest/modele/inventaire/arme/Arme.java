@@ -14,6 +14,12 @@ public class Arme extends Object {
         return this.degat;
     }
 
+    public void incrementerDegat(int degat){
+        setDegat(this.degat+degat);
+    }
 
+    public void setDegat(int degat){
+        this.degat = degat;
+    }
 
 }
