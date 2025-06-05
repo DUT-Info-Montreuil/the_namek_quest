@@ -9,6 +9,7 @@ package universite_paris8.iut.fan.the_namek_quest.vue;
  **/
 
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -20,14 +21,17 @@ public class TrunksVue {
     private ImageView persoImage;
     private Pane pane;
     private Trunks trunks;
+    private AnimationTimer animationTimer;
+    private int frameCounter = 0;
+    private boolean enMarche = false;
 
 
     public TrunksVue(Pane pane,Trunks trunks) {
         this.trunks = trunks;
         this.pane = pane;
         this.persoImage = new ImageView();
-        this.afficherTrunks();
-
+        //this.afficherTrunks();
+        this.lancerAnimation();
     }
 
     public void afficherTrunks() {
@@ -134,6 +138,65 @@ public class TrunksVue {
         }
     }
 
+    public void animerMarche() {
+        frameCounter = (frameCounter + 1); // Car 2 frames pour image 1, 2 frames pour image 2
+
+        if (trunks.getDirection() == 1) {
+            if (frameCounter < 10) {
+                persoImage.setImage(new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche1.png").toExternalForm()));
+            } else {
+                persoImage.setImage(new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche.png").toExternalForm()));
+            }
+        } else if (trunks.getDirection() == -1) {
+            if (frameCounter < 10) {
+                persoImage.setImage(new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche-gauche.png").toExternalForm()));
+            } else {
+                persoImage.setImage(new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche-gauche1.png").toExternalForm()));
+            }
+        }
+    }
+
+
+    public void lancerAnimation() {
+        if (animationTimer == null) {
+            animationTimer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    if (enMarche) {
+                        frameCounter = (frameCounter + 1) % 4; // 2 images : frame 0-1 = image1, 2-3 = image2
+                        mettreAJourImageMarche();
+                    }
+                }
+            };
+            animationTimer.start();
+        }
+    }
+
+    private void mettreAJourImageMarche() {
+        String cheminImage = "";
+        int id = trunks.getObjectEquipe().getId();
+
+        if (trunks.getDirection() == 1) {
+            if (frameCounter < 2) {
+                cheminImage = "/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche1.png";
+            } else {
+                cheminImage = "/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche.png";
+            }
+        } else if (trunks.getDirection() == -1) {
+            if (frameCounter < 2) {
+                cheminImage = "/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche-gauche.png";
+            } else {
+                cheminImage = "/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-marche-gauche1.png";
+            }
+        } else {
+            return;
+        }
+
+        // Gère les variantes avec épée/pioche/hache si besoin ici
+
+        Image img = new Image(getClass().getResource(cheminImage).toExternalForm());
+        persoImage.setImage(img);
+    }
 
 
 }

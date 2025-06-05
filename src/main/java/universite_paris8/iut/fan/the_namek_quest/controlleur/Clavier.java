@@ -90,14 +90,13 @@ public class Clavier implements EventHandler<KeyEvent> {
 
     public void handleLeft() {
         trunks.setDirection(-1);
-       trunksVue.changerImageGauche();
+        trunksVue.enMarche = true;
 
     }
 
     public void handleRight() {
         trunks.setDirection(1);
-       trunksVue.changerImageDroite();
-
+        trunksVue.enMarche = true;
     }
 
     public void handleUp() {
