@@ -105,6 +105,7 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
             this.grandChefVue.afficherMessageAcceuil();
+            trunksVue.modifImage();
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 

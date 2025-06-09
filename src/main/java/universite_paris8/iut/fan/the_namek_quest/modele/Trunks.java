@@ -21,7 +21,6 @@ import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Pioche
 
 public class Trunks extends Personnage {
 
-    // TODO remplacer par un IntegerProperty et un listener qui change l('image.
     private IntegerProperty direction;
 
 
