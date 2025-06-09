@@ -1,5 +1,7 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
+import universite_paris8.iut.fan.the_namek_quest.Algo.BFS;
+import universite_paris8.iut.fan.the_namek_quest.Algo.Position;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
 
 /**
@@ -15,11 +17,13 @@ public class Environnement {
     private Terrain terrain;
     private Trunks trunks;
     private PersonnageEnnemis personnageEnnemis;
+    private BFS bfs;
 
     public Environnement() {
         this.terrain = new Terrain();
         this.trunks= new Trunks(this);
         this.personnageEnnemis = new PersonnageEnnemis(this);
+        this.bfs = new BFS(this);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -41,17 +45,29 @@ public class Environnement {
     }
 
     public void update() {
-
+        bfs = new BFS(this);
         trunks.seDeplacer();
-        personnageEnnemis.deplacement();
+
+        int nouvelleYEnnemis = this.gravite(personnageEnnemis.getX(), personnageEnnemis.getY());
+        personnageEnnemis.setY(nouvelleYEnnemis);
+
+        Position  ennemiPos = new Position(personnageEnnemis.getX() / Constante.TAILLE_TUILE, personnageEnnemis.getY() / Constante.TAILLE_TUILE);
+        Position cible = bfs.getNextMove(ennemiPos);
+        //System.out.println(cible.toString());
+        if (cible != null) {
+            //System.out.println("rentre ici");
+            personnageEnnemis.deplacement(cible.getX(), 0);
+        }
+
+
         if (!trunks.estEnSaut()) {
             int nouvelleY = this.gravite(trunks.getX(), trunks.getY());
             trunks.setY(nouvelleY);
         } else {
             trunks.gererSaut();
         }
-        int nouvelleYEnnemis = this.gravite(personnageEnnemis.getX(), personnageEnnemis.getY());
-        personnageEnnemis.setY(nouvelleYEnnemis);
+
+
     }
 
     public boolean collisionBas(int x, int y) {

@@ -11,7 +11,7 @@ public class PersonnageEnnemis extends Personnage{
     }
 
 
-    public int detecteTrunks(int xTrunks, int yTrunks) {
+    /*public int detecteTrunks(int xTrunks, int yTrunks) {
 
         int directionTrunks = 0;
         System.out.println("distance a gauche"+ (this.getX()-3*32));
@@ -53,7 +53,16 @@ public class PersonnageEnnemis extends Personnage{
                 }
             }
 
+        }*/
+
+        public void deplacement(int x, int y) {
+            if (getEnv().getTerrain().dansTerrainModel(x, y)) {
+                this.setX((x * Constante.TAILLE_TUILE) + getVitesse());
+                //this.setY((y * Constante.TAILLE_TUILE) + getVitesse());
+            }
         }
+
+
 
     }
 

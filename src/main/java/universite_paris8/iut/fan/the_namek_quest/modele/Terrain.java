@@ -93,6 +93,7 @@ public class Terrain {
     public boolean dansTerrain(int x, int y) {
         return (x >= 0 && x < width && y >= 0 && y < height);
     }
+    public boolean dansTerrainModel(int x, int y) { return (x >= 0 && x < hauteurTerrain() && y >= 0 && y < largeurTerrain());}
 
     // Détermine si la case (en pixels) est "traversable" (ciel, nuage)
     public boolean estTraversable(int xPixel, int yPixel) {
