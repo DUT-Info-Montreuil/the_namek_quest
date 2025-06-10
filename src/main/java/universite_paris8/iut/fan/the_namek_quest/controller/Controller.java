@@ -100,7 +100,7 @@ public class Controller implements Initializable {
             if(clavier.isVPressed()) clavier.handleV();
 
             // MISE À JOUR DE LA "CAMÉRA"
-            camera.update();
+            updateCamera();
 
 
             if(trunks.estMort()) {
@@ -117,6 +117,14 @@ public class Controller implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
     }
+
+    private void updateCamera(){
+        double decalageX = borderPane.getwidth( /2 - ralph.getx()- (double) ralph.getLARGEUR() / 2=
+        double decalageY = borderPane.getHeight() / 2 - ralph.getY()- (double) ralph.getHAUTEUR() / 2 + 100;
+        paneScroll.setTranslateX(decalageX);
+        paneScroll.setTranslateY(decalageY);}
+    }
+
 
     /*private void updateCamera() {
         if (!cameraCenteredInitially) {

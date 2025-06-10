@@ -24,7 +24,7 @@ public class Camera {
     }
 
     public void update() {
-        if (!cameraCenteredInitially) {
+       /* if (!cameraCenteredInitially) {
             double sceneWidth = stackPane.getWidth(); // Fenêtre visible
             double sceneHeight = stackPane.getHeight();
 
@@ -57,6 +57,7 @@ public class Camera {
         offsetY = Math.max(minOffsetY, Math.min(maxOffsetY, offsetY));
 
         group.setTranslateX(offsetX);
-        group.setTranslateY(offsetY);
+        group.setTranslateY(offsetY);*/
+
     }
 }
