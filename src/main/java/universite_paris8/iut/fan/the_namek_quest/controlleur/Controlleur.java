@@ -57,6 +57,7 @@ public class Controlleur implements Initializable {
     @FXML private Pane paneInventaire;
     @FXML private Pane borderpane;
     private GameOver gameOver;
+    private KiVue kiVue;
 
 
 
@@ -85,6 +86,7 @@ public class Controlleur implements Initializable {
         this.trunksVue = new TrunksVue(pane,trunks);
         this.grandChefVue = new GrandChefVue(pane,grandChef);
         this.pointVieVue = new PointVieVue(trunks, pane);
+        this.kiVue = new KiVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);

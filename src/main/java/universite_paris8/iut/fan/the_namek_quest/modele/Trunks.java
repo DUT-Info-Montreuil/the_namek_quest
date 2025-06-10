@@ -21,7 +21,6 @@ import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Pioche
 
 public class Trunks extends Personnage {
 
-    // TODO remplacer par un IntegerProperty et un listener qui change l('image.
     private IntegerProperty direction;
 
 
@@ -29,6 +28,7 @@ public class Trunks extends Personnage {
     private int hauteurMax = 0;
     private Object objectEquipe;
     private Inventaire inventaire;
+    private IntegerProperty KI;
 
     public Trunks(Environnement env) {
         super(0, 0, env);
@@ -40,6 +40,7 @@ public class Trunks extends Personnage {
         this.inventaire.addObject(new Epee());
         this.inventaire.addObject(new Hache());
         this.inventaire.addObject(new Pioche());
+        this.KI = new SimpleIntegerProperty(0);
     }
 
 
@@ -52,6 +53,17 @@ public class Trunks extends Personnage {
     }
     public void setDirection(int direction) {
         this.direction.setValue(direction);
+    }
+
+    public IntegerProperty getKI() {
+        return this.KI;
+    }
+    public void setKI(int KI) {
+        this.KI.setValue(KI);
+    }
+
+    public void increaseKI() {
+        this.KI.set(this.KI.get() + 10);
     }
 
     public void seDeplacer() {
@@ -139,4 +151,5 @@ public class Trunks extends Personnage {
         }
         return y;
     }
+
 }
