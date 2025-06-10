@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;

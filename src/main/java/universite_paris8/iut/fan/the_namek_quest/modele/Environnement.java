@@ -1,6 +1,9 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
 import universite_paris8.iut.fan.the_namek_quest.Constante;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 
 /**
  * Classe Environnement
@@ -57,7 +60,7 @@ public class Environnement {
         } else {
             trunks.gererSaut();
         }
-
+        dende.apparitionOuDisparition();
     }
 
     public boolean collisionBas(int x, int y) {

@@ -5,11 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import universite_paris8.iut.fan.the_namek_quest.modele.GrandChef;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import javafx.scene.image.Image;
-
-
-import java.awt.*;
 
 public class GrandChefVue {
     private ImageView persoImage;

@@ -1,7 +1,8 @@
-package universite_paris8.iut.fan.the_namek_quest.modele;
+package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 
 public class PersonnageNonJoueur {
 
@@ -38,6 +39,6 @@ public class PersonnageNonJoueur {
         this.yProp.setValue(y);
     }
     public boolean trunksAProximite(){
-        return trunks.getX() >= this.getX()-96 && trunks.getX() <= this.getX()+32;
+        return trunks.getX() >= this.getX()-96 && trunks.getX() <= this.getX()+64;
     }
 }

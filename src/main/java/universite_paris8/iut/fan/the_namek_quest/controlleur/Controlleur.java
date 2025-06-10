@@ -25,6 +25,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.modele.*;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.*;
 
 import java.net.URL;
@@ -68,7 +71,6 @@ public class Controlleur implements Initializable {
         menuDemarrage = new MenuDemarrage();
         menuDemarrage.afficherMenuDemarrage(pane);
 
-
         this.environnement = new Environnement();
         this.trunks = environnement.getTrunks();
         this.grandChef = environnement.getGrandChef();
@@ -76,8 +78,6 @@ public class Controlleur implements Initializable {
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
-
-
     }
 
     public void demarrerJeu() {
@@ -89,7 +89,7 @@ public class Controlleur implements Initializable {
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue, grandChef);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue, grandChef, dende);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
@@ -105,10 +105,7 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
             this.grandChefVue.afficherMessageAcceuil();
-            if(dende.dendePeutAider()){
-                dendeVue.afficherDende();
-                dende.apparitionDende();
-            }
+            this.dendeVue.updateAffichageDende();
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 

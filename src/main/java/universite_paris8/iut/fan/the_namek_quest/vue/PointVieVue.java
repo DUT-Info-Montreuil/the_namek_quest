@@ -1,12 +1,9 @@
 package universite_paris8.iut.fan.the_namek_quest.vue;
 
-import javafx.animation.PauseTransition;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import universite_paris8.iut.fan.the_namek_quest.modele.Personnage;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Personnage;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 
 public class PointVieVue {
     private ProgressBar barreDeVie;

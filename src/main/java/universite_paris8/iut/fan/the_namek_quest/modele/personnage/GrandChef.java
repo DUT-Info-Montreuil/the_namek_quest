@@ -1,5 +1,6 @@
-package universite_paris8.iut.fan.the_namek_quest.modele;
+package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Arme;
