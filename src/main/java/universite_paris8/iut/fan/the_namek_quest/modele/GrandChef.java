@@ -13,7 +13,7 @@ import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Roc
  *
  **/
 
-public class GrandChef  extends Personnage {
+public class GrandChef  extends PersonnageNonJoueur {
     private Trunks trunks;
     private Object object;
     private Materieau materieau;
@@ -24,8 +24,6 @@ public class GrandChef  extends Personnage {
         this.trunks = trunks;
         this.inventaire = new Inventaire();
     }
-
-    public void seDeplacer(){}
 
     public void ameliorerEpee(){
         System.out.println("demande d'amelioration de l'epee du grand chef");
@@ -44,7 +42,5 @@ public class GrandChef  extends Personnage {
         }
     }
 
-    public boolean trunksAProximite(){
-        return trunks.getX() >= this.getX()-96 && trunks.getX() <= this.getX()+32;
-    }
+
 }

@@ -23,11 +23,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
-import universite_paris8.iut.fan.the_namek_quest.modele.GrandChef;
+import universite_paris8.iut.fan.the_namek_quest.modele.*;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.*;
 
 import java.net.URL;
@@ -63,6 +60,9 @@ public class Controlleur implements Initializable {
     private MenuDemarrage menuDemarrage;
     private PointVieVue pointVieVue;
 
+    private Dende dende;
+    private DendeVue dendeVue;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuDemarrage = new MenuDemarrage();
@@ -72,7 +72,7 @@ public class Controlleur implements Initializable {
         this.environnement = new Environnement();
         this.trunks = environnement.getTrunks();
         this.grandChef = environnement.getGrandChef();
-
+        this.dende = environnement.getDende();
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
@@ -84,6 +84,7 @@ public class Controlleur implements Initializable {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
         this.trunksVue = new TrunksVue(pane,trunks);
         this.grandChefVue = new GrandChefVue(pane,grandChef);
+        this.dendeVue = new DendeVue(pane,dende);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
@@ -93,7 +94,6 @@ public class Controlleur implements Initializable {
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         this.pane.addEventHandler(KeyEvent.KEY_RELEASED,clavier);
-        this.grandChefVue.afficherMessageAcceuil();
         pane.setFocusTraversable(true); // autorise le focus
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
@@ -105,6 +105,10 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
             this.grandChefVue.afficherMessageAcceuil();
+            if(dende.dendePeutAider()){
+                dendeVue.afficherDende();
+                dende.apparitionDende();
+            }
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 

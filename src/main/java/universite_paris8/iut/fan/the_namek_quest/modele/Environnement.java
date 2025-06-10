@@ -15,12 +15,14 @@ public class Environnement {
     private Terrain terrain;
     private Trunks trunks;
     private GrandChef grandChef;
+    private Dende dende;
 
 
     public Environnement() {
         this.terrain = new Terrain();
         this.trunks= new Trunks(this);
         this.grandChef = new GrandChef(450,513,this, this.trunks);
+        this.dende = new Dende(700,513,this, this.trunks);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -40,6 +42,10 @@ public class Environnement {
 
     public GrandChef getGrandChef() {
         return grandChef;
+    }
+
+    public Dende getDende() {
+        return dende;
     }
 
     public void update() {
