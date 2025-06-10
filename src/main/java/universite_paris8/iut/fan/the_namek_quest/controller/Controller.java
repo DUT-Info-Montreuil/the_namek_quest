@@ -19,11 +19,7 @@ import universite_paris8.iut.fan.the_namek_quest.model.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.view.GameOver;
-import universite_paris8.iut.fan.the_namek_quest.view.InventaireVue;
-import universite_paris8.iut.fan.the_namek_quest.view.MenuDemarrage;
-import universite_paris8.iut.fan.the_namek_quest.view.TerrainVue;
-import universite_paris8.iut.fan.the_namek_quest.view.TrunksVue;
+import universite_paris8.iut.fan.the_namek_quest.view.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,9 +53,7 @@ public class Controller implements Initializable {
     private GameOver gameOver;
     private MenuDemarrage menuDemarrage;
 
-    private static final double CAMERA_VIEWPORT_WIDTH = 600;
-    private static final double CAMERA_VIEWPORT_HEIGHT = 300;
-    private boolean cameraCenteredInitially = false;
+    private Camera camera;
 
 
     @Override
@@ -72,7 +66,7 @@ public class Controller implements Initializable {
 
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(stackPane);
-
+        this.camera = new Camera(stackPane, pane, group, trunks);
         this.environnement = new Environnement();
         this.terrain = new Terrain();
         this.trunks = new Trunks(environnement);
@@ -106,7 +100,8 @@ public class Controller implements Initializable {
             if(clavier.isVPressed()) clavier.handleV();
 
             // MISE À JOUR DE LA "CAMÉRA"
-            updateCamera();
+            camera.update();
+
 
             if(trunks.estMort()) {
                 afficherGameOver();
@@ -123,7 +118,7 @@ public class Controller implements Initializable {
         gameLoop.play();
     }
 
-    private void updateCamera() {
+    /*private void updateCamera() {
         if (!cameraCenteredInitially) {
             double sceneWidth = stackPane.getWidth(); // Fenêtre visible
             double sceneHeight = stackPane.getHeight();
@@ -143,9 +138,10 @@ public class Controller implements Initializable {
 
         // CAMÉRA QUI SUIT LE JOUEUR
         double playerX = trunks.getX();
+        double playerY = trunks.getY();
 
         double offsetX = CAMERA_VIEWPORT_WIDTH / 2 - playerX;
-        double offsetY = CAMERA_VIEWPORT_HEIGHT ;
+        double offsetY = (CAMERA_VIEWPORT_HEIGHT/2) - playerY ;
 
         double maxOffsetX = 0;
         double maxOffsetY = 0;
@@ -159,7 +155,7 @@ public class Controller implements Initializable {
         group.setTranslateY(offsetY);
     }
 
-
+*/
     public void afficherGameOver() {
         gameLoop.stop();
         gameOver = new GameOver();
