@@ -10,6 +10,8 @@ public class BFS {
 
     private Environnement env;
     private Position positionTrunks;
+    private Grille g;
+    
     /**
      * Chaque sommet (clé) est associé à son prédécesseur (valeur) du parcours en largeur
      */
@@ -20,6 +22,7 @@ public class BFS {
         this.env = env;
         predecesseurs = new HashMap<Position, Position>();
         positionTrunks = new Position(env.getTrunks().getX()/Constante.TAILLE_TUILE,env.getTrunks().getY()/ Constante.TAILLE_TUILE);
+        this.g = new Grille(this.env,env.getTerrain().hauteurTerrain(),env.getTerrain().largeurTerrain());
         algoBFS();
     }
 
@@ -35,16 +38,14 @@ public class BFS {
 
         while (!fifo.isEmpty()) {
             positionUtilisé = fifo.pollFirst();
-            for(Position  voisin : getVoisins(positionUtilisé)) {
-                if(!predecesseurs.containsKey(voisin)) {
+            for(Position  voisin : g.adjacents(positionUtilisé)) {
+                if(!predecesseurs.containsKey(voisin) /*&& env.getTerrain().codeTuile(voisin.getX(), voisin.getY())==1*/) {
                     predecesseurs.put(voisin, positionUtilisé);
                     fifo.addLast(voisin);
                     visited.add(voisin);
                 }
             }
-
         }
-
     }
 
     /*public Position getNextMove(Position from) {
@@ -71,14 +72,13 @@ public class BFS {
             positionUtilisé = predecesseurs.get(positionUtilisé);
         }
 
-       if(chemin.size()==0){
+       if(chemin.isEmpty()){
            return null;
+       }if(chemin.size()==1){
+           return chemin.get(0);
+       }else {
+           return chemin.get(chemin.size()-1);
        }
-        if(chemin.size()==1){
-            return chemin.get(0);
-        }else {
-            return chemin.get(chemin.size()-1);
-        }
     }
 
     private ArrayList<Position> getVoisins(Position p) {
@@ -87,14 +87,24 @@ public class BFS {
         int y = p.getY();
 
         
-        if(env.getTerrain().dansTerrainModel(x + 1, y) && env.getTerrain().codeTuile(x+1,y)==1){
-            voisins.add(new Position(x + 1, y));
-        }if(env.getTerrain().dansTerrainModel(x - 1, y)&& env.getTerrain().codeTuile(x-1,y)==1){
-            voisins.add(new Position(x - 1, y));
-        }if(env.getTerrain().dansTerrainModel(x, y+1)&& env.getTerrain().codeTuile(x,y+1)==1){
-            voisins.add(new Position(x, y+1));
-        }if(env.getTerrain().dansTerrainModel(x, y-1)&& env.getTerrain().codeTuile(x,y-1)==1){
-            voisins.add(new Position(x, y-1));
+        if(env.getTerrain().dansTerrainModel(x + 1, y) ){
+            if(env.getTerrain().codeTuile(x+1,y)==1){
+                voisins.add(new Position(x + 1, y));
+            }
+
+        }if(env.getTerrain().dansTerrainModel(x - 1, y) && env.getTerrain().codeTuile(x-1,y)==1){
+            if(env.getTerrain().codeTuile(x-1,y)==1){
+                voisins.add(new Position(x-1, y));
+            }
+        }if(env.getTerrain().dansTerrainModel(x, y+1)){
+            if(env.getTerrain().codeTuile(x,y+1)==1){
+                voisins.add(new Position(x,y+1));
+            }
+        }if(env.getTerrain().dansTerrainModel(x, y-1)){
+            if(env.getTerrain().codeTuile(x,y-1)==1){
+                voisins.add(new Position(x,y-1));
+            }
+
         }
 
         return voisins;
