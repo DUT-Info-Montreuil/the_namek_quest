@@ -104,6 +104,7 @@ public class Controlleur implements Initializable {
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
+            this.centrerVueSurTrunks();
             this.grandChefVue.afficherMessageAcceuil();
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
@@ -120,6 +121,15 @@ public class Controlleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
     }
+
+    private void centrerVueSurTrunks() {
+        double decalageX = tilePane.getWidth() / 2 - trunks.getX() - (double) trunks.getX() / 2;
+        double decalageY = tilePane.getHeight() / 2 - trunks.getY() - (double) trunks.getY() /2 + tilePane.getHeight()/2;
+
+        pane.setTranslateX(decalageX);
+        pane.setTranslateY(decalageY);
+    }
+
 
     public void afficherGameOver() {
        gameLoop.stop();
