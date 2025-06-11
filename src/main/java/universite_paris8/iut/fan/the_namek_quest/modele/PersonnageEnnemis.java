@@ -12,20 +12,14 @@ public class PersonnageEnnemis extends Personnage{
 
 
     public void dectecteDirection(int xTrunks, int yTrunks) {
-
-        int direction = 0;
-        //System.out.println("distance a gauche"+ (this.getX()-3*32));
-        if(this.getX() <= xTrunks ){
-            direction = 1;
+        if (this.getX() < xTrunks) {
             this.setDirection(1);
-        }else if(xTrunks <=  this.getX() ){
-            direction= -1;
+        } else if (this.getX() > xTrunks) {
             this.setDirection(-1);
+        } else {
+            this.setDirection(0);
         }
-        //System.out.println("detect trunks : " +direction);
-        //return direction;
     }
-
     /*public void deplacement(){
         int vitesse = getVitesse();
         Terrain terrain = this.getEnv().getTerrain();
@@ -55,7 +49,7 @@ public class PersonnageEnnemis extends Personnage{
 
         }*/
 
-        public void deplacement(int x, int y) {
+        /*public void deplacement(int x, int y) {
             if (getEnv().getTerrain().dansTerrainModel(x, y)) {
                 dectecteDirection(x, y);
                 if(this.getDirection() == 1){
@@ -72,12 +66,46 @@ public class PersonnageEnnemis extends Personnage{
                     }
                 }
             }
+
+            System.out.println("Position ennemis : " + this.getX() + " - " + this.getY());
+        }*/
+
+
+
+    public void deplacement(int x, int y) {
+        dectecteDirection(x * Constante.TAILLE_TUILE, this.getY());
+
+        if (this.getDirection() == 1) {
+            int newX = this.getX() + this.getVitesse();
+            if (newX > x * Constante.TAILLE_TUILE) newX = x * Constante.TAILLE_TUILE;
+            if (!getEnv().collisionDroite(newX, this.getY()) && !getEnv().collisionDroite(newX, this.getY()) ) {
+                this.setX(newX);
+            }
+        } else if (this.getDirection() == -1) {
+            int newX = this.getX() - this.getVitesse();
+            if (newX < x * Constante.TAILLE_TUILE) newX = x * Constante.TAILLE_TUILE;
+            if (!getEnv().collisionGauche(newX, this.getY()) && !getEnv().collisionGauche(newX, this.getY())) {
+                this.setX(newX);
+            }
         }
+
+        if (this.getY() < y * Constante.TAILLE_TUILE) {
+            int newY = this.getY() + this.getVitesse();
+            if (newY > y * Constante.TAILLE_TUILE) newY = y * Constante.TAILLE_TUILE;
+            this.setY(newY);
+        } else if (this.getY() > y * Constante.TAILLE_TUILE) {
+            int newY = this.getY() - this.getVitesse();
+            if (newY < y * Constante.TAILLE_TUILE) newY = y * Constante.TAILLE_TUILE;
+            this.setY(newY);
+        }
+        System.out.println("Position ennemis : " + this.getX() + " - " + this.getY());
+    }
+}
 
 
 //this.setX((x * Constante.TAILLE_TUILE) + getVitesse());
     //this.setY((y * Constante.TAILLE_TUILE) + getVitesse());
-    }
+
 
 
 

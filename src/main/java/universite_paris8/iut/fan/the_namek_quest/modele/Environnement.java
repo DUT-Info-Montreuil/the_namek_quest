@@ -56,8 +56,8 @@ public class Environnement {
 
 
         if (cible != null) {
-            System.out.println("cible :" +cible.toString());
-            personnageEnnemis.deplacement(cible.getX(), 0);
+            //System.out.println("cible :" +cible.toString());
+            personnageEnnemis.deplacement(cible.getX(), cible.getY());
         }
 
 

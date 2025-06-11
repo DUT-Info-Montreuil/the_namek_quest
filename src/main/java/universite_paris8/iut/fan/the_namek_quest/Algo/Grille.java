@@ -70,21 +70,21 @@ public class Grille {
     }
 
     private boolean dansGrille(int x, int y) {
-        return x >= 0 && x < this.hauteur && y >= 0 && y < this.largeur;
+        return x >= 0 && x < this.largeur && y >= 0 && y < this.hauteur;
     }
 
     public void poseObstacles() {
-        for(int x=0; x<this.hauteur; x++) {
-            for(int y=0; y<this.largeur; y++) {
-                if(environnement.getTerrain().codeTuile(y,x)!=1){
-                    this.obstacles.add(this.getPosition(x,y));
+
+            for (int l = 0; l < environnement.getTerrain().hauteurTerrain(); l++) {
+                for (int c = 0; c < environnement.getTerrain().largeurTerrain(); c++) {
+                    if (environnement.getTerrain().codeTuile(c, l) != 1) {
+                        this.obstacles.add(new Position(c, l));
+                    }
                 }
             }
         }
 
-        this.reconnecte(this.getPosition(0, 0));
 
-    }
 
     public void reconnecte(Position s) {
         this.obstacles.remove(s);
