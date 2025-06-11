@@ -37,7 +37,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 //si trunks a une pioche
                 if (environnement.getTrunks().getObjectEquipe().getId() == 1
                         && (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==3
-                ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==2)) {
+                        ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==2)) {
 
                     environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
@@ -45,6 +45,12 @@ public class Souris implements EventHandler<MouseEvent> {
                 }
                 //si trunks a une hache
                 else if (environnement.getTrunks().getObjectEquipe().getId()==2  && environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==10) {
+                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
+                    environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
+                    this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
+                } else if (environnement.getTrunks().getObjectEquipe().getId()==99
+                        &&( (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==8 )
+                        || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==8 )) {
                     environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
