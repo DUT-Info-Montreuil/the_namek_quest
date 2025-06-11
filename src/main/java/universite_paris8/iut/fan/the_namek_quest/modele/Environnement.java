@@ -4,6 +4,7 @@ import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.VieuxNamek;
 
 /**
  * Classe Environnement
@@ -19,6 +20,7 @@ public class Environnement {
     private Trunks trunks;
     private GrandChef grandChef;
     private Dende dende;
+    private VieuxNamek vieuxNamek;
 
 
     public Environnement() {
@@ -26,6 +28,7 @@ public class Environnement {
         this.trunks= new Trunks(this);
         this.grandChef = new GrandChef(450,513,this, this.trunks);
         this.dende = new Dende(700,513,this, this.trunks);
+        this.vieuxNamek = new VieuxNamek(100,513, this,this.trunks);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -51,6 +54,10 @@ public class Environnement {
         return dende;
     }
 
+    public VieuxNamek getVieuxNamek() {
+        return vieuxNamek;
+    }
+
     public void update() {
 
         trunks.seDeplacer();
@@ -61,6 +68,7 @@ public class Environnement {
             trunks.gererSaut();
         }
         dende.apparitionOuDisparition();
+       // vieuxNamek.apparitionOuDisparition();
     }
 
     public boolean collisionBas(int x, int y) {

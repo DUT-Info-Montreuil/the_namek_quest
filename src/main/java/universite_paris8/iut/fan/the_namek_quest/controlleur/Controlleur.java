@@ -28,6 +28,7 @@ import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.VieuxNamek;
 import universite_paris8.iut.fan.the_namek_quest.vue.*;
 
 import java.net.URL;
@@ -48,6 +49,8 @@ public class Controlleur implements Initializable {
     private Souris souris;
     private GrandChefVue grandChefVue;
     private GrandChef grandChef;
+    private VieuxNamekVue vieuxNamekVue;
+    private VieuxNamek vieuxNamek;
 
     private MoletteControlleur moletteController;
 
@@ -75,6 +78,7 @@ public class Controlleur implements Initializable {
         this.trunks = environnement.getTrunks();
         this.grandChef = environnement.getGrandChef();
         this.dende = environnement.getDende();
+        this.vieuxNamek = environnement.getVieuxNamek();
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
@@ -85,6 +89,7 @@ public class Controlleur implements Initializable {
         this.trunksVue = new TrunksVue(pane,trunks);
         this.grandChefVue = new GrandChefVue(pane,grandChef);
         this.dendeVue = new DendeVue(pane,dende);
+        this.vieuxNamekVue = new VieuxNamekVue(pane , vieuxNamek);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
@@ -106,6 +111,7 @@ public class Controlleur implements Initializable {
             environnement.update();
             this.grandChefVue.afficherMessageAcceuil();
             this.dendeVue.updateAffichageDende();
+            this.vieuxNamekVue.afficherMessageAcceuil();
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 

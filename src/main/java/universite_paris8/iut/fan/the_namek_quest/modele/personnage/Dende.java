@@ -46,6 +46,7 @@ public class Dende extends PersonnageNonJoueur {
         setY(-1000);
         dejaApparu = false;
     }
+
     public boolean estVisible() {
         return dejaApparu;
     }
