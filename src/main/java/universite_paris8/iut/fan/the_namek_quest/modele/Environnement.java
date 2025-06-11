@@ -53,9 +53,10 @@ public class Environnement {
 
         Position  ennemiPos = new Position(personnageEnnemis.getX() / Constante.TAILLE_TUILE, personnageEnnemis.getY() / Constante.TAILLE_TUILE);
         Position cible = bfs.getNextMove(ennemiPos);
-        //System.out.println(cible.toString());
+
+
         if (cible != null) {
-            //System.out.println("rentre ici");
+            System.out.println("cible :" +cible.toString());
             personnageEnnemis.deplacement(cible.getX(), 0);
         }
 

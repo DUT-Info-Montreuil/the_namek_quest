@@ -28,21 +28,20 @@ public class BFS {
 
     public void algoBFS() {
         LinkedList<Position> fifo = new LinkedList<Position>();
-        Set<Position> visited = new HashSet<>();
-
-        predecesseurs.put(positionTrunks,null);
-        fifo.add(positionTrunks);
-        visited.add(positionTrunks);
 
         Position positionUtilisé = positionTrunks;
+        predecesseurs.put(positionUtilisé,null);
+        fifo.addFirst(positionUtilisé);
 
         while (!fifo.isEmpty()) {
             positionUtilisé = fifo.pollFirst();
-            for(Position  voisin : g.adjacents(positionUtilisé)) {
-                if(!predecesseurs.containsKey(voisin) /*&& env.getTerrain().codeTuile(voisin.getX(), voisin.getY())==1*/) {
-                    predecesseurs.put(voisin, positionUtilisé);
-                    fifo.addLast(voisin);
-                    visited.add(voisin);
+            if(g.adjacents(positionUtilisé)!=null){
+                for(Position  voisin : g.adjacents(positionUtilisé)) {
+                    if(!predecesseurs.containsKey(voisin) /*&& env.getTerrain().codeTuile(voisin.getX(), voisin.getY())==1*/) {
+                        predecesseurs.put(voisin, positionUtilisé);
+                        fifo.addLast(voisin);
+                        //visited.add(voisin);
+                    }
                 }
             }
         }
@@ -66,8 +65,8 @@ public class BFS {
     public Position getNextMove(Position cible){
         ArrayList<Position> chemin = new ArrayList<>();
         Position positionUtilisé = cible;
+
         while(predecesseurs.get(positionUtilisé) != null) {
-            System.out.println(positionUtilisé.toString());
             chemin.add(positionUtilisé);
             positionUtilisé = predecesseurs.get(positionUtilisé);
         }
@@ -81,34 +80,34 @@ public class BFS {
        }
     }
 
-    private ArrayList<Position> getVoisins(Position p) {
+    /*private ArrayList<Position> getVoisins(Position p) {
         ArrayList<Position> voisins = new ArrayList<>();
         int x = p.getX();
         int y = p.getY();
 
         
         if(env.getTerrain().dansTerrainModel(x + 1, y) ){
-            if(env.getTerrain().codeTuile(x+1,y)==1){
+            if(env.getTerrain().codeTuile(y,x+1)==1){
                 voisins.add(new Position(x + 1, y));
             }
 
         }if(env.getTerrain().dansTerrainModel(x - 1, y) && env.getTerrain().codeTuile(x-1,y)==1){
-            if(env.getTerrain().codeTuile(x-1,y)==1){
+            if(env.getTerrain().codeTuile(y,x-1)==1){
                 voisins.add(new Position(x-1, y));
             }
         }if(env.getTerrain().dansTerrainModel(x, y+1)){
-            if(env.getTerrain().codeTuile(x,y+1)==1){
+            if(env.getTerrain().codeTuile(y+1,x)==1){
                 voisins.add(new Position(x,y+1));
             }
         }if(env.getTerrain().dansTerrainModel(x, y-1)){
-            if(env.getTerrain().codeTuile(x,y-1)==1){
+            if(env.getTerrain().codeTuile(y-1,x)==1){
                 voisins.add(new Position(x,y-1));
             }
 
         }
 
         return voisins;
-    }
+    }*/
 
 
 

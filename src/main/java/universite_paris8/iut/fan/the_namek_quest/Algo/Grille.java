@@ -22,44 +22,33 @@ public class Grille {
         this.listeAdj = new HashMap();
         this.obstacles = FXCollections.observableArrayList();
         construireMap();
+        poseObstacles();
     }
 
     public void construireMap() {
-        for(int x=0; x<hauteur; x++) {
-            for(int y=0; y<largeur; y++) {
+        for(int x=0; x<largeur; x++) {
+            for(int y=0; y<hauteur; y++) {
                 this.listeAdj.put(new Position(x,y),new HashSet<>());
             }
         }
 
-        for(int i = 0; i < this.hauteur; ++i) {
-            for(int j = 0; j < this.largeur; ++j) {
+        for(int i = 0; i < this.largeur; ++i) {
+            for(int j = 0; j < this.hauteur; ++j) {
                 Position s = this.getPosition(i, j);
                 if (this.dansGrille(i - 1, j)) {
-
-                        ((Set)this.listeAdj.get(s)).add(this.getPosition(i - 1, j));
-
+                    ((Set) this.listeAdj.get(s)).add(this.getPosition(i - 1, j));
                 }
-
                 if (this.dansGrille(i + 1, j)) {
-
-                    ((Set)this.listeAdj.get(s)).add(this.getPosition(i + 1, j));
+                    ((Set) this.listeAdj.get(s)).add(this.getPosition(i + 1, j));
                 }
-
                 if (this.dansGrille(i, j + 1)) {
-
-                        ((Set)this.listeAdj.get(s)).add(this.getPosition(i, j + 1));
-
+                    ((Set) this.listeAdj.get(s)).add(this.getPosition(i, j + 1));
                 }
-
                 if (this.dansGrille(i, j - 1)) {
-
-                        ((Set)this.listeAdj.get(s)).add(this.getPosition(i, j - 1));
+                    ((Set) this.listeAdj.get(s)).add(this.getPosition(i, j - 1));
                 }
             }
         }
-
-
-
     }
 
 
@@ -87,7 +76,7 @@ public class Grille {
     public void poseObstacles() {
         for(int x=0; x<this.hauteur; x++) {
             for(int y=0; y<this.largeur; y++) {
-                if(environnement.getTerrain().codeTuile(x,y)!=1){
+                if(environnement.getTerrain().codeTuile(y,x)!=1){
                     this.obstacles.add(this.getPosition(x,y));
                 }
             }

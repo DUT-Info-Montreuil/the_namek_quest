@@ -14,7 +14,7 @@ public class PersonnageEnnemis extends Personnage{
     public void dectecteDirection(int xTrunks, int yTrunks) {
 
         int direction = 0;
-        System.out.println("distance a gauche"+ (this.getX()-3*32));
+        //System.out.println("distance a gauche"+ (this.getX()-3*32));
         if(this.getX() <= xTrunks ){
             direction = 1;
             this.setDirection(1);
