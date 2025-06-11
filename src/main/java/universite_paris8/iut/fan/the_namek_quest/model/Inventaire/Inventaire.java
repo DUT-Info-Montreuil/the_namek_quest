@@ -2,8 +2,7 @@ package universite_paris8.iut.fan.the_namek_quest.model.Inventaire;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Materieau;
-import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.Terre;
+import universite_paris8.iut.fan.the_namek_quest.model.Inventaire.ressource.*;
 
 public class Inventaire {
     private ObservableList<Object> inventaire;
@@ -51,6 +50,25 @@ public class Inventaire {
                 break;
             case 3 :
                 verifierRessource(2,new Terre());
+                break;
+            case 4:
+                verifierRessource(4,new Energie());
+                break;
+            case 6:
+                verifierRessource(6,new Haricot());
+                break;
+                case 8 :
+                    verifierRessource(8,new BouleCristal());
+                    break;
+            case 9:
+                verifierRessource(9,new RocheDeNamek());
+                break;
+
+                    case 10 :
+                verifierRessource(10,new Arbres());
+                break;
+
+            default:
                 break;
 
         }
