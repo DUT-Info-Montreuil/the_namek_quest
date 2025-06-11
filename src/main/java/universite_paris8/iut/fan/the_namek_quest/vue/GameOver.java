@@ -20,7 +20,7 @@ public class GameOver {
         gameOverPane = new Pane();
         gameOverPane.setPrefSize(800, 600);
 
-        Image gameOverImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/gameOver.png"));
+        Image gameOverImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/gameOver.png"));
         ImageView imageView = new ImageView(gameOverImage);
         imageView.setFitWidth(800);
         imageView.setFitHeight(600);

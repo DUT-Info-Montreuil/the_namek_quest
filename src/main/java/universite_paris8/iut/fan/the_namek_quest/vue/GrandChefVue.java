@@ -24,7 +24,7 @@ public class GrandChefVue {
     }
 
     public void afficherGrandChef() {
-        Image imageGrandChef = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/grandchef.png").toExternalForm());
+        Image imageGrandChef = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/PNJ/grandchef.png").toExternalForm());
         persoImage.setImage(imageGrandChef);
         persoImage.translateXProperty().bind(grandChef.getXProp());
         persoImage.translateYProperty().bind(grandChef.getYProp());

@@ -93,13 +93,13 @@ public class Clavier implements EventHandler<KeyEvent> {
 
     public void handleLeft() {
         trunks.setDirection(-1);
-        trunksVue.changerImageGauche();
+       trunksVue.changerImageGauche();
 
     }
 
     public void handleRight() {
         trunks.setDirection(1);
-        trunksVue.changerImageDroite();
+       trunksVue.changerImageDroite();
 
     }
 
