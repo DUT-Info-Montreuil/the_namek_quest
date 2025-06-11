@@ -2,6 +2,7 @@ package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Arme;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.BouleCristal;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Energie;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
@@ -23,21 +24,16 @@ public class VieuxNamek extends PersonnageNonJoueur {
         //disparaitre(); // cache le personnage au départ
     }
 
-   /* public boolean peutApparaitre() {
+    public boolean peutApparaitre() {
         // Vérifie si on a au moins 8 ressources
         if (inventaire.ressourceDansInventaire(8)) {
-            int index = inventaire.getIndexObject(new BouleCristal());
-
-            // Si une boule de cristal est présente
-            if (index != -1) {
-                Objet objet = inventaire.getListObjects().get(index);
-
-                if (objet instanceof Materieau) {
-                    Materieau boule = (Materieau) objet;
-                    return boule.getQuantite() >= 1;
+            if(rocheNamek.getQuantite() >= 3 && energie.getQuantite() >= 2){
+                    if((trunks.getObjectEquipe().getId()== 0)){
+                        Arme epee = (Arme) trunks.getObjectEquipe();
+                        epee.incrementerDegat(10);
+                    }
                 }
             }
-        }
         return false;
     }
 
