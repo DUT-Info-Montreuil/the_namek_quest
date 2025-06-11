@@ -83,7 +83,7 @@ public class Controlleur implements Initializable {
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
         this.trunksVue = new TrunksVue(pane,trunks);
-        this.grandChefVue = new GrandChefVue(pane,grandChef);
+        this.grandChefVue = new GrandChefVue(tilePane,grandChef);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
