@@ -35,12 +35,18 @@ public class Souris implements EventHandler<MouseEvent> {
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())) {
                 System.out.println("entre dans la range");
                 //si trunks a une pioche
-                if (environnement.getTrunks().getObjectEquipe().getId() == 1) {
+                if (environnement.getTrunks().getObjectEquipe().getId() == 1
+                        && (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==3
+                ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==2)) {
 
                     environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                }else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
+                } else if (environnement.getTrunks().getObjectEquipe().getId()==2  && environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==10) {
+                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
+                    environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
+                    this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
+                } else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
                     if(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==1){
                         Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
                         if(materieau.getQuantite()>0) {
