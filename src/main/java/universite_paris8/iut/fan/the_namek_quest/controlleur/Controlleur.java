@@ -48,18 +48,15 @@ public class Controlleur implements Initializable {
     private Souris souris;
     private GrandChefVue grandChefVue;
     private GrandChef grandChef;
-
     private MoletteControlleur moletteController;
 
-
     @FXML private TilePane tilePane;
-    @FXML private Pane pane;
+    @FXML private Pane pane; // pane qui contient trunks + UI
     @FXML private Pane paneInventaire;
-    @FXML private Pane borderpane;
+    @FXML private Pane paneFond; // pour afficher une image derrière
+    @FXML private Pane paneScroll; // pour scroller tout le terrain
+    private FondVue fond;
     private GameOver gameOver;
-
-
-
     private MenuDemarrage menuDemarrage;
     private PointVieVue pointVieVue;
 
@@ -68,45 +65,56 @@ public class Controlleur implements Initializable {
         menuDemarrage = new MenuDemarrage();
         menuDemarrage.afficherMenuDemarrage(pane);
 
-
         this.environnement = new Environnement();
         this.trunks = environnement.getTrunks();
         this.grandChef = environnement.getGrandChef();
 
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
-        souris = new Souris(this,this.environnement,this.terrainVue );
+        this.souris = new Souris(this, environnement, terrainVue);
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
-
-
     }
 
     public void demarrerJeu() {
-        menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
-        this.trunksVue = new TrunksVue(pane,trunks);
-        this.grandChefVue = new GrandChefVue(tilePane,grandChef);
+        menuDemarrage.retirerMenuDemarrage(pane);
+
+        // ===================== FOND =====================
+        this.fond = new FondVue(paneFond); // Fond image placé dans fondVue
+        fond.afficherFond("/universite_paris8/iut/fan/the_namek_quest/images/namek.png");
+
+        // ===================== VUES =====================
+        this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
+        this.trunksVue = new TrunksVue(pane, trunks);
+        this.grandChefVue = new GrandChefVue(tilePane, grandChef);
         this.pointVieVue = new PointVieVue(trunks, pane);
-        this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
-        this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
+        this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire, trunks);
+
+        // ===================== INVENTAIRE =====================
+        this.inventaireListener = new InventaireListener(inventaireVue, trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue, grandChef);
-        this.moletteController = new MoletteControlleur(trunks,inventaireVue);
-        this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
-        this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
-        this.pane.addEventHandler(KeyEvent.KEY_RELEASED,clavier);
-        this.grandChefVue.afficherMessageAcceuil();
-        pane.setFocusTraversable(true); // autorise le focus
 
-        Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
+        // ===================== CONTROLES =====================
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, terrainVue, grandChef);
+        this.moletteController = new MoletteControlleur(trunks, inventaireVue);
 
+        pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
+        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);
+        pane.addEventHandler(KeyEvent.KEY_RELEASED, clavier);
+        pane.setFocusTraversable(true);
+        Platform.runLater(() -> pane.requestFocus());
+
+        grandChefVue.afficherMessageAcceuil();
+
+        // ===================== GAME LOOP =====================
         initAnimation();
     }
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
-            this.centrerVueSurTrunks();
-            this.grandChefVue.afficherMessageAcceuil();
-            if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
+            centrerVueSurTrunks();
+            grandChefVue.afficherMessageAcceuil();
+
+            if (trunks.estMort()) {
                 afficherGameOver();
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -123,16 +131,18 @@ public class Controlleur implements Initializable {
     }
 
     private void centrerVueSurTrunks() {
-        double decalageX = tilePane.getWidth() / 2 - trunks.getX() - (double) trunks.getX() / 2;
-        double decalageY = tilePane.getHeight() / 2 - trunks.getY() - (double) trunks.getY() /2 + tilePane.getHeight()/2;
+        double largeurScene = pane.getScene().getWidth();
+        double hauteurScene = pane.getScene().getHeight();
 
-        pane.setTranslateX(decalageX);
-        pane.setTranslateY(decalageY);
+        double centreX = largeurScene / 2 - trunks.getX();
+        double centreY = hauteurScene / 2 - trunks.getY();
+
+        paneScroll.setTranslateX(centreX);
+        paneScroll.setTranslateY(centreY);
     }
 
-
     public void afficherGameOver() {
-       gameLoop.stop();
+        gameLoop.stop();
         gameOver = new GameOver();
         gameOver.afficherGameOver(pane);
     }
