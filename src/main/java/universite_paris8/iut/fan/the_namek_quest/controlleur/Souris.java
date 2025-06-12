@@ -33,11 +33,11 @@ public class Souris implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
             System.out.println("clic");
-            if (mouseEvent.getX() > 330 && mouseEvent.getX() < 530
-                    && mouseEvent.getY() > 420 && mouseEvent.getY() < 480) {
+            /*if (mouseEvent.getX() > 330 && mouseEvent.getX() < 530
+                    && mouseEvent.getY() > 420 && mouseEvent.getY() < 480) {*/
                 System.out.println("clic start");
                 controlleur.demarrerJeu();
-            }
+            //}
 
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())) {
                 System.out.println("entre dans la range");

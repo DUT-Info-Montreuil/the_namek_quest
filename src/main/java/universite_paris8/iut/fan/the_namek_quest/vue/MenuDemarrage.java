@@ -17,12 +17,11 @@ public class MenuDemarrage {
 
     public void afficherMenuDemarrage(Pane pane) {
         menuPane = new Pane();
-        menuPane.setPrefSize(800, 600);
+
 
         Image menuImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/menu.png"));
         ImageView imageView = new ImageView(menuImage);
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
+
 
         menuPane.getChildren().add(imageView);
         pane.getChildren().add(menuPane);
