@@ -77,7 +77,7 @@ public class BFS {
        }if(chemin.size()==1){
            return chemin.get(0);
        }else {
-           return chemin.get(chemin.size()-1);
+           return chemin.get(1);
        }
     }
 

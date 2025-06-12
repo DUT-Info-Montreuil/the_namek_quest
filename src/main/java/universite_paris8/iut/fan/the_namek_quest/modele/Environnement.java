@@ -56,7 +56,7 @@ public class Environnement {
 
 
         if (cible != null) {
-            //System.out.println("cible :" +cible.toString());
+            System.out.println("cible :" +cible.toString());
             personnageEnnemis.deplacement(cible.getX(), cible.getY());
         }
 
@@ -67,6 +67,9 @@ public class Environnement {
         } else {
             trunks.gererSaut();
         }
+
+        System.out.println("Position Trunks en pixel : " + trunks.getX() + " - " + trunks.getY());
+        System.out.println("Position ennemis en pixel : " + personnageEnnemis.getX() + " - " + personnageEnnemis.getY());
 
 
     }
