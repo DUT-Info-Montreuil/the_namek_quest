@@ -9,26 +9,24 @@
             fx:controller="universite_paris8.iut.fan.the_namek_quest.controlleur.Controlleur">
 
     <center>
+        <!-- Fond du jeu -->
+        <Pane fx:id="paneFond">
+            <!-- ✅ Image de fond : affichée en tout premier -->
+            <ImageView fx:id="imageFond" fitWidth="1920.0" fitHeight="1080.0" />
         <!-- Pane principale contenant tous les éléments du jeu -->
-        <Pane fx:id="pane" BorderPane.alignment="CENTER">
+            <children>
+                    <!-- ✅ Scroll / terrain : affiché au-dessus de l’image -->
+                    <Pane fx:id="paneScroll">
+                        <children>
+                        <Pane fx:id="pane" BorderPane.alignment="CENTER">
+                            <TilePane fx:id="tilePane" prefHeight="1.0" prefWidth="1.0" tileAlignment="CENTER" />
+                        </Pane>
 
-            <!-- Fond du jeu -->
-            <Pane fx:id="paneFond">
-
-                <!-- ✅ Image de fond : affichée en tout premier -->
-                <ImageView fx:id="imageFond" fitWidth="1920.0" fitHeight="1080.0" />
-
-                <!-- ✅ Scroll / terrain : affiché au-dessus de l’image -->
-                <Pane fx:id="paneScroll">
-                    <TilePane fx:id="tilePane"
-                              prefHeight="1.0" prefWidth="1.0"
-                              tileAlignment="CENTER" />
-                </Pane>
-
-                <!-- ✅ Inventaire par-dessus tout -->
-                <Pane fx:id="paneInventaire" prefHeight="200.0" prefWidth="200.0" />
-
-            </Pane>
+                    <!-- ✅ Inventaire par-dessus tout -->
+                        <Pane fx:id="paneInventaire" prefHeight="200.0" prefWidth="200.0" />
+                        </children>
+                    </Pane>
+            </children>
 
         </Pane>
     </center>

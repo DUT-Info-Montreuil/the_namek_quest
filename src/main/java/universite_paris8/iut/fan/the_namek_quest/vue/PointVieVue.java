@@ -31,4 +31,8 @@ public class PointVieVue {
 
         pane.getChildren().add(barreDeVie);
     }
+
+    public ProgressBar getBarreDeVie () {
+        return barreDeVie;
+    }
 }

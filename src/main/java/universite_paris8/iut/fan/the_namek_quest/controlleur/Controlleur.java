@@ -78,13 +78,13 @@ public class Controlleur implements Initializable {
         menuDemarrage.retirerMenuDemarrage(pane);
 
         // ===================== FOND =====================
-        this.fond = new FondVue(paneFond); // Fond image placé dans fondVue
-        fond.afficherFond("/universite_paris8/iut/fan/the_namek_quest/images/namek.png");
+        //this.fond = new FondVue(paneFond); // Fond image placé dans fondVue
+        //fond.afficherFond("/universite_paris8/iut/fan/the_namek_quest/images/namek.png");
 
         // ===================== VUES =====================
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         this.trunksVue = new TrunksVue(pane, trunks);
-        this.grandChefVue = new GrandChefVue(tilePane, grandChef);
+       // this.grandChefVue = new GrandChefVue(tilePane, grandChef);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire, trunks);
 
@@ -102,7 +102,7 @@ public class Controlleur implements Initializable {
         pane.setFocusTraversable(true);
         Platform.runLater(() -> pane.requestFocus());
 
-        grandChefVue.afficherMessageAcceuil();
+        //grandChefVue.afficherMessageAcceuil();
 
         // ===================== GAME LOOP =====================
         initAnimation();
@@ -112,7 +112,7 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
             centrerVueSurTrunks();
-            grandChefVue.afficherMessageAcceuil();
+            //grandChefVue.afficherMessageAcceuil();
 
             if (trunks.estMort()) {
                 afficherGameOver();
@@ -139,6 +139,12 @@ public class Controlleur implements Initializable {
 
         paneScroll.setTranslateX(centreX);
         paneScroll.setTranslateY(centreY);
+        paneInventaire.setTranslateX(trunks.getX());
+        paneInventaire.setTranslateY(trunks.getY()-500);
+        this.pointVieVue.getBarreDeVie().setTranslateX(trunks.getX()-750);
+        this.pointVieVue.getBarreDeVie().setTranslateY(trunks.getY()-500);
+
+
     }
 
     public void afficherGameOver() {

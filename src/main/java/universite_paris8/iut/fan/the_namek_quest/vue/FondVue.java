@@ -12,6 +12,7 @@ public class FondVue {
 
     public FondVue(Pane fondPane) {
         this.fondPane = fondPane;
+        this.afficherFond("/universite_paris8/iut/fan/the_namek_quest/images/namek.png");
     }
 
     public void afficherFond(String imagePath) {
