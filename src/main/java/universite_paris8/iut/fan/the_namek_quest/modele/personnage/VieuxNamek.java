@@ -24,10 +24,10 @@ public class VieuxNamek extends PersonnageNonJoueur {
         //disparaitre(); // cache le personnage au départ
     }
 
-    public boolean peutApparaitre() {
+    /*public boolean peutApparaitre() {
         // Vérifie si on a au moins 8 ressources
         if (inventaire.ressourceDansInventaire(8)) {
-            if(rocheNamek.getQuantite() >= 3 && energie.getQuantite() >= 2){
+            if(.getQuantite() >= 3 && energie.getQuantite() >= 2){
                     if((trunks.getObjectEquipe().getId()== 0)){
                         Arme epee = (Arme) trunks.getObjectEquipe();
                         epee.incrementerDegat(10);
