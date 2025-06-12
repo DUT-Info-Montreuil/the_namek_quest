@@ -89,7 +89,7 @@ public class Controlleur implements Initializable {
         this.trunksVue = new TrunksVue(pane,trunks);
         this.grandChefVue = new GrandChefVue(pane,grandChef);
         this.dendeVue = new DendeVue(pane,dende);
-        this.vieuxNamekVue = new VieuxNamekVue(pane , vieuxNamek);
+        this.vieuxNamekVue = new VieuxNamekVue(pane, vieuxNamek);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
@@ -111,7 +111,7 @@ public class Controlleur implements Initializable {
             environnement.update();
             this.grandChefVue.afficherMessageAcceuil();
             this.dendeVue.updateAffichageDende();
-            this.vieuxNamekVue.afficherMessageAcceuil();
+            this.vieuxNamekVue.updateAffichageVieuxNamek();
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 

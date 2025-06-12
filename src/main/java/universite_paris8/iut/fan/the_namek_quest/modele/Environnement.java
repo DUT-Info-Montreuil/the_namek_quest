@@ -28,7 +28,7 @@ public class Environnement {
         this.trunks= new Trunks(this);
         this.grandChef = new GrandChef(450,513,this, this.trunks);
         this.dende = new Dende(700,513,this, this.trunks);
-        this.vieuxNamek = new VieuxNamek(100,513, this,this.trunks);
+        this.vieuxNamek = new VieuxNamek(this.trunks.getX()-64, this.trunks.getY(), this,this.trunks);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -68,7 +68,7 @@ public class Environnement {
             trunks.gererSaut();
         }
         dende.apparitionOuDisparition();
-       // vieuxNamek.apparitionOuDisparition();
+        vieuxNamek.apparitionOuDisparition();
     }
 
     public boolean collisionBas(int x, int y) {
