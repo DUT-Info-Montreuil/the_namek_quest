@@ -65,12 +65,13 @@ public class BFS {
     public Position getNextMove(Position cible){
         ArrayList<Position> chemin = new ArrayList<>();
         Position positionUtilisé = cible;
-
+        System.out.println("debut");
         while(predecesseurs.get(positionUtilisé) != null) {
+            System.out.println(positionUtilisé.toString());
             chemin.add(positionUtilisé);
             positionUtilisé = predecesseurs.get(positionUtilisé);
         }
-
+        System.out.println("fin ");
        if(chemin.isEmpty()){
            return null;
        }if(chemin.size()==1){

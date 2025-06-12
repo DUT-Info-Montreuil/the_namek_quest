@@ -78,7 +78,7 @@ public class PersonnageEnnemis extends Personnage{
         if (this.getDirection() == 1) {
             int newX = this.getX() + this.getVitesse();
             if (newX > x * Constante.TAILLE_TUILE) newX = x * Constante.TAILLE_TUILE;
-            if (!getEnv().collisionDroite(newX, this.getY()) && !getEnv().collisionDroite(newX, this.getY()) ) {
+            if (!getEnv().collisionDroite(newX, this.getY()) && !getEnv().collisionDroite(newX, this.getY())) {
                 this.setX(newX);
             }
         } else if (this.getDirection() == -1) {
@@ -89,7 +89,7 @@ public class PersonnageEnnemis extends Personnage{
             }
         }
 
-        if (this.getY() < y * Constante.TAILLE_TUILE) {
+        /*if (this.getY() < y * Constante.TAILLE_TUILE) {
             int newY = this.getY() + this.getVitesse();
             if (newY > y * Constante.TAILLE_TUILE) newY = y * Constante.TAILLE_TUILE;
             this.setY(newY);
@@ -99,6 +99,7 @@ public class PersonnageEnnemis extends Personnage{
             this.setY(newY);
         }
         System.out.println("Position ennemis : " + this.getX() + " - " + this.getY());
+    }*/
     }
 }
 
