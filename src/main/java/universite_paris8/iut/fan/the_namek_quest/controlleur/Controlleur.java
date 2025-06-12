@@ -144,6 +144,8 @@ public class Controlleur implements Initializable {
         this.pointVieVue.getBarreDeVie().setTranslateX(trunks.getX()-750);
         this.pointVieVue.getBarreDeVie().setTranslateY(trunks.getY()-500);
 
+        this.inventaireVue.getCapsuleVue().setTranslateX(trunks.getX()+750);
+        this.inventaireVue.getCapsuleVue().setTranslateY(trunks.getY()-500);
 
     }
 

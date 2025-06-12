@@ -48,6 +48,9 @@ public class InventaireVue {
         afficherLogoInventaire();
     }
 
+    public ImageView getCapsuleVue() {
+        return capsuleVue;
+    }
 
     public void afficherLogoInventaire() {
         if (!this.estOuvert()) {
