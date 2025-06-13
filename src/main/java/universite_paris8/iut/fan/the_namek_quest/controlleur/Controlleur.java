@@ -112,6 +112,7 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update();
             centrerVueSurTrunks();
+            trunksVue.changerImage();
             //grandChefVue.afficherMessageAcceuil();
 
             if (trunks.estMort()) {
@@ -139,12 +140,12 @@ public class Controlleur implements Initializable {
 
         paneScroll.setTranslateX(centreX);
         paneScroll.setTranslateY(centreY);
-        paneInventaire.setTranslateX(trunks.getX());
-        paneInventaire.setTranslateY(trunks.getY()-500);
-        this.pointVieVue.getBarreDeVie().setTranslateX(trunks.getX()-750);
+        paneInventaire.setTranslateX(trunks.getX()+120);
+        paneInventaire.setTranslateY(trunks.getY()-507);
+        this.pointVieVue.getBarreDeVie().setTranslateX(trunks.getX()-920);
         this.pointVieVue.getBarreDeVie().setTranslateY(trunks.getY()-500);
 
-        this.inventaireVue.getCapsuleVue().setTranslateX(trunks.getX()+750);
+        this.inventaireVue.getCapsuleVue().setTranslateX(trunks.getX()+870);
         this.inventaireVue.getCapsuleVue().setTranslateY(trunks.getY()-500);
 
     }

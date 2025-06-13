@@ -99,6 +99,30 @@ public class Trunks extends Personnage {
         }
     }
 
+
+    /*private double velocite;
+
+    public void gererSaut2(){
+        velocite = -12;
+    }
+
+    public void gravite2(){
+            velocite += 0.5;
+            int steps = (int) Math.abs(velocite);
+            int direction = velocite > 0 ? 1 : -1;
+
+            for (int i = 0; i < steps; i++) {
+                if (direction > 0 && !getEnv().collisionBas(this.getX(), this.getY()+1) && !this.getEnv().collisionHaut(this.getX(), this.getY())) {
+                    this.setY(this.getY() + 1);
+                }
+                else {
+                    velocite = 0;
+                    break;
+                }
+
+            }
+    }*/
+
     public int getDirection() {
         return this.direction.getValue();
     }
