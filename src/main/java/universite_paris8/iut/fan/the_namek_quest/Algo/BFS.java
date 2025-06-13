@@ -21,7 +21,7 @@ public class BFS {
     public BFS(Environnement env) {
         this.env = env;
         predecesseurs = new HashMap<Position, Position>();
-        positionTrunks = new Position(env.getTrunks().getX()/Constante.TAILLE_TUILE,env.getTrunks().getY()/ Constante.TAILLE_TUILE);
+        positionTrunks = new Position(env.getTrunks().getX()/(Constante.TAILLE_TUILE-1),env.getTrunks().getY()/ (Constante.TAILLE_TUILE-1));
         this.g = new Grille(this.env,env.getTerrain().hauteurTerrain(),env.getTerrain().largeurTerrain());
         algoBFS();
     }
@@ -65,13 +65,14 @@ public class BFS {
     public Position getNextMove(Position cible){
         ArrayList<Position> chemin = new ArrayList<>();
         Position positionUtilisé = cible;
-        System.out.println("debut");
+
         while(predecesseurs.get(positionUtilisé) != null) {
             System.out.println(positionUtilisé.toString());
             chemin.add(positionUtilisé);
             positionUtilisé = predecesseurs.get(positionUtilisé);
+
         }
-        System.out.println("fin ");
+
        if(chemin.isEmpty()){
            return null;
        }if(chemin.size()==1){

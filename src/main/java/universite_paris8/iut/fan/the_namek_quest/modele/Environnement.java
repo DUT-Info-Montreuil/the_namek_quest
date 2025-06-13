@@ -49,6 +49,7 @@ public class Environnement {
         trunks.seDeplacer();
 
         int nouvelleYEnnemis = this.gravite(personnageEnnemis.getX(), personnageEnnemis.getY());
+        System.out.println("y ennemis = "+ nouvelleYEnnemis);
         personnageEnnemis.setY(nouvelleYEnnemis);
 
         Position  ennemiPos = new Position(personnageEnnemis.getX() / Constante.TAILLE_TUILE, personnageEnnemis.getY() / Constante.TAILLE_TUILE);
@@ -67,10 +68,6 @@ public class Environnement {
         } else {
             trunks.gererSaut();
         }
-
-        System.out.println("Position Trunks en pixel : " + trunks.getX() + " - " + trunks.getY());
-        System.out.println("Position ennemis en pixel : " + personnageEnnemis.getX() + " - " + personnageEnnemis.getY());
-
 
     }
 

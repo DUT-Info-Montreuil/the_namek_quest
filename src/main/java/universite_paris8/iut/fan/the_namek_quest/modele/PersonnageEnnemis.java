@@ -24,7 +24,7 @@ public class PersonnageEnnemis extends Personnage{
 
     public void deplacement(int x, int y) {
         int cibleX = x * Constante.TAILLE_TUILE;
-        int cibleY = y * Constante.TAILLE_TUILE;
+        //int cibleY = y * Constante.TAILLE_TUILE;
         int vitesse = this.getVitesse();
 
         // Déplacement horizontal vers la prochaine case du chemin
@@ -32,27 +32,19 @@ public class PersonnageEnnemis extends Personnage{
             int newX = this.getX() + vitesse;
             if (newX > cibleX) newX = cibleX;
             if (!getEnv().collisionDroite(newX, this.getY())) {
+                System.out.println("Collision droite");
                 this.setX(newX);
             }
         } else if (this.getX() > cibleX) {
             int newX = this.getX() - vitesse;
             if (newX < cibleX) newX = cibleX;
             if (!getEnv().collisionGauche(newX, this.getY())) {
+                System.out.println("Collision gauche");
                 this.setX(newX);
             }
         }
 
-        // Monter si besoin (ex : échelle)
-        if (this.getY() > cibleY) {
-            int newY = this.getY() - vitesse;
-            if (newY < cibleY) newY = cibleY;
-            if (!getEnv().collisionHaut(this.getX(), newY)) {
-                this.setY(newY);
-            }
-        }
 
-        // La gravité gère la descente
-        System.out.println("Position ennemis : " + this.getX() + " - " + this.getY());
     }
 }
 
