@@ -33,12 +33,12 @@ public class Souris implements EventHandler<MouseEvent> {
             double x = mouseEvent.getX();
             double y = mouseEvent.getY();
 
-            // Bouton start
+           /* // Bouton start
             if (x > 330 && x < 530 && y > 420 && y < 480) {
                 System.out.println("clic start");
                 controlleur.demarrerJeu();
                 return;
-            }
+            }*/
 
             // Action dans le jeu (creuser ou poser)
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), x, y)) {

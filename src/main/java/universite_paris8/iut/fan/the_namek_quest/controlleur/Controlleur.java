@@ -72,8 +72,7 @@ public class Controlleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuDemarrage = new MenuDemarrage();
-        menuDemarrage.afficherMenuDemarrage(pane);
-
+        menuDemarrage.afficherMenuDemarrage(pane, this::demarrerJeu);
         this.environnement = new Environnement();
         this.trunks = environnement.getTrunks();
         this.grandChef = environnement.getGrandChef();
