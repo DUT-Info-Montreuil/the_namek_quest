@@ -24,6 +24,8 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.modele.*;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.PersonnageEnnemis;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
@@ -37,14 +39,18 @@ import java.util.ResourceBundle;
 public class Controlleur implements Initializable {
 
     private Environnement environnement;
-    private Terrain terrain;
+
     private Trunks trunks;
     private TrunksVue trunksVue;
+    private Terrain terrain;
     private TerrainVue terrainVue;
+    private PersonnageEnnemis personnageEnnemis;
+    private PersonnageEnnemisVue personnageEnnemisVue;
     private Timeline gameLoop;
     private InventaireVue inventaireVue;
     private Inventaire inventaire;
     private InventaireListener inventaireListener;
+    private ObservableEnnemis observableEnnemis;
     private Clavier clavier;
     private Souris souris;
     private GrandChefVue grandChefVue;
@@ -96,10 +102,31 @@ public class Controlleur implements Initializable {
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
         this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);
+        this.observableEnnemis = new ObservableEnnemis(pane);
+        environnement.getPersonnageEnnemisList().addListener(observableEnnemis);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         this.pane.addEventHandler(KeyEvent.KEY_RELEASED,clavier);
+
+
+        /*this.personnageEnnemis.getPvProp().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() <= 0) {
+               pane.getChildren().remove(personnageEnnemisVue.getPersoImage());
+                environnement.supprimerEnnemi();
+
+            }
+        });*/
+
+        environnement.ajouterEnnemi();
+        for (PersonnageEnnemis ennemi : environnement.getPersonnageEnnemisList()) {
+            ennemi.getPvProp().addListener((obs, oldVal, newVal) -> {
+                if (ennemi.estMort()) {
+                    environnement.getPersonnageEnnemisList().remove(ennemi);
+                }
+            });
+        }
+
         pane.setFocusTraversable(true); // autorise le focus
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement

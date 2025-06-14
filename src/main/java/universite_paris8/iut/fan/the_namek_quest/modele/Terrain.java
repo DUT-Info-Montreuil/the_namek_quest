@@ -58,6 +58,10 @@ public class Terrain {
             {1, 1, 1, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 2, 2, 2, 3, 3, 3},
             {2, 2, 2, 6, 2, 2, 9, 2, 2, 2, 2, 8, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 3, 3},
+            {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
     };
 
@@ -68,6 +72,7 @@ public class Terrain {
         this.height = hauteurTerrain() * Constante.TAILLE_TUILE;
         this.width = largeurTerrain() * Constante.TAILLE_TUILE;
     }
+
 
     /**
      * Retourne la hauteur du terrain en nombre de cases (lignes).
@@ -133,6 +138,7 @@ public class Terrain {
     public boolean dansTerrain(int x, int y) {
         return (x >= 0 && x < width && y >= 0 && y < height);
     }
+    public boolean dansTerrainModel(int x, int y) { return (x >= 0 && x < hauteurTerrain() && y >= 0 && y < largeurTerrain());}
 
     /**
      * Modifie la tuile en position (c, l) en ciel (code 1).

@@ -1,10 +1,11 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import universite_paris8.iut.fan.the_namek_quest.Algo.BFS;
+import universite_paris8.iut.fan.the_namek_quest.Algo.Position;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.VieuxNamek;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.*;
 
 /**
  * Classe Environnement
@@ -23,6 +24,9 @@ public class Environnement {
     private GrandChef grandChef;
     private Dende dende;
     private VieuxNamek vieuxNamek;
+    private PersonnageEnnemis personnageEnnemis;
+    private ObservableList<PersonnageEnnemis> personnageEnnemisList ;
+    private BFS bfs;
 
     // --- Constructeur ---
     public Environnement() {
@@ -31,6 +35,21 @@ public class Environnement {
         this.grandChef = new GrandChef(450, 513, this, this.trunks);
         this.dende = new Dende(700, 513, this, this.trunks);
         this.vieuxNamek = new VieuxNamek(this.trunks.getX() - 64, this.trunks.getY(), this, this.trunks);
+        this.trunks= new Trunks(this);
+        this.personnageEnnemis = new PersonnageEnnemis(this);
+        this.personnageEnnemisList = FXCollections.observableArrayList();
+        this.bfs = new BFS(this);
+
+    }
+
+    public void ajouterEnnemi() {
+       for(int i=0;i<3;i++) {
+        this.personnageEnnemisList.add(new  PersonnageEnnemis(this,250 + i * 50, 400));
+       }
+    }
+
+    public void supprimerEnnemi() {
+        this.personnageEnnemis = null;
     }
 
     // --- Getters et Setters ---
@@ -41,9 +60,34 @@ public class Environnement {
     public Trunks getTrunks() {
         return trunks;
     }
+    public PersonnageEnnemis getPersonnageEnnemis() {
+        return this.personnageEnnemis;
+    }
 
     public void setTrunks(Trunks trunks) {
         this.trunks = trunks;
+    }
+
+    public ObservableList<PersonnageEnnemis> getPersonnageEnnemisList() {
+        return personnageEnnemisList;
+    }
+
+    public PersonnageEnnemis trouverEnnemi(int xSouris, int ySouris) {
+        for (PersonnageEnnemis ennemi : personnageEnnemisList) {
+            if(ennemiTouche(ennemi.getX(),ennemi.getY(), xSouris, ySouris)) {
+                return ennemi;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean ennemiTouche(int x, int y,int xSouris, int ySouris) {
+        int xEnnemi = x;
+        int yEnnemi = y ;
+        return (xSouris >= xEnnemi && xSouris <= xEnnemi + Constante.TAILLE_TUILE &&
+                ySouris >= yEnnemi && ySouris <= yEnnemi + Constante.TAILLE_TUILE);
+
     }
 
     public GrandChef getGrandChef() {
@@ -60,10 +104,39 @@ public class Environnement {
 
     // --- Mise à jour globale de l'environnement (appelée à chaque frame) ---
     public void update() {
+
         trunks.seDeplacer();
         trunks.increaseKI();
+        bfs = new BFS(this);
+
+        if(!this.personnageEnnemisList.isEmpty()){
+            for(PersonnageEnnemis p : this.personnageEnnemisList){
+                //gavité l'ennemi
+                int nouvelleYEnnemis = this.gravite(p.getX(), p.getY());
+                p.setY(nouvelleYEnnemis);
+
+                // Déplacement de l'ennemi
+                Position  ennemiPos = new Position(p.getX() / Constante.TAILLE_TUILE, p.getY() / Constante.TAILLE_TUILE);
+                Position cible = bfs.getNextMove(ennemiPos);
+                if (cible != null && !caseOccupeeParEnnemi(cible.getX(), cible.getY(), p)) {
+                    p.deplacement(cible.getX(), cible.getY());
+                }else {
+                    System.out.println("rentre ici");
+                    p.deplacementAleatoire();
+                }
+
+                //Attaque de l'ennemi
+//                if (trunksAProximite(p.getX(), p.getY())) {
+//                    trunks.decrementerPv(10); // Trunks subit des dégâts
+//                    System.out.println("Trunks a été attaqué par " + p.getId());
+//                }
+            }
+        }
+
+        // Gestion de la gravité pour Trunks
+
         if (!trunks.estEnSaut()) {
-            int nouvelleY = trunks.gravite(trunks.getX(), trunks.getY());
+            int nouvelleY = this.gravite(trunks.getX(), trunks.getY());
             trunks.setY(nouvelleY);
         } else {
             trunks.gererSaut();
@@ -81,6 +154,10 @@ public class Environnement {
      * @param y Position Y du personnage
      * @return true si une collision est détectée en bas
      */
+    public boolean trunksAProximite(int x,int y) {
+        return trunks.getX() >= x - 80 && trunks.getX() <= x + 50;
+    }
+
     public boolean collisionBas(int x, int y) {
         int yTest = y + Constante.HAUTEUR_PERSO;
 
@@ -148,4 +225,24 @@ public class Environnement {
 
         return false;
     }
+
+    public int gravite(int x, int y) {
+        if (!this.collisionBas(x, y)) {
+            y += 2;
+        }
+        return y;
+    }
+
+    public boolean caseOccupeeParEnnemi(int xCase, int yCase, PersonnageEnnemis perso) {
+        for (PersonnageEnnemis ennemi : personnageEnnemisList) {
+            if (ennemi != perso &&
+                    ennemi.getX() / Constante.TAILLE_TUILE == xCase &&
+                    ennemi.getY() / Constante.TAILLE_TUILE == yCase) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
