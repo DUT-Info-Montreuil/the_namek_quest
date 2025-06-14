@@ -32,6 +32,10 @@ public abstract class Personnage {
     public boolean estMort(){
         return this.getPv() <= 0;
     }
+    public void decrementerPv(int degat){
+        this.pv.setValue(this.pv.getValue() - degat);
+        System.out.println("PV restants : " + this.pv.getValue());
+    }
 
     //getter
     public int getX() {

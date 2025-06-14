@@ -47,27 +47,12 @@ public class BFS {
         }
     }
 
-    /*public Position getNextMove(Position from) {
-        if (!predecesseurs.containsKey(from)) {
-            return null;
-        }
-
-        Position pos = from;
-
-        while (predecesseurs.containsKey(pos) && !predecesseurs.get(pos).equals(positionTrunks)) {
-            System.out.println("next mouvement");
-            pos = predecesseurs.get(pos);
-        }
-
-        return pos;
-    }*/
-
     public Position getNextMove(Position cible){
         ArrayList<Position> chemin = new ArrayList<>();
         Position positionUtilisé = cible;
 
         while(predecesseurs.get(positionUtilisé) != null) {
-            System.out.println(positionUtilisé.toString());
+
             chemin.add(positionUtilisé);
             positionUtilisé = predecesseurs.get(positionUtilisé);
 
@@ -81,39 +66,6 @@ public class BFS {
            return chemin.get(1);
        }
     }
-
-    /*private ArrayList<Position> getVoisins(Position p) {
-        ArrayList<Position> voisins = new ArrayList<>();
-        int x = p.getX();
-        int y = p.getY();
-
-        
-        if(env.getTerrain().dansTerrainModel(x + 1, y) ){
-            if(env.getTerrain().codeTuile(y,x+1)==1){
-                voisins.add(new Position(x + 1, y));
-            }
-
-        }if(env.getTerrain().dansTerrainModel(x - 1, y) && env.getTerrain().codeTuile(x-1,y)==1){
-            if(env.getTerrain().codeTuile(y,x-1)==1){
-                voisins.add(new Position(x-1, y));
-            }
-        }if(env.getTerrain().dansTerrainModel(x, y+1)){
-            if(env.getTerrain().codeTuile(y+1,x)==1){
-                voisins.add(new Position(x,y+1));
-            }
-        }if(env.getTerrain().dansTerrainModel(x, y-1)){
-            if(env.getTerrain().codeTuile(y-1,x)==1){
-                voisins.add(new Position(x,y-1));
-            }
-
-        }
-
-        return voisins;
-    }*/
-
-
-
-
 
 
 }

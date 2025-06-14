@@ -14,6 +14,8 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.PersonnageEnnemis;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Arme;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
 
@@ -46,7 +48,21 @@ public class Souris implements EventHandler<MouseEvent> {
                     environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                }else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
+                }
+                //si trunks a une epee
+                else if (environnement.getTrunks().getObjectEquipe().getId() == 0) {
+                    Arme epee = (Arme) environnement.getTrunks().getObjectEquipe();
+                    //si un ennemis est touché
+                    System.out.println("entre dans la range epee");
+                        PersonnageEnnemis persotouché = environnement.trouverEnnemi((int) mouseEvent.getX(),(int) mouseEvent.getY());
+                    //System.out.println("persotouché = " + persotouché.toString());
+                        if(persotouché!=null) {
+                            System.out.println("ennemi touché");
+                            persotouché.decrementerPv(epee.getDegat());
+                        }
+
+
+                } else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
                     if(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==1){
                         Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
                         if(materieau.getQuantite()>0) {

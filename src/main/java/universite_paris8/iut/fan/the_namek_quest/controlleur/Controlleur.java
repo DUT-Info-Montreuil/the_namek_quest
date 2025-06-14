@@ -47,6 +47,7 @@ public class Controlleur implements Initializable {
     private InventaireVue inventaireVue;
     private Inventaire inventaire;
     private InventaireListener inventaireListener;
+    private ObservableEnnemis observableEnnemis;
     private Clavier clavier;
     private Souris souris;
 
@@ -73,7 +74,7 @@ public class Controlleur implements Initializable {
 
         this.environnement = new Environnement();
         this.trunks = environnement.getTrunks();
-        this.personnageEnnemis = environnement.getPersonnageEnnemis();
+        //this.personnageEnnemis = environnement.getPersonnageEnnemis();
 
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         souris = new Souris(this,this.environnement,this.terrainVue );
@@ -85,17 +86,36 @@ public class Controlleur implements Initializable {
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane); // enlève le menu
         this.trunksVue = new TrunksVue(pane,trunks);
-        this.personnageEnnemisVue = new PersonnageEnnemisVue(pane,this.personnageEnnemis);
+        //this.personnageEnnemisVue = new PersonnageEnnemisVue(pane,this.personnageEnnemis);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
+        this.observableEnnemis = new ObservableEnnemis(pane);
+        environnement.getPersonnageEnnemisList().addListener(observableEnnemis);
         this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         this.pane.addEventHandler(KeyEvent.KEY_RELEASED,clavier);
 
+
+        /*this.personnageEnnemis.getPvProp().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() <= 0) {
+               pane.getChildren().remove(personnageEnnemisVue.getPersoImage());
+                environnement.supprimerEnnemi();
+
+            }
+        });*/
+
+        environnement.ajouterEnnemi();
+        for (PersonnageEnnemis ennemi : environnement.getPersonnageEnnemisList()) {
+            ennemi.getPvProp().addListener((obs, oldVal, newVal) -> {
+                if (ennemi.estMort()) {
+                    environnement.getPersonnageEnnemisList().remove(ennemi);
+                }
+            });
+        }
         pane.setFocusTraversable(true); // autorise le focus
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement

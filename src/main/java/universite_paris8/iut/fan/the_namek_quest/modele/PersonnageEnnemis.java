@@ -4,23 +4,22 @@ import universite_paris8.iut.fan.the_namek_quest.Constante;
 
 public class PersonnageEnnemis extends Personnage{
 
+    private String id;
+    public static int compteur = 0;
+
     public PersonnageEnnemis(Environnement env) {
         super(250, 400, env);
         this.setVitesse(1);
         this.setDirection(0);
+        this.id = "E" + compteur;
     }
 
-
-    public void dectecteDirection(int xTrunks, int yTrunks) {
-        if (this.getX() < xTrunks) {
-            this.setDirection(1);
-        } else if (this.getX() > xTrunks) {
-            this.setDirection(-1);
-        } else if (this.getY() == yTrunks) {
-            this.setDirection(0);
-        }
+    public PersonnageEnnemis(Environnement env ,int x,int y) {
+        super(x, y, env);
+        this.setVitesse(1);
+        this.setDirection(0);
+        this.id = "E" + compteur;
     }
-
 
     public void deplacement(int x, int y) {
         int cibleX = x * Constante.TAILLE_TUILE;
@@ -32,18 +31,29 @@ public class PersonnageEnnemis extends Personnage{
             int newX = this.getX() + vitesse;
             if (newX > cibleX) newX = cibleX;
             if (!getEnv().collisionDroite(newX, this.getY())) {
-                System.out.println("Collision droite");
                 this.setX(newX);
             }
         } else if (this.getX() > cibleX) {
             int newX = this.getX() - vitesse;
             if (newX < cibleX) newX = cibleX;
             if (!getEnv().collisionGauche(newX, this.getY())) {
-                System.out.println("Collision gauche");
                 this.setX(newX);
             }
         }
 
+
+    }
+
+    public void deplacementAleatoire(){
+        int x = (int) Math.random()*2;
+        deplacement(this.getX()+(x*getVitesse()),this.getY());
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void attaque(){
 
     }
 }

@@ -94,9 +94,4 @@ public class Grille {
         this.obstacles.add(s);
     }
 
-
-
-    /*public Set<Position> adjacents(Position s) {
-        return (Set<Position>)(!this.estDeconnecte(s) ? (Set)this.listeAdj.get(s) : new HashSet());
-    }*/
 }

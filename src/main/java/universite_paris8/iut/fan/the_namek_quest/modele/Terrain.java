@@ -56,7 +56,7 @@ public class Terrain {
 
     public void setTuile(int c, int l,int typeTuile) {
         System.out.println("modif de la tuile en sol modele");
-        this.terrain[l][c] = 2;
+        this.terrain[l][c] = typeTuile;
         System.out.println(l + "-" + c);
     }
 
