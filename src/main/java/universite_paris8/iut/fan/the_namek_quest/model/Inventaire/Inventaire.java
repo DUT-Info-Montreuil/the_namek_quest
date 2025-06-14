@@ -63,11 +63,14 @@ public class Inventaire {
             case 9:
                 verifierRessource(9,new RocheDeNamek());
                 break;
-
-                    case 10 :
+            case 10 :
+                verifierRessource(10,new Arbres());
                 verifierRessource(10,new Arbres());
                 break;
-
+            case 11:
+                verifierRessource(10,new Arbres());
+                verifierRessource(10,new Arbres());
+                break;
             default:
                 break;
 

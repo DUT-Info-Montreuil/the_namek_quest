@@ -36,36 +36,36 @@ public class Souris implements EventHandler<MouseEvent> {
                 System.out.println("entre dans la range");
                 //si trunks a une pioche
                 if (environnement.getTrunks().getObjectEquipe().getId() == 1
-                        && (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==3
-                        ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==2)) {
+                        && (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 3
+                        || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 2)) {
 
-                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
+                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
                 }
                 //si trunks a une hache
-                else if (environnement.getTrunks().getObjectEquipe().getId()==2  && environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==10) {
-                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
+                else if (environnement.getTrunks().getObjectEquipe().getId() == 2 && (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 10 || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 11)) {
+                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                } else if (environnement.getTrunks().getObjectEquipe().getId()==99
-                        &&( (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==8 )
-                        || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==8 )) {
-                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
+                } else if (environnement.getTrunks().getObjectEquipe().getId() == 99
+                        && ((environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 8)
+                        || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 8)) {
+                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()));
                     environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
                     this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                } else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
-                    if(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==1){
+                }else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
+                    if (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 1) {
                         Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
-                        if(materieau.getQuantite()>0) {
+                        if (materieau.getQuantite() > 0) {
                             materieau.decrementerRessource();
                             environnement.getTerrain().poserBloc(mouseEvent.getX(), mouseEvent.getY(), materieau.getId());
-                            this.terrainVue.changerTuileSol((int) mouseEvent.getX(), (int) mouseEvent.getY());
+                            this.terrainVue.changerTuileSol((int) mouseEvent.getX(), (int) mouseEvent.getY(), materieau.getId());
                         }
+                    }
                     }
                 }
             }
         }
     }
-}
 

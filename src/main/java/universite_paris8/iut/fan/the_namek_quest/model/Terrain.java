@@ -41,8 +41,8 @@ public class Terrain {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 3, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
+            {1, 1, 1, 11, 1, 3, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1},
+            {1, 1, 1, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1},
             {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 2, 2, 2, 3, 3, 3},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2},
             {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
@@ -61,7 +61,7 @@ public class Terrain {
 
     public void setTuile(int c, int l,int typeTuile) {
         System.out.println("modif de la tuile en sol modele");
-        this.terrain[l][c] = 2;
+        this.terrain[l][c] = typeTuile;
         System.out.println(l + "-" + c);
     }
 
@@ -107,10 +107,31 @@ public class Terrain {
         if (caseY < 0 || caseY >= terrain.length || caseX < 0 || caseX >= terrain[0].length) {
             return false;
         }
+
         int code = terrain[caseY][caseX];
 
-        return (code == 1 || code == 4 || code == 5 || code == 6 || code == 7 || code == 8 || code == 9);
+        // Cas des cases "traversables"
+        if (code == 1) {
+            return true;
+        }
+
+        // Cas des murs (code 10)
+        if (code == 10) {
+            int c= xPixel % 32;
+
+            final int MARGE_GAUCHE_MUR = 3;
+            final int MARGE_DROITE_MUR = 23;
+
+            boolean dansZoneVideHorizontale = c < MARGE_GAUCHE_MUR || c >= (32 - MARGE_DROITE_MUR);
+
+            if (dansZoneVideHorizontale ) {
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
+
 
     public boolean collisionBas(int x, int y) {
         int yTest = y + HAUTEUR_PERSO;
@@ -189,6 +210,5 @@ public class Terrain {
         setTuile((int) (xSouris / TAILLE_TUILE), (int) (ySouris / TAILLE_TUILE),typeTuile);
         System.out.println("tuile creuser");
     }
-
 
 }

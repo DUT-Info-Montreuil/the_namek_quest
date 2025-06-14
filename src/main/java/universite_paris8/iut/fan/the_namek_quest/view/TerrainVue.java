@@ -28,6 +28,9 @@ public class TerrainVue {
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png"));
 
+        Image imageTronc = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/tronc.png"));
+        Image imageFeuillage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/feuille.png"));
+        Image imageMur = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/mur.png"));
         this.tuiles = new ImageView[terrain.largeurTerrain()][terrain.hauteurTerrain()];
 
 
@@ -45,6 +48,22 @@ public class TerrainVue {
                     tuiles[x][y] = new ImageView(imageHerbe);
                     //tilePane.getChildren().add(new ImageView(imageHerbe));
                 }
+
+
+
+
+                else if(this.terrain.codeTuile(x,y)==10){
+                    tuiles[x][y] = new ImageView(imageTronc);
+                    //tilePane.getChildren().add(new ImageView(imageHerbe));
+                }
+                else if(this.terrain.codeTuile(x,y)==11){
+                    tuiles[x][y] = new ImageView(imageFeuillage);
+                }
+                else if(this.terrain.codeTuile(x,y)==15){
+                    tuiles[x][y] = new ImageView(imageMur);
+                }
+
+
 
                 tilePane.getChildren().add(tuiles[x][y]);
                 /*tuiles[x][y].setFitWidth(tailleTuile);
@@ -65,8 +84,18 @@ public class TerrainVue {
 
     }
     /// TODO changer cette fonction avec un switch pour changer en fonction fu typ de bloc posé
-    public void changerTuileSol(int x, int y) {
+    public void changerTuileSol(int x, int y, int type) {
         System.out.println("changerTuile");
-        this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png")));
+        switch (type) {
+            case 2:
+                this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png")));
+                break;
+            case 10:
+                this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/mur.png")));
+                break;
+        }
+
     }
+
+
 }

@@ -62,6 +62,8 @@ public class InventaireVue {
         Image caseInventaire = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/caseInventaire.png") );
         Image Equipé = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/CaseObjetEquipe.png") );
         Image terre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/herbe.png") );
+
+        Image arbre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/bois.png") );
         ImageView caseInventaireVue;
         ImageView EquipéVue;
 
@@ -103,6 +105,9 @@ public class InventaireVue {
                             break;
                         case  "terre":
                                 img = new ImageView(terre);
+                            break;
+                        case "arbre":
+                            img = new ImageView(arbre);
                             break;
                     }
 
