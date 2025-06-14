@@ -9,12 +9,10 @@ package universite_paris8.iut.fan.the_namek_quest.vue;
  **/
 
 
-import javafx.fxml.FXML;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 
 public class TrunksVue {
     private ImageView persoImage;

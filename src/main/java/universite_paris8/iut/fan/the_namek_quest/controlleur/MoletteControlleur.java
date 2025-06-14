@@ -2,7 +2,7 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.ScrollEvent;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 
 /**

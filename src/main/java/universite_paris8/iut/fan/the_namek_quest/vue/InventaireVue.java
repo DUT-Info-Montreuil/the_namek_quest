@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -68,8 +68,11 @@ public class InventaireVue {
         Image caseInventaire = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/caseInventaire.png") );
         Image Equipé = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/CaseObjetEquipe.png") );
         Image terre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/herbe.png") );
+        Image bouleCristale = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/CaseObjetEquipe.png") );
+
         ImageView caseInventaireVue;
         ImageView EquipéVue;
+
 
         int x = 753;
         int y = 0;
@@ -109,6 +112,9 @@ public class InventaireVue {
                             break;
                         case  "terre":
                                 img = new ImageView(terre);
+                            break;
+                        case "boule":
+                            img = new ImageView(bouleCristale);
                             break;
                     }
 

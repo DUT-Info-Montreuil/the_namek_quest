@@ -1,6 +1,10 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
 import universite_paris8.iut.fan.the_namek_quest.Constante;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.VieuxNamek;
 
 /**
  * Classe Environnement
@@ -15,12 +19,16 @@ public class Environnement {
     private Terrain terrain;
     private Trunks trunks;
     private GrandChef grandChef;
+    private Dende dende;
+    private VieuxNamek vieuxNamek;
 
 
     public Environnement() {
         this.terrain = new Terrain();
         this.trunks= new Trunks(this);
         this.grandChef = new GrandChef(450,513,this, this.trunks);
+        this.dende = new Dende(700,513,this, this.trunks);
+        this.vieuxNamek = new VieuxNamek(this.trunks.getX()-64, this.trunks.getY(), this,this.trunks);
     }
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
@@ -42,6 +50,14 @@ public class Environnement {
         return grandChef;
     }
 
+    public Dende getDende() {
+        return dende;
+    }
+
+    public VieuxNamek getVieuxNamek() {
+        return vieuxNamek;
+    }
+
     public void update() {
 
         trunks.seDeplacer();
@@ -51,7 +67,8 @@ public class Environnement {
         } else {
             trunks.gererSaut();
         }
-
+        dende.apparitionOuDisparition();
+        vieuxNamek.apparitionOuDisparition();
     }
 
     public boolean collisionBas(int x, int y) {

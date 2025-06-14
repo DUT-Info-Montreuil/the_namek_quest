@@ -42,7 +42,6 @@ public class Souris implements EventHandler<MouseEvent> {
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())) {
                 System.out.println("entre dans la range");
                 //si trunks a une pioche
-
                 if (environnement.getTrunks().getObjectEquipe().getId() == 1
                         && (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==3
                         ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==2)) {

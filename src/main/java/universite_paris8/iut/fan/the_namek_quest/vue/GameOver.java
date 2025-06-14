@@ -18,7 +18,7 @@ public class GameOver {
 
     public void afficherGameOver(Pane pane) {
         gameOverPane = new Pane();
-        gameOverPane.setPrefSize(800, 600);
+
 
         Image gameOverImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/gameOver.png"));
         ImageView imageView = new ImageView(gameOverImage);

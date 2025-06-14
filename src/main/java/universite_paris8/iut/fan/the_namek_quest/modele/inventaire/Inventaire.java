@@ -7,14 +7,9 @@ package universite_paris8.iut.fan.the_namek_quest.modele.inventaire;
  * Utilise une ObservableList pour faciliter l'observation et la mise à jour en interface graphique.
  **/
 
- import javafx.collections.FXCollections;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.BouleCristal;
-import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
-import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Terre;
-import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Energie;
- import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.*;
-
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.*;
 
 public class Inventaire {
     private ObservableList<Object> inventaire;

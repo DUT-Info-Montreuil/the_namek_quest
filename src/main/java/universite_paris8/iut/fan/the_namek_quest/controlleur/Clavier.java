@@ -14,8 +14,9 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.modele.GrandChef;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
@@ -28,18 +29,20 @@ public class Clavier implements EventHandler<KeyEvent> {
     private InventaireVue inventaireVue;
     private TerrainVue  terrainVue;
     private GrandChef grandChef;
+    private Dende dende;
     private final BooleanProperty spacePressed = new SimpleBooleanProperty();
     private BooleanProperty qPressed = new SimpleBooleanProperty();
     private final BooleanProperty dPressed = new SimpleBooleanProperty();
     private final BooleanProperty vPressed = new SimpleBooleanProperty();
     private final BooleanProperty ePressed = new SimpleBooleanProperty();
 
-    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, TerrainVue terrainVue, GrandChef grandChef) {
+    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, TerrainVue terrainVue, GrandChef grandChef, Dende dende) {
         this.trunks = trunks;
         this.trunksVue = trunksVue;
         this.inventaireVue = inventaireVue;
         this.terrainVue = terrainVue;
         this.grandChef = grandChef;
+        this.dende = dende;
     }
 
     public void setupKeyHandlers(Pane pane) {
@@ -112,6 +115,10 @@ public class Clavier implements EventHandler<KeyEvent> {
         trunks.decrementerPv();
     }
 
+    public void handleP(){
+        dende.soignerTrunksSiProcheEtTouchePressee();
+    }
+
     @Override
     public void handle(KeyEvent keyEvent) {
         if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
@@ -133,6 +140,9 @@ public class Clavier implements EventHandler<KeyEvent> {
                     break;
                 case E:
                     handleE();
+                    break;
+                case P:
+                    handleP();
                     break;
             }
 

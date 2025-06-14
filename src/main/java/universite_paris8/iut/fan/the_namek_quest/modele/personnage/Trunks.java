@@ -1,8 +1,10 @@
-package universite_paris8.iut.fan.the_namek_quest.modele;
+package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.MainVide;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;

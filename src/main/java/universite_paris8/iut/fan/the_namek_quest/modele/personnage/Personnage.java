@@ -1,4 +1,4 @@
-package universite_paris8.iut.fan.the_namek_quest.modele;
+package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 
 /**
  * Classe Personnage
@@ -9,6 +9,7 @@ package universite_paris8.iut.fan.the_namek_quest.modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 
 public abstract class Personnage {
 
@@ -24,7 +25,7 @@ public abstract class Personnage {
         this.yProp = new SimpleIntegerProperty(y);
         this.vitesse = 1;
         this.env=env;
-        this.pv = new SimpleIntegerProperty(99);
+        this.pv = new SimpleIntegerProperty(100);
     }
 
     public boolean estMort(){
