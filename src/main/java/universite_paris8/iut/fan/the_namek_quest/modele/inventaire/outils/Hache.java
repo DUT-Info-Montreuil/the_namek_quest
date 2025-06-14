@@ -4,6 +4,4 @@ public class Hache extends Outils{
     public Hache() {
         super(2, "Hache");
     }
-
-
 }

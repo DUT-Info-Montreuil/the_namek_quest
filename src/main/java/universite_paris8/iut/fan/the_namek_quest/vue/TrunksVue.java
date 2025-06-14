@@ -1,5 +1,13 @@
 package universite_paris8.iut.fan.the_namek_quest.vue;
 
+
+
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
+
 /**
  * Classe TrunksVue
  * ------------------
@@ -7,14 +15,6 @@ package universite_paris8.iut.fan.the_namek_quest.vue;
  * Elle lie les propriétés du modèle (classe Trunks) à des composants JavaFX
  * comme une ImageView et une barre de vie, pour refléter visuellement son état.
  **/
-
-
-import javafx.fxml.FXML;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
 
 public class TrunksVue {
     private ImageView persoImage;
@@ -36,17 +36,6 @@ public class TrunksVue {
         persoImage.translateXProperty().bind(trunks.getXProp());
         persoImage.translateYProperty().bind(trunks.getYProp());
         pane.getChildren().add(persoImage);
-    }
-
-    public void changerImage(){
-        //System.out.println("rentre dans la condition");
-        if(trunks.getDirection()=='d'){
-            changerImageDroite();
-            System.out.println("rentre a droite");
-        } else if (trunks.getDirection()=='g') {
-            System.out.println("rentre a gauche");
-            changerImageGauche();
-        }
     }
 
     public void changerImageDroite() {

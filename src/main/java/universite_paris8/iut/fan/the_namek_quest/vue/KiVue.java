@@ -1,10 +1,8 @@
 package universite_paris8.iut.fan.the_namek_quest.vue;
 
-import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
-import universite_paris8.iut.fan.the_namek_quest.modele.Personnage;
-import universite_paris8.iut.fan.the_namek_quest.modele.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.*;
 
 public class KiVue {
     private ProgressBar barreDeKI;

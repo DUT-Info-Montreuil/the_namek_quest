@@ -1,4 +1,6 @@
-package universite_paris8.iut.fan.the_namek_quest.modele.inventaire;
+package universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils;
+
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Element;
 
 /**
  * Classe MainVide
@@ -8,7 +10,7 @@ package universite_paris8.iut.fan.the_namek_quest.modele.inventaire;
  * Hérite de la classe Object, avec un identifiant fixe (99) et un nom par défaut ("main vide").
  **/
 
-public class MainVide extends Object {
+public class MainVide extends Element {
 
     public MainVide() {
         super(99, "main vide");
