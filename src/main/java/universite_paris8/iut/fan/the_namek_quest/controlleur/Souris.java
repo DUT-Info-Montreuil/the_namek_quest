@@ -1,27 +1,23 @@
 package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
-
-/**
- * Classe Souris
- * --------------
- * Gère les événements de souris (clics) dans le jeu.
- * Cette classe détecte les clics de souris, vérifie la zone cliquée
- * et agit en conséquence, notamment pour commencer le jeu,
- * creuser des blocs ou poser des blocs dans l'environnement.
- **/
-
-
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
 
+/**
+ * Classe Souris
+ * --------------
+ * Gère les clics de souris dans le jeu :
+ * - Lance le jeu via le bouton "start"
+ * - Permet de creuser ou poser des blocs selon l'objet équipé
+ */
 public class Souris implements EventHandler<MouseEvent> {
 
     private final Controlleur controlleur;
-    private Environnement environnement;
-    private TerrainVue terrainVue;
+    private final Environnement environnement;
+    private final TerrainVue terrainVue;
 
     public Souris(Controlleur controlleur, Environnement environnement, TerrainVue terrainVue) {
         this.controlleur = controlleur;
@@ -33,49 +29,56 @@ public class Souris implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
             System.out.println("clic");
-            if (mouseEvent.getX() > 330 && mouseEvent.getX() < 530
-                    && mouseEvent.getY() > 420 && mouseEvent.getY() < 480) {
+
+            double x = mouseEvent.getX();
+            double y = mouseEvent.getY();
+
+            // Bouton start
+            if (x > 330 && x < 530 && y > 420 && y < 480) {
                 System.out.println("clic start");
                 controlleur.demarrerJeu();
+                return;
             }
 
-            if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), mouseEvent.getX(), mouseEvent.getY())) {
+            // Action dans le jeu (creuser ou poser)
+            if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), x, y)) {
                 System.out.println("entre dans la range");
-                //si trunks a une pioche
-                if (environnement.getTrunks().getObjectEquipe().getId() == 1
-                        && (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==3
-                        ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==2 ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==6 ||environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==9)) {
-                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
-                    environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
-                    this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
+
+                int idTuile = environnement.getTerrain().codeTuilePixel((int) x, (int) y);
+                int idObjet = environnement.getTrunks().getObjectEquipe().getId();
+
+                // Si Trunks a une pioche (id 1)
+                if (idObjet == 1 && (idTuile == 2 || idTuile == 3 || idTuile == 6 || idTuile == 9)) {
+                    environnement.getTrunks().getInventaire().ajoutRessource(idTuile);
+                    environnement.getTerrain().casserBloc(x, y);
+                    terrainVue.changerTuileCiel((int) x, (int) y);
                 }
-                //si trunks a une hache
-                else if (environnement.getTrunks().getObjectEquipe().getId()==2  && environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==10) {
-                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
-                    environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
-                    this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
 
-                //si trunks a les mains vides
-                } else if (environnement.getTrunks().getObjectEquipe().getId()==99
-                        &&( (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==8)
-                        || environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==6)) {
-                    environnement.getTrunks().getInventaire().ajoutRessource(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY()));
-                    environnement.getTerrain().casserBloc(mouseEvent.getX(), mouseEvent.getY());
-                    this.terrainVue.changerTuileCiel((int) mouseEvent.getX(), (int) mouseEvent.getY());
+                // Si Trunks a une hache (id 2)
+                else if (idObjet == 2 && (idTuile == 10 || idTuile == 11)) {
+                    environnement.getTrunks().getInventaire().ajoutRessource(idTuile);
+                    environnement.getTerrain().casserBloc(x, y);
+                    terrainVue.changerTuileCiel((int) x, (int) y);
+                }
 
-                //si trunks a du materiaux en mains
-                } else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
-                    if(environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(),(int) mouseEvent.getY())==1){
-                        Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
-                        if(materieau.getQuantite()>0) {
-                            materieau.decrementerRessource();
-                            environnement.getTerrain().poserBloc(mouseEvent.getX(), mouseEvent.getY(), materieau.getId());
-                            this.terrainVue.changerTuileSol((int) mouseEvent.getX(), (int) mouseEvent.getY());
-                        }
+                // Si Trunks a les mains vides (id 99)
+                else if (idObjet == 99 && (idTuile == 6 || idTuile == 8)) {
+                    environnement.getTrunks().getInventaire().ajoutRessource(idTuile);
+                    environnement.getTerrain().casserBloc(x, y);
+                    terrainVue.changerTuileCiel((int) x, (int) y);
+                }
+
+                // Si Trunks tient un matériau
+                else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
+                    Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
+
+                    if (idTuile == 1 && materieau.getQuantite() > 0) {
+                        materieau.decrementerRessource();
+                        environnement.getTerrain().poserBloc(x, y, materieau.getId());
+                        terrainVue.changerTuile((int) x, (int) y, materieau.getId());
                     }
                 }
             }
         }
     }
 }
-

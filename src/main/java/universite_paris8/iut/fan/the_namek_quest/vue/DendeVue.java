@@ -23,7 +23,7 @@ public class DendeVue {
     public void updateAffichageDende() {
         if (dende.estVisible()) {
             if (persoImage == null) {
-                Image imageDende = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/dendeNuage.png").toExternalForm());
+                Image imageDende = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/PNJ/dendeNuage.png").toExternalForm());
                 persoImage = new ImageView(imageDende);
                 persoImage.translateXProperty().bind(dende.getXProp());
                 persoImage.translateYProperty().bind(dende.getYProp());

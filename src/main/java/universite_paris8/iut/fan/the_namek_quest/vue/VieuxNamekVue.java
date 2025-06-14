@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.VieuxNamek;
 
 public class VieuxNamekVue {
@@ -26,7 +25,7 @@ public class VieuxNamekVue {
 
         if (doitAfficher) {
             if (persoImage == null) {
-                Image imageVieuxNamek = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/vieux.png").toExternalForm());
+                Image imageVieuxNamek = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/PNJ/vieux.png").toExternalForm());
                 persoImage = new ImageView(imageVieuxNamek);
                 persoImage.translateXProperty().bind(vieuxNamek.getXProp());
                 persoImage.translateYProperty().bind(vieuxNamek.getYProp());

@@ -71,7 +71,7 @@ public class InventaireVue {
         Image bouleCristale1 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/b.png") );
         Image Haricot = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/haricot.png") );
         Image roche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/roche.png") );
-
+        Image arbre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/bois.png"));
         ImageView caseInventaireVue;
         ImageView EquipéVue;
 
@@ -123,6 +123,8 @@ public class InventaireVue {
                             break;
                         case "roche":
                             img = new ImageView(roche);
+                        case "arbre":
+                            img = new ImageView(arbre);
                             break;
                     }
 

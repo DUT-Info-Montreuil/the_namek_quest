@@ -32,13 +32,15 @@ public class TerrainVue {
         tilePane.setPrefColumns(terrain.largeurTerrain());
         tilePane.setPrefSize(terrain.largeurTerrain()*tailleTuile,terrain.hauteurTerrain()*tailleTuile);
         tilePane.setFocusTraversable(true);
-
         Image imageCiel = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/ciel.png") );
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/herbe.png"));
         Image imageCristal =new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/bouleDansTerre.png"));
         Image imageHaricot =new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/haricotDansTerre.png"));
         Image imageRoche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/roche.png"));
+        Image imageTronc = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/tronc.png"));
+        Image imageFeuillage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/feuille.png"));
+        Image imageMur = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/mur.png"));
         this.tuiles = new ImageView[terrain.largeurTerrain()][terrain.hauteurTerrain()];
 
 
@@ -62,6 +64,18 @@ public class TerrainVue {
                 else if(this.terrain.codeTuile(x,y)==9){
                     tuiles[x][y] = new ImageView(imageRoche);
                 }
+                else if(this.terrain.codeTuile(x,y)==10){
+                    tuiles[x][y] = new ImageView(imageTronc);
+                    //tilePane.getChildren().add(new ImageView(imageHerbe));
+                }
+                else if(this.terrain.codeTuile(x,y)==11){
+                    tuiles[x][y] = new ImageView(imageFeuillage);
+                }
+                else if(this.terrain.codeTuile(x,y)==15){
+                    tuiles[x][y] = new ImageView(imageMur);
+                }
+
+
 
                 tilePane.getChildren().add(tuiles[x][y]);
             }
@@ -75,9 +89,19 @@ public class TerrainVue {
         this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/ciel.png")));
 
     }
-    /// TODO changer cette fonction avec un switch pour changer en fonction fu typ de bloc posé
-    public void changerTuileSol(int x, int y) {
+
+
+    public void changerTuile(int x, int y, int type) {
         System.out.println("changerTuile");
-        this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/sol.png")));
+        switch (type) {
+            case 2:
+                this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/sol.png")));
+                break;
+            case 10:
+                this.tuiles[x/32][y/32].setImage(new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/mur.png")));
+                break;
+        }
     }
+
+
 }
