@@ -19,11 +19,10 @@ public class VieuxNamekVue {
     public VieuxNamekVue(Pane pane, VieuxNamek vieuxNamek) {
         this.vieuxNamek = vieuxNamek;
         this.pane = pane;
-        this.persoImage = new ImageView();
     }
 
     public void updateAffichageVieuxNamek() {
-        boolean doitAfficher = vieuxNamek.estVisible() && vieuxNamek.trunksAProximite();
+        boolean doitAfficher = vieuxNamek.estVisible();
 
         if (doitAfficher) {
             if (persoImage == null) {
@@ -33,16 +32,19 @@ public class VieuxNamekVue {
                 persoImage.translateYProperty().bind(vieuxNamek.getYProp());
                 pane.getChildren().add(persoImage);
             }
+            // Afficher message si Trunks est proche
+            afficherMessageAcceuil();
         } else {
             if (persoImage != null) {
                 pane.getChildren().remove(persoImage);
                 persoImage = null;
             }
+            if (labelMessage != null) {
+                pane.getChildren().remove(labelMessage);
+                labelMessage = null;
+            }
         }
-        afficherMessageAcceuil();
     }
-
-
 
     public void afficherMessageAcceuil() {
         if (vieuxNamek.trunksAProximite()) {
@@ -57,10 +59,12 @@ public class VieuxNamekVue {
                                 "-fx-background-radius: 10;" +
                                 "-fx-border-radius: 10;"
                 );
-                labelMessage.setLayoutX(vieuxNamek.getXProp().doubleValue());
-                labelMessage.setLayoutY(vieuxNamek.getYProp().doubleValue() - 106);
                 pane.getChildren().add(labelMessage);
             }
+
+            // Mise à jour de la position du message pour qu’il suive le Namek
+            labelMessage.setLayoutX(vieuxNamek.getXProp().doubleValue());
+            labelMessage.setLayoutY(vieuxNamek.getYProp().doubleValue() - 106);
         } else {
             if (labelMessage != null) {
                 pane.getChildren().remove(labelMessage);
@@ -69,6 +73,7 @@ public class VieuxNamekVue {
         }
     }
 }
+
 
 
 

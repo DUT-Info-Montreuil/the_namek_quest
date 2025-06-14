@@ -18,7 +18,7 @@ public class VieuxNamek extends PersonnageNonJoueur {
 
     private Trunks trunks;
     private int boulesDejaFellicitees = 0;
-    private boolean dejaApparu = false;
+    private boolean visible = false;
 
     public VieuxNamek(int x, int y, Environnement env, Trunks trunks) {
         super(x, y, env);
@@ -36,30 +36,35 @@ public class VieuxNamek extends PersonnageNonJoueur {
         return total;
     }
 
-    public boolean doitApparaitre() {
-        int nbActuel = compterBoulesDeCristal();
-        return nbActuel > boulesDejaFellicitees;
-    }
-
     public void apparitionOuDisparition() {
-        if (doitApparaitre()) {
-            if (!dejaApparu) {
-                setX(trunks.getX() - 64);
-                setY(trunks.getY());
-                dejaApparu = true;
+        int nbBoules = compterBoulesDeCristal();
+
+        // Si Trunks a une nouvelle boule (max 3 fois)
+        if (nbBoules > boulesDejaFellicitees && boulesDejaFellicitees < 3) {
+            // On fait apparaître le Vieux Namek
+            setX(trunks.getX() - 64);
+            setY(trunks.getY());
+            visible = true;
+            boulesDejaFellicitees = nbBoules;
+        }
+
+        // Si le Vieux Namek est visible, on vérifie la distance
+        if (visible) {
+            double distance = Math.hypot(trunks.getX() - getX(), trunks.getY() - getY());
+            if (distance > 100) {
+                disparaitre();
             }
-        } else {
-            disparaitre();
         }
     }
 
     public void disparaitre() {
         setX(-1000);
         setY(-1000);
-        dejaApparu = false;
+        visible = false;
     }
 
     public boolean estVisible() {
-        return dejaApparu;
+        return visible;
     }
 }
+
