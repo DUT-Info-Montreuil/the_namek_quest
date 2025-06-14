@@ -1,61 +1,128 @@
 package universite_paris8.iut.fan.the_namek_quest.vue;
 
-import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
+
+
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
-import universite_paris8.iut.fan.the_namek_quest.Controller;
-import universite_paris8.iut.fan.the_namek_quest.Launcher;
-import universite_paris8.iut.fan.the_namek_quest.model.Terrain;
-import universite_paris8.iut.fan.the_namek_quest.model.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
+
+/**
+ * Classe TrunksVue
+ * ------------------
+ * Gère l'affichage graphique du personnage Trunks dans l'interface utilisateur.
+ * Elle lie les propriétés du modèle (classe Trunks) à des composants JavaFX
+ * comme une ImageView et une barre de vie, pour refléter visuellement son état.
+ **/
 
 public class TrunksVue {
-    @FXML
     private ImageView persoImage;
-    private double persoImageX = 0;
-    private final int tailleTuile = 16;
     private Pane pane;
     private Trunks trunks;
 
 
-    public TrunksVue(Pane pane) {
-        this.trunks = new Trunks();
+    public TrunksVue(Pane pane,Trunks trunks) {
+        this.trunks = trunks;
         this.pane = pane;
         this.persoImage = new ImageView();
-
         this.afficherTrunks();
+
     }
 
     public void afficherTrunks() {
-
-        Image imagePerso = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks.png").toExternalForm());
-        System.out.println(imagePerso);
-        ImageView imageViewPerso = new ImageView(imagePerso);
-        persoImage.setImage(imagePerso);
+        Image imagePersoDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-droite.png").toExternalForm());
+        persoImage.setImage(imagePersoDroite);
         persoImage.translateXProperty().bind(trunks.getXProp());
         persoImage.translateYProperty().bind(trunks.getYProp());
         pane.getChildren().add(persoImage);
+    }
 
-        //tilePane.setFocusTraversable(true);
+    public void changerImageDroite() {
 
-
-           Platform.runLater(() -> {
-                pane.getScene().setOnKeyPressed(event -> {
-                    switch (event.getCode()) {
-                        case D:
-                            this.trunks.setX(this.trunks.getX()+16);
-                            break;
-                        case Q:
-                            this.trunks.setX(this.trunks.getX()-16);
-                            break;
-                    }
-                    //persoImage.setTranslateX(persoImageX);
-                    //persoImage.setTranslateX(persoImageX);
-                });
-            });
+        //TODO charger les images une seule fois au démarrage de TrunksVue
+        Image imagePersoDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-droite.png").toExternalForm());
+        switch (trunks.getObjectEquipe().getId()) {
+            case 0:
+                changerImageEpeeDroite();
+                break;
+            case 1:
+                changerImagePiocheDroite();
+                break;
+            case 2:
+                changerImageHacheDroite();
+                break;
+            default:
+                persoImage.setImage(imagePersoDroite);
+                break;
+        }
 
     }
+
+    public void changerImageGauche() {
+        Image imagePersoGauche = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-gauche.png").toExternalForm());
+        switch (trunks.getObjectEquipe().getId()) {
+            case 0:
+                changerImageEpeeGauche();
+                break;
+            case 1:
+                changerImagePiocheGauche();
+                break;
+            case 2:
+                changerImageHacheGauche();
+                break;
+            default:
+                persoImage.setImage(imagePersoGauche);
+                break;
+        }
+    }
+
+    public void changerImagePiocheDroite(){
+        if(this.trunks.getObjectEquipe().getId() == 1){
+            Image imagePersoPiocheDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-pioche-droite.png").toExternalForm());
+            persoImage.setImage(imagePersoPiocheDroite);
+        }
+    }
+
+    public void changerImagePiocheGauche(){
+
+        if(this.trunks.getObjectEquipe().getId() == 1){
+            Image imagePersoPiocheGauche = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-pioche-gauche.png").toExternalForm());
+            persoImage.setImage(imagePersoPiocheGauche);
+        }
+    }
+
+
+    public void changerImageEpeeDroite(){
+        if(this.trunks.getObjectEquipe().getId() == 0){
+            Image imagePersoEpeeDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-epee-droite.png").toExternalForm());
+            persoImage.setImage(imagePersoEpeeDroite);
+        }
+    }
+
+    public void changerImageEpeeGauche(){
+
+        if(this.trunks.getObjectEquipe().getId() == 0){
+            System.out.println("epee gauche");
+            Image imagePersoEpeeGauche = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-epee-gauche.png").toExternalForm());
+            persoImage.setImage(imagePersoEpeeGauche);
+        }
+    }
+
+    public void changerImageHacheDroite(){
+        if(this.trunks.getObjectEquipe().getId() == 2){
+            Image imagePersoHacheDroite = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-hache-droite.png").toExternalForm());
+            persoImage.setImage(imagePersoHacheDroite);
+        }
+    }
+
+    public void changerImageHacheGauche(){
+        if(this.trunks.getObjectEquipe().getId() == 2){
+            Image imagePersoHacheGauche = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/trunks/trunks-hache-gauche.png").toExternalForm());
+            persoImage.setImage(imagePersoHacheGauche);
+        }
+    }
+
+
+
 }
