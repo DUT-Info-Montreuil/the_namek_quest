@@ -1,10 +1,21 @@
 package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 
 /**
- * Classe Personnage
- * ------------------
- * Classe abstraite représentant un personnage dans le jeu.
- * Elle sert de base aux personnages comme Trunks ou d'autres entités vivantes.
+ * Classe abstraite Personnage
+ * ----------------------------
+ * Représente un personnage du jeu "The Namek Quest".
+ * Cette classe est la base de tous les personnages (joueurs ou PNJ).
+ *
+ * Caractéristiques :
+ * - Position (x, y) observable via JavaFX (IntegerProperty)
+ * - Points de vie (PV) également observables
+ * - Vitesse de déplacement
+ * - Référence à l'environnement dans lequel se trouve le personnage
+ *
+ * Méthodes principales :
+ * - Accesseurs/mutateurs de la position, des PV, et de la vitesse
+ * - Méthode abstraite de déplacement à surcharger
+ * - Détection de la mort (PV <= 0)
  */
 
 import javafx.beans.property.IntegerProperty;
@@ -13,65 +24,86 @@ import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 
 public abstract class Personnage {
 
-    private IntegerProperty xProp;
-    private IntegerProperty yProp;
+    // Position observable
+    private final IntegerProperty xProp;
+    private final IntegerProperty yProp;
+
+    // Points de vie observables
+    private final IntegerProperty pv;
+
+    // Vitesse de déplacement
     private int vitesse;
-    private Environnement env;
-    private IntegerProperty pv;
 
-    public Personnage( int x, int y, Environnement env) {
+    // Environnement du personnage
+    private final Environnement env;
 
+    // Constructeur
+    public Personnage(int x, int y, Environnement env) {
         this.xProp = new SimpleIntegerProperty(x);
         this.yProp = new SimpleIntegerProperty(y);
-        this.vitesse = 1;
-        this.env=env;
         this.pv = new SimpleIntegerProperty(100);
+        this.vitesse = 1;
+        this.env = env;
     }
 
-    public boolean estMort(){
+    /** Indique si le personnage est mort (PV <= 0) */
+    public boolean estMort() {
         return this.getPv() <= 0;
     }
 
-    //getter
+    // --- Getters ---
+
     public int getX() {
-        return this.xProp.getValue();
-    }
-    public int getY() {
-        return this.yProp.getValue();
-    }
-    public IntegerProperty getXProp() {
-        return this.xProp;
-    }
-    public IntegerProperty getYProp() {
-        return this.yProp;
-    }
-    public int getVitesse() {
-        return this.vitesse;
-    }
-    public Environnement getEnv(){
-        return  this.env;
-    }
-    public IntegerProperty getPvProp() {
-        return this.pv;
-    }
-    public int getPv(){
-        return this.pv.getValue();
+        return xProp.get();
     }
 
-    //setter
+    public int getY() {
+        return yProp.get();
+    }
+
+    public IntegerProperty getXProp() {
+        return xProp;
+    }
+
+    public IntegerProperty getYProp() {
+        return yProp;
+    }
+
+    public int getPv() {
+        return pv.get();
+    }
+
+    public IntegerProperty getPvProp() {
+        return pv;
+    }
+
+    public int getVitesse() {
+        return vitesse;
+    }
+
+    public Environnement getEnv() {
+        return env;
+    }
+
+    // --- Setters ---
+
     public void setX(int x) {
-        this.xProp.setValue(x);
+        this.xProp.set(x);
     }
+
     public void setY(int y) {
-        this.yProp.setValue(y);
+        this.yProp.set(y);
     }
+
+    public void setPv(int pv) {
+        this.pv.set(pv);
+    }
+
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-    public void setPv(int pv) {
-        this.pv.setValue(pv);
-    }
 
-    // Deplacement
-    public void seDeplacer(){}
+    // --- Déplacement ---
+    public void seDeplacer() {}
 }
+

@@ -79,7 +79,7 @@ public class Controlleur implements Initializable {
         this.dende = environnement.getDende();
         this.vieuxNamek = environnement.getVieuxNamek();
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
-        souris = new Souris(this,this.environnement,this.terrainVue );
+        souris = new Souris(this.environnement,this.terrainVue );
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
     }
 
@@ -93,7 +93,7 @@ public class Controlleur implements Initializable {
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue,terrainVue, grandChef, dende);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);

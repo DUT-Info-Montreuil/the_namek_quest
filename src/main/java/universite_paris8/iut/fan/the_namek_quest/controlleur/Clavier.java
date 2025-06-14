@@ -9,119 +9,79 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
  */
 
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
-import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
 import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
+
 
 
 public class Clavier implements EventHandler<KeyEvent> {
 
-    private Trunks trunks;
-    private TrunksVue trunksVue;
-    private InventaireVue inventaireVue;
-    private TerrainVue  terrainVue;
-    private GrandChef grandChef;
-    private Dende dende;
-    private final BooleanProperty spacePressed = new SimpleBooleanProperty();
-    private BooleanProperty qPressed = new SimpleBooleanProperty();
-    private final BooleanProperty dPressed = new SimpleBooleanProperty();
-    private final BooleanProperty vPressed = new SimpleBooleanProperty();
-    private final BooleanProperty ePressed = new SimpleBooleanProperty();
+    private final Trunks trunks;
+    private final TrunksVue trunksVue;
+    private final InventaireVue inventaireVue;
+    private final GrandChef grandChef;
+    private final Dende dende;
 
-    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, TerrainVue terrainVue, GrandChef grandChef, Dende dende) {
+    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, GrandChef grandChef, Dende dende) {
         this.trunks = trunks;
         this.trunksVue = trunksVue;
         this.inventaireVue = inventaireVue;
-        this.terrainVue = terrainVue;
         this.grandChef = grandChef;
         this.dende = dende;
     }
 
-    public void setupKeyHandlers(Pane pane) {
-        pane.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-                case SPACE, UP, Z:
-                    spacePressed.set(true);
-                    break;
-
-                case Q, LEFT:
-                    qPressed.set(true);
-                    break;
-                case D, RIGHT :
-                    dPressed.set(true);
-                    break;
-                case V :
-                    vPressed.set(true);
-                    break;
-                case E:
-                    ePressed.set(true);
-                    break;
-            }
-        });
-
-        pane.setOnKeyReleased(event -> {
-            switch (event.getCode()) {
-                case Q -> qPressed.set(false);
-                case LEFT -> qPressed.set(false);
-                case D -> dPressed.set(false);
-                case RIGHT -> dPressed.set(false);
-                case V ->  vPressed.set(false);
-                case E ->  ePressed.set(false);
-            }
-        });
-
-    }
-
-    public void handleInventaire(){
-
-        if(inventaireVue.estOuvert()){
-            System.out.println("fermé");
+    /** Ouvre ou ferme l’inventaire selon son état actuel */
+    private void handleInventaire() {
+        if (inventaireVue.estOuvert()) {
             inventaireVue.fermeInventaire();
-        }else{
-            System.out.println("ouvert");
+        } else {
             inventaireVue.ouvrirInventaire();
         }
     }
 
-    public void handleLeft() {
+    /** Déplace Trunks vers la gauche */
+    private void handleLeft() {
         trunks.setDirection(-1);
-       trunksVue.changerImageGauche();
-
+        trunksVue.changerImageGauche();
     }
 
-    public void handleRight() {
+    /** Déplace Trunks vers la droite */
+    private void handleRight() {
         trunks.setDirection(1);
-       trunksVue.changerImageDroite();
-
+        trunksVue.changerImageDroite();
     }
 
-    public void handleUp() {
+    /** Fait sauter Trunks */
+    private void handleUp() {
         trunks.sauter();
-
     }
-    public void handleE() {
+
+    /** Interagit avec le Grand Chef pour améliorer l’épée */
+    private void handleE() {
         grandChef.ameliorerEpee();
     }
 
-    public void handleV() {
+    /** Fait perdre des PV à Trunks (méthode pour tester des fonctionnalites) */
+    private void handleV() {
         trunks.decrementerPv();
     }
 
-    public void handleP(){
+    /** Fait soigner Trunks par Dende s’il est proche */
+    private void handleP() {
         dende.soignerTrunksSiProcheEtTouchePressee();
     }
 
-    public void handleH(){
+    /** Trunks mange un haricot magique */
+    private void handleH() {
         trunks.mangerHaricot();
     }
+
+    /** Gère les événements clavier */
     @Override
     public void handle(KeyEvent keyEvent) {
         if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
@@ -157,13 +117,12 @@ public class Clavier implements EventHandler<KeyEvent> {
                 case Q:
                     trunks.setDirection(0);
                     break;
-                    case D:
-                        trunks.setDirection(0);
-                        break;
+                case D:
+                    trunks.setDirection(0);
+                    break;
             }
 
         }
     }
 }
-
 

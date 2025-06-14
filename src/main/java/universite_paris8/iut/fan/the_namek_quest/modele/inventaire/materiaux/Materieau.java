@@ -2,9 +2,9 @@ package universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Element;
 
-public abstract class Materieau extends Object {
+public abstract class Materieau extends Element {
     private IntegerProperty Quantite ;
 
     public Materieau(int id, String name) {

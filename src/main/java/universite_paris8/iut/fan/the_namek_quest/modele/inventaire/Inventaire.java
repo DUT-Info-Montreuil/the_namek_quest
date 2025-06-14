@@ -5,122 +5,111 @@ package universite_paris8.iut.fan.the_namek_quest.modele.inventaire;
  * ------------------
  * Gère la liste d'objets (objets génériques et ressources) détenus par le joueur.
  * Utilise une ObservableList pour faciliter l'observation et la mise à jour en interface graphique.
- **/
+ */
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.*;
 
 public class Inventaire {
-    private ObservableList<Object> inventaire;
+
+    private ObservableList<Element> inventaire;
 
     public Inventaire() {
-
         this.inventaire = FXCollections.observableArrayList();
     }
 
-    public ObservableList<Object> getListObjects() {
+    // Accesseur à la liste observable des objets
+    public ObservableList<Element> getListObjects() {
         return inventaire;
     }
 
-    public void setInventaire(ObservableList<Object> inventaire) {
-
+    // Mutateur pour remplacer l'inventaire complet (usage à manipuler avec précaution)
+    public void setInventaire(ObservableList<Element> inventaire) {
         this.inventaire = inventaire;
     }
-    public void addObject(Object o) {
+
+    // Ajoute un objet à l'inventaire
+    public void addObject(Element o) {
         this.inventaire.add(o);
     }
 
-
-    public void removeObject(Object object) {
-        this.inventaire.remove(object);
-    }
-    public void removeObjectsIndex(int index) {
-        this.inventaire.remove(index);
+    // Retourne l'indice d'un objet donné dans l'inventaire, -1 si absent
+    public int getIndexObject(Element object) {
+        return this.inventaire.indexOf(object);
     }
 
-    public int getIndexObject(Object object) {
-        for (int i = 0; i < this.inventaire.size(); i++) {
-            if (this.inventaire.get(i).equals(object)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-
-    public void ajoutRessource(int typeRessource){
-        System.out.println("entre dans ajoutRessource : \n type ressource"+typeRessource);
+    /**
+     * Ajoute une ressource à l'inventaire en fonction de son type.
+     * Certains types ajoutent plusieurs ressources.
+     */
+    public void ajoutRessource(int typeRessource) {
         switch (typeRessource) {
-            case 2 :
-                verifierRessource(2,new Terre());
-                break;
-            case 3 :
-                verifierRessource(2,new Terre());
+            case 2:
+            case 3:
+                verifierRessource(2, new Terre());
                 break;
             case 4:
-                verifierRessource(4,new Energie());
+                verifierRessource(4, new Energie());
                 break;
             case 6:
-                verifierRessource(6,new Haricot());
+                verifierRessource(6, new Haricot());
                 break;
-                case 8 :
-                    verifierRessource(8,new BouleCristal());
-                    break;
+            case 8:
+                verifierRessource(8, new BouleCristal());
+                break;
             case 9:
-                verifierRessource(9,new RocheDeNamek());
+                verifierRessource(9, new RocheDeNamek());
                 break;
-            case 10 :
-                verifierRessource(10,new Arbres());
-                verifierRessource(10,new Arbres());
-                break;
+            case 10:
             case 11:
-                verifierRessource(10,new Arbres());
-                verifierRessource(10,new Arbres());
+                verifierRessource(10, new Arbres());
+                verifierRessource(10, new Arbres());
                 break;
             default:
+                // Type ressource non reconnu : ne rien faire
                 break;
-
         }
-
     }
 
-    public int positionRessource(int typeRessource){
+    /**
+     * Cherche la position d'une ressource par son type dans l'inventaire.
+     * Commence à l'indice 3 réservé aux ressources.
+     * @return indice de la ressource ou -1 si non trouvée
+     */
+    public int positionRessource(int typeRessource) {
         for (int i = 3; i < this.inventaire.size(); i++) {
-            if (this.inventaire.get(i).getId()==typeRessource) {
-                return i;
+            Element obj = this.inventaire.get(i);
+            if (obj instanceof Materieau) {
+                Materieau mat = (Materieau) obj;
+                if (mat.getId() == typeRessource) {
+                    return i;
+                }
             }
         }
         return -1;
     }
 
-    public void verifierRessource(int typeRessource,Object ressource){
+    /**
+     * Vérifie si la ressource est déjà dans l'inventaire.
+     * @return true si présente, false sinon
+     */
+    public boolean ressourceDansInventaire(int typeRessource) {
+        return positionRessource(typeRessource) != -1;
+    }
 
-        if(this.ressourceDansInventaire(typeRessource)){
-            System.out.println("entre dans verif");
-            Materieau materieau = (Materieau)this.inventaire.get(positionRessource(typeRessource));
+    /**
+     * Vérifie la présence d'une ressource dans l'inventaire.
+     * Si présente, incrémente sa quantité.
+     * Sinon, ajoute la nouvelle ressource.
+     */
+    public void verifierRessource(int typeRessource, Element ressource) {
+        int pos = positionRessource(typeRessource);
+        if (pos != -1) {
+            Materieau materieau = (Materieau) this.inventaire.get(pos);
             materieau.incrementerRessource();
-            System.out.println("materieau quantité :"+materieau.getQuantite());
-
-            if(this.inventaire.get(positionRessource(typeRessource)) instanceof Materieau){
-                System.out.println("entre dans verif materieau");
-
-            }
-        }else {
-
+        } else {
             this.inventaire.add(ressource);
         }
-
     }
-
-    public boolean ressourceDansInventaire(int typeRessource){
-        for (int i = 3; i < this.inventaire.size(); i++) {
-            if (this.inventaire.get(i).getId()==typeRessource) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 }

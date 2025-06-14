@@ -1,10 +1,5 @@
 package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.ScrollEvent;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
-
 /**
  * Classe MoletteController
  * -------------------------
@@ -15,42 +10,49 @@ import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
  * Si l'inventaire est ouvert, il est rafraîchi pour refléter le changement.
  */
 
+import javafx.event.EventHandler;
+import javafx.scene.input.ScrollEvent;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
+import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
+
 public class MoletteControlleur implements EventHandler<ScrollEvent> {
-    private Trunks trunks;
-    private InventaireVue inventaireVue;
 
+    private final Trunks trunks;
+    private final InventaireVue inventaireVue;
 
-    public MoletteControlleur(Trunks trunks, InventaireVue inventaireVue){
+    public MoletteControlleur(Trunks trunks, InventaireVue inventaireVue) {
         this.trunks = trunks;
         this.inventaireVue = inventaireVue;
     }
 
-
     @Override
     public void handle(ScrollEvent event) {
+        double delta = event.getDeltaY();
 
-        if(event.getDeltaY()>0){
-            System.out.println("Molette vers le haut");
-            trunks.changerEquipement(1);
-
-
-            if(inventaireVue.estOuvert()) {
-                inventaireVue.fermeInventaire();
-                inventaireVue.ouvrirInventaire();
-            }
-
-            System.out.println(trunks.getObjectEquipe().toString());
-        } else if (event.getDeltaY()<0) {
-            System.out.println("Molette vers le bas");
-            trunks.changerEquipement(-1);
-
-            if(inventaireVue.estOuvert()) {
-                inventaireVue.fermeInventaire();
-                inventaireVue.ouvrirInventaire();
-            }
-            System.out.println(trunks.getObjectEquipe().toString());
+        if (delta > 0) {
+            changerEquipement(1); // Scroll vers le haut
+        } else if (delta < 0) {
+            changerEquipement(-1); // Scroll vers le bas
         }
+    }
 
+    /**
+     * Change l’équipement de Trunks et met à jour la vue de l’inventaire si elle est ouverte.
+     * @param direction +1 pour suivant, -1 pour précédent
+     */
+    private void changerEquipement(int direction) {
+        trunks.changerEquipement(direction);
+
+        if (inventaireVue.estOuvert()) {
+            rafraichirInventaire();
+        }
+    }
+
+    /**
+     * Ferme puis rouvre l’inventaire pour forcer l’affichage mis à jour.
+     */
+    private void rafraichirInventaire() {
+        inventaireVue.fermeInventaire();
+        inventaireVue.ouvrirInventaire();
     }
 }
-

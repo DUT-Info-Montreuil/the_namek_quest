@@ -15,12 +15,10 @@ import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
  */
 public class Souris implements EventHandler<MouseEvent> {
 
-    private final Controlleur controlleur;
     private final Environnement environnement;
     private final TerrainVue terrainVue;
 
-    public Souris(Controlleur controlleur, Environnement environnement, TerrainVue terrainVue) {
-        this.controlleur = controlleur;
+    public Souris(Environnement environnement, TerrainVue terrainVue) {
         this.environnement = environnement;
         this.terrainVue = terrainVue;
     }
@@ -33,12 +31,6 @@ public class Souris implements EventHandler<MouseEvent> {
             double x = mouseEvent.getX();
             double y = mouseEvent.getY();
 
-           /* // Bouton start
-            if (x > 330 && x < 530 && y > 420 && y < 480) {
-                System.out.println("clic start");
-                controlleur.demarrerJeu();
-                return;
-            }*/
 
             // Action dans le jeu (creuser ou poser)
             if (environnement.getTerrain().rangeCreuser(environnement.getTrunks().getX(), environnement.getTrunks().getY(), x, y)) {

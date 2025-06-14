@@ -1,8 +1,8 @@
 package universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme;
 
-import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Element;
 
-public class Arme extends Object {
+public class Arme extends Element {
 
     private int degat;
     public Arme(int id, String name,int degat) {
