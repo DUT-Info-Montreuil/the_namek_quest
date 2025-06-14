@@ -11,10 +11,11 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Element;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 
-public class InventaireListener implements ListChangeListener<Object>{
+public class InventaireListener implements ListChangeListener<Element>{
 
     private Inventaire inventaire;
     private InventaireVue inventaireVue;
@@ -28,7 +29,7 @@ public class InventaireListener implements ListChangeListener<Object>{
     }
 
     @Override
-    public void onChanged(Change<? extends Object> c) {
+    public void onChanged(Change<? extends Element> c) {
         while (c.next() && inventaireVue.estOuvert()) {
             if (c.wasAdded() || c.wasRemoved() || c.wasReplaced()) {
                 for (Object o : c.getAddedSubList()) {
