@@ -119,6 +119,9 @@ public class Clavier implements EventHandler<KeyEvent> {
         dende.soignerTrunksSiProcheEtTouchePressee();
     }
 
+    public void handleH(){
+        trunks.mangerHaricot();
+    }
     @Override
     public void handle(KeyEvent keyEvent) {
         if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
@@ -143,6 +146,9 @@ public class Clavier implements EventHandler<KeyEvent> {
                     break;
                 case P:
                     handleP();
+                    break;
+                case H:
+                    handleH();
                     break;
             }
 

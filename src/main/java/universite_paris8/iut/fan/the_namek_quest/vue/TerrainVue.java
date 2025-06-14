@@ -36,7 +36,9 @@ public class TerrainVue {
         Image imageCiel = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/ciel.png") );
         Image imageSol = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/sol.png"));
         Image imageHerbe = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/herbe.png"));
-        Image imageCristal =new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/bouleCristal1.png"));
+        Image imageCristal =new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/bouleDansTerre.png"));
+        Image imageHaricot =new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/haricotDansTerre.png"));
+        Image imageRoche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/roche.png"));
         this.tuiles = new ImageView[terrain.largeurTerrain()][terrain.hauteurTerrain()];
 
 
@@ -53,6 +55,12 @@ public class TerrainVue {
                 }
                 else if(this.terrain.codeTuile(x,y)==8){
                     tuiles[x][y] = new ImageView(imageCristal);
+                }
+                else if(this.terrain.codeTuile(x,y)==6){
+                    tuiles[x][y] = new ImageView(imageHaricot);
+                }
+                else if(this.terrain.codeTuile(x,y)==9){
+                    tuiles[x][y] = new ImageView(imageRoche);
                 }
 
                 tilePane.getChildren().add(tuiles[x][y]);

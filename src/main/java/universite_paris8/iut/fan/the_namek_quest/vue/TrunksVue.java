@@ -36,17 +36,6 @@ public class TrunksVue {
         pane.getChildren().add(persoImage);
     }
 
-    public void changerImage(){
-        //System.out.println("rentre dans la condition");
-        if(trunks.getDirection()=='d'){
-            changerImageDroite();
-            System.out.println("rentre a droite");
-        } else if (trunks.getDirection()=='g') {
-            System.out.println("rentre a gauche");
-            changerImageGauche();
-        }
-    }
-
     public void changerImageDroite() {
 
         //TODO charger les images une seule fois au démarrage de TrunksVue

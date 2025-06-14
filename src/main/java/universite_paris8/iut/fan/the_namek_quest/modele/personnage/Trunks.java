@@ -9,6 +9,8 @@ import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.MainVide;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Object;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Epee;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Haricot;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Hache;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Pioche;
 
@@ -140,5 +142,17 @@ public class Trunks extends Personnage {
             y += 2;
         }
         return y;
+    }
+
+    public void mangerHaricot(){
+        int pvActuel = getPv();
+        if(getObjectEquipe().getId() == 6 && pvActuel<100){
+            int pvManquant = 100 - pvActuel;
+            setPv(getPv() + pvManquant);
+            Materieau materieau = (Materieau) getObjectEquipe();
+            if(materieau.getQuantite()>0) {
+                materieau.decrementerRessource();
+            }
+        }
     }
 }
