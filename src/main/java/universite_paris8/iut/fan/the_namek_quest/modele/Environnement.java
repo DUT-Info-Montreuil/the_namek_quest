@@ -61,7 +61,8 @@ public class Environnement {
     // --- Mise à jour globale de l'environnement (appelée à chaque frame) ---
     public void update() {
         trunks.seDeplacer();
-
+        grandChef.setY(gravite(grandChef.getX(), grandChef.getY()));
+        vieuxNamek.setY(gravite(vieuxNamek.getX(), vieuxNamek.getY()));
         if (!trunks.estEnSaut()) {
             int nouvelleY = trunks.gravite(trunks.getX(), trunks.getY());
             trunks.setY(nouvelleY);
@@ -147,5 +148,12 @@ public class Environnement {
         }
 
         return false;
+    }
+
+    public int gravite(int x, int y) {
+        if (!this.collisionBas(x, y)) {
+            y += 2;
+        }
+        return y;
     }
 }

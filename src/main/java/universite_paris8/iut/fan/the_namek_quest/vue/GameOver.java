@@ -26,20 +26,10 @@ public class GameOver {
     public void afficherGameOver(Pane pane) {
         gameOverPane = new Pane();
 
-        // Chargement de l'image Game Over depuis les ressources
-        Image gameOverImage = new Image(getClass().getResourceAsStream(
-                "/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/gameOver.png"));
-
+        Image gameOverImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/gameOver.png"));
         ImageView imageView = new ImageView(gameOverImage);
 
-        // Redimensionnement de l'image pour correspondre à la taille souhaitée
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
-
-        // Ajout de l'image dans le pane dédié à Game Over
         gameOverPane.getChildren().add(imageView);
-
-        // Nettoyage du pane principal et ajout du pane Game Over
         pane.getChildren().clear();
         pane.getChildren().add(gameOverPane);
     }

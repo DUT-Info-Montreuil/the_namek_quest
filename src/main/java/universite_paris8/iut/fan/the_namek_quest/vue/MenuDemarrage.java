@@ -30,17 +30,15 @@ public class MenuDemarrage {
         // Image de fond du menu
         Image menuImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/menu.png"));
         ImageView imageView = new ImageView(menuImage);
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
 
         menuPane.getChildren().add(imageView);
 
         // Bouton transparent pour déclencher le démarrage du jeu
         startButton = new Button();
-        startButton.setStyle("-fx-background-color: transparent;");
+        startButton.setStyle("-fx-background-color: black;");
         startButton.setPrefSize(150, 70);    // Taille du bouton
-        startButton.setLayoutX(325);         // Position X
-        startButton.setLayoutY(410);         // Position Y
+        startButton.setLayoutX(800);         // Position X
+        startButton.setLayoutY(800);         // Position Y
 
         // Action au clic du bouton "Start"
         startButton.setOnAction(e -> {
