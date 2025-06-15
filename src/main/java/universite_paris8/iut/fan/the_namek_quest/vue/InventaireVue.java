@@ -75,6 +75,7 @@ public class InventaireVue {
         Image haricot = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/haricot.png"));
         Image roche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/roche.png"));
         Image arbre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/bois.png"));
+        Image ki = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/ki.png"));
 
         int x = 753; // Position initiale X
         int y = 0;   // Position initiale Y
@@ -129,6 +130,8 @@ public class InventaireVue {
                     case "arbre":
                         img.setImage(arbre);
                         break;
+                    case "energie":
+                        img.setImage(ki);
                     default:
                         // Optionnel: gérer un cas "image inconnue"
                         break;

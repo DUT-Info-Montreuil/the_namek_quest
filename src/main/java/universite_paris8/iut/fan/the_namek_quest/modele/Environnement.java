@@ -32,7 +32,7 @@ public class Environnement {
     public Environnement() {
         this.terrain = new Terrain();
         this.trunks = new Trunks(this);
-        this.grandChef = new GrandChef(450, 513, this, this.trunks);
+        this.grandChef = new GrandChef(500, 513, this, this.trunks);
         this.dende = new Dende(700, 513, this, this.trunks);
         this.vieuxNamek = new VieuxNamek(this.trunks.getX() - 64, this.trunks.getY(), this, this.trunks);
         this.trunks= new Trunks(this);

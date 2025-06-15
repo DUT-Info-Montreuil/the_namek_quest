@@ -6,6 +6,7 @@ package universite_paris8.iut.fan.the_namek_quest.vue;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 /**
  * Classe TerrainVue
@@ -47,6 +48,8 @@ public class TerrainVue {
         Image imageTronc = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/tronc.png"));
         Image imageFeuillage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/feuille.png"));
         Image imageMur = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/mur.png"));
+        Image imageKi = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/energieki.png"));
+
 
         tuiles = new ImageView[terrain.largeurTerrain()][terrain.hauteurTerrain()];
 
@@ -66,6 +69,7 @@ public class TerrainVue {
                     case 10: imgTuile = imageTronc; break;
                     case 11: imgTuile = imageFeuillage; break;
                     case 15: imgTuile = imageMur; break;
+                    case 4 : imgTuile = imageKi; break;
                     default:
                         imgTuile = imageCiel; // par défaut, ciel si code inconnu
                 }
