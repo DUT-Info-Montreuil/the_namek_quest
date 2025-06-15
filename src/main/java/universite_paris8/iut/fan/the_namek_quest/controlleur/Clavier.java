@@ -15,6 +15,7 @@ import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
+import universite_paris8.iut.fan.the_namek_quest.vue.KiVue;
 import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
 
 
@@ -26,13 +27,15 @@ public class Clavier implements EventHandler<KeyEvent> {
     private final InventaireVue inventaireVue;
     private final GrandChef grandChef;
     private final Dende dende;
+    private final KiVue KiVue;
 
-    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, GrandChef grandChef, Dende dende) {
+    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, GrandChef grandChef, Dende dende, KiVue kiVue) {
         this.trunks = trunks;
         this.trunksVue = trunksVue;
         this.inventaireVue = inventaireVue;
         this.grandChef = grandChef;
         this.dende = dende;
+        KiVue = kiVue;
     }
 
     /** Ouvre ou ferme l’inventaire selon son état actuel */
@@ -81,6 +84,11 @@ public class Clavier implements EventHandler<KeyEvent> {
         trunks.mangerHaricot();
     }
 
+    private void handleKI() {
+        trunks.attaquerAuKi();
+        KiVue.lancerBouleDeKi();
+    }
+
     /** Gère les événements clavier */
     @Override
     public void handle(KeyEvent keyEvent) {
@@ -109,6 +117,9 @@ public class Clavier implements EventHandler<KeyEvent> {
                     break;
                 case H:
                     handleH();
+                    break;
+                case RIGHT:
+                    handleKI();
                     break;
             }
 

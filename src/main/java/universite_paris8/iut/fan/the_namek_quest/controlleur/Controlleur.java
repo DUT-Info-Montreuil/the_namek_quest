@@ -102,7 +102,7 @@ public class Controlleur implements Initializable {
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende, kiVue);
         this.observableEnnemis = new ObservableEnnemis(pane);
         environnement.getPersonnageEnnemisList().addListener(observableEnnemis);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);

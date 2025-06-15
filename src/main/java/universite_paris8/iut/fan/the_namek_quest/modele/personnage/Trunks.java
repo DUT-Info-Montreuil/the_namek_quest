@@ -211,6 +211,25 @@ public class Trunks extends Personnage {
         }
     }
 
+    public void decreaseKI() {
+        int maxKI = 0;
+        if (this.KI.get() > maxKI) {
+            this.KI.set(this.KI.get() - 10);
+        }
+    }
+
+    public void attaquerAuKi(){
+        int pv = getEnv().getPersonnageEnnemis().getPv();
+        if(this.getObjectEquipe().getId() == 99) {
+            if (this.getY() == getEnv().getPersonnageEnnemis().getY()) {
+                if (this.KI.get() > 0) {
+                    decreaseKI();
+                    getEnv().getPersonnageEnnemis().setPv(pv-10);
+                }
+            }
+        }
+    }
+
     //----
 
 }
