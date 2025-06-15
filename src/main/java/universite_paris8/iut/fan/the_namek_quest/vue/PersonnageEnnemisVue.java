@@ -23,7 +23,7 @@ public class PersonnageEnnemisVue {
         persoImage.setImage(imageEnnemis);
         persoImage.translateXProperty().bind(personnageEnnemis.getXProp());
         persoImage.translateYProperty().bind(personnageEnnemis.getYProp());
-        persoImage.setId("#"+personnageEnnemis.getId());
+        persoImage.setId(personnageEnnemis.getId());
         pane.getChildren().add(persoImage);
     }
 

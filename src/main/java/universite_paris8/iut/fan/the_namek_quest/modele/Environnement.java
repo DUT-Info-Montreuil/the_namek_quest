@@ -103,7 +103,7 @@ public class Environnement {
     }
 
     // --- Mise à jour globale de l'environnement (appelée à chaque frame) ---
-    public void update() {
+    public void update(int temp) {
 
         trunks.seDeplacer();
         trunks.increaseKI();
@@ -126,10 +126,10 @@ public class Environnement {
                 }
 
                 //Attaque de l'ennemi
-//                if (trunksAProximite(p.getX(), p.getY())) {
-//                    trunks.decrementerPv(10); // Trunks subit des dégâts
-//                    System.out.println("Trunks a été attaqué par " + p.getId());
-//                }
+                if (trunksAProximite(p.getX(), p.getY()) && temp % 60 ==0) {
+                    trunks.decrementerPv(10); // Trunks subit des dégâts
+                    System.out.println("Trunks a été attaqué par " + p.getId());
+                }
             }
         }
 
@@ -155,7 +155,7 @@ public class Environnement {
      * @return true si une collision est détectée en bas
      */
     public boolean trunksAProximite(int x,int y) {
-        return trunks.getX() >= x - 80 && trunks.getX() <= x + 50;
+        return trunks.getX() >= x - 80 && trunks.getX() <= x + 50 && trunks.getY() >= y - 32 && trunks.getY() <= y + 32;
     }
 
     public boolean collisionBas(int x, int y) {

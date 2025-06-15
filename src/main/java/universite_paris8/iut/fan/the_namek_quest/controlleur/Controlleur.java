@@ -57,6 +57,7 @@ public class Controlleur implements Initializable {
     private GrandChef grandChef;
     private VieuxNamekVue vieuxNamekVue;
     private VieuxNamek vieuxNamek;
+    private int temps = 0; // Variable pour le temps dans la boucle de jeu
 
     private MoletteControlleur moletteController;
 
@@ -135,11 +136,14 @@ public class Controlleur implements Initializable {
     }
 
     private void initAnimation() {
+
+
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
-            environnement.update();
+            environnement.update(this.temps);
             this.grandChefVue.afficherMessageAcceuil();
             this.dendeVue.updateAffichageDende();
             this.vieuxNamekVue.updateAffichageVieuxNamek();
+
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();
 
@@ -150,6 +154,7 @@ public class Controlleur implements Initializable {
                 });
                 pause.play();
             }
+            this.temps++;
         }));
 
         gameLoop.setCycleCount(Timeline.INDEFINITE);
