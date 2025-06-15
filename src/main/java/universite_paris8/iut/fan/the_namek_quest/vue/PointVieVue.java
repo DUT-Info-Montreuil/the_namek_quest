@@ -28,6 +28,8 @@ public class PointVieVue {
         barreDeVie.setPrefWidth(150);
         barreDeVie.setProgress(0.50);
         barreDeVie.progressProperty().bind(trunks.getPvProp().divide(100.0));
+        barreDeVie.setTranslateX(41);
+        barreDeVie.setTranslateY(108);
 
         pane.getChildren().add(barreDeVie);
     }

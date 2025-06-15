@@ -31,7 +31,7 @@ public class Trunks extends Personnage {
     private Inventaire inventaire;
 
     public Trunks(Environnement env) {
-        super(0, 0, env);
+        super(33*33, 500, env);
         this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0); // 0 => ne bouge pas
         this.inventaire = new Inventaire();

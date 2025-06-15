@@ -42,8 +42,10 @@ public class InventaireVue {
 
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
-        capsuleVue.setTranslateX(752);
-        capsuleVue.setTranslateY(0);
+        capsuleVue.setTranslateX(1831);
+        capsuleVue.setTranslateY(108);
+
+
 
         afficherLogoInventaire();
     }
@@ -127,7 +129,7 @@ public class InventaireVue {
                         labelQuantite.textProperty().bind(mat.getQuantiteProp().asString());
                         labelQuantite.setFont(new Font("Arial", 12));
                         labelQuantite.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-                        labelQuantite.setTranslateX(x + 30);// Ajuste la position X
+                        labelQuantite.setTranslateX(x + 25);// Ajuste la position X
                         labelQuantite.setTranslateY(y + 28); // Ajuste la position Y
                         paneInventaire.getChildren().add(labelQuantite);
                     }

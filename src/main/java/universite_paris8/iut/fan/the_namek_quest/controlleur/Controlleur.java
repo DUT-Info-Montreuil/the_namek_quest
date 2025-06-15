@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
@@ -110,8 +111,10 @@ public class Controlleur implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
-            environnement.update();
+
             centrerVueSurTrunks();
+            environnement.update();
+
             trunksVue.changerImage();
             //grandChefVue.afficherMessageAcceuil();
 
@@ -134,19 +137,26 @@ public class Controlleur implements Initializable {
     private void centrerVueSurTrunks() {
         double largeurScene = pane.getScene().getWidth();
         double hauteurScene = pane.getScene().getHeight();
-
         double centreX = largeurScene / 2 - trunks.getX();
         double centreY = hauteurScene / 2 - trunks.getY();
 
-        paneScroll.setTranslateX(centreX);
-        paneScroll.setTranslateY(centreY);
-        paneInventaire.setTranslateX(trunks.getX()+120);
-        paneInventaire.setTranslateY(trunks.getY()-507);
-        this.pointVieVue.getBarreDeVie().setTranslateX(trunks.getX()-920);
-        this.pointVieVue.getBarreDeVie().setTranslateY(trunks.getY()-500);
+        if(trunks.getX()>30* Constante.TAILLE_TUILE && trunks.getX()<(environnement.getTerrain().largeurTerrain()-30)*Constante.TAILLE_TUILE) {
 
-        this.inventaireVue.getCapsuleVue().setTranslateX(trunks.getX()+870);
-        this.inventaireVue.getCapsuleVue().setTranslateY(trunks.getY()-500);
+
+            paneScroll.setTranslateX(centreX);
+            paneScroll.setTranslateY(centreY);
+
+            paneInventaire.setTranslateX(trunks.getX()+120);
+            paneInventaire.setTranslateY(trunks.getY()-507);
+
+            this.pointVieVue.getBarreDeVie().setTranslateX(trunks.getX()-920);
+            this.pointVieVue.getBarreDeVie().setTranslateY(trunks.getY()-500);
+
+            this.inventaireVue.getCapsuleVue().setTranslateX(trunks.getX()+870);
+            this.inventaireVue.getCapsuleVue().setTranslateY(trunks.getY()-500);
+
+
+        }
 
     }
 
