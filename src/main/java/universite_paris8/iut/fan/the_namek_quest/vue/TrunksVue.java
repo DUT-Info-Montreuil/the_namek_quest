@@ -1,8 +1,6 @@
 package universite_paris8.iut.fan.the_namek_quest.vue;
 
 
-
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

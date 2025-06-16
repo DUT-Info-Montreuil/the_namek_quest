@@ -67,7 +67,7 @@ public class Controlleur implements Initializable {
     @FXML private Pane paneInventaire;
     @FXML private Pane borderpane;
     private GameOver gameOver;
-    private KiVue kiVue;
+    private EnergieVue energieVue;
 
 
 
@@ -98,11 +98,11 @@ public class Controlleur implements Initializable {
         this.dendeVue = new DendeVue(pane,dende);
         this.vieuxNamekVue = new VieuxNamekVue(pane, vieuxNamek);
         this.pointVieVue = new PointVieVue(trunks, pane);
-        this.kiVue = new KiVue(trunks, pane);
+        this.energieVue = new EnergieVue(trunks, pane, );
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende, kiVue);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende, energieVue);
         this.observableEnnemis = new ObservableEnnemis(pane);
         environnement.getPersonnageEnnemisList().addListener(observableEnnemis);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);

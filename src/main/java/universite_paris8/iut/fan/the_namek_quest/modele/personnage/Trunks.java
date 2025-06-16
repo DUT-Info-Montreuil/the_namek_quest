@@ -59,6 +59,7 @@ public class Trunks extends Personnage {
         this.inventaire.addObject(new Pioche());
     }
 
+
     // --- Déplacement horizontal ---
 
     /**

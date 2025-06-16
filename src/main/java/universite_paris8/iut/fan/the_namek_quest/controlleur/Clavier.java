@@ -15,7 +15,7 @@ import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
-import universite_paris8.iut.fan.the_namek_quest.vue.KiVue;
+import universite_paris8.iut.fan.the_namek_quest.vue.EnergieVue;
 import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
 
 
@@ -27,15 +27,15 @@ public class Clavier implements EventHandler<KeyEvent> {
     private final InventaireVue inventaireVue;
     private final GrandChef grandChef;
     private final Dende dende;
-    private final KiVue KiVue;
+    private final EnergieVue EnergieVue;
 
-    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, GrandChef grandChef, Dende dende, KiVue kiVue) {
+    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, GrandChef grandChef, Dende dende, EnergieVue energieVue) {
         this.trunks = trunks;
         this.trunksVue = trunksVue;
         this.inventaireVue = inventaireVue;
         this.grandChef = grandChef;
         this.dende = dende;
-        KiVue = kiVue;
+        EnergieVue = energieVue;
     }
 
     /** Ouvre ou ferme l’inventaire selon son état actuel */
@@ -86,7 +86,7 @@ public class Clavier implements EventHandler<KeyEvent> {
 
     private void handleKI() {
         trunks.attaquerAuKi();
-        KiVue.lancerBouleDeKi();
+        EnergieVue.lancerBouleDeKi();
     }
 
     /** Gère les événements clavier */
