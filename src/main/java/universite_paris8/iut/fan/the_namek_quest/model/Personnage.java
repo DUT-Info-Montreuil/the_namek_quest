@@ -60,7 +60,6 @@ public abstract class Personnage {
         this.pv.setValue(pv);
     }
 
-
     // Deplacement
     public void seDeplacer(){}
 }

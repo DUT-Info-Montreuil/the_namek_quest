@@ -1,13 +1,19 @@
 package universite_paris8.iut.fan.the_namek_quest;
 
+/**
+ * Classe Launcher
+ * ------------------
+ * Point d'entrée de l'application JavaFX.
+ * Cette classe initialise la fenêtre principale (Stage),
+ * charge le fichier FXML de la vue principale,
+ * crée la scène et l'affiche.
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
-
 
 public class Launcher extends Application {
     @Override
@@ -21,6 +27,8 @@ public class Launcher extends Application {
     }
 
     public static void main(String[] args) {
+
         launch();
     }
+
 }

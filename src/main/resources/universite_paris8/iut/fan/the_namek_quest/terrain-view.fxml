@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="140.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.controller.Controller">
+<BorderPane fx:id="bordenpane" prefHeight="140.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.controlleur.Controlleur">
     <top>
         <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER">
         <font>
@@ -15,7 +15,7 @@
 
         <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
             <TilePane fx:id="tilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="1.0" tileAlignment="CENTER" BorderPane.alignment="CENTER" />
+            <Pane fx:id="paneInventaire" prefHeight="200.0" prefWidth="200.0"/>
         </Pane>
-
     </center>
 </BorderPane>
