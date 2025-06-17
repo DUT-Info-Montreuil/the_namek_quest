@@ -25,6 +25,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.*;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
@@ -49,6 +51,7 @@ public class Controlleur implements Initializable {
     private Souris souris;
     private GrandChefVue grandChefVue;
     private GrandChef grandChef;
+
     private VieuxNamek vieuxNamek;
     private VieuxNamekVue vieuxNamekVue;
     private Dende dende;
@@ -56,19 +59,22 @@ public class Controlleur implements Initializable {
     private MoletteControlleur moletteController;
 
 
+    @FXML private TilePane tilePane;
+    @FXML private Pane pane; // pane qui contient trunks + UI
+    @FXML private Pane paneInventaire;
+    @FXML private Pane paneFond; // pour afficher une image derrière
+    @FXML private Pane paneScroll; // pour scroller tout le terrain
+    private FondVue fond;
+
     private GameOver gameOver;
     private MenuDemarrage menuDemarrage;
     private PointVieVue pointVieVue;
-
-    @FXML private TilePane tilePane;
-    @FXML private Pane pane;              // Pane principale contenant Trunks + UI
-    @FXML private Pane paneInventaire;    // Inventaire
-    @FXML private Pane paneFond;          // Fond d'écran
-    @FXML private Pane paneScroll;        // Scroll global
+    // Scroll global
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuDemarrage = new MenuDemarrage();
+
         menuDemarrage.afficherMenuDemarrage(pane, this::demarrerJeu);
 
         this.environnement = new Environnement();
@@ -77,12 +83,13 @@ public class Controlleur implements Initializable {
         this.dende = environnement.getDende();
         this.vieuxNamek = environnement.getVieuxNamek();
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
-        this.souris = new Souris( environnement, terrainVue);
+        this.souris = new Souris( environnement, terrainVue,this);
         pane.addEventHandler(MouseEvent.MOUSE_CLICKED, souris);
     }
 
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane);
+
         // ===================== VUES =====================
         this.trunksVue = new TrunksVue(pane, trunks);
         this.grandChefVue = new GrandChefVue(pane, grandChef);
@@ -103,26 +110,53 @@ public class Controlleur implements Initializable {
         pane.setFocusTraversable(true);
 
         Platform.runLater(() -> pane.requestFocus());
+
+
+        // ===================== FOND =====================
+        //this.fond = new FondVue(paneFond); // Fond image placé dans fondVue
+        //fond.afficherFond("/universite_paris8/iut/fan/the_namek_quest/images/namek.png");
+
+        // ===================== VUES =====================
+        this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
+        this.trunksVue = new TrunksVue(pane, trunks);
+       // this.grandChefVue = new GrandChefVue(tilePane, grandChef);
+        this.pointVieVue = new PointVieVue(trunks, pane);
+        this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire, trunks);
+
+        // ===================== INVENTAIRE =====================
+        this.inventaireListener = new InventaireListener(inventaireVue, trunks.getInventaire(), paneInventaire);
+        trunks.getInventaire().getListObjects().addListener(inventaireListener);
+
+        // ===================== CONTROLES =====================
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef,dende);
+        this.moletteController = new MoletteControlleur(trunks, inventaireVue);
+
+        pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
+        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);
+        pane.addEventHandler(KeyEvent.KEY_RELEASED, clavier);
+        pane.setFocusTraversable(true);
+        Platform.runLater(() -> pane.requestFocus());
+
+        //grandChefVue.afficherMessageAcceuil();
+
+
         // ===================== GAME LOOP =====================
         initAnimation();
     }
 
     private void initAnimation() {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
+
             centrerVueSurTrunks();
             environnement.update();
             grandChefVue.afficherMessageAcceuil();
             dendeVue.updateAffichageDende();
             vieuxNamekVue.updateAffichageVieuxNamek();
+            trunksVue.changerImage();
+            //grandChefVue.afficherMessageAcceuil();
 
             if (trunks.estMort()) {
                 afficherGameOver();
-                PauseTransition pause = new PauseTransition(Duration.seconds(3));
-                pause.setOnFinished(event -> {
-                    Stage stage = (Stage) pane.getScene().getWindow();
-                    stage.close();
-                });
-                pause.play();
             }
         }));
 
@@ -136,11 +170,14 @@ public class Controlleur implements Initializable {
         double centreX = largeurScene / 2 - trunks.getX();
         double centreY = hauteurScene / 2 - trunks.getY();
 
-        if (trunks.getX() > 30 * Constante.TAILLE_TUILE &&
-                trunks.getX() < (environnement.getTerrain().largeurTerrain() - 30) * Constante.TAILLE_TUILE) {
+
+        if(trunks.getX()>30* Constante.TAILLE_TUILE && trunks.getX()<(environnement.getTerrain().largeurTerrain()-30)*Constante.TAILLE_TUILE) {
+
+
 
             paneScroll.setTranslateX(centreX);
             paneScroll.setTranslateY(centreY);
+
 
             paneInventaire.setTranslateX(trunks.getX() + 120);
             paneInventaire.setTranslateY(trunks.getY() - 507);
@@ -151,6 +188,7 @@ public class Controlleur implements Initializable {
             inventaireVue.getCapsuleVue().setTranslateX(trunks.getX() + 870);
             inventaireVue.getCapsuleVue().setTranslateY(trunks.getY() - 500);
         }
+
     }
 
     public void afficherGameOver() {

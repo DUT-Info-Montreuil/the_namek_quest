@@ -15,18 +15,30 @@ import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
  */
 public class Souris implements EventHandler<MouseEvent> {
 
+
     private final Environnement environnement;
     private final TerrainVue terrainVue;
+    private final Controlleur controlleur;
+    private boolean demarrerJeu = false;
 
-    public Souris(Environnement environnement, TerrainVue terrainVue) {
+
+    public Souris(Environnement environnement, TerrainVue terrainVue,Controlleur controlleur) {
         this.environnement = environnement;
         this.terrainVue = terrainVue;
+        this.controlleur = controlleur;
     }
 
     @Override
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
             System.out.println("clic");
+
+            if (mouseEvent.getX() > 330 && mouseEvent.getX() < 530
+                    && mouseEvent.getY() > 420 && mouseEvent.getY() < 480 && !demarrerJeu) {
+                this.demarrerJeu = true;
+                System.out.println("clic start");
+                controlleur.demarrerJeu();
+            }
 
             double x = mouseEvent.getX();
             double y = mouseEvent.getY();

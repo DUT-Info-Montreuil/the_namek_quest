@@ -27,10 +27,10 @@ public class MenuDemarrage {
     public void afficherMenuDemarrage(Pane pane, Runnable actionDemarrerJeu) {
         menuPane = new Pane();
 
+
         // Image de fond du menu
         Image menuImage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/menu.png"));
         ImageView imageView = new ImageView(menuImage);
-
         menuPane.getChildren().add(imageView);
 
         // Bouton transparent pour déclencher le démarrage du jeu
