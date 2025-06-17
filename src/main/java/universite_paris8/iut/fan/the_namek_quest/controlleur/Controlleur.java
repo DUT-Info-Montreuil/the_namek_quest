@@ -98,7 +98,7 @@ public class Controlleur implements Initializable {
         this.dendeVue = new DendeVue(pane,dende);
         this.vieuxNamekVue = new VieuxNamekVue(pane, vieuxNamek);
         this.pointVieVue = new PointVieVue(trunks, pane);
-        this.energieVue = new EnergieVue(trunks, pane, );
+        this.energieVue = new EnergieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire,this.trunks);
         this.inventaireListener = new InventaireListener(inventaireVue,trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);

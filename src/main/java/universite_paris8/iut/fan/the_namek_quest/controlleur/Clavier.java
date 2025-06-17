@@ -86,7 +86,7 @@ public class Clavier implements EventHandler<KeyEvent> {
 
     private void handleKI() {
         trunks.attaquerAuKi();
-        EnergieVue.lancerBouleDeKi();
+        //EnergieVue.lancerBouleDeKi();
     }
 
     /** Gère les événements clavier */

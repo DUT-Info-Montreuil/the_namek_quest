@@ -1,10 +1,12 @@
 package universite_paris8.iut.fan.the_namek_quest.modele;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import universite_paris8.iut.fan.the_namek_quest.Algo.BFS;
 import universite_paris8.iut.fan.the_namek_quest.Algo.Position;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Energie;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.*;
 
 /**
@@ -27,6 +29,7 @@ public class Environnement {
     private PersonnageEnnemis personnageEnnemis;
     private ObservableList<PersonnageEnnemis> personnageEnnemisList ;
     private BFS bfs;
+    private Energie KI;
 
     // --- Constructeur ---
     public Environnement() {
@@ -39,7 +42,12 @@ public class Environnement {
         this.personnageEnnemis = new PersonnageEnnemis(this);
         this.personnageEnnemisList = FXCollections.observableArrayList();
         this.bfs = new BFS(this);
+        this.KI = new Energie(this.trunks, this);
 
+    }
+
+    public Double getKI() {
+        return this.KI.getKI().getValue();
     }
 
     public void ajouterEnnemi() {
@@ -121,15 +129,14 @@ public class Environnement {
                 if (cible != null && !caseOccupeeParEnnemi(cible.getX(), cible.getY(), p)) {
                     p.deplacement(cible.getX(), cible.getY());
                 }else {
-                    System.out.println("rentre ici");
                     p.deplacementAleatoire();
                 }
 
                 //Attaque de l'ennemi
-                if (trunksAProximite(p.getX(), p.getY()) && temp % 60 ==0) {
+                /*if (trunksAProximite(p.getX(), p.getY()) && temp % 60 ==0) {
                     trunks.decrementerPv(3); // Trunks subit des dégâts
                     System.out.println("Trunks a été attaqué par " + p.getId());
-                }
+                }*/
             }
         }
 

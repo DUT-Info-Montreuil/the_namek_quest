@@ -15,10 +15,10 @@ public class EnergieVue {
     private ImageView ki;
     private PersonnageEnnemisVue ennemisVue;
 
-    public EnergieVue(Trunks trunks, Pane pane, PersonnageEnnemisVue ennemisVue) {
+    public EnergieVue(Trunks trunks, Pane pane/*, PersonnageEnnemisVue ennemisVue*/) {
         this.trunks = trunks;
         this.pane = pane;
-        this.ennemisVue = ennemisVue;
+        //this.ennemisVue = ennemisVue;
         afficherBarreKI();
     }
 
@@ -28,7 +28,7 @@ public class EnergieVue {
         this.barreDeKI.setPrefWidth(150);
 
         // Binding du KI avec la barre
-        this.barreDeKI.progressProperty().bind(trunks.getKI().divide(100.0));
+        this.barreDeKI.progressProperty().bind(trunks.getEnv().getKI().divide(100.0));
 
         this.barreDeKI.setLayoutX(0);
         this.barreDeKI.setLayoutY(20);

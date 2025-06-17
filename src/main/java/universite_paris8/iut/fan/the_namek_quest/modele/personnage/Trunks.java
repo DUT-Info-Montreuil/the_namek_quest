@@ -13,6 +13,7 @@ import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Hache;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Pioche;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Energie;
 
 /**
  * Classe Trunks
@@ -49,7 +50,7 @@ public class Trunks extends Personnage {
         this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0);
         this.inventaire = new Inventaire();
-        this.KI = new SimpleDoubleProperty(0);
+        this.KI = new SimpleDoubleProperty(getEnv().getKI());
 
         // Par défaut, Trunks commence avec une main vide + 3 outils de base
         this.objectEquipe = new MainVide();
@@ -197,37 +198,22 @@ public class Trunks extends Personnage {
         return enSaut;
     }
 
-    //  ---- KI ------
-    public DoubleProperty getKI() {
-        return this.KI;
-    }
-    public void setKI(double KI) {
-        this.KI.setValue(KI);
-    }
-
-    public void increaseKI() {
-        int maxKI = 100;
-        if (this.KI.get() < maxKI) {
-            this.KI.set(this.KI.get() + 0.01);
-        }
-    }
-
-    public void decreaseKI() {
-        int maxKI = 0;
-        if (this.KI.get() > maxKI) {
-            this.KI.set(this.KI.get() - 10);
-        }
-    }
 
     public void attaquerAuKi(){
         int pv = getEnv().getPersonnageEnnemis().getPv();
+        System.out.println("ca appelle attaque");
         if(this.getObjectEquipe().getId() == 99) {
-            if (this.getY() == getEnv().getPersonnageEnnemis().getY()) {
+            System.out.println("rien dans les maings");
+            //if (this.getY() == getEnv().getPersonnageEnnemis().getY()) {
+                System.out.println("on a le meme Y que les persos");
                 if (this.KI.get() > 0) {
+                    System.out.println("ATTAQUE AU KI!");
                     decreaseKI();
-                    getEnv().getPersonnageEnnemis().setPv(pv-10);
+                    getEnv().trouverEnnemi().setPv(pv-10);
+                    //getEnv().getPersonnageEnnemis().
+                    System.out.println("pv ennemis"+ getEnv().getPersonnageEnnemis().getPv());
                 }
-            }
+            //}
         }
     }
 
