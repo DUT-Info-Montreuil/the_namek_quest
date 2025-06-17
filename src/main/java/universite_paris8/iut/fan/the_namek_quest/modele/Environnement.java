@@ -34,6 +34,7 @@ public class Environnement {
     // --- Constructeur ---
     public Environnement() {
         this.terrain = new Terrain();
+        this.KI = new Energie( this);
         this.trunks = new Trunks(this);
         this.grandChef = new GrandChef(500, 513, this, this.trunks);
         this.dende = new Dende(700, 513, this, this.trunks);
@@ -42,8 +43,13 @@ public class Environnement {
         this.personnageEnnemis = new PersonnageEnnemis(this);
         this.personnageEnnemisList = FXCollections.observableArrayList();
         this.bfs = new BFS(this);
-        this.KI = new Energie(this.trunks, this);
 
+
+
+    }
+
+    public DoubleProperty getKIProperty() {
+        return this.KI.getKI();
     }
 
     public Double getKI() {
@@ -114,7 +120,7 @@ public class Environnement {
     public void update(int temp) {
 
         trunks.seDeplacer();
-        trunks.increaseKI();
+        //trunks.increaseKI();
         bfs = new BFS(this);
 
         if(!this.personnageEnnemisList.isEmpty()){
@@ -137,6 +143,10 @@ public class Environnement {
                     trunks.decrementerPv(3); // Trunks subit des dégâts
                     System.out.println("Trunks a été attaqué par " + p.getId());
                 }*/
+
+
+
+
             }
         }
 

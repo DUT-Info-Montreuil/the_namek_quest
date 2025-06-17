@@ -11,6 +11,7 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.BouleDeKI;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
@@ -85,8 +86,9 @@ public class Clavier implements EventHandler<KeyEvent> {
     }
 
     private void handleKI() {
-        trunks.attaquerAuKi();
+        trunks.attaquerBouleDeKi();
         //EnergieVue.lancerBouleDeKi();
+
     }
 
     /** Gère les événements clavier */
@@ -118,7 +120,7 @@ public class Clavier implements EventHandler<KeyEvent> {
                 case H:
                     handleH();
                     break;
-                case RIGHT:
+                case J:
                     handleKI();
                     break;
             }

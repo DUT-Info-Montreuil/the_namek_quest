@@ -5,6 +5,7 @@ import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.BouleDeKI;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.MainVide;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Element;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Epee;
@@ -41,6 +42,8 @@ public class Trunks extends Personnage {
     private Element objectEquipe;
     private Inventaire inventaire;
     private DoubleProperty KI;
+    private BouleDeKI bouleDeKI;
+
     /**
      * Constructeur de Trunks
      * Initialise la position, l’inventaire de base, la vitesse, la direction, et l’objet équipé.
@@ -51,6 +54,8 @@ public class Trunks extends Personnage {
         this.direction = new SimpleIntegerProperty(0);
         this.inventaire = new Inventaire();
         this.KI = new SimpleDoubleProperty(getEnv().getKI());
+        this.bouleDeKI =new BouleDeKI(getX(), getY(), getEnv());
+
 
         // Par défaut, Trunks commence avec une main vide + 3 outils de base
         this.objectEquipe = new MainVide();
@@ -199,7 +204,16 @@ public class Trunks extends Personnage {
     }
 
 
-    public void attaquerAuKi(){
+    public void attaquerBouleDeKi(){
+        if (!bouleDeKI.getEnAttaqueDistance()){
+            this.bouleDeKI =new BouleDeKI(getX(), getY(), getEnv());
+            bouleDeKI.setEnAttaqueDistance(true);
+        }
+        this.bouleDeKI.attaque();
+    }
+
+
+    /*public void attaquerAuKi(){
         int pv = getEnv().getPersonnageEnnemis().getPv();
         System.out.println("ca appelle attaque");
         if(this.getObjectEquipe().getId() == 99) {
@@ -215,7 +229,7 @@ public class Trunks extends Personnage {
                 }
             //}
         }
-    }
+    }*/
 
     //----
 

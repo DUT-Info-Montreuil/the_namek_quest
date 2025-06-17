@@ -28,7 +28,7 @@ public class EnergieVue {
         this.barreDeKI.setPrefWidth(150);
 
         // Binding du KI avec la barre
-        this.barreDeKI.progressProperty().bind(trunks.getEnv().getKI().divide(100.0));
+        this.barreDeKI.progressProperty().bind(trunks.getEnv().getKIProperty().divide(99.0));
 
         this.barreDeKI.setLayoutX(0);
         this.barreDeKI.setLayoutY(20);

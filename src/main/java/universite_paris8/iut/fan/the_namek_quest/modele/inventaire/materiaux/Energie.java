@@ -20,15 +20,18 @@ public class Energie extends Materieau{
         super(4, "energie");
     }
 
-    public Energie(Trunks trunks, Environnement environnement) {
+    public Energie( Environnement environnement) {
         super(4,"energie");
         this.environnement = environnement;
         this.trunks = trunks;
-        x = new SimpleIntegerProperty(this.trunks.getX());
-        y = new SimpleIntegerProperty(this.trunks.getY());
         this.KI = new SimpleDoubleProperty(0);
         this.porte = 400;
     }
+
+    /*public void MiseEnPlaceCoordoné(){
+        x = new SimpleIntegerProperty(this.environnement.getTrunks().getX());
+        y = new SimpleIntegerProperty(this.environnement.getTrunks().getY());
+    }*/
 
     public void setX(int x) {
         this.x.setValue(x);
