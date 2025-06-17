@@ -36,8 +36,8 @@ public class MenuDemarrage {
         // Bouton transparent pour déclencher le démarrage du jeu
         startButton = new Button();
         startButton.setStyle("-fx-background-color: transparent;");
-        startButton.setPrefSize(350, 150);    // Taille du bouton
-        startButton.setLayoutX(785);         // Position X
+        startButton.setPrefSize(400, 175);    // Taille du bouton
+        startButton.setLayoutX(765);         // Position X
         startButton.setLayoutY(725);         // Position Y
 
         // Action au clic du bouton "Start"
