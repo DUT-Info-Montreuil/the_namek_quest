@@ -11,7 +11,6 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
  */
 
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,7 +20,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.*;
@@ -86,27 +84,6 @@ public class Controlleur implements Initializable {
 
     public void demarrerJeu() {
         menuDemarrage.retirerMenuDemarrage(pane);
-
-        // ===================== VUES =====================
-        this.trunksVue = new TrunksVue(pane, trunks);
-        this.grandChefVue = new GrandChefVue(pane, grandChef);
-        this.dendeVue = new DendeVue(pane, dende);
-        this.vieuxNamekVue = new VieuxNamekVue(pane, vieuxNamek);
-        this.pointVieVue = new PointVieVue(trunks, pane);
-        this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire, trunks);
-        // ===================== INVENTAIRE =====================
-        this.inventaireListener = new InventaireListener(inventaireVue, trunks.getInventaire(), paneInventaire);
-        trunks.getInventaire().getListObjects().addListener(inventaireListener);
-        // ===================== CONTROLES =====================
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);
-        this.moletteController = new MoletteControlleur(trunks, inventaireVue);
-
-        pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
-        pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);
-        pane.addEventHandler(KeyEvent.KEY_RELEASED, clavier);
-        pane.setFocusTraversable(true);
-
-        Platform.runLater(() -> pane.requestFocus());
 
         // ===================== VUES =====================
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
