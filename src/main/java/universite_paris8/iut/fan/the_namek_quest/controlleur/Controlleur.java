@@ -86,24 +86,24 @@ public class Controlleur implements Initializable {
         menuDemarrage.retirerMenuDemarrage(pane);
 
         // ===================== VUES =====================
-        this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         this.trunksVue = new TrunksVue(pane, trunks);
-       // this.grandChefVue = new GrandChefVue(tilePane, grandChef);
+        this.grandChefVue = new GrandChefVue(pane, grandChef);
+        this.dendeVue = new DendeVue(pane, dende);
+        this.vieuxNamekVue = new VieuxNamekVue(pane, vieuxNamek);
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire, trunks);
-
         // ===================== INVENTAIRE =====================
         this.inventaireListener = new InventaireListener(inventaireVue, trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
-
         // ===================== CONTROLES =====================
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef,dende);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);
         this.moletteController = new MoletteControlleur(trunks, inventaireVue);
 
         pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);
         pane.addEventHandler(KeyEvent.KEY_RELEASED, clavier);
         pane.setFocusTraversable(true);
+
         Platform.runLater(() -> pane.requestFocus());
 
         // ===================== GAME LOOP =====================
