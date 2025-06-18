@@ -47,13 +47,21 @@ public class Clavier implements EventHandler<KeyEvent> {
     /** Déplace Trunks vers la gauche */
     private void handleLeft() {
         trunks.setDirection(-1);
+
         trunksVue.changerImageGauche();
+
+        trunksVue.demarrerAnimationMarche();
+
     }
 
     /** Déplace Trunks vers la droite */
     private void handleRight() {
         trunks.setDirection(1);
+
         trunksVue.changerImageDroite();
+
+        trunksVue.demarrerAnimationMarche();
+
     }
 
     /** Fait sauter Trunks */
@@ -84,17 +92,23 @@ public class Clavier implements EventHandler<KeyEvent> {
     /** Gère les événements clavier */
     @Override
     public void handle(KeyEvent keyEvent) {
-        if(keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
+        if (keyEvent.getEventType() == KeyEvent.KEY_PRESSED) {
             switch (keyEvent.getCode()) {
+
                 case I:
                     handleInventaire();
                     break;
                 case Q:
                     handleLeft();
+                    trunks.setDirection(-1);
+                    trunksVue.demarrerAnimationMarche();
                     break;
                 case D:
                     handleRight();
+                    trunks.setDirection(1);
+                    trunksVue.demarrerAnimationMarche();
                     break;
+
                 case SPACE,UP:
                     handleUp();
                     break;
@@ -110,19 +124,25 @@ public class Clavier implements EventHandler<KeyEvent> {
                 case H:
                     handleH();
                     break;
-            }
 
-        }if(keyEvent.getEventType() == KeyEvent.KEY_RELEASED ){
+            }
+        }
+
+        if (keyEvent.getEventType() == KeyEvent.KEY_RELEASED) {
             switch (keyEvent.getCode()) {
-                case Q:
+                case Q -> {
                     trunks.setDirection(0);
                     break;
-                case D:
+                }
+                case D->{
                     trunks.setDirection(0);
+                    trunksVue.arreterAnimationMarche(); // arrêt de l'animation
                     break;
-            }
+                }
 
+            }
         }
     }
+
 }
 

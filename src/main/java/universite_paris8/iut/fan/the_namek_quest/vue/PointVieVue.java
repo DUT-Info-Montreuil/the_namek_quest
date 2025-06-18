@@ -38,6 +38,18 @@ public class PointVieVue {
         barreDeVie.setPrefWidth(150);
         // La progressProperty est bindée sur le pv du personnage divisé par 100 pour normaliser à [0,1]
         barreDeVie.progressProperty().bind(trunks.getPvProp().divide(100.0));
+        barreDeVie.setTranslateX(41);
+        barreDeVie.setTranslateY(108);
         pane.getChildren().add(barreDeVie);
     }
+
+    public ProgressBar getBarreDeVie () {
+        return barreDeVie;
+    }
+
+
+
 }
+
+
+

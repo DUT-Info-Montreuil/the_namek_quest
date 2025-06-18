@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<BorderPane fx:id="bordenpane" prefHeight="140.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="universite_paris8.iut.fan.the_namek_quest.controlleur.Controlleur">
-    <top>
-        <Label alignment="CENTER" styleClass="label-header" text="The Namek Quest" BorderPane.alignment="CENTER">
-        <font>
-            <Font size="35.0" />
-        </font></Label>
-    </top>
+<BorderPane fx:id="bordenpane" prefHeight="720.0" prefWidth="1280.0"
+            xmlns="http://javafx.com/javafx/8.0.40"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="universite_paris8.iut.fan.the_namek_quest.controlleur.Controlleur">
+
     <center>
+        <!-- Fond du jeu -->
+        <Pane fx:id="paneFond">
+            <!-- ✅ Image de fond : affichée en tout premier -->
+            <ImageView fx:id="imageFond" fitWidth="1920.0" fitHeight="1080.0" />
+            <!-- Pane principale contenant tous les éléments du jeu -->
+            <children>
+                <!-- ✅ Scroll / terrain : affiché au-dessus de l’image -->
+                <Pane fx:id="paneScroll">
+                    <children>
+                        <Pane fx:id="pane" BorderPane.alignment="CENTER">
+                            <TilePane fx:id="tilePane" prefHeight="1.0" prefWidth="1.0" tileAlignment="CENTER" />
+                        </Pane>
 
-        <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
-            <TilePane fx:id="tilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="1.0" tileAlignment="CENTER" BorderPane.alignment="CENTER" />
-            <Pane fx:id="paneInventaire" prefHeight="200.0" prefWidth="200.0"/>
+                        <!-- ✅ Inventaire par-dessus tout -->
+                        <Pane fx:id="paneInventaire" prefHeight="200.0" prefWidth="200.0" />
+                    </children>
+                </Pane>
+            </children>
+
         </Pane>
     </center>
+
 </BorderPane>

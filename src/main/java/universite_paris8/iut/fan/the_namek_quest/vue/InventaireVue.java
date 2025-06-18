@@ -40,15 +40,22 @@ public class InventaireVue {
 
         capsuleVue.setFitHeight(46);
         capsuleVue.setFitWidth(46);
-        capsuleVue.setTranslateX(752);
-        capsuleVue.setTranslateY(0);
+        capsuleVue.setTranslateX(1831);
+        capsuleVue.setTranslateY(108);
+
+
 
         afficherLogoInventaire();
+    }
+
+    public ImageView getCapsuleVue() {
+        return capsuleVue;
     }
 
     /**
      * Affiche ou masque l'icône d'inventaire selon son état.
      */
+
     public void afficherLogoInventaire() {
         if (!this.estOuvert()) {
             if (!pane.getChildren().contains(capsuleVue)) {
@@ -134,11 +141,24 @@ public class InventaireVue {
                         break;
                 }
 
+
                 img.setTranslateX(x + (46 - 32) / 2);
                 img.setTranslateY(y + (46 - 32) / 2);
                 img.setFitHeight(32);
                 img.setFitWidth(32);
                 paneInventaire.getChildren().add(img);
+
+                    if (object instanceof Materieau){
+                        Materieau mat = (Materieau) object;
+                        Label labelQuantite = new Label();
+                        labelQuantite.textProperty().bind(mat.getQuantiteProp().asString());
+                        labelQuantite.setFont(new Font("Arial", 12));
+                        labelQuantite.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        labelQuantite.setTranslateX(x + 25);// Ajuste la position X
+                        labelQuantite.setTranslateY(y + 28); // Ajuste la position Y
+                        paneInventaire.getChildren().add(labelQuantite);
+                    }
+
 
                 // Si l'objet est un matériau, afficher sa quantité
                 if (object instanceof Materieau) {
@@ -147,7 +167,7 @@ public class InventaireVue {
                     labelQuantite.textProperty().bind(mat.getQuantiteProp().asString());
                     labelQuantite.setFont(new Font("Arial", 12));
                     labelQuantite.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-                    labelQuantite.setTranslateX(x + 30);
+                    labelQuantite.setTranslateX(x + 25);
                     labelQuantite.setTranslateY(y + 28);
                     paneInventaire.getChildren().add(labelQuantite);
                 }
