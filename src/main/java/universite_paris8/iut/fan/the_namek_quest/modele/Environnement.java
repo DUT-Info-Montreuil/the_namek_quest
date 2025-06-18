@@ -144,13 +144,14 @@ public class Environnement {
                     System.out.println("Trunks a été attaqué par " + p.getId());
                 }*/
 
-
-
-
             }
         }
 
         // Gestion de la gravité pour Trunks
+
+        if(trunks.getBouleDeKI().getEnAttaqueDistance()){
+            trunks.attaquerBouleDeKi();
+        }
 
         if (!trunks.estEnSaut()) {
             int nouvelleY = this.gravite(trunks.getX(), trunks.getY());

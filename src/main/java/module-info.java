@@ -21,4 +21,6 @@ module universite_paris8.iut.fan.the_namek_quest {
     opens universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils to javafx.fxml;
     exports universite_paris8.iut.fan.the_namek_quest.modele.personnage;
     opens universite_paris8.iut.fan.the_namek_quest.modele.personnage to javafx.fxml;
+    exports universite_paris8.iut.fan.the_namek_quest.vue;
+    opens universite_paris8.iut.fan.the_namek_quest.vue to javafx.fxml;
 }

@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.modele.*;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.BouleDeKI;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.PersonnageEnnemis;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
@@ -77,6 +78,9 @@ public class Controlleur implements Initializable {
     private Dende dende;
     private DendeVue dendeVue;
 
+    private BouleKiVue bouleKiVue;
+    private BouleDeKI bouleDeKI;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuDemarrage = new MenuDemarrage();
@@ -106,9 +110,13 @@ public class Controlleur implements Initializable {
         this.observableEnnemis = new ObservableEnnemis(pane);
         environnement.getPersonnageEnnemisList().addListener(observableEnnemis);
         this.moletteController = new MoletteControlleur(trunks,inventaireVue);
+        this.bouleDeKI = trunks.getBouleDeKI();
         this.pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         this.pane.addEventHandler(KeyEvent.KEY_PRESSED,clavier);
         this.pane.addEventHandler(KeyEvent.KEY_RELEASED,clavier);
+        //this.bouleKiVue = new BouleKiVue(pane,trunks.getBouleDeKI());
+
+
 
 
         /*this.personnageEnnemis.getPvProp().addListener((observable, oldValue, newValue) -> {
@@ -128,6 +136,20 @@ public class Controlleur implements Initializable {
             });
         }
 
+        this.bouleDeKI.getEnAttaqueDistanceProperty().addListener((observable, oldValue, newValue) -> {
+//            System.out.println("L'état actif a changé : " + oldValue + " -> " + newValue);
+//            if(trunks.getBouleDeKI().getEnAttaqueDistance()){
+//                System.out.println("rentre dans l'affichage");
+//                this.bouleKiVue = new BouleKiVue(pane,trunks.getBouleDeKI());
+//            }
+            if(newValue== false){
+                System.out.println("L'état actif a changé : " + oldValue + " -> " + newValue);
+            }
+
+        });
+
+        this.trunks.getBouleDeKI().setEnAttaqueDistance(false);
+
         pane.setFocusTraversable(true); // autorise le focus
 
         Platform.runLater(() -> pane.requestFocus()); // donne le focus réellement
@@ -137,12 +159,23 @@ public class Controlleur implements Initializable {
 
     private void initAnimation() {
 
+        this.trunks.getBouleDeKI().getEnAttaqueDistanceProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("L'état actif a changé : " + oldValue + " -> " + newValue);
+            if(trunks.getBouleDeKI().getEnAttaqueDistance()){
+                System.out.println("rentre dans l'affichage");
+                this.bouleKiVue = new BouleKiVue(pane,trunks.getBouleDeKI());
+            }
+        });
 
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
             environnement.update(this.temps);
             this.grandChefVue.afficherMessageAcceuil();
             this.dendeVue.updateAffichageDende();
             this.vieuxNamekVue.updateAffichageVieuxNamek();
+
+            if(temps%50==0){
+                System.out.println(trunks.getBouleDeKI().getEnAttaqueDistance());
+            }
 
             if(trunks.estMort()) { //TODO déclencher par un listener sur les pts de vie
                 afficherGameOver();

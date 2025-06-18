@@ -205,32 +205,18 @@ public class Trunks extends Personnage {
 
 
     public void attaquerBouleDeKi(){
-        if (!bouleDeKI.getEnAttaqueDistance()){
-            this.bouleDeKI =new BouleDeKI(getX(), getY(), getEnv());
-            bouleDeKI.setEnAttaqueDistance(true);
+
+        if (!this.bouleDeKI.getEnAttaqueDistance()){
+            this.bouleDeKI.reset(getX(), getY());
+            this.bouleDeKI.setEnAttaqueDistance(true);
         }
         this.bouleDeKI.attaque();
+        //System.out.println(bouleDeKI.getEnAttaqueDistance());
+
     }
 
-
-    /*public void attaquerAuKi(){
-        int pv = getEnv().getPersonnageEnnemis().getPv();
-        System.out.println("ca appelle attaque");
-        if(this.getObjectEquipe().getId() == 99) {
-            System.out.println("rien dans les maings");
-            //if (this.getY() == getEnv().getPersonnageEnnemis().getY()) {
-                System.out.println("on a le meme Y que les persos");
-                if (this.KI.get() > 0) {
-                    System.out.println("ATTAQUE AU KI!");
-                    decreaseKI();
-                    getEnv().trouverEnnemi().setPv(pv-10);
-                    //getEnv().getPersonnageEnnemis().
-                    System.out.println("pv ennemis"+ getEnv().getPersonnageEnnemis().getPv());
-                }
-            //}
-        }
-    }*/
-
-    //----
+    public BouleDeKI getBouleDeKI() {
+        return bouleDeKI;
+    }
 
 }

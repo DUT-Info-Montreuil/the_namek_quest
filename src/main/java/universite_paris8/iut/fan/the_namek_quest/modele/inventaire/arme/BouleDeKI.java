@@ -1,6 +1,8 @@
 package universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.PersonnageEnnemis;
@@ -17,20 +19,28 @@ public class BouleDeKI extends Arme{
     private IntegerProperty xProp; // Position X de la boule de Ki
     private IntegerProperty yProp; // Position Y de la boule de Ki
     private Environnement env;
-    private Boolean enAttaqueDistance= false; // Indique si la boule de Ki est en train d'attaquer à distance
+    //private Boolean enAttaqueDistance= false; // Indique si la boule de Ki est en train d'attaquer à distance
+    private BooleanProperty enAttaqueDistance ;
+
 
     public BouleDeKI(int x, int y , Environnement environnement) {
-        super(93290, "Boule de Ki", 5);
+        super(93290, "Boule de Ki", 20);
         this.env = environnement;
         this.xProp = new SimpleIntegerProperty(x);
         this.yProp = new SimpleIntegerProperty(y);
+        this.enAttaqueDistance = new SimpleBooleanProperty(false);
     }
     public Boolean getEnAttaqueDistance() {
+        return enAttaqueDistance.getValue();
+    }
+
+    public BooleanProperty getEnAttaqueDistanceProperty() {
         return enAttaqueDistance;
     }
 
     public void setEnAttaqueDistance(Boolean enAttaqueDistance) {
-        this.enAttaqueDistance = enAttaqueDistance;
+        this.enAttaqueDistance.setValue(enAttaqueDistance);
+        //this.enAttaqueDistance = enAttaqueDistance;
     }
 
     public void deplacement() {
@@ -41,10 +51,10 @@ public class BouleDeKI extends Arme{
     }
 
     public void attaque(){
-        System.out.println("rentre dans la méthode attaque de BouleDeKI"+
-                " x = " + getX() +
-                " y = " + getY() +
-                " direction = " + env.getTrunks().getDirection());
+//        System.out.println("rentre dans la méthode attaque de BouleDeKI"+
+//                " x = " + getX() +
+//                " y = " + getY() +
+//                " direction = " + env.getTrunks().getDirection());
         deplacement();
         PersonnageEnnemis persotouché = env.trouverEnnemi(getX(),getY());
 
@@ -78,6 +88,13 @@ public class BouleDeKI extends Arme{
 //            this.yProp.setValue(-100);
 //        }
     }
+
+    public void reset(int x, int y) {
+        this.setX(x);
+        this.setY(y);
+        setEnAttaqueDistance(true);
+    }
+
 
     public int getX() {
         return xProp.getValue();
