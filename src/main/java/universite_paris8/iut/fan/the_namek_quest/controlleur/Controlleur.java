@@ -60,16 +60,13 @@ public class Controlleur implements Initializable {
 
 
     @FXML private TilePane tilePane;
-    @FXML private Pane pane; // pane qui contient trunks + UI
+    @FXML private Pane pane; // pane qui contient trunks
     @FXML private Pane paneInventaire;
-    @FXML private Pane paneFond; // pour afficher une image derrière
     @FXML private Pane paneScroll; // pour scroller tout le terrain
-    private FondVue fond;
 
     private GameOver gameOver;
     private MenuDemarrage menuDemarrage;
     private PointVieVue pointVieVue;
-    // Scroll global
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,11 +108,6 @@ public class Controlleur implements Initializable {
 
         Platform.runLater(() -> pane.requestFocus());
 
-
-        // ===================== FOND =====================
-        //this.fond = new FondVue(paneFond); // Fond image placé dans fondVue
-        //fond.afficherFond("/universite_paris8/iut/fan/the_namek_quest/images/namek.png");
-
         // ===================== VUES =====================
         this.terrainVue = new TerrainVue(tilePane, environnement.getTerrain());
         this.trunksVue = new TrunksVue(pane, trunks);
@@ -137,9 +129,6 @@ public class Controlleur implements Initializable {
         pane.setFocusTraversable(true);
         Platform.runLater(() -> pane.requestFocus());
 
-        //grandChefVue.afficherMessageAcceuil();
-
-
         // ===================== GAME LOOP =====================
         initAnimation();
     }
@@ -153,7 +142,6 @@ public class Controlleur implements Initializable {
             dendeVue.updateAffichageDende();
             vieuxNamekVue.updateAffichageVieuxNamek();
             trunksVue.changerImage();
-            //grandChefVue.afficherMessageAcceuil();
 
             if (trunks.estMort()) {
                 afficherGameOver();

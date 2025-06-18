@@ -47,7 +47,16 @@ public class TerrainVue {
         Image imageTronc = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/tronc.png"));
         Image imageFeuillage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/feuille.png"));
         Image imageMur = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/mur.png"));
-
+        Image finTerre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/finTerre.png"));
+        Image temple81 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/81.png"));
+        Image temple82 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/82.png"));
+        Image temple83 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/83.png"));
+        Image temple84 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/84.png"));
+        Image temple85 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/85.png"));
+        Image temple86 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/86.png"));
+        Image temple87 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/87.png"));
+        Image temple88 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/88.png"));
+        Image temple89 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/89.png"));
         tuiles = new ImageView[terrain.largeurTerrain()][terrain.hauteurTerrain()];
 
         // Parcours du terrain pour créer chaque ImageView selon le code de la tuile
@@ -66,6 +75,16 @@ public class TerrainVue {
                     case 10: imgTuile = imageTronc; break;
                     case 11: imgTuile = imageFeuillage; break;
                     case 15: imgTuile = imageMur; break;
+                    case 0: imgTuile = finTerre; break;
+                    case 81: imgTuile = temple81; break;
+                    case 82: imgTuile = temple82; break;
+                    case 83: imgTuile = temple83; break;
+                    case 84: imgTuile = temple84; break;
+                    case 85: imgTuile = temple85; break;
+                    case 86: imgTuile = temple86; break;
+                    case 87: imgTuile = temple87; break;
+                    case 88: imgTuile = temple88; break;
+                    case 89: imgTuile = temple89; break;
                     default:
                         imgTuile = imageCiel; // par défaut, ciel si code inconnu
                 }
