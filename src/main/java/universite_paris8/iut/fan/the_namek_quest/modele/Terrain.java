@@ -230,93 +230,93 @@ public class Terrain {
         return terrain.length > 0 ? terrain[0].length : 0;
     }
 
-        /**
-         * Retourne le code de la tuile à la position (c, l) en cases.
-         * @param c colonne (case)
-         * @param l ligne (case)
-         * @return code entier de la tuile
-         */
-        public int codeTuile(int c, int l) {
-            return terrain[l][c];
+    /**
+     * Retourne le code de la tuile à la position (c, l) en cases.
+     * @param c colonne (case)
+     * @param l ligne (case)
+     * @return code entier de la tuile
+     */
+    public int codeTuile(int c, int l) {
+        return terrain[l][c];
+    }
+
+    /**
+     * Retourne le code de la tuile correspondant à une position en pixels (x, y).
+     * Si en dehors du terrain, retourne -1.
+     * @param x position en pixels sur l'axe horizontal
+     * @param y position en pixels sur l'axe vertical
+     * @return code de la tuile ou -1 si hors limites
+     */
+    public int codeTuilePixel(int x, int y) {
+        int l = y / Constante.TAILLE_TUILE;
+        int c = x / Constante.TAILLE_TUILE;
+
+        if (l < 0 || l >= hauteurTerrain() || c < 0 || c >= largeurTerrain()) {
+            return -1; // hors terrain
         }
+        return terrain[l][c];
+    }
 
-        /**
-         * Retourne le code de la tuile correspondant à une position en pixels (x, y).
-         * Si en dehors du terrain, retourne -1.
-         * @param x position en pixels sur l'axe horizontal
-         * @param y position en pixels sur l'axe vertical
-         * @return code de la tuile ou -1 si hors limites
-         */
-        public int codeTuilePixel(int x, int y) {
-            int l = y / Constante.TAILLE_TUILE;
-            int c = x / Constante.TAILLE_TUILE;
+    public int getCaseX(int xPixel) {
+        return xPixel / Constante.TAILLE_TUILE;
+    }
 
-            if (l < 0 || l >= hauteurTerrain() || c < 0 || c >= largeurTerrain()) {
-                return -1; // hors terrain
-            }
-            return terrain[l][c];
-        }
+    public int getCaseY(int yPixel) {
+        return yPixel / Constante.TAILLE_TUILE;
+    }
 
-        public int getCaseX(int xPixel) {
-            return xPixel / Constante.TAILLE_TUILE;
-        }
+    public boolean dansTerrain(int x, int y) {
+        return (x >= 0 && x < width && y >= 0 && y < height);
+    }
 
-        public int getCaseY(int yPixel) {
-            return yPixel / Constante.TAILLE_TUILE;
-        }
+    public void setTuileCiel(int c, int l) {
+        terrain[l][c] = 1;
+    }
 
-        public boolean dansTerrain(int x, int y) {
-            return (x >= 0 && x < width && y >= 0 && y < height);
-        }
+    public void setTuile(int c, int l, int typeTuile) {
+        terrain[l][c] = typeTuile;
+    }
 
-        public void setTuileCiel(int c, int l) {
-            terrain[l][c] = 1;
-        }
+    public boolean estTraversable(int xPixel, int yPixel) {
+        int caseX = getCaseX(xPixel);
+        int caseY = getCaseY(yPixel);
 
-        public void setTuile(int c, int l, int typeTuile) {
-            terrain[l][c] = typeTuile;
-        }
-
-        public boolean estTraversable(int xPixel, int yPixel) {
-            int caseX = getCaseX(xPixel);
-            int caseY = getCaseY(yPixel);
-
-            if (caseY < 0 || caseY >= hauteurTerrain() || caseX < 0 || caseX >= largeurTerrain()) {
-                return false;
-            }
-
-            int code = terrain[caseY][caseX];
-
-            if (code == 1 /* ciel */ || code == 11  || code == 81 || code == 82 || code == 83 || code == 84 || code == 85 || code == 86 || code == 87 || code == 88 || code == 89 ) {
-                return true;
-            }
-
-            if (code == 10 /* mur */) {
-                int decalageX = xPixel % Constante.TAILLE_TUILE;
-                return decalageX < Constante.MARGE_GAUCHE_MUR || decalageX >= (Constante.TAILLE_TUILE - Constante.MARGE_DROITE_MUR);
-            }
-
+        if (caseY < 0 || caseY >= hauteurTerrain() || caseX < 0 || caseX >= largeurTerrain()) {
             return false;
         }
 
-        public boolean rangeCreuser(int xTrunks, int yTrunks, double xSouris, double ySouris) {
-            boolean dansX = xSouris >= xTrunks - Constante.TAILLE_TUILE && xSouris <= xTrunks + 2 * Constante.TAILLE_TUILE;
-            boolean dansY = ySouris >= yTrunks - Constante.TAILLE_TUILE && ySouris <= yTrunks + 2 * Constante.TAILLE_TUILE;
-            boolean surTrunks = xSouris >= xTrunks && xSouris <= xTrunks + Constante.TAILLE_TUILE
-                    && ySouris >= yTrunks && ySouris <= yTrunks + Constante.TAILLE_TUILE;
+        int code = terrain[caseY][caseX];
 
-            return (dansX && dansY) && !surTrunks;
+        if (code == 1 /* ciel */ || code == 11  || code == 81 || code == 82 || code == 83 || code == 84 || code == 85 || code == 86 || code == 87 || code == 88 || code == 89 ) {
+            return true;
         }
 
-        public void casserBloc(double xSouris, double ySouris) {
-            int c = (int) (xSouris / Constante.TAILLE_TUILE);
-            int l = (int) (ySouris / Constante.TAILLE_TUILE);
-            setTuileCiel(c, l);
+        if (code == 10 /* mur */) {
+            int decalageX = xPixel % Constante.TAILLE_TUILE;
+            return decalageX < Constante.MARGE_GAUCHE_MUR || decalageX >= (Constante.TAILLE_TUILE - Constante.MARGE_DROITE_MUR);
         }
 
-        public void poserBloc(double xSouris, double ySouris, int typeTuile) {
-            int c = (int) (xSouris / Constante.TAILLE_TUILE);
-            int l = (int) (ySouris / Constante.TAILLE_TUILE);
-            setTuile(c, l, typeTuile);
-        }
+        return false;
     }
+
+    public boolean rangeCreuser(int xTrunks, int yTrunks, double xSouris, double ySouris) {
+        boolean dansX = xSouris >= xTrunks - Constante.TAILLE_TUILE && xSouris <= xTrunks + 2 * Constante.TAILLE_TUILE;
+        boolean dansY = ySouris >= yTrunks - Constante.TAILLE_TUILE && ySouris <= yTrunks + 2 * Constante.TAILLE_TUILE;
+        boolean surTrunks = xSouris >= xTrunks && xSouris <= xTrunks + Constante.TAILLE_TUILE
+                && ySouris >= yTrunks && ySouris <= yTrunks + Constante.TAILLE_TUILE;
+
+        return (dansX && dansY) && !surTrunks;
+    }
+
+    public void casserBloc(double xSouris, double ySouris) {
+        int c = (int) (xSouris / Constante.TAILLE_TUILE);
+        int l = (int) (ySouris / Constante.TAILLE_TUILE);
+        setTuileCiel(c, l);
+    }
+
+    public void poserBloc(double xSouris, double ySouris, int typeTuile) {
+        int c = (int) (xSouris / Constante.TAILLE_TUILE);
+        int l = (int) (ySouris / Constante.TAILLE_TUILE);
+        setTuile(c, l, typeTuile);
+    }
+}

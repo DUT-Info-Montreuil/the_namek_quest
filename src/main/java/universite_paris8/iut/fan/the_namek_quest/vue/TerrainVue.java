@@ -6,6 +6,7 @@ package universite_paris8.iut.fan.the_namek_quest.vue;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 /**
  * Classe TerrainVue
@@ -47,6 +48,7 @@ public class TerrainVue {
         Image imageTronc = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/tronc.png"));
         Image imageFeuillage = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/feuille.png"));
         Image imageMur = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/mur.png"));
+
         Image finTerre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/finTerre.png"));
         Image temple81 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/81.png"));
         Image temple82 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/82.png"));
@@ -57,6 +59,9 @@ public class TerrainVue {
         Image temple87 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/87.png"));
         Image temple88 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/88.png"));
         Image temple89 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/89.png"));
+
+        Image imageKi = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/energieki.png"));
+
         tuiles = new ImageView[terrain.largeurTerrain()][terrain.hauteurTerrain()];
 
         // Parcours du terrain pour créer chaque ImageView selon le code de la tuile
@@ -75,6 +80,7 @@ public class TerrainVue {
                     case 10: imgTuile = imageTronc; break;
                     case 11: imgTuile = imageFeuillage; break;
                     case 15: imgTuile = imageMur; break;
+
                     case 0: imgTuile = finTerre; break;
                     case 81: imgTuile = temple81; break;
                     case 82: imgTuile = temple82; break;
@@ -85,6 +91,9 @@ public class TerrainVue {
                     case 87: imgTuile = temple87; break;
                     case 88: imgTuile = temple88; break;
                     case 89: imgTuile = temple89; break;
+
+                    case 4 : imgTuile = imageKi; break;
+
                     default:
                         imgTuile = imageCiel; // par défaut, ciel si code inconnu
                 }

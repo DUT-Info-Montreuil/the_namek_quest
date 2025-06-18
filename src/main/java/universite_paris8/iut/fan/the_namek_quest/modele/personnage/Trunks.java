@@ -1,17 +1,20 @@
 package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.BouleDeKI;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.MainVide;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Element;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Epee;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Hache;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.Pioche;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Energie;
 
 /**
  * Classe Trunks
@@ -38,16 +41,21 @@ public class Trunks extends Personnage {
     private int hauteurMax = 0;
     private Element objectEquipe;
     private Inventaire inventaire;
+    private DoubleProperty KI;
+    private BouleDeKI bouleDeKI;
 
     /**
      * Constructeur de Trunks
      * Initialise la position, l’inventaire de base, la vitesse, la direction, et l’objet équipé.
      */
     public Trunks(Environnement env) {
-        super(33*33, 720, env);
+        super(0, 0, env);
         this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0);
         this.inventaire = new Inventaire();
+        this.KI = new SimpleDoubleProperty(getEnv().getKI());
+        this.bouleDeKI =new BouleDeKI(getX(), getY(), getEnv());
+
 
         // Par défaut, Trunks commence avec une main vide + 3 outils de base
         this.objectEquipe = new MainVide();
@@ -56,6 +64,7 @@ public class Trunks extends Personnage {
         this.inventaire.addObject(new Hache());
         this.inventaire.addObject(new Pioche());
     }
+
 
     // --- Déplacement horizontal ---
 
@@ -193,4 +202,21 @@ public class Trunks extends Personnage {
     public boolean estEnSaut() {
         return enSaut;
     }
+
+
+    public void attaquerBouleDeKi(){
+
+        if (!this.bouleDeKI.getEnAttaqueDistance()){
+            this.bouleDeKI.reset(getX(), getY());
+            this.bouleDeKI.setEnAttaqueDistance(true);
+        }
+        this.bouleDeKI.attaque();
+        //System.out.println(bouleDeKI.getEnAttaqueDistance());
+
+    }
+
+    public BouleDeKI getBouleDeKI() {
+        return bouleDeKI;
+    }
+
 }

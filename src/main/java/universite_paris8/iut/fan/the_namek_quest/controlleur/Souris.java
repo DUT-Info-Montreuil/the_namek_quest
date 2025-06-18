@@ -3,6 +3,8 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.PersonnageEnnemis;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Arme;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Materieau;
 import universite_paris8.iut.fan.the_namek_quest.vue.TerrainVue;
 
@@ -66,20 +68,36 @@ public class Souris implements EventHandler<MouseEvent> {
                 }
 
                 // Si Trunks a les mains vides (id 99)
-                else if (idObjet == 99 && (idTuile == 6 || idTuile == 8)) {
+                else if (idObjet == 99 && (idTuile == 6 || idTuile == 8|| idTuile == 4)) {
                     environnement.getTrunks().getInventaire().ajoutRessource(idTuile);
                     environnement.getTerrain().casserBloc(x, y);
                     terrainVue.changerTuileCiel((int) x, (int) y);
                 }
 
+                //si trunks a une epee
+                else if (environnement.getTrunks().getObjectEquipe().getId() == 0) {
+                    Arme epee = (Arme) environnement.getTrunks().getObjectEquipe();
+                    //si un ennemis est touché
+                    System.out.println("entre dans la range epee");
+                    PersonnageEnnemis persotouché = environnement.trouverEnnemi((int) mouseEvent.getX(), (int) mouseEvent.getY());
+                    //System.out.println("persotouché = " + persotouché.toString());
+                    if (persotouché != null) {
+                        System.out.println("ennemi touché");
+                        persotouché.decrementerPv(epee.getDegat());
+                    }
+
+
+                }
                 // Si Trunks tient un matériau
                 else if (environnement.getTrunks().getObjectEquipe() instanceof Materieau) {
-                    Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
+                    if (environnement.getTerrain().codeTuilePixel((int) mouseEvent.getX(), (int) mouseEvent.getY()) == 1) {
+                        Materieau materieau = (Materieau) environnement.getTrunks().getObjectEquipe();
+                        if (materieau.getQuantite() > 0) {
+                            materieau.decrementerRessource();
+                            environnement.getTerrain().poserBloc(mouseEvent.getX(), mouseEvent.getY(), materieau.getId());
+                            this.terrainVue.changerTuile((int) mouseEvent.getX(), (int) mouseEvent.getY(),materieau.getId());
+                        }
 
-                    if (idTuile == 1 && materieau.getQuantite() > 0) {
-                        materieau.decrementerRessource();
-                        environnement.getTerrain().poserBloc(x, y, materieau.getId());
-                        terrainVue.changerTuile((int) x, (int) y, materieau.getId());
                     }
                 }
             }
