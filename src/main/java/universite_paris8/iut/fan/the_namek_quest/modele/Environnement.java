@@ -117,6 +117,7 @@ public class Environnement {
     // --- Mise à jour globale de l'environnement (appelée à chaque frame) ---
     public void update(int temps) {
         int tempDivise = temps % 60;
+
         if(trunks.seDeplacerT() && tempDivise == 0) {
             bfs = new BFS(this);
         }
@@ -145,10 +146,10 @@ public class Environnement {
                 }
 
                 //Attaque de l'ennemi
-                if (trunksAProximite(p.getX(), p.getY()) && tempDivise ==0) {
-                    trunks.decrementerPv(3); // Trunks subit des dégâts
-                    System.out.println("Trunks a été attaqué par " + p.getId());
-                }
+//                if (trunksAProximite(p.getX(), p.getY()) && tempDivise ==0) {
+//                    trunks.decrementerPv(3); // Trunks subit des dégâts
+//                    System.out.println("Trunks a été attaqué par " + p.getId());
+//                }
 
             }
         }
