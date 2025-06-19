@@ -146,8 +146,8 @@ public class Controlleur implements Initializable {
         double centreX = largeurScene / 2 - trunks.getX();
         double centreY = hauteurScene / 2 - trunks.getY();
 
-        if (trunks.getX() > 25 * Constante.TAILLE_TUILE &&
-                trunks.getX() < (environnement.getTerrain().largeurTerrain() - 25) * Constante.TAILLE_TUILE) {
+        if (trunks.getX() > 30 * Constante.TAILLE_TUILE &&
+                trunks.getX() < (environnement.getTerrain().largeurTerrain() - 30) * Constante.TAILLE_TUILE) {
 
             paneScroll.setTranslateX(centreX);
             paneScroll.setTranslateY(centreY);
