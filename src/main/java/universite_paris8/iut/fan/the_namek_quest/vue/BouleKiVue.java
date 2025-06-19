@@ -21,6 +21,8 @@ public class BouleKiVue {
         if(bouleDeKI.getEnAttaqueDistance()){
             Image imageBoule = new Image(getClass().getResource("/universite_paris8/iut/fan/the_namek_quest/images/materieau/ki.png").toExternalForm());
             imageBouleView.setImage(imageBoule);
+            imageBouleView.setFitWidth(25);
+            imageBouleView.setFitHeight(25);
             imageBouleView.translateXProperty().bind(bouleDeKI.getXProp());
             imageBouleView.translateYProperty().bind(bouleDeKI.getYProp());
             pane.getChildren().add(imageBouleView);

@@ -16,7 +16,6 @@ import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
 import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
-import universite_paris8.iut.fan.the_namek_quest.vue.EnergieVue;
 import universite_paris8.iut.fan.the_namek_quest.vue.TrunksVue;
 
 
@@ -28,15 +27,15 @@ public class Clavier implements EventHandler<KeyEvent> {
     private final InventaireVue inventaireVue;
     private final GrandChef grandChef;
     private final Dende dende;
-    private final EnergieVue EnergieVue;
 
-    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, GrandChef grandChef, Dende dende, EnergieVue energieVue) {
+
+    public Clavier(Trunks trunks, TrunksVue trunksVue, InventaireVue inventaireVue, GrandChef grandChef, Dende dende) {
         this.trunks = trunks;
         this.trunksVue = trunksVue;
         this.inventaireVue = inventaireVue;
         this.grandChef = grandChef;
         this.dende = dende;
-        EnergieVue = energieVue;
+
     }
 
     /** Ouvre ou ferme l’inventaire selon son état actuel */
