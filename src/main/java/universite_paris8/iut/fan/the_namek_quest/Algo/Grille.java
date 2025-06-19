@@ -92,8 +92,8 @@ public class Grille {
 
     public void poseObstacles() {
 
-            for (int l = 0; l < environnement.getTerrain().hauteurTerrain(); l++) {
-                for (int c = 0; c < environnement.getTerrain().largeurTerrain(); c++) {
+            for (int l = debuty; l < environnement.getTerrain().hauteurTerrain(); l++) {
+                for (int c = debutx; c < environnement.getTerrain().largeurTerrain(); c++) {
                     if (environnement.getTerrain().codeTuile(c, l) != 1) {
                         this.obstacles.add(new Position(c, l));
                     }

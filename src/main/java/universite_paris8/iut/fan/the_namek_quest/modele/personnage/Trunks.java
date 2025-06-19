@@ -49,7 +49,7 @@ public class Trunks extends Personnage {
      * Initialise la position, l’inventaire de base, la vitesse, la direction, et l’objet équipé.
      */
     public Trunks(Environnement env) {
-        super(0, 0, env);
+        super(300, 30, env);
         this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0);
         this.inventaire = new Inventaire();
@@ -72,11 +72,13 @@ public class Trunks extends Personnage {
      * Met à jour la position horizontale de Trunks selon sa direction (gauche ou droite)
      * Vérifie les collisions à droite et à gauche.
      */
-    public void seDeplacer() {
+    public boolean seDeplacerT() {
         int vitesse = getVitesse();
         Terrain terrain = this.getEnv().getTerrain();
         int x = this.getX();
         int y = this.getY();
+
+
 
         if (this.direction.get() == 1) { // droite
             int newX = x + vitesse;
@@ -90,6 +92,12 @@ public class Trunks extends Personnage {
                 setX(newX);
             }
         }
+
+        if(this.direction.getValue() ==0){
+            // Si Trunks est immobile, on ne fait rien
+            return false;
+        }
+        return true;
     }
 
     // --- Saut & Gravité ---

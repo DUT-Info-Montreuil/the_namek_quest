@@ -117,14 +117,16 @@ public class Environnement {
     // --- Mise à jour globale de l'environnement (appelée à chaque frame) ---
     public void update(int temps) {
 
-        trunks.seDeplacer();
+        if(trunks.seDeplacerT()){
+            bfs = new BFS(this);
+        }
 
         grandChef.setY(gravite(grandChef.getX(), grandChef.getY()));
         vieuxNamek.setY(gravite(vieuxNamek.getX(), vieuxNamek.getY()));
 
         //trunks.increaseKI();
 
-        bfs = new BFS(this);
+
 
         if(!this.personnageEnnemisList.isEmpty()){
             for(PersonnageEnnemis p : this.personnageEnnemisList){
