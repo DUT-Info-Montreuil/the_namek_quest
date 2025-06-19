@@ -116,8 +116,8 @@ public class Environnement {
 
     // --- Mise à jour globale de l'environnement (appelée à chaque frame) ---
     public void update(int temps) {
-
-        if(trunks.seDeplacerT()){
+        int tempDivise = temps % 60;
+        if(trunks.seDeplacerT() && tempDivise == 0) {
             bfs = new BFS(this);
         }
 
@@ -135,19 +135,20 @@ public class Environnement {
                 p.setY(nouvelleYEnnemis);
 
                 // Déplacement de l'ennemi
-                Position  ennemiPos = new Position(p.getX() / Constante.TAILLE_TUILE, p.getY() / Constante.TAILLE_TUILE);
+                Position ennemiPos = new Position(p.getX() / Constante.TAILLE_TUILE, p.getY() / Constante.TAILLE_TUILE);
                 Position cible = bfs.getNextMove(ennemiPos);
                 if (cible != null && !caseOccupeeParEnnemi(cible.getX(), cible.getY(), p)) {
                     p.deplacement(cible.getX(), cible.getY());
                 }else {
-                    p.deplacement(p.getX()-10, p.getY()-10);
+                    // Déplacement aléatoire
+                    p.deplacementAleatoire();
                 }
 
                 //Attaque de l'ennemi
-                /*if (trunksAProximite(p.getX(), p.getY()) && temp % 60 ==0) {
+                if (trunksAProximite(p.getX(), p.getY()) && tempDivise ==0) {
                     trunks.decrementerPv(3); // Trunks subit des dégâts
                     System.out.println("Trunks a été attaqué par " + p.getId());
-                }*/
+                }
 
             }
         }

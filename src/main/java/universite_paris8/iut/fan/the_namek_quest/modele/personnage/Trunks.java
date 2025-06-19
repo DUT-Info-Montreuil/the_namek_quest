@@ -49,7 +49,7 @@ public class Trunks extends Personnage {
      * Initialise la position, l’inventaire de base, la vitesse, la direction, et l’objet équipé.
      */
     public Trunks(Environnement env) {
-        super(300, 30, env);
+        super(500, 30, env);
         this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0);
         this.inventaire = new Inventaire();

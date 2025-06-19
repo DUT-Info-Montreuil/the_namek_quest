@@ -47,8 +47,24 @@ public class PersonnageEnnemis extends Personnage {
     }
 
     public void deplacementAleatoire(){
-        int x = (int) Math.random()*2;
-        deplacement(this.getX()+(x*getVitesse()),this.getY());
+        // 0 = gauche, 1 = droite
+        int direction = (int) (Math.random() * 2);
+        int caseX = this.getX() / Constante.TAILLE_TUILE;
+        int caseY = this.getY() / Constante.TAILLE_TUILE;
+
+        if (direction == 0) {
+            // Gauche
+            int cibleX = caseX - 1;
+            if (!getEnv().collisionGauche(this.getX() - getVitesse(), this.getY())) {
+                this.setX(this.getX() - getVitesse());
+            }
+        } else {
+            // Droite
+            int cibleX = caseX + 1;
+            if (!getEnv().collisionDroite(this.getX() + getVitesse(), this.getY())) {
+                this.setX(this.getX() + getVitesse());
+            }
+        }
     }
 
     public String getId() {
