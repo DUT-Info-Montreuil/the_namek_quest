@@ -32,7 +32,6 @@ public class Controlleur implements Initializable {
     private DendeVue dendeVue;
     private VieuxNamek vieuxNamek;
     private VieuxNamekVue vieuxNamekVue;
-    private EnergieVue energieVue;
     private PointVieVue pointVieVue;
     private BouleDeKI bouleDeKI;
     private BouleKiVue bouleKiVue;
@@ -76,13 +75,13 @@ public class Controlleur implements Initializable {
         this.dendeVue = new DendeVue(pane, dende);
         this.vieuxNamekVue = new VieuxNamekVue(pane, vieuxNamek);
         this.pointVieVue = new PointVieVue(trunks, pane);
-        this.energieVue = new EnergieVue(trunks, pane);
+
 
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire, trunks);
         this.inventaireListener = new InventaireListener(inventaireVue, trunks.getInventaire(), paneInventaire);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
 
-        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende, energieVue);
+        this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);
         this.moletteController = new MoletteControlleur(trunks, inventaireVue);
 
         this.bouleDeKI = trunks.getBouleDeKI();

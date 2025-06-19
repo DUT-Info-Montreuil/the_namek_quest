@@ -28,11 +28,6 @@ public class Energie extends Materieau{
         this.porte = 400;
     }
 
-    /*public void MiseEnPlaceCoordoné(){
-        x = new SimpleIntegerProperty(this.environnement.getTrunks().getX());
-        y = new SimpleIntegerProperty(this.environnement.getTrunks().getY());
-    }*/
-
     public void setX(int x) {
         this.x.setValue(x);
     }
@@ -44,23 +39,5 @@ public class Energie extends Materieau{
     public DoubleProperty getKI() {
         return this.KI;
     }
-    public void setKI(double KI) {
-        this.KI.setValue(KI);
-    }
-
-    public void increaseKI() {
-        int maxKI = 100;
-        if (this.KI.get() < maxKI) {
-            this.KI.set(this.KI.get() + 0.01);
-        }
-    }
-
-    public void decreaseKI() {
-        int maxKI = 0;
-        if (this.KI.get() > maxKI) {
-            this.KI.set(this.KI.get() - 10);
-        }
-    }
-
 
 }

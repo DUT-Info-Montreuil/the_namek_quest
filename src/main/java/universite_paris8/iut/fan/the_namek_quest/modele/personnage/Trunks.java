@@ -41,7 +41,6 @@ public class Trunks extends Personnage {
     private int hauteurMax = 0;
     private Element objectEquipe;
     private Inventaire inventaire;
-    private DoubleProperty KI;
     private BouleDeKI bouleDeKI;
 
     /**
@@ -53,7 +52,6 @@ public class Trunks extends Personnage {
         this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0);
         this.inventaire = new Inventaire();
-        this.KI = new SimpleDoubleProperty(getEnv().getKI());
         this.bouleDeKI =new BouleDeKI(getX(), getY(), getEnv());
 
 
@@ -219,8 +217,6 @@ public class Trunks extends Personnage {
             this.bouleDeKI.setEnAttaqueDistance(true);
         }
         this.bouleDeKI.attaque();
-        //System.out.println(bouleDeKI.getEnAttaqueDistance());
-
     }
 
     public BouleDeKI getBouleDeKI() {

@@ -29,12 +29,10 @@ public class Environnement {
     private PersonnageEnnemis personnageEnnemis;
     private ObservableList<PersonnageEnnemis> personnageEnnemisList ;
     private BFS bfs;
-    private Energie KI;
 
     // --- Constructeur ---
     public Environnement() {
         this.terrain = new Terrain();
-        this.KI = new Energie( this);
         this.trunks = new Trunks(this);
         this.grandChef = new GrandChef(1695, 720, this, this.trunks);
         this.dende = new Dende(700, 720, this, this.trunks);
@@ -46,13 +44,6 @@ public class Environnement {
 
     }
 
-    public DoubleProperty getKIProperty() {
-        return this.KI.getKI();
-    }
-
-    public Double getKI() {
-        return this.KI.getKI().getValue();
-    }
 
     public void ajouterEnnemi() {
        for(int i=0;i<3;i++) {
@@ -124,7 +115,6 @@ public class Environnement {
         grandChef.setY(gravite(grandChef.getX(), grandChef.getY()));
         vieuxNamek.setY(gravite(vieuxNamek.getX(), vieuxNamek.getY()));
 
-        //trunks.increaseKI();
 
 
 
