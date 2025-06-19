@@ -19,6 +19,11 @@ public class Grille {
     private int debuty;
 
     private static final int OBSTACLE_CODE = 1;
+    /**
+     * Constructeur
+     * Initialise la grille avec ses dimensions et la position de départ.
+     * Construit la carte et place les obstacles.
+     */
 
     public Grille(Environnement environnement, int hauteur, int largeur, int debutX, int debutY) {
         this.environnement = environnement;
@@ -32,6 +37,11 @@ public class Grille {
         refaireMap();
     }
 
+
+    /**
+     * Réinitialise la carte et les obstacles.
+     * À appeler lorsqu'il y a un changement dans l'environnement.
+     */
     public void refaireMap() {
         listeAdj.clear();
         obstacles.clear();
@@ -39,6 +49,11 @@ public class Grille {
         poseObstacles();
     }
 
+
+    /**
+     * Construit la liste d'adjacence pour chaque case de la grille.
+     * Les cases adjacentes sont celles accessibles (haut, bas, gauche, droite).
+     */
     public void construireMap() {
         for (int x = 0; x < largeur; x++) {
             for (int y = 0; y < hauteur; y++) {
@@ -53,6 +68,10 @@ public class Grille {
         }
     }
 
+
+    /**
+     * Retourne la position correspondant aux coordonnées données dans la grille.
+     */
     public Position getPosition(int x, int y) {
         return listeAdj.keySet().stream()
                 .filter(p -> p.getX() == x && p.getY() == y)
@@ -60,17 +79,32 @@ public class Grille {
                 .orElse(null);
     }
 
+    /**
+     * Indique si une position est considérée comme déconnectée (obstacle).
+     */
     public boolean estDeconnecte(Position s) {
         return obstacles.contains(s);
     }
 
+
+    /**
+     * Retourne les positions adjacentes accessibles à partir de la position donnée.
+     */
     public Set<Position> adjacents(Position s) {
         return estDeconnecte(s) ? new HashSet<>() : listeAdj.getOrDefault(s, new HashSet<>());
     }
 
+
+    /**
+     * Place les obstacles sur la grille en fonction du terrain de l'environnement.
+     */
     private boolean dansGrille(int x, int y) {
         return x >= 0 && x < largeur && y >= 0 && y < hauteur;
     }
+
+    /**
+     * Place les obstacles sur la grille en fonction du terrain de l'environnement.
+     */
 
     public void poseObstacles() {
         obstacles.clear();
@@ -83,10 +117,17 @@ public class Grille {
         }
     }
 
+    /**
+     * Retire une position de la liste des obstacles (la rend accessible).
+     */
     public void reconnecte(Position s) {
         obstacles.remove(s);
     }
 
+
+    /**
+     * Ajoute une position à la liste des obstacles (la rend inaccessible).
+     */
     public void deconnecte(Position s) {
         if (!obstacles.contains(s)) {
             obstacles.add(s);

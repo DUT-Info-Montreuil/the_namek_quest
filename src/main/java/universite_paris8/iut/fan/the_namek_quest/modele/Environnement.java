@@ -56,7 +56,7 @@ public class Environnement {
 
     public void ajouterEnnemi() {
        for(int i=0;i<3;i++) {
-        this.personnageEnnemisList.add(new  PersonnageEnnemis(this,250 + i * 50, 400));
+        this.personnageEnnemisList.add(new  PersonnageEnnemis(this,3000 + i * 1000, 400));
        }
     }
 
@@ -126,8 +126,6 @@ public class Environnement {
         vieuxNamek.setY(gravite(vieuxNamek.getX(), vieuxNamek.getY()));
 
         //trunks.increaseKI();
-
-
 
         if(!this.personnageEnnemisList.isEmpty()){
             for(PersonnageEnnemis p : this.personnageEnnemisList){

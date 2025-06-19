@@ -3,7 +3,10 @@ package universite_paris8.iut.fan.the_namek_quest.modele.personnage;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.*;
-
+/**
+ * Classe représentant un personnage ennemi dans le jeu.
+ * Hérite de {@link Personnage} et possède un identifiant unique.
+ */
 public class PersonnageEnnemis extends Personnage {
 
     private String id;
@@ -23,6 +26,11 @@ public class PersonnageEnnemis extends Personnage {
         this.id = "E" + compteur;
     }
 
+    /**
+     * Déplace l'ennemi horizontalement vers la case cible (x, y).
+     * @param x abscisse de la case cible
+     * @param y ordonnée de la case cible (non utilisée ici)
+     */
     public void deplacement(int x, int y) {
         int cibleX = x * Constante.TAILLE_TUILE;
         //int cibleY = y * Constante.TAILLE_TUILE;
@@ -45,6 +53,9 @@ public class PersonnageEnnemis extends Personnage {
 
 
     }
+    /**
+     * Déplace l'ennemi aléatoirement d'une case à gauche ou à droite.
+     */
 
     public void deplacementAleatoire(){
         // 0 = gauche, 1 = droite
@@ -71,9 +82,6 @@ public class PersonnageEnnemis extends Personnage {
         return id;
     }
 
-    public void attaque(){
-
-    }
 }
 
 
