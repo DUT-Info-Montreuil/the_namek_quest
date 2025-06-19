@@ -1,19 +1,36 @@
 package universite_paris8.iut.fan.the_namek_quest.Algo;
 
+/**
+ * Classe Position
+ * ---------------
+ * Représente une position (x, y) sur la grille du jeu.
+ * Sert à identifier les cases pour les algorithmes de cheminement (BFS, Grille, etc.).
+ * Implémente hashCode() et equals() pour permettre l’utilisation dans des collections (HashMap, HashSet).
+ */
 public class Position {
     private int x;
     private int y;
-
+    /**
+     * Constructeur
+     * @param x Coordonnée X
+     * @param y Coordonnée Y
+     */
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
-
+    /**
+     * Calcule un code de hachage unique pour la position.
+     * Permet l’utilisation dans des structures de données comme HashMap/HashSet.
+     */
     @Override
     public int hashCode() {
         return x * 31 + y;
     }
 
+    /**
+     * Vérifie l’égalité entre deux positions (mêmes coordonnées x et y).
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -47,6 +64,9 @@ public class Position {
         this.x = x;
     }
 
+    /**
+     * Affiche la position sous forme de chaîne de caractères.
+     */
     @Override
     public String toString() {
         return "Position{" +

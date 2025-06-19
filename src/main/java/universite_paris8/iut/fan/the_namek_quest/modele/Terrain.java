@@ -299,6 +299,18 @@ public class Terrain {
         return false;
     }
 
+    /**
+     * Vérifie si une position (xSouris, ySouris) est dans la zone de creusage autour du personnage Trunks,
+     * sans être directement sur la case occupée par Trunks.
+     *
+     * La zone de creusage est un carré de 3x3 tuiles centré sur Trunks, mais exclut la tuile centrale (celle de Trunks).
+     *
+     * @param xTrunks abscisse (en pixels) du coin supérieur gauche de Trunks
+     * @param yTrunks ordonnée (en pixels) du coin supérieur gauche de Trunks
+     * @param xSouris abscisse (en pixels) de la position à tester (ex : souris)
+     * @param ySouris ordonnée (en pixels) de la position à tester
+     * @return true si la position est dans la zone de creusage autour de Trunks, false sinon
+     */
     public boolean rangeCreuser(int xTrunks, int yTrunks, double xSouris, double ySouris) {
         boolean dansX = xSouris >= xTrunks - Constante.TAILLE_TUILE && xSouris <= xTrunks + 2 * Constante.TAILLE_TUILE;
         boolean dansY = ySouris >= yTrunks - Constante.TAILLE_TUILE && ySouris <= yTrunks + 2 * Constante.TAILLE_TUILE;

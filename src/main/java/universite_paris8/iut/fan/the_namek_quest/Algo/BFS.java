@@ -12,6 +12,10 @@ package universite_paris8.iut.fan.the_namek_quest.Algo;
         private Grille grille;
         private Map<Position, Position> predecesseurs;
 
+        /**
+         * Constructeur
+         * Initialise la position de Trunks, crée la grille locale, puis lance l’algorithme BFS.
+         */
         public BFS(Environnement env) {
             this.env = env;
             this.predecesseurs = new HashMap<>();
@@ -20,6 +24,9 @@ package universite_paris8.iut.fan.the_namek_quest.Algo;
             algoBFS();
         }
 
+        /**
+         * Calcule la position de Trunks en cases (et non en pixels).
+         */
         private Position calculerPositionTrunks() {
             return new Position(
                 env.getTrunks().getX() / Constante.TAILLE_TUILE,
@@ -27,6 +34,9 @@ package universite_paris8.iut.fan.the_namek_quest.Algo;
             );
         }
 
+        /**
+         * Crée une sous-grille centrée autour de Trunks pour optimiser le calcul du chemin.
+         */
         private Grille creerGrilleAutourDeTrunks() {
             int x = env.getTrunks().getX();
             int y = env.getTrunks().getY();
@@ -41,6 +51,11 @@ package universite_paris8.iut.fan.the_namek_quest.Algo;
             );
         }
 
+
+        /**
+         * Exécute l’algorithme de parcours en largeur (BFS) depuis la position de Trunks.
+         * Remplit la table des prédécesseurs pour chaque case atteignable.
+         */
         public void algoBFS() {
             LinkedList<Position> fifo = new LinkedList<>();
             predecesseurs.clear();
@@ -59,6 +74,11 @@ package universite_paris8.iut.fan.the_namek_quest.Algo;
             }
         }
 
+        /**
+         * Retourne la prochaine case à atteindre pour aller de la position cible vers Trunks.
+         * @param cible Position de départ (souvent celle d’un ennemi)
+         * @return Prochaine position à atteindre, ou null si inatteignable
+         */
         public Position getNextMove(Position cible) {
             if (!predecesseurs.containsKey(cible)) {
                 return null; // Cible inatteignable
@@ -76,6 +96,9 @@ package universite_paris8.iut.fan.the_namek_quest.Algo;
             return chemin.size() > 1 ? chemin.get(1) : chemin.get(0);
         }
 
+        /**
+         * Met à jour l’environnement, recalcule la position de Trunks et relance le BFS.
+         */
         public void setEnv(Environnement env) {
             this.env = env;
             this.positionTrunks = calculerPositionTrunks();
