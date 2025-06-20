@@ -24,17 +24,7 @@ public abstract class Materieau extends Element {
         this.Quantite.setValue( this.Quantite.getValue() - 1);
     }
 
-    public void setQuantite(IntegerProperty Quantite) {
-        this.Quantite = Quantite;
-    }
-
     public int getQuantite() {
         return Quantite.getValue();
     }
-
-    public void setQuantite(int Quantite) {
-        this.Quantite.setValue(Quantite);
-    }
-
-
 }

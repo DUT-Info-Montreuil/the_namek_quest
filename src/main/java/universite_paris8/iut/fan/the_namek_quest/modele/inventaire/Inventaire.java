@@ -90,13 +90,6 @@ public class Inventaire {
         return -1;
     }
 
-    /**
-     * Vérifie si la ressource est déjà dans l'inventaire.
-     * @return true si présente, false sinon
-     */
-    public boolean ressourceDansInventaire(int typeRessource) {
-        return positionRessource(typeRessource) != -1;
-    }
 
     /**
      * Vérifie la présence d'une ressource dans l'inventaire.

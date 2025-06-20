@@ -96,7 +96,7 @@ public class Controlleur implements Initializable {
         this.pointVieVue = new PointVieVue(trunks, pane);
         this.inventaireVue = new InventaireVue(trunks.getInventaire(), pane, paneInventaire, trunks);
         // ===================== INVENTAIRE =====================
-        this.inventaireListener = new InventaireListener(inventaireVue, trunks.getInventaire(), paneInventaire);
+        this.inventaireListener = new InventaireListener(inventaireVue);
         trunks.getInventaire().getListObjects().addListener(inventaireListener);
         // ===================== CONTROLES =====================
         this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);

@@ -26,10 +26,4 @@ public class PersonnageEnnemisVue {
         persoImage.setId(personnageEnnemis.getId());
         pane.getChildren().add(persoImage);
     }
-
-    public ImageView getPersoImage() {
-        return persoImage;
-    }
-
-
 }

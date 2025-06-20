@@ -49,10 +49,6 @@ public class Environnement {
         }
     }
 
-    public void supprimerEnnemi() {
-        this.personnageEnnemis = null;
-    }
-
 
     // --- Getters et Setters ---
     public Terrain getTerrain() {
@@ -144,7 +140,6 @@ public class Environnement {
                 //Attaque de l'ennemi
                 if (trunksAProximite(p.getX(), p.getY()) && tempDivise ==0) {
                     trunks.decrementerPv(3); // Trunks subit des dégâts
-                    System.out.println("Trunks a été attaqué par " + p.getId());
                 }
 
             }

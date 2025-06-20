@@ -82,7 +82,6 @@ public class GrandChefVue {
         } else {
             // Supprime le message si Trunks n'est plus proche
             if (labelMessage != null) {
-                System.out.println("pas de grand chef");
                 pane.getChildren().remove(labelMessage);
                 labelMessage = null;
             }

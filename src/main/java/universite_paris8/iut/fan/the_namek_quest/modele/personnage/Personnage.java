@@ -114,8 +114,5 @@ public abstract class Personnage {
         this.pv.setValue(this.pv.getValue() - degat);
         System.out.println("PV restants : " + this.pv.getValue());
     }
-
-    // --- Déplacement ---
-    public void seDeplacer() {}
 }
 

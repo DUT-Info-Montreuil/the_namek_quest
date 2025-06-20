@@ -67,7 +67,6 @@ public class VieuxNamek extends PersonnageNonJoueur {
 
         // Apparition si Trunks a collecté une nouvelle boule (jusqu'à 3 fois)
         if (nbBoules > boulesDejaFellicitees && boulesDejaFellicitees < 3) {
-            System.out.println("vieux namek peut apparaitrer");
             setX(trunks.getX() - 64); // apparaît à gauche de Trunks
             System.out.println(trunks.getX() - 64);
             setY(trunks.getY());

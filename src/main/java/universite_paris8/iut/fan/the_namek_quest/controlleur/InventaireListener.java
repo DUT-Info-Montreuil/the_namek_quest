@@ -17,15 +17,15 @@ import universite_paris8.iut.fan.the_namek_quest.vue.InventaireVue;
 
 public class InventaireListener implements ListChangeListener<Element>{
 
-    private Inventaire inventaire;
-    private InventaireVue inventaireVue;
-    private Pane paneInventaire;
 
-    public InventaireListener(InventaireVue inventaireVue,Inventaire inventaire ,Pane paneInventaire) {
+    private InventaireVue inventaireVue;
+
+
+    public InventaireListener(InventaireVue inventaireVue) {
         super();
-        this.inventaire = inventaire;
+
         this.inventaireVue = inventaireVue;
-        this.paneInventaire = paneInventaire;
+
     }
 
     @Override

@@ -69,15 +69,7 @@ public class Grille {
     }
 
 
-    /**
-     * Retourne la position correspondant aux coordonnées données dans la grille.
-     */
-    public Position getPosition(int x, int y) {
-        return listeAdj.keySet().stream()
-                .filter(p -> p.getX() == x && p.getY() == y)
-                .findFirst()
-                .orElse(null);
-    }
+
 
     /**
      * Indique si une position est considérée comme déconnectée (obstacle).
@@ -118,20 +110,5 @@ public class Grille {
         }
     }
 
-    /**
-     * Retire une position de la liste des obstacles (la rend accessible).
-     */
-    public void reconnecte(Position s) {
-        obstacles.remove(s);
-    }
 
-
-    /**
-     * Ajoute une position à la liste des obstacles (la rend inaccessible).
-     */
-    public void deconnecte(Position s) {
-        if (!obstacles.contains(s)) {
-            obstacles.add(s);
-        }
-    }
 }
