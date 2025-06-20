@@ -111,6 +111,7 @@ public class Grille {
         for (int l = debuty; l < environnement.getTerrain().hauteurTerrain(); l++) {
             for (int c = debutx; c < environnement.getTerrain().largeurTerrain(); c++) {
                 if (environnement.getTerrain().codeTuile(c, l) != OBSTACLE_CODE) {
+
                     obstacles.add(new Position(c, l));
                 }
             }

@@ -29,6 +29,7 @@ public class Environnement {
     private PersonnageEnnemis personnageEnnemis;
     private ObservableList<PersonnageEnnemis> personnageEnnemisList ;
     private BFS bfs;
+    private int lastXTrunks;
 
     // --- Constructeur ---
     public Environnement() {
@@ -41,6 +42,7 @@ public class Environnement {
         this.personnageEnnemis = new PersonnageEnnemis(this);
         this.personnageEnnemisList = FXCollections.observableArrayList();
         this.bfs = new BFS(this);
+        this.lastXTrunks = 0;
 
     }
 
@@ -109,8 +111,9 @@ public class Environnement {
     public void update(int temps) {
         int tempDivise = temps % 60;
 
-        if(trunks.seDeplacerT() && tempDivise == 0) {
+        if(trunks.seDeplacerT() && (tempDivise == 0 ||lastXTrunks +500 < Math.abs(trunks.getX()))) {
             bfs = new BFS(this);
+            lastXTrunks = Math.abs(trunks.getX());
         }
 
         grandChef.setY(gravite(grandChef.getX(), grandChef.getY()));
