@@ -23,7 +23,7 @@ public class InventaireVue {
 
     private Pane pane;             // Pane principal de l'interface (affiche l'icône inventaire)
     private Inventaire inventaire; // Objet métier représentant l'inventaire
-    private Trunks trunks;          // Personnage joueur
+    private Trunks trunks;         // Personnage joueur
     private Pane paneInventaire;   // Pane dédié à l'affichage du contenu de l'inventaire
     private ImageView capsuleVue;  // Icône d'accès à l'inventaire
     private boolean ouvert;        // Indique si l'inventaire est ouvert
@@ -43,8 +43,6 @@ public class InventaireVue {
         capsuleVue.setTranslateX(1831);
         capsuleVue.setTranslateY(108);
 
-
-
         afficherLogoInventaire();
     }
 
@@ -55,7 +53,6 @@ public class InventaireVue {
     /**
      * Affiche ou masque l'icône d'inventaire selon son état.
      */
-
     public void afficherLogoInventaire() {
         if (!this.estOuvert()) {
             if (!pane.getChildren().contains(capsuleVue)) {
@@ -71,6 +68,8 @@ public class InventaireVue {
      * Affiche chaque objet avec son image, cadre, quantité et indication d'équipement.
      */
     public void afficherContenuInventaire() {
+        // Nettoyage du contenu précédent
+        paneInventaire.getChildren().clear();
 
         // Chargement des images des objets et cadres
         Image pioche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/pioche.png"));
@@ -87,20 +86,23 @@ public class InventaireVue {
 
         int x = 753; // Position initiale X
         int y = 0;   // Position initiale Y
+        int itemsPerRow = 20; // Ajuste selon la taille de l'inventaire
+        int itemCount = 0;
 
         if (!inventaire.getListObjects().isEmpty()) {
             this.ouvert = true;
 
             for (Element object : inventaire.getListObjects()) {
-                // Si on dépasse la limite horizontale, passer à la ligne suivante
-                if (x < 100) {
+                // Si on atteint la limite d'objets par ligne, passer à la ligne suivante
+                if (itemCount == itemsPerRow) {
                     x = 753;
                     y += 46;
+                    itemCount = 0;
                 }
 
                 // Affiche le cadre selon que l'objet est équipé ou non
                 ImageView caseInventaireVue;
-                if (trunks.getObjectEquipe().equals(object)) {
+                if (trunks.getObjectEquipe() != null && trunks.getObjectEquipe().equals(object)) {
                     caseInventaireVue = new ImageView(equipeImage);
                 } else {
                     caseInventaireVue = new ImageView(caseInventaire);
@@ -121,6 +123,7 @@ public class InventaireVue {
                         img.setImage(hache);
                         break;
                     case "épée":
+                    case "epee":
                         img.setImage(epee);
                         break;
                     case "terre":
@@ -145,24 +148,11 @@ public class InventaireVue {
                         break;
                 }
 
-
                 img.setTranslateX(x + (46 - 32) / 2);
                 img.setTranslateY(y + (46 - 32) / 2);
                 img.setFitHeight(32);
                 img.setFitWidth(32);
                 paneInventaire.getChildren().add(img);
-
-                    if (object instanceof Materieau){
-                        Materieau mat = (Materieau) object;
-                        Label labelQuantite = new Label();
-                        labelQuantite.textProperty().bind(mat.getQuantiteProp().asString());
-                        labelQuantite.setFont(new Font("Arial", 12));
-                        labelQuantite.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-                        labelQuantite.setTranslateX(x + 25);// Ajuste la position X
-                        labelQuantite.setTranslateY(y + 28); // Ajuste la position Y
-                        paneInventaire.getChildren().add(labelQuantite);
-                    }
-
 
                 // Si l'objet est un matériau, afficher sa quantité
                 if (object instanceof Materieau) {
@@ -177,6 +167,7 @@ public class InventaireVue {
                 }
 
                 x -= 46; // Décalage vers la gauche pour le prochain objet
+                itemCount++;
             }
         }
     }
