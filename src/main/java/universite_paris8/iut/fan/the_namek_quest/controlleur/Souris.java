@@ -66,7 +66,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 }
 
                 // Si Trunks a les mains vides (id 99)
-                else if (idObjet == 99 && (idTuile == 6 || idTuile == 8)) {
+                else if (idObjet == 99 && (idTuile == 6 || idTuile == 8 || idTuile == 4)) {
                     environnement.getTrunks().getInventaire().ajoutRessource(idTuile);
                     environnement.getTerrain().casserBloc(x, y);
                     terrainVue.changerTuileCiel((int) x, (int) y);

@@ -57,6 +57,8 @@ public class TerrainVue {
         Image temple87 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/87.png"));
         Image temple88 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/88.png"));
         Image temple89 = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/affichageGeneral/89.png"));
+        Image imageEnergie = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/BOULECIEL.png"));
+
         tuiles = new ImageView[terrain.largeurTerrain()][terrain.hauteurTerrain()];
 
         // Parcours du terrain pour créer chaque ImageView selon le code de la tuile
@@ -69,6 +71,7 @@ public class TerrainVue {
                     case 1: imgTuile = imageCiel; break;
                     case 2: imgTuile = imageSol; break;
                     case 3: imgTuile = imageHerbe; break;
+                    case 4: imgTuile = imageEnergie; break;
                     case 6: imgTuile = imageHaricot; break;
                     case 8: imgTuile = imageCristal; break;
                     case 9: imgTuile = imageRoche; break;

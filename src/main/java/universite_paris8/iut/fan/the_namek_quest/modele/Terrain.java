@@ -287,7 +287,7 @@ public class Terrain {
 
             int code = terrain[caseY][caseX];
 
-            if (code == 1 /* ciel */ || code == 11  || code == 81 || code == 82 || code == 83 || code == 84 || code == 85 || code == 86 || code == 87 || code == 88 || code == 89 ) {
+            if (code == 1 /* ciel */ || code == 4 || code == 11  || code == 81 || code == 82 || code == 83 || code == 84 || code == 85 || code == 86 || code == 87 || code == 88 || code == 89 ) {
                 return true;
             }
 

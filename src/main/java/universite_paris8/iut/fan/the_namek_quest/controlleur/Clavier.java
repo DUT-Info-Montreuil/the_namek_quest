@@ -72,6 +72,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     /** Interagit avec le Grand Chef pour améliorer l’épée */
     private void handleE() {
         grandChef.ameliorerEpee();
+        System.out.println("resultat amelioration eppe:"+grandChef.ameliorerEpee());
     }
 
     /** Fait perdre des PV à Trunks (méthode pour tester des fonctionnalites) */

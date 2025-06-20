@@ -23,46 +23,73 @@ import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.materiaux.Roc
 
 public class GrandChef extends PersonnageNonJoueur {
 
-    private final Trunks trunks;
-    private final Inventaire inventaire;
+    private Trunks trunks;
+    private  Inventaire inventaire;
 
     public GrandChef(int x, int y, Environnement env, Trunks trunks) {
         super(x, y, env);
         this.trunks = trunks;
-        this.inventaire = new Inventaire();
+        this.inventaire = trunks.getInventaire();
     }
 
     /**
      * Tente d'améliorer l'épée de Trunks si toutes les conditions sont remplies.
      */
-    public void ameliorerEpee() {
+
+    public boolean ameliorerEpee() {
         System.out.println("Demande d'amélioration de l'épée par le Grand Chef");
-
+        boolean ameliorer = false;
         // Vérifie que Trunks est juste à gauche du Grand Chef
-        if (trunks.getX() == this.getX() - 1 && trunks.getY() == this.getY()) {
-
-            // Vérifie que les ressources nécessaires sont dans l'inventaire
-            boolean aRoche = inventaire.ressourceDansInventaire(7);
-            boolean aEnergie = inventaire.ressourceDansInventaire(4);
-
-            if (aRoche && aEnergie) {
-                // Récupération des ressources
-                Materieau rocheNamek = (Materieau) inventaire.getListObjects().get(inventaire.getIndexObject(new RocheDeNamek()));
-                Materieau energie = (Materieau) inventaire.getListObjects().get(inventaire.getIndexObject(new Energie()));
-
-                // Vérifie les quantités
-                if (rocheNamek != null && energie != null && rocheNamek.getQuantite() >= 3 && energie.getQuantite() >= 2) {
-
-                    Element objetEquipe = trunks.getObjectEquipe();
-
-                    // Vérifie que Trunks a équipé une épée (id = 0)
-                    if (objetEquipe != null && objetEquipe.getId() == 0) {
-                        Arme epee = (Arme) objetEquipe;
-                        epee.incrementerDegat(10);
-                        System.out.println("Épée améliorée de +10 dégâts !");
-                    }
-                }
-            }
+        if (!trunksAProximite()) {
+            System.out.println("Trunks n'est pas à proximité.");
+            return false;
         }
+        // Vérifie la disponibilité
+
+        if (inventaire.positionRessource(9)  == -1) {
+            System.out.println(inventaire.verifierPresenceRessource(9));
+            System.out.println("Pas assez de Roches de Namek !");
+            return false;
+        }
+        if (inventaire.positionRessource(4) == -1) {
+            System.out.println("Pas assez d’Énergie !");
+            return false;
+        }
+
+        Element objetEquipe = trunks.getObjectEquipe();
+        if (objetEquipe == null || objetEquipe.getId() != 0) {
+            System.out.println("Trunks n'a pas d'épée équipée !");
+            return false;
+        }
+
+
+        Materieau rocheNamek = (Materieau) inventaire.getListObjects().get(inventaire.positionRessource(9));
+        Materieau energie = (Materieau) inventaire.getListObjects().get(inventaire.positionRessource(4));
+
+        // Vérification des quantités
+        if( rocheNamek.getQuantite() < 3 || energie.getQuantite() < 2) {
+            System.out.println("Ressources insuffisantes pour l'amélioration de l'épée !");
+            return false;
+        }
+
+        // Amélioration de l'épée
+        if(!ameliorer) {
+            Arme epee = (Arme) objetEquipe;
+            epee.incrementerDegat(10);
+            System.out.println("Épée améliorée de +10 dégâts !");
+            ameliorer = true;
+        }
+        // Mise à jour des quantités dans l'inventaire du joueur
+        if(ameliorer){
+        for(int i = 0; i < 3; i++) {
+            rocheNamek.decrementerRessource();
+        }
+        for(int i = 0; i < 2; i++) {
+            energie.decrementerRessource();
+        }
+        ameliorer = false;
+        return true;
     }
+    return false;}
 }
+

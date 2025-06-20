@@ -60,6 +60,21 @@ public class Trunks extends Personnage {
         this.inventaire.addObject(new Pioche());
     }
 
+    public Trunks(int x, int y, Environnement env) {
+        super( x, y, env);
+        this.setVitesse(2);
+        this.direction = new SimpleIntegerProperty(0);
+        this.inventaire = new Inventaire();
+        this.bouleDeKI =new BouleDeKI(getX(), getY(), getEnv());
+
+        // Par défaut, Trunks commence avec une main vide + 3 outils de base
+        this.objectEquipe = new MainVide();
+        this.inventaire.addObject(this.objectEquipe);
+        this.inventaire.addObject(new Epee());
+        this.inventaire.addObject(new Hache());
+        this.inventaire.addObject(new Pioche());
+    }
+
     // --- Déplacement horizontal ---
 
     /**

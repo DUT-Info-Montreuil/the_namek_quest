@@ -71,6 +71,7 @@ public class InventaireVue {
      * Affiche chaque objet avec son image, cadre, quantité et indication d'équipement.
      */
     public void afficherContenuInventaire() {
+
         // Chargement des images des objets et cadres
         Image pioche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/pioche.png"));
         Image hache = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/outils/hache.png"));
@@ -82,6 +83,7 @@ public class InventaireVue {
         Image haricot = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/haricot.png"));
         Image roche = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/roche.png"));
         Image arbre = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/bois.png"));
+        Image energie = new Image(getClass().getResourceAsStream("/universite_paris8/iut/fan/the_namek_quest/images/materieau/ki.png"));
 
         int x = 753; // Position initiale X
         int y = 0;   // Position initiale Y
@@ -136,8 +138,10 @@ public class InventaireVue {
                     case "arbre":
                         img.setImage(arbre);
                         break;
+                    case "energie":
+                        img.setImage(energie);
+                        break;
                     default:
-
                         break;
                 }
 

@@ -11,6 +11,7 @@ package universite_paris8.iut.fan.the_namek_quest.controlleur;
  */
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.*;
@@ -131,6 +133,19 @@ public class Controlleur implements Initializable {
         bouleDeKI.setEnAttaqueDistance(false);
 
 
+        // === OBSERVATEUR POUR LA MORT DE TRUNKS ===
+        trunks.getPvProp().addListener((obs, oldVal, newVal) -> {
+            if (trunks.estMort()) {
+                afficherGameOver();
+                PauseTransition pause = new PauseTransition(Duration.seconds(3));
+                pause.setOnFinished(event -> {
+                    Stage stage = (Stage) pane.getScene().getWindow();
+                    stage.close();
+                });
+                pause.play();
+            }
+        });
+
         // ===================== GAME LOOP =====================
         initAnimation();
     }
@@ -145,9 +160,6 @@ public class Controlleur implements Initializable {
             vieuxNamekVue.updateAffichageVieuxNamek();
             trunksVue.changerImage();
 
-            if (trunks.estMort()) {
-                afficherGameOver();
-            }
             temps ++;
         }));
 

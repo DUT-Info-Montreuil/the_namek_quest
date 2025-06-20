@@ -47,24 +47,24 @@ public class Inventaire {
         switch (typeRessource) {
             case 2:
             case 3:
-                verifierRessource(2, new Terre());
+                ajouterRessource(2, new Terre());
                 break;
             case 4:
-                verifierRessource(4, new Energie());
+                ajouterRessource(4, new Energie());
                 break;
             case 6:
-                verifierRessource(6, new Haricot());
+                ajouterRessource(6, new Haricot());
                 break;
             case 8:
-                verifierRessource(8, new BouleCristal());
+                ajouterRessource(8, new BouleCristal());
                 break;
             case 9:
-                verifierRessource(9, new RocheDeNamek());
+                ajouterRessource(9, new RocheDeNamek());
                 break;
             case 10:
             case 11:
-                verifierRessource(10, new Arbres());
-                verifierRessource(10, new Arbres());
+                ajouterRessource(10, new Arbres());
+                ajouterRessource(10, new Arbres());
                 break;
             default:
                 // Type ressource non reconnu : ne rien faire
@@ -78,7 +78,7 @@ public class Inventaire {
      * @return indice de la ressource ou -1 si non trouvée
      */
     public int positionRessource(int typeRessource) {
-        for (int i = 3; i < this.inventaire.size(); i++) {
+        for (int i = 0; i < this.inventaire.size(); i++) {
             Element obj = this.inventaire.get(i);
             if (obj instanceof Materieau) {
                 Materieau mat = (Materieau) obj;
@@ -103,7 +103,7 @@ public class Inventaire {
      * Si présente, incrémente sa quantité.
      * Sinon, ajoute la nouvelle ressource.
      */
-    public void verifierRessource(int typeRessource, Element ressource) {
+    public void ajouterRessource(int typeRessource, Element ressource) {
         int pos = positionRessource(typeRessource);
         if (pos != -1) {
             Materieau materieau = (Materieau) this.inventaire.get(pos);
@@ -111,5 +111,11 @@ public class Inventaire {
         } else {
             this.inventaire.add(ressource);
         }
+    }
+
+    public int  verifierPresenceRessource(int typeRessouce){
+        int pos = positionRessource(typeRessouce);
+        return pos;
+
     }
 }
