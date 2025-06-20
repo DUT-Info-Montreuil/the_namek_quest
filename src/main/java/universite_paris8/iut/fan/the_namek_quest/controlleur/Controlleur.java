@@ -24,12 +24,10 @@ import javafx.util.Duration;
 import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.*;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.BouleDeKI;
+import universite_paris8.iut.fan.the_namek_quest.modele.personnage.*;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Dende;
 import universite_paris8.iut.fan.the_namek_quest.modele.personnage.GrandChef;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.Trunks;
-import universite_paris8.iut.fan.the_namek_quest.modele.personnage.VieuxNamek;
 import universite_paris8.iut.fan.the_namek_quest.vue.*;
 
 import java.net.URL;
@@ -49,13 +47,14 @@ public class Controlleur implements Initializable {
     private Souris souris;
     private GrandChefVue grandChefVue;
     private GrandChef grandChef;
-
+    private ObservableEnnemis observableEnnemis;
     private VieuxNamek vieuxNamek;
     private VieuxNamekVue vieuxNamekVue;
     private Dende dende;
     private DendeVue dendeVue;
     private MoletteControlleur moletteController;
-
+    private BouleDeKI bouleDeKI;
+    private BouleKiVue bouleKiVue;
 
     @FXML private TilePane tilePane;
     @FXML private Pane pane; // pane qui contient trunks
@@ -65,6 +64,8 @@ public class Controlleur implements Initializable {
     private GameOver gameOver;
     private MenuDemarrage menuDemarrage;
     private PointVieVue pointVieVue;
+    private int temps = 0;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -98,6 +99,11 @@ public class Controlleur implements Initializable {
         // ===================== CONTROLES =====================
         this.clavier = new Clavier(trunks, trunksVue, inventaireVue, grandChef, dende);
         this.moletteController = new MoletteControlleur(trunks, inventaireVue);
+        this.bouleDeKI = trunks.getBouleDeKI();
+
+        // === OBSERVATEURS ===
+        this.observableEnnemis = new ObservableEnnemis(pane);
+        environnement.getPersonnageEnnemisList().addListener(observableEnnemis);
 
         pane.addEventHandler(ScrollEvent.SCROLL, moletteController);
         pane.addEventHandler(KeyEvent.KEY_PRESSED, clavier);
@@ -105,6 +111,25 @@ public class Controlleur implements Initializable {
         pane.setFocusTraversable(true);
 
         Platform.runLater(() -> pane.requestFocus());
+
+        // === AJOUT DES ENNEMIS ET OBSERVATEURS DE MORT ===
+        environnement.ajouterEnnemi();
+        for (PersonnageEnnemis ennemi : environnement.getPersonnageEnnemisList()) {
+            ennemi.getPvProp().addListener((obs, oldVal, newVal) -> {
+                if (ennemi.estMort()) {
+                    environnement.getPersonnageEnnemisList().remove(ennemi);
+                }
+            });
+        }
+
+        // === OBSERVATEUR POUR L’ATTAQUE À DISTANCE ===
+        bouleDeKI.getEnAttaqueDistanceProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                this.bouleKiVue = new BouleKiVue(pane, bouleDeKI);
+            }
+        });
+        bouleDeKI.setEnAttaqueDistance(false);
+
 
         // ===================== GAME LOOP =====================
         initAnimation();
@@ -114,7 +139,7 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(10), ev -> {
 
             centrerVueSurTrunks();
-            environnement.update();
+            environnement.update(temps);
             grandChefVue.afficherMessageAcceuil();
             dendeVue.updateAffichageDende();
             vieuxNamekVue.updateAffichageVieuxNamek();
@@ -123,6 +148,7 @@ public class Controlleur implements Initializable {
             if (trunks.estMort()) {
                 afficherGameOver();
             }
+            temps ++;
         }));
 
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -138,11 +164,8 @@ public class Controlleur implements Initializable {
 
         if(trunks.getX()>30* Constante.TAILLE_TUILE && trunks.getX()<(environnement.getTerrain().largeurTerrain()-30)*Constante.TAILLE_TUILE) {
 
-
-
             paneScroll.setTranslateX(centreX);
             paneScroll.setTranslateY(centreY);
-
 
             paneInventaire.setTranslateX(trunks.getX() + 120);
             paneInventaire.setTranslateY(trunks.getY() - 507);

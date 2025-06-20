@@ -137,7 +137,7 @@ public class InventaireVue {
                         img.setImage(arbre);
                         break;
                     default:
-                        // Optionnel: gérer un cas "image inconnue"
+
                         break;
                 }
 

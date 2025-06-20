@@ -6,6 +6,7 @@ import universite_paris8.iut.fan.the_namek_quest.Constante;
 import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 import universite_paris8.iut.fan.the_namek_quest.modele.Terrain;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Inventaire;
+import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.BouleDeKI;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.outils.MainVide;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.Element;
 import universite_paris8.iut.fan.the_namek_quest.modele.inventaire.arme.Epee;
@@ -33,6 +34,7 @@ import universite_paris8.iut.fan.the_namek_quest.modele.*;
 
 public class Trunks extends Personnage {
 
+    private BouleDeKI bouleDeKI;
     private IntegerProperty direction;        // -1 = gauche, 0 = immobile, 1 = droite
     private boolean enSaut = false;
     private int hauteurMax = 0;
@@ -48,6 +50,7 @@ public class Trunks extends Personnage {
         this.setVitesse(2);
         this.direction = new SimpleIntegerProperty(0);
         this.inventaire = new Inventaire();
+        this.bouleDeKI =new BouleDeKI(getX(), getY(), getEnv());
 
         // Par défaut, Trunks commence avec une main vide + 3 outils de base
         this.objectEquipe = new MainVide();
@@ -63,11 +66,13 @@ public class Trunks extends Personnage {
      * Met à jour la position horizontale de Trunks selon sa direction (gauche ou droite)
      * Vérifie les collisions à droite et à gauche.
      */
-    public void seDeplacer() {
+    public boolean seDeplacerT() {
         int vitesse = getVitesse();
         Terrain terrain = this.getEnv().getTerrain();
         int x = this.getX();
         int y = this.getY();
+
+
 
         if (this.direction.get() == 1) { // droite
             int newX = x + vitesse;
@@ -81,7 +86,14 @@ public class Trunks extends Personnage {
                 setX(newX);
             }
         }
+
+        if(this.direction.getValue() ==0){
+            // Si Trunks est immobile, on ne fait rien
+            return false;
+        }
+        return true;
     }
+
 
     // --- Saut & Gravité ---
 
@@ -192,5 +204,20 @@ public class Trunks extends Personnage {
 
     public boolean estEnSaut() {
         return enSaut;
+    }
+
+    // --- KI ---
+
+    public void attaquerBouleDeKi(){
+
+        if (!this.bouleDeKI.getEnAttaqueDistance()){
+            this.bouleDeKI.reset(getX(), getY());
+            this.bouleDeKI.setEnAttaqueDistance(true);
+        }
+        this.bouleDeKI.attaque();
+    }
+
+    public BouleDeKI getBouleDeKI() {
+        return bouleDeKI;
     }
 }

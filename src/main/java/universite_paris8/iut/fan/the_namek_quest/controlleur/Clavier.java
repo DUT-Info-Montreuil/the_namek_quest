@@ -89,6 +89,10 @@ public class Clavier implements EventHandler<KeyEvent> {
         trunks.mangerHaricot();
     }
 
+    private void handleKI() {
+        trunks.attaquerBouleDeKi();
+    }
+
     /** Gère les événements clavier */
     @Override
     public void handle(KeyEvent keyEvent) {
@@ -123,6 +127,9 @@ public class Clavier implements EventHandler<KeyEvent> {
                     break;
                 case H:
                     handleH();
+                    break;
+                case J:
+                    handleKI();
                     break;
 
             }

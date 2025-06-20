@@ -24,6 +24,8 @@ import universite_paris8.iut.fan.the_namek_quest.modele.Environnement;
 
 public abstract class Personnage {
 
+    private IntegerProperty direction;
+
     // Position observable
     private final IntegerProperty xProp;
     private final IntegerProperty yProp;
@@ -39,6 +41,7 @@ public abstract class Personnage {
 
     // Constructeur
     public Personnage(int x, int y, Environnement env) {
+        this.direction = new SimpleIntegerProperty(0);
         this.xProp = new SimpleIntegerProperty(x);
         this.yProp = new SimpleIntegerProperty(y);
         this.pv = new SimpleIntegerProperty(100);
@@ -101,6 +104,15 @@ public abstract class Personnage {
 
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
+    }
+
+    public void setDirection(int direction) {
+        this.direction.setValue(direction);
+    }
+
+    public void decrementerPv(int degat){
+        this.pv.setValue(this.pv.getValue() - degat);
+        System.out.println("PV restants : " + this.pv.getValue());
     }
 
     // --- Déplacement ---
